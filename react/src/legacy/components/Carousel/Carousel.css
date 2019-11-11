@@ -1,0 +1,13 @@
+.carousel {
+  height: 25rem;
+  width: 100%;
+  margin: 0 auto;
+  overflow: hidden;
+  padding: 0;
+}
+
+.carousel img {
+  display:block; /*remove inline-block spaces*/
+  width:100%;
+  margin: -15rem 0;
+}

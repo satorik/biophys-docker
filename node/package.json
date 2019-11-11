@@ -1,0 +1,35 @@
+{
+  "name": "biophys.msu",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "nodemon --ignore frontend/ src/index.js --exec babel-node"
+  },
+  "author": "satorik",
+  "license": "ISC",
+  "dependencies": {
+    "apollo-server": "^2.9.3",
+    "apollo-server-express": "^2.9.3",
+    "dateformat": "^3.0.3",
+    "express": "^4.17.1",
+    "graphql": "^14.5.4",
+    "graphql-tools": "^4.0.5",
+    "multer": "^1.4.2",
+    "nodemon": "^1.19.2",
+    "pg": "^7.12.1",
+    "pg-hstore": "^2.3.3",
+    "sequelize": "^5.18.4",
+    "uuidv4": "^5.0.1",
+    "validator": "^11.1.0"
+  },
+  "devDependencies": {
+    "@babel/cli": "^7.6.0",
+    "@babel/core": "^7.6.0",
+    "@babel/node": "^7.6.1",
+    "@babel/preset-env": "^7.6.0",
+    "env-cmd": "^9.0.3",
+    "faker": "^4.1.0"
+  }
+}

@@ -1,0 +1,33 @@
+.content__page{
+  width: 100%;
+  margin-bottom: 15px;
+}
+
+.content__header {
+  width: 100%;
+  height: 250px;
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 10px;
+}
+
+.content__img {
+  width: 45%;
+  height: 250px;
+  display: block;
+  overflow: hidden;
+}
+
+.content__header_body {
+  width: 35%;
+  display: block;
+  text-align: right;
+}
+
+.content__header_body p {
+  background-color: rgb(246, 245, 245);
+  font-size: 1.5rem;
+}
+.content__body {
+  padding: 5px;
+}

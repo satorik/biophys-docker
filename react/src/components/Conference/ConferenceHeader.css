@@ -1,0 +1,38 @@
+.container,
+.overlay:before {
+  background: url(http://localhost:4000/images/conference/header.jpg) no-repeat fixed 0 0 / cover;
+}
+
+
+.container {
+  width: 100%;
+  align-items: center;
+  display: flex;
+  justify-content: center;
+}
+
+.overlay {
+  max-height: 200px;
+  margin: 0 auto;
+  max-width: 768px;
+  overflow: hidden;
+  padding: 50px;
+  position: relative;
+  color: white;
+  font-family: 'Lato';
+  position: relative;
+  text-align: center;
+  border: 1px solid white;
+  z-index: 0;
+}
+
+.overlay:before {
+    content: '';
+    filter: blur(8px);
+    height: 100%;
+    left: 0;
+    position: absolute;
+    top: 0;
+    width: 100%;
+    z-index: -1;
+}

@@ -1,0 +1,7 @@
+.main__title {
+  width: 40%;
+  font-size: 3rem;
+  border-bottom: 1px solid grey;
+  margin-left: auto;
+  margin-bottom: 30px;
+}
