@@ -1,0 +1,26 @@
+sudo: required
+services: 
+  - docker
+
+script:
+  - docker build -t emwrk/biophys-react -f /react/Dockerfile.dev ./react
+  - docker build -t emwrk/biophys-nginx -f /nginx/Dockerfile.dev ./nginx
+  - docker build -t emwrk/biophys-node -f /node/Dockerfile.dev ./node
+  - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_ID" --password-stdin
+  - docker push emwrk/biophys-react
+  - docker push emwrk/biophys-nginx
+  - docker push emwrk/biophys-node
+
+# deploy:
+#   provider: elasticbeanstalk
+#   region: "us-east-1"
+#   app: "docker-react-study"
+#   env: "DockerReactStudy-env"
+#   bucket_name: "elasticbeanstalk-us-east-1-602166969005"
+#   bucket_path: "docker-react-study"
+#   on:
+#     branch: master
+#   access_key_id:
+#     secure: $AWS_ACCESS_KEY
+#   secret_access_key:
+#     secure: "$AWS_SECRET_KEY"
