@@ -3,9 +3,9 @@ services:
   - docker
 
 script:
-  - docker build -t emwrk/biophys-react -f /react/Dockerfile.dev ./react
-  - docker build -t emwrk/biophys-nginx -f /nginx/Dockerfile.dev ./nginx
-  - docker build -t emwrk/biophys-node -f /node/Dockerfile.dev ./node
+  - docker build -t emwrk/biophys-react -f ./react/Dockerfile.dev ./react
+  - docker build -t emwrk/biophys-nginx -f ./nginx/Dockerfile.dev ./nginx
+  - docker build -t emwrk/biophys-node -f ./node/Dockerfile.dev ./node
   - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_ID" --password-stdin
   - docker push emwrk/biophys-react
   - docker push emwrk/biophys-nginx
