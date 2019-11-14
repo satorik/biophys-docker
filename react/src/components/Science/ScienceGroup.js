@@ -187,6 +187,12 @@ const ScienceGroup = ({match}) => {
     setMode({...mode, isCreating: true})
   }
 
+  const onChangeGroupHandler = async (inputData, type) => {
+    if (type === 'simple') {
+
+    }
+  }
+
   return (
     <div className="container mt-5">
       <div className="card">
@@ -204,6 +210,7 @@ const ScienceGroup = ({match}) => {
           (mode.isEditing || mode.isCreating) && 
           <MultiEdit 
             formProp = {FORM_TEMPLATE}
+            onChangeGroupHandler = {onChangeGroupHandler}
           />
         }
         {
