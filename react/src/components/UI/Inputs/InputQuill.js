@@ -19,12 +19,12 @@ const quillFormats = [
   'link', 'image'
 ]
 
-const InputQuill = ({onChanged, onBlur, label, value, children}) => {
+const InputQuill = ({onChanged, onBlur, label, value, children, required}) => {
   return (
   <div className="form-group">
     <ReactQuill 
       value={value}
-      placeholder={label}
+      placeholder={label+`${required ? '*': ''}`}
       onChange={onChanged} 
       onBlur={onBlur}
       formats={quillFormats}

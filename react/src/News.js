@@ -210,19 +210,12 @@ const News = () => {
     //setUpdatedNote(blogposts[id])
   }
 
-  const onDeleteConferenceHandler = () => {
-    deleteNote({ variables: {id: updatedNote.id}})
-    .then( res => { 
-      setIsModalOpen(false)
-      setMode({...mode, isDeleting: false})
-      document.body.style.overflow = "scroll"
-      setUpdatedNote({})
-      }
-    )
-    .catch(e => {
-      setIsError(e)
-    }
-    )
+  const onDeleteConferenceHandler = async() => {
+    await deleteNote({ variables: {id: updatedNote.id}})
+    setIsModalOpen(false)
+    setMode({...mode, isDeleting: false})
+    document.body.style.overflow = "scroll"
+    setUpdatedNote({})
   }
 
   const onCloseModal = () => {
@@ -247,29 +240,17 @@ const News = () => {
       setMode({...mode, isCreating: false})
       if (mode.isEditing) {
         const forUpdate = getUpdateData(updatedNote, postObject)
-        console.log(forUpdate)
-        updateNote({ variables: {id: updatedNote.id, inputData: forUpdate}})
-        .then( res => {
-          console.log(res)
-          setIsModalOpen(false)
-          setMode({...mode, isEditing: false})
-          document.body.style.overflow = "scroll"
-          setUpdatedNote({})
-          })
-        .catch(e => {setIsError(e)})
+        await updateNote({ variables: {id: updatedNote.id, inputData: forUpdate}})      
+        setIsModalOpen(false)
+        setMode({...mode, isEditing: false})
+        document.body.style.overflow = "scroll"
+        setUpdatedNote({})
       }
       if (mode.isCreating) {
-        createNote({ variables: {inputData: postObject}})
-        .then( res => {
-          setIsModalOpen(false)
-          setMode({...mode, isCreating: false})
-          document.body.style.overflow = "scroll"
-          }
-        )
-        .catch(e => {
-          setIsError(e)
-        }
-        )
+        await createNote({ variables: {inputData: postObject}})
+        setIsModalOpen(false)
+        setMode({...mode, isCreating: false})
+        document.body.style.overflow = "scroll"
       }
     } 
   }

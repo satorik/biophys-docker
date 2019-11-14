@@ -1,4 +1,5 @@
 node/node_modules
+node/nodemon.json
+react/.env.development
 react/node_modules
-biophys.msu
 docker-compose.yml

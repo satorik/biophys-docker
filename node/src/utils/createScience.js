@@ -5,12 +5,13 @@ const createScience = async (models) => {
 
   await models.scienceRoute.create({
     title: 'Теоретическая биофизика',
-    desc: faker.lorem.paragraph(),
+    description: faker.lorem.paragraph(),
     scienceGroups: bulk(3, () => ({
       title: faker.lorem.words(),
-      desc: faker.lorem.paragraph(),
+      description: faker.lorem.paragraph(),
       tel: faker.phone.phoneNumber(),
       mail: faker.internet.email(),
+      imageUrl:'/images/scienceGroup/002.png',
       room: '205'
     }))
   },
@@ -21,22 +22,24 @@ const createScience = async (models) => {
 
   await firstScienceRoute.createScienceGroup({
     title: 'Группа молекулярной фотобиологии микроорганизмов',
-    desc: `Научная работа группы связана с исследованием фундаментальных механизмов воздействия света на живую клетку. Основная проблема состоит в изучении природы светочувствительности клеток дрожжей и бактерий, не содержащих специализированные фоторецепторные системы. В центре внимания – идентификация потенциально фотоактивных хромофоров (сенсибилизаторов), способных вступать в фотохимические реакции, инициирующие определенные фотобиологические ответы. В зависимости от природы хромофора, его субклеточной локализации и молекулярного микроокружения, а также параметров оптического излучения наблюдаются фотосенсибилизированные цитотоксические, фотозащитные и регуляторные эффекты. Выявленные у дрожжей новые механизмы фотозащиты клеток расширяют представления об индуцированных светом защитных процессах в живых системах. 
+    description: `Научная работа группы связана с исследованием фундаментальных механизмов воздействия света на живую клетку. Основная проблема состоит в изучении природы светочувствительности клеток дрожжей и бактерий, не содержащих специализированные фоторецепторные системы. В центре внимания – идентификация потенциально фотоактивных хромофоров (сенсибилизаторов), способных вступать в фотохимические реакции, инициирующие определенные фотобиологические ответы. В зависимости от природы хромофора, его субклеточной локализации и молекулярного микроокружения, а также параметров оптического излучения наблюдаются фотосенсибилизированные цитотоксические, фотозащитные и регуляторные эффекты. Выявленные у дрожжей новые механизмы фотозащиты клеток расширяют представления об индуцированных светом защитных процессах в живых системах. 
     На основе изучения молекулярных основ цитотоксических воздействий фотосенсибилизаторов разрабатывается новый метод антимикробной фотодинамической терапии. Процессы взаимодействия антимикробных соединений с микробными объектами исследуются с помощью бактериальной биолюминесцентной тест-системы, методами измерения поверхностного потенциала, молекулярного моделирования.
     `,
     tel: '8-495-939-39-68',
     mail: faker.internet.email(),
+    imageUrl:'/images/scienceGroup/002.png',
     room: '217-219'
   })
 
   await models.scienceRoute.create({
     title: 'Биофизика клеточных и мембранных процессов',
-    desc: faker.lorem.paragraph(),
+    description: faker.lorem.paragraph(),
     scienceGroups: bulk(3, () => ({
       title: faker.lorem.words(),
-      desc: faker.lorem.paragraph(),
+      description: faker.lorem.paragraph(),
       tel: faker.phone.phoneNumber(),
       mail: faker.internet.email(),
+      imageUrl:'/images/scienceGroup/002.png',
       room: '205'
     }))
   },
@@ -45,12 +48,13 @@ const createScience = async (models) => {
   
   await models.scienceRoute.create({
     title: 'Биофизика фотобиологических процессов',
-    desc: faker.lorem.paragraph(),
+    description: faker.lorem.paragraph(),
     scienceGroups: bulk(3, () => ({
       title: faker.lorem.words(),
-      desc: faker.lorem.paragraph(),
+      description: faker.lorem.paragraph(),
       tel: faker.phone.phoneNumber(),
       mail: faker.internet.email(),
+      imageUrl:'/images/scienceGroup/002.png',
       room: '205'
     }))
   },
@@ -59,12 +63,13 @@ const createScience = async (models) => {
 
   await models.scienceRoute.create({
     title: 'Радиационная биофизика',
-    desc: faker.lorem.paragraph(),
+    description: faker.lorem.paragraph(),
     scienceGroups: bulk(3, () => ({
       title: faker.lorem.words(),
-      desc: faker.lorem.paragraph(),
+      description: faker.lorem.paragraph(),
       tel: faker.phone.phoneNumber(),
       mail: faker.internet.email(),
+      imageUrl:'/images/scienceGroup/002.png',
       room: '205'
     }))
   },
@@ -73,12 +78,13 @@ const createScience = async (models) => {
 
   await models.scienceRoute.create({
     title: 'Медицинская биофизика',
-    desc: faker.lorem.paragraph(),
+    description: faker.lorem.paragraph(),
     scienceGroups: bulk(3, () => ({
       title: faker.lorem.words(),
-      desc: faker.lorem.paragraph(),
+      description: faker.lorem.paragraph(),
       tel: faker.phone.phoneNumber(),
       mail: faker.internet.email(),
+      imageUrl:'/images/scienceGroup/002.png',
       room: '205'
     }))
   },
@@ -87,11 +93,12 @@ const createScience = async (models) => {
 
   await models.scienceRoute.create({
     title: 'Экологическая биофизика',
-    desc: faker.lorem.paragraph(),
+    description: faker.lorem.paragraph(),
     scienceGroups: bulk(3, () => ({
       title: faker.lorem.words(),
-      desc: faker.lorem.paragraph(),
+      description: faker.lorem.paragraph(),
       tel: faker.phone.phoneNumber(),
+      imageUrl:'/images/scienceGroup/002.png',
       mail: faker.internet.email(),
       room: '205'
     }))
@@ -113,7 +120,7 @@ for (const group of groups) {
         tel: faker.phone.phoneNumber(),
         mail: faker.internet.email(),
         scienceGroupId: group.id,
-        type:'student'
+        type:'STUDENT'
       }))
     )
 
@@ -125,7 +132,7 @@ for (const group of groups) {
         tel: faker.phone.phoneNumber(),
         mail: faker.internet.email(),
         scienceGroupId: group.id,
-        type:'staff'
+        type:'STAFF'
       }))
     )
 
@@ -144,33 +151,33 @@ for (const group of groups) {
         firstname: 'Григорий',
         middlename: 'Яковлевич',
         lastname: 'Фрайкин',
-        desc:'доктор биологических наук, ведущий научный сотрудник, профессор',
+        description:'доктор биологических наук, ведущий научный сотрудник, профессор',
         scienceGroupId: group.id,
-        type:'staff'
+        type:'STAFF'
       },
       {
         firstname: 'Марина',
         middlename: 'Глебовна',
         lastname: 'Страховская',
-        desc:'доктор биологических наук, ведущий научный сотрудник',
+        description:'доктор биологических наук, ведущий научный сотрудник',
         scienceGroupId: group.id,
-        type:'staff'
+        type:'STAFF'
       },
       {
         firstname: 'Наталья',
         middlename: 'Серафимовна',
         lastname: 'Беленикина',
-        desc:'кандидат биологических наук, научный сотрудник',
+        description:'кандидат биологических наук, научный сотрудник',
         scienceGroupId: group.id,
-        type:'staff'
+        type:'STAFF'
       },
       {
         firstname: 'Екатерина',
         middlename: 'Георгиевна',
         lastname: 'Холина',
-        desc:'2-й год обучения',
+        description:'2-й год обучения',
         scienceGroupId: group.id,
-        type:'student'
+        type:'STUDENT'
       }
     ]) 
 

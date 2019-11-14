@@ -1,10 +1,23 @@
 const scienceRoute = (sequelize, DataTypes ) => {
   return sequelize.define('scienceRoute', {
   title: {
-    type: DataTypes.STRING,
-    allowNull: false
+    type: DataTypes.STRING(100), 
+    allowNull: false,
+    validate:{
+      notEmpty:{
+          args:true,
+          msg:"Title required"
+      },
+      len:{
+          args:[5, 100],
+          msg:"Title 100 characters"
+      }
+    }
   },
-  desc: { type: DataTypes.TEXT}
+  description: {
+    type: DataTypes.TEXT, 
+    allowNull: true
+    }
   }
   )
 }

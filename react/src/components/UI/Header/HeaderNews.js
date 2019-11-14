@@ -1,6 +1,6 @@
 import React from 'react'
 
-const header = process.env.REACT_APP_STATIC_URI+'images/header/header-news.jpg'
+const header = process.env.REACT_APP_STATIC_URI+'/images/header/header-news.jpg'
 console.log(header)
 
 const headerImage = {

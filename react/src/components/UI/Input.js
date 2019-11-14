@@ -1,16 +1,16 @@
 import React from 'react'
 
 
-import { InputFile, InputText, InputDate, InputTextarea, InputQuill, InputCheck } from './Inputs'
+import { InputFile, InputText, InputDate, InputTextarea, InputQuill, InputCheck, InputRadio } from './Inputs'
 
-const Input = ({control, value, onChanged, onBlur, touched, valid, label}) => {
+const Input = ({control, value, onChanged, onBlur, touched, valid, label, required}) => {
 
   const inputClasses = control === 'file' ? ['custom-file-input'] : ['form-control']
   let validationError = null
  
   if ( !valid && touched ) {
     inputClasses.push('is-invalid')
-    validationError = <p className="d-inline text-danger text-right">Пожалуйста, заполните {label}</p>
+    validationError = <p className="d-inline text-danger text-right">Пожалуйста, заполните {label} верно</p>
   }
 
   const getControlElement = () => {
@@ -20,10 +20,12 @@ const Input = ({control, value, onChanged, onBlur, touched, valid, label}) => {
               label='Выберите файл'
               onChanged={onChanged}
               onBlur={onBlur}
+              required={required}
               >{validationError}</InputFile>
     }
     else if (control === 'input') {
       return <InputText
+              required={required}
               className={inputClasses.join( ' ' )}
               label={label}
               value={value}
@@ -37,6 +39,7 @@ const Input = ({control, value, onChanged, onBlur, touched, valid, label}) => {
               label={label}
               value={value}
               onChanged={onChanged}
+              required={required}
               onBlur={onBlur}
               withTime={control === 'datetime' ? true : false}
               >{validationError}</InputDate>
@@ -46,6 +49,7 @@ const Input = ({control, value, onChanged, onBlur, touched, valid, label}) => {
               className={inputClasses.join( ' ' )}
               label={label}
               value={value}
+              required={required}
               onChanged={onChanged}
               onBlur={onBlur}
               >{validationError}</InputTextarea>
@@ -54,6 +58,7 @@ const Input = ({control, value, onChanged, onBlur, touched, valid, label}) => {
       return <InputQuill
               label={label}
               value={value}
+              required={required}
               onChanged={onChanged}
               onBlur={onBlur}
               >{validationError}</InputQuill>
@@ -62,6 +67,15 @@ const Input = ({control, value, onChanged, onBlur, touched, valid, label}) => {
       return <InputCheck
               label={label}
               value={value}
+              required={required}
+              onChanged={onChanged}
+              />
+    }
+    else if (control === 'radio') {
+      return <InputRadio
+              label={label}
+              required={required}
+              value={label[0].value}
               onChanged={onChanged}
               />
     }

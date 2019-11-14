@@ -4,8 +4,6 @@ import NavigationList from './components/Shared/SecondaryNavigation/NavigationLi
 import ScienceGroup from './components/Science/ScienceGroup'
 import {Route, Redirect} from 'react-router-dom'
 
-
-
 const Science = ({links}) => {
  
   const {subLinks} = links
@@ -15,8 +13,6 @@ const Science = ({links}) => {
     setSelectedScienceRoute(sublinkId)
   }
 
-  console.log(subLinks)
-  console.log(subLinks[0].id)
   return (
     <div>
       <Carousel />

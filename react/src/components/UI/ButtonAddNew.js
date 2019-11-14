@@ -1,14 +1,16 @@
 import React from 'react'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faPlus, faCircle } from '@fortawesome/free-solid-svg-icons'
 
-const ButtonAddNew = ({onClickAddButton, color}) => {
+const ButtonAddNew = ({onClickAddButton, color, fixed, size}) => {
+
+  const divStyle = fixed ? {position:'fixed', bottom:'35px', right:'35px', cursor:'pointer'} : {cursor:'pointer'}
+  const spanClass = `fa-layers fa-fw fa-${size}x`
 
   return (
-    <div style={{position:'fixed', bottom:'35px', right:'35px', cursor:'pointer'}} onClick={onClickAddButton}>
-      <span className="fa-layers fa-fw fa-4x">
-        <FontAwesomeIcon icon={faCircle} style={{color: `var(--${color})`}}/>
-        <FontAwesomeIcon icon={faPlus} color="white" transform="shrink-6"/>
+    <div style={divStyle} onClick={onClickAddButton}>
+      <span className={spanClass}>
+        <FontAwesomeIcon icon="circle" style={{color: `var(--${color})`}}/>
+        <FontAwesomeIcon icon="plus" color="white" transform="shrink-6"/>
       </span>
     </div>
   )

@@ -1,6 +1,6 @@
 import React from 'react'
 
-const header = process.env.REACT_APP_STATIC_URI+'images/conference/header.jpg'
+const header = process.env.REACT_APP_STATIC_URI+'/images/conference/header.jpg'
 
 const imageBackground = {
   height: '20rem',

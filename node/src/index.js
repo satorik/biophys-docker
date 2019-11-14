@@ -8,7 +8,6 @@ app.use('/images', express.static(path.join(__dirname, 'images')))
 
 server.applyMiddleware({ app })
 
-
 populate(false).
   then(res => {
     app.listen({ port: process.env.PORT || 4000 }, () => {

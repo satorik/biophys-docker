@@ -1,36 +1,91 @@
 const scienceQuery = {
   async scienceRoutes(parent, {id}, {models}, info) {
-    let routes
-    if (id) {
-      routes = await models.ScienceRoute.findAll({raw:true, where: {id}})
+    
+    let WHERE = {}
+    if (id) WHERE = {id}
+    
+    const options = {
+      where: WHERE,
+      include: [
+        {
+          model: models.ScienceGroup,
+          include:[
+            {
+              model: models.SciencePeople
+            },
+            {
+              model: models.ScienceArticle
+            }
+          ]
+        }
+      ]     
     }
-    else {
-      routes = await models.ScienceRoute.findAll({raw:true })
-    }
-    for (const route of routes) {  
-      const groups = await models.ScienceGroup.findAll({raw: true, where:{scienceRouteId: route.id}})
-      route.groups = groups
-    }
-    return routes
+
+    const routes = await models.ScienceRoute.findAll(options)
+    return routes.map(route => {
+      return Object.assign(
+        {},
+        {
+          id: route.id,
+          title: route.title,
+          description: route.description,
+          scienceGroups: route.scienceGroups.map(group => {
+            return Object.assign(
+              {},
+              {
+                id: group.id,
+                title: group.title,
+                description: group.description,
+                imageUrl: group.imageUrl,
+                tel: group.tel,
+                mail: group.mail,
+                room: group.room,
+                people: group.sciencePeople,
+                articles: group.scienceArticles
+              }
+            )
+          })
+        }
+      )
+    })
+
   },
   async scienceGroups(parent, {id, scienceRouteId}, {models}, info) {
-    let WHERE = {}
-   
-    if (parent) {WHERE = {scienceRouteId: parent.id}}
-    if (scienceRouteId) { WHERE = {...WHERE, scienceRouteId: scienceRouteId} }
-    if (id) {
-      WHERE = {...WHERE, id}  
-    }
-    
-    const groups = await models.ScienceGroup.findAll({raw:true, where: WHERE})
 
-    for (const group of groups) {  
-      const people = await models.SciencePeople.findAll({raw: true, where:{scienceGroupId: group.id}})
-      const articles = await models.ScienceArticle.findAll({raw: true, where:{scienceGroupId: group.id}})
-      group.people = people
-      group.articles = articles
+    let WHERE = {}
+    if (id) WHERE = {id}
+    if(scienceRouteId) WHERE={...WHERE, scienceRouteId}
+
+    const options = {
+      where: WHERE,
+      include:[
+        {
+          model: models.SciencePeople
+        },
+        {
+          model: models.ScienceArticle
+        }
+      ]
     }
-    return groups
+
+    
+    const groups = await models.ScienceGroup.findAll(options)
+    return groups.map(group => {
+      return Object.assign(
+        {},
+        {
+          id: group.id,
+          title: group.title,
+          description: group.description,
+          imageUrl: group.imageUrl,
+          tel: group.tel,
+          mail: group.mail,
+          room: group.room,
+          people: group.sciencePeople,
+          articles: group.scienceArticles
+        }
+      )
+    })
   }
 }
 

@@ -4,11 +4,18 @@ import { getValue } from '../../utils/getFormChangedValue'
 import { postInputChange, postInputBlur, createPostForm } from '../../utils/formHandlers'
 
 
-const Edit = ({onClickSubmit, onClickCancel, formTemplate, isAbleToSave, post, config}) => {
+const Edit = ({onClickSubmit, onClickCancel, formTemplate, isAbleToSave, post}) => {
   
   const [postForm, setPostForm] = React.useState(createPostForm(formTemplate, post))
   const [formIsValid, setFormIsValid] = React.useState(false)
   const [imagePreview, setImagePreview] = React.useState(post.imageUrl ? process.env.REACT_APP_STATIC_URI+post.imageUrl : null)
+
+  React.useEffect(() => {
+    if(isAbleToSave) {
+      setPostForm(createPostForm(formTemplate, post))
+      setImagePreview(post.imageUrl ? process.env.REACT_APP_STATIC_URI+post.imageUrl : null)
+    }
+  }, [formTemplate])
 
   const postInputChangeHandler = (event, id) => {
     getValue(event, postForm[id].type, postForm[id].value)
@@ -32,6 +39,7 @@ const Edit = ({onClickSubmit, onClickCancel, formTemplate, isAbleToSave, post, c
   return (
     <div>
       {!isAbleToSave && <p className="text-danger text-center">Заполните форму верно</p>}
+      <p>* - обязательное поле</p>
       <form>
            <div>
               {imagePreview && (
@@ -54,6 +62,7 @@ const Edit = ({onClickSubmit, onClickCancel, formTemplate, isAbleToSave, post, c
                 valid={control.valid}
                 touched={control.touched}
                 value={control.value}
+                required={control.required}
             />
             )
           }

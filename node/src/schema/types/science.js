@@ -4,11 +4,41 @@ const SciencePeople = `
     firstname: String!
     middlename: String
     lastname: String!
-    desc: String
+    description: String
     tel: String
     mail: String
     birthday: String
-    type: String!
+    url: String
+    type: SciencePeopleType!
+  }
+
+  enum SciencePeopleType {
+    STAFF
+    STUDENT
+  }
+
+  input SciencePeopleCreateData {
+    firstname: String!
+    middlename: String
+    lastname: String!
+    description: String
+    tel: String
+    mail: String
+    url: String
+    birthday: String
+    type: SciencePeopleType!
+  }
+
+  input SciencePeopleUpdateData {
+    firstname: String
+    middlename: String
+    lastname: String
+    description: String
+    tel: String
+    mail: String
+    url: String
+    birthday: String
+    type: SciencePeopleType
   }
 `
 
@@ -19,20 +49,53 @@ const ScienceArticle = `
     title: String!
     journal: String!
   }
-`
 
+  input ScienceArticleCreateData {
+    author: String!
+    title: String!
+    journal: String!
+  }
+
+  input ScienceArticleUpdateData {
+    author: String
+    title: String
+    journal: String
+  }
+`
 
 const ScienceGroup = `
   type ScienceGroup {
     id: ID!
     title: String!
-    desc: String
+    description: String!
+    tel: String!
+    imageUrl: String!
+    mail: String!
+    room: String!
+    people: [SciencePeople!]!
+    articles: [ScienceArticle!]!
+  }
+
+  input ScienceGroupCreateData {
+    title: String!
+    description: String!
+    tel: String!
+    imageUrl: String!
+    mail: String!
+    room: String!
+    people: [SciencePeopleCreateData!]!
+    articles: [ScienceArticleCreateData!]!
+  }
+
+  input ScienceGroupUpdateData {
+    title: String
+    description: String
     tel: String
     imageUrl: String
     mail: String
     room: String
-    people: [SciencePeople!]!
-    articles: [ScienceArticle!]!
+    people: [SciencePeopleCreateData!]
+    articles: [ScienceArticleCreateData!]
   }
 `
 
@@ -40,8 +103,18 @@ const ScienceRoute = `
   type ScienceRoute {
     id: ID!
     title: String!
-    desc: String!
+    description: String
     scienceGroups(id: ID): [ScienceGroup!]
+  }
+
+  input ScienceRouteCreateData {
+    title: String!
+    description: String
+  }
+
+  input ScienceRouteUpdateData {
+    title: String
+    description: String
   }
 `
 

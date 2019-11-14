@@ -4,5 +4,6 @@ import InputDate from './InputDate'
 import InputTextarea from './InputTextarea'
 import InputQuill from './InputQuill'
 import InputCheck from './InputCheck'
+import InputRadio from './InputRadio'
 
-export { InputFile, InputText, InputDate, InputTextarea, InputQuill, InputCheck }
+export { InputFile, InputText, InputDate, InputTextarea, InputQuill, InputCheck, InputRadio }

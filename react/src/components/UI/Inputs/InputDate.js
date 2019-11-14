@@ -5,7 +5,7 @@ const currentYear = new Date().getFullYear()
 
 const YEARS = [currentYear-1, currentYear, currentYear+1]
 
-const InputDate = ({className, onChanged, onBlur, label, value, withTime, children}) => {
+const InputDate = ({onChanged, onBlur, label, value, withTime, children, required}) => {
   return (
       <div className="d-flex align-items-baseline">
         <div className="input-group form-group">
@@ -17,7 +17,7 @@ const InputDate = ({className, onChanged, onBlur, label, value, withTime, childr
               className='form-control col-1'
               value={value.day}
               title='day'
-              placeholder='День'
+              placeholder={`День+${required ? '*': ''}`}
               onChange={onChanged}
               onBlur={onBlur}
             />

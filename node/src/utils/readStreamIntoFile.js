@@ -13,7 +13,7 @@ export default (file, subDir) => {
 
     const savedFileName = uuidv4()+path.extname(filename)
     const savedFile = path.join(__dirname, '..', 'images', subDir, savedFileName)
-    const imagePath = path.join('images', subDir, savedFileName).replace(/\\/g, "/")
+    const imagePath = path.join('/images', subDir, savedFileName).replace(/\\/g, "/")
     
     const readStream  = createReadStream()
 

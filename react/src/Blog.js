@@ -288,6 +288,8 @@ const Blog = () => {
     <ButtonAddNew
       color='red'
       onClickAddButton={onAddNewBlogpost}
+      fixed
+      size='4'
       />
     </>
   )

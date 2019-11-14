@@ -6,7 +6,9 @@ const noteMutation = {
 
     // const user = await User.findOne({where: {id: +req.userId}});
     // if (!user) {  throw e }
-
+      if (inputData.onTop) {
+        await models.Note.update({onTop:false}, {where: {onTop: true}})
+      }
       const note = await models.Note.create({...inputData})
       return note.dataValues
   },
@@ -18,6 +20,9 @@ const noteMutation = {
 
     // const user = await User.findOne({where: {id: +req.userId}});
     // if (!user) {thro e }
+    if (inputData.onTop) {
+      await models.Note.update({onTop:false}, {where: {onTop: true}})
+    }
     Object.keys(inputData).forEach(item => post[item] = inputData[item])
 
     await post.save()

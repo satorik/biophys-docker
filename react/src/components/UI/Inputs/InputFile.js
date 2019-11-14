@@ -1,5 +1,5 @@
 import React from 'react'
-export default ({className, onChanged, onBlur, label, children}) => <div className="form-group">
+export default ({className, onChanged, onBlur, label, children, required}) => <div className="form-group">
   <div className="custom-file">
     <input 
       type="file" 
@@ -7,7 +7,7 @@ export default ({className, onChanged, onBlur, label, children}) => <div classNa
       onChange={onChanged}
       onBlur={onBlur}
       id="customFile"/>
-    <label className="custom-file-label" htmlFor="customFile">{label}</label>
+    <label className="custom-file-label" htmlFor="customFile">{label+`${required ? '*': ''}`}</label>
   </div>
   {children}
 </div>

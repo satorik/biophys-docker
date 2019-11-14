@@ -1,10 +1,10 @@
 import React from 'react'
 
 const gallery = [
-  process.env.REACT_APP_STATIC_URI+'images/blog/001.jpg',
-  process.env.REACT_APP_STATIC_URI+'images/blog/002.jpg',
-  process.env.REACT_APP_STATIC_URI+'images/blog/003.jpg',
-  process.env.REACT_APP_STATIC_URI+'images/blog/004.jpg'
+  process.env.REACT_APP_STATIC_URI+'/images/blog/001.jpg',
+  process.env.REACT_APP_STATIC_URI+'/images/blog/002.jpg',
+  process.env.REACT_APP_STATIC_URI+'/images/blog/003.jpg',
+  process.env.REACT_APP_STATIC_URI+'/images/blog/004.jpg'
 ]
 
 const quotes = [

@@ -10,7 +10,7 @@ import Edit from './components/Shared/Edit'
 import Spinner from './components/UI/Spinner'
 import ErrorBoundry from './components/Shared/ErrorHandling/ErrorBoundry'
 import getUpdateData from './utils/getObjectForUpdate'
-import SeminarHeader from './components/Seminar/SeminarHeader'
+import HeaderSeminar from './components/UI/Header/HeaderSeminar'
 import SeminarCard from './components/Seminar/SeminarCard'
 import SeminarDetails from './components/Seminar/SeminarDetails'
 import NetworkErrorComponent from './components/Shared/ErrorHandling/NetworkErrorComponent'
@@ -111,9 +111,6 @@ const Seminar = () => {
   const [mode, setMode] = React.useState({isEditing: false, isCreating: false, isDeleting: false})
   const [updatedSeminar, setUpdatedSeminar] = React.useState({})
   const [isAbleToSave, setIsAbleToSave] = React.useState(true)
-  const [isError, setIsError] = React.useState(null)
-  
-  if (isError) throw isError
 
   const variables = {
     offset:0, 
@@ -180,19 +177,12 @@ const Seminar = () => {
     //setUpdatedSeminar(blogposts[id])
   }
 
-  const onDeleteSeminarHandler = () => {
-    deleteSeminar({ variables: {id: updatedSeminar.id}})
-    .then( res => {
-      setIsModalOpen(false)
-      setMode({...mode, isDeleting: false})
-      document.body.style.overflow = "scroll"
-      setUpdatedSeminar({})
-      }
-    )
-    .catch(e => {
-      setIsError(e)
-    }
-    )
+  const onDeleteSeminarHandler = async () => {
+    await deleteSeminar({ variables: {id: updatedSeminar.id}})
+    setIsModalOpen(false)
+    setMode({...mode, isDeleting: false})
+    document.body.style.overflow = "scroll"
+    setUpdatedSeminar({})
   }
 
   const onCloseModal = () => {
@@ -221,41 +211,30 @@ const Seminar = () => {
       setMode({...mode, isCreating: false})
       if (mode.isEditing) {
         const forUpdate = getUpdateData(updatedSeminar, postObject)
-        updateSeminar({ variables: {id: updatedSeminar.id, inputData: forUpdate}})
-        .then( res => {
-          console.log(res)
-          setIsModalOpen(false)
-          setMode({...mode, isEditing: false})
-          document.body.style.overflow = "scroll"
-          setUpdatedSeminar({})
-          })
-        .catch(e => {setIsError(e)})
+        await updateSeminar({ variables: {id: updatedSeminar.id, inputData: forUpdate}})
+        setIsModalOpen(false)
+        setMode({...mode, isEditing: false})
+        document.body.style.overflow = "scroll"
+        setUpdatedSeminar({})
       }
       if (mode.isCreating) {
-        createSeminar({ variables: {inputData: postObject}})
-        .then( res => {
-          setIsModalOpen(false)
-          setMode({...mode, isCreating: false})
-          document.body.style.overflow = "scroll"
-          }
-        )
-        .catch(e => {
-          setIsError(e)
-        }
-        )
+        await createSeminar({ variables: {inputData: postObject}})
+        setIsModalOpen(false)
+        setMode({...mode, isCreating: false})
+        document.body.style.overflow = "scroll"
       }
     } 
   }
 
   let modalTitle = ''
-  if (mode.isEditing) {modalTitle = 'Редактирование записи в блоге'}
-  if (mode.isCreating) {modalTitle = 'Новая запись в блоге'}
-  if (mode.isDeleting) {modalTitle = 'Удаление записи из блога'}
+  if (mode.isEditing) {modalTitle = 'Редактирование семинара'}
+  if (mode.isCreating) {modalTitle = 'Новый семинар'}
+  if (mode.isDeleting) {modalTitle = 'Удаление семинара'}
 
   
   return (
     <>
-    <SeminarHeader />
+    <HeaderSeminar />
 
     {isModalOpen && <Modal 
       isOpen={isModalOpen}
@@ -299,6 +278,8 @@ const Seminar = () => {
       <ButtonAddNew
         color='red'
         onClickAddButton={onAddNewSeminar}
+        fixed
+        size='4'
        />
     </>
   )

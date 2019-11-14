@@ -3,7 +3,7 @@ import { useQuery, useMutation } from '@apollo/react-hooks'
 import { gql } from 'apollo-boost'
 import { required, length, date } from './utils/validators'
 
-import ConferenceHeader from './components/Conference/ConfereceHeader'
+import HeaderConference from './components/UI/Header/HeaderConference'
 import YesDelete from './components/Shared/DoYouWantToDelete'
 import ButtonAddNew from './components/UI/ButtonAddNew'
 import Modal from './components/UI/Modal'
@@ -118,7 +118,6 @@ const Conferece = () => {
   const [mode, setMode] = React.useState({isEditing: false, isCreating: false, isDeleting: false})
   const [updatedConference, setUpdatedConference] = React.useState({})
   const [isAbleToSave, setIsAbleToSave] = React.useState(true)
-  const [isError, setIsError] = React.useState(null)
   
   const variables = {
     offset:0, 
@@ -184,19 +183,12 @@ const Conferece = () => {
     //setUpdatedConference(blogposts[id])
   }
 
-  const onDeleteConferenceHandler = () => {
-    deleteConference({ variables: {id: updatedConference.id}})
-    .then( res => {
-      setIsModalOpen(false)
-      setMode({...mode, isDeleting: false})
-      document.body.style.overflow = "scroll"
-      setUpdatedConference({})
-      }
-    )
-    .catch(e => {
-      setIsError(e)
-    }
-    )
+  const onDeleteConferenceHandler = async () => {
+    await deleteConference({ variables: {id: updatedConference.id}})
+    setIsModalOpen(false)
+    setMode({...mode, isDeleting: false})
+    document.body.style.overflow = "scroll"
+    setUpdatedConference({})
   }
 
   const onCloseModal = () => {
@@ -225,43 +217,30 @@ const Conferece = () => {
       setMode({...mode, isCreating: false})
       if (mode.isEditing) {
         const forUpdate = getUpdateData(updatedConference, postObject)
-        updateConference({ variables: {id: updatedConference.id, inputData: forUpdate}})
-        .then( res => {
-          console.log(res)
-          setIsModalOpen(false)
-          setMode({...mode, isEditing: false})
-          document.body.style.overflow = "scroll"
-          setUpdatedConference({})
-          })
-        .catch(e => {setIsError(e)})
+        await updateConference({ variables: {id: updatedConference.id, inputData: forUpdate}})
+        setIsModalOpen(false)
+        setMode({...mode, isEditing: false})
+        document.body.style.overflow = "scroll"
+        setUpdatedConference({})
       }
       if (mode.isCreating) {
-        createConference({ variables: {inputData: postObject}})
-        .then( res => {
-          setIsModalOpen(false)
-          setMode({...mode, isCreating: false})
-          document.body.style.overflow = "scroll"
-          }
-        )
-        .catch(e => {
-          setIsError(e)
-        }
-        )
+        await createConference({ variables: {inputData: postObject}})
+        setIsModalOpen(false)
+        setMode({...mode, isCreating: false})
+        document.body.style.overflow = "scroll"
       }
     } 
   }
 
   let modalTitle = ''
-  if (mode.isEditing) {modalTitle = 'Редактирование записи в блоге'}
-  if (mode.isCreating) {modalTitle = 'Новая запись в блоге'}
-  if (mode.isDeleting) {modalTitle = 'Удаление записи из блога'}
+  if (mode.isEditing) {modalTitle = 'Редактирование конференции'}
+  if (mode.isCreating) {modalTitle = 'Новая конференция'}
+  if (mode.isDeleting) {modalTitle = 'Удаление конференции'}
 
   
   return (
     <>
-    <div>
-      <ConferenceHeader />
-    </div>
+    <HeaderConference />
     {isModalOpen && <Modal 
       isOpen={isModalOpen}
       title={modalTitle}
@@ -305,6 +284,8 @@ const Conferece = () => {
       <ButtonAddNew
         color='red'
         onClickAddButton={onAddNewConference}
+        fixed
+        size='4'
        />
     </>
   )
