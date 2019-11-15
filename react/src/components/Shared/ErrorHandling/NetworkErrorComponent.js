@@ -2,7 +2,6 @@ import React from 'react'
 
 const NetworkErrorComponent = ({error}) => {
 
-  console.log('ERROR', error)
   const {graphQLErrors, networkError} = error
   let errorInfo = []
 
@@ -11,10 +10,14 @@ const NetworkErrorComponent = ({error}) => {
       errorInfo.push(`[GraphQL error]: Message: ${message}, Location: ${locations}, Path: ${path}`)
     )
 
-  if (networkError) 
+  if (networkError) {
+   if (networkError.result) 
     networkError.result.errors.map(({ message }) => 
-      errorInfo.push(`[Network error]: Message: ${message}`)
+    errorInfo.push(`[Network error]: Message: ${message}`)
     )
+    else errorInfo.push(`[Network error]: Message: ${networkError.message}`)
+  }
+
 
   return (
     <div className="container mt-5 text-center">

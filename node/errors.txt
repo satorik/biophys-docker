@@ -1,0 +1,7 @@
+The "path" argument must be one of type string, Buffer, or URL. Received type function
+
+GraphQL request:2:3
+1 | mutation createBlogpost($inputData: BlogpostCreateData!) {
+2 |   createBlogpost(inputData: $inputData) {
+  |   ^
+3 |     id

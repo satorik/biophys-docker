@@ -4,23 +4,20 @@ import clearImage from '../../utils/clearImage'
 
 const blogpostMutation = {
   async createBlogpost(parent, { inputData }, { models }) {
-    // if (!req.isAuth) {throw e}
-
-    // const user = await User.findOne({where: {id: +req.userId}});
-    // if (!user) {throw e}
-
     const uploadedImage = await inputData.image
+    const {file, imageUrl} = await writeImage(uploadedImage, 'blog')
+    //try {
 
-    const { file, imageUrl } = await writeImage(uploadedImage, 'blog')
-
-    const post = await models.Blogpost.create({
-      title: inputData.title,
-      content: inputData.content,
-      description: inputData.description,
-      imageUrl: imageUrl
-    })
-
-    return post.dataValues
+      const post = await models.Blogpost.create({
+        title: inputData.title,
+        content: inputData.content,
+        description: inputData.description,
+        imageUrl: imageUrl
+      })
+  
+      return post.dataValues
+   // } 
+   // catch(error) {throw new ApolloError(error)}
   },
   async updateBlogpost(parent, { id, inputData }, { models }) {
     // if (!req.isAuth) {throw e }
