@@ -20,18 +20,16 @@ const scienceMutation = {
 
     const newGroup = await models.ScienceGroup.create({...groupDataWithUrl})
     console.log(newGroup)
-    await newGroup.setPeople(people)
-    console.log(newGroup)
-    await newGroup.setArticles(articles)
-    console.log(newGroup)
-    
+    if (people.length > 0) { await newGroup.setSciencePeople(people) }
+    if (articles.length > 0) { await newGroup.setScienceArticles(articles) }
+
     return newGroup.dataValues
   },
   async updateScienceGroup(parent, {id, inputData}, { models }){
     // if (!req.isAuth) { e }
   
-    const post = await models.Conference.findOne({where: {id}})
-    if (!post) { throw new ApolloError('Post not found') }
+    const route = await models.Conference.findOne({where: {id}})
+    if (!route) { throw new ApolloError('Post not found') }
 
     let isUploaded = {}
     if (inputData.image) {
@@ -42,19 +40,39 @@ const scienceMutation = {
   
     // const user = await User.findOne({where: {id: +req.userId}});
     // if (!user) {thro e }
-    Object.keys(inputData).forEach(item => post[item] = inputData[item])
-    if (isUploaded.imageUrl) { post.imageUrl = isUploaded.imageUrl }
+    Object.keys(inputData).forEach(item => route[item] = inputData[item])
+    if (isUploaded.imageUrl) { route.imageUrl = isUploaded.imageUrl }
 
-    await post.save()
-    return post.dataValues
+    await route.save()
+    return route.dataValues
 
   },
   async deleteScienceGroup(parent, {id}, { models }){
-    const post = await models.Conference.findOne({where: {id}})
-    if (!post) { throw new ApolloError('Post not found') }
+    const route = await models.Conference.findOne({where: {id}})
+    if (!route) { throw new ApolloError('Post not found') }
 
-    await post.destroy()
-    clearImage(post.dataValues.imageUrl, 'conference')
+    await route.destroy()
+    clearImage(route.dataValues.imageUrl, 'conference')
+    return id
+  },
+  async createScienceRoute(parent, {inputData}, { models }) {
+    const scienceRoute = await models.ScienceRoute.create({...inputData})
+    return scienceRoute.dataValues
+  },
+  async updateScienceRoute(parent, {id, inputData}, { models }){
+    const route = await models.ScienceRoute.findOne({where: {id}})
+    if (!route) { throw new ApolloError('Route not found') }
+
+    Object.keys(inputData).forEach(item => route[item] = inputData[item])
+
+    await route.save()
+    return route.dataValues
+  },
+  async deleteScienceRoute(parent, {id}, { models }){
+    const route = await models.ScienceRoute.findOne({where: {id}})
+    if (!route) { throw new ApolloError('Route not found') }
+
+    await route.destroy()
     return id
   }
 }

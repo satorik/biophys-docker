@@ -72,8 +72,8 @@ const ScienceGroup = `
     imageUrl: String!
     mail: String!
     room: String!
-    people: [SciencePeople!]!
-    articles: [ScienceArticle!]!
+    people: [SciencePeople!]
+    articles: [ScienceArticle!]
   }
 
   input ScienceGroupCreateData {
@@ -83,8 +83,8 @@ const ScienceGroup = `
     imageUrl: String!
     mail: String!
     room: String!
-    people: [SciencePeopleCreateData!]!
-    articles: [ScienceArticleCreateData!]!
+    people: [SciencePeopleCreateData!]
+    articles: [ScienceArticleCreateData!]
   }
 
   input ScienceGroupUpdateData {

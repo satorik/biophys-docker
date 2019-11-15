@@ -2,6 +2,7 @@ import React from 'react'
 
 const NetworkErrorComponent = ({error}) => {
 
+  console.log('ERROR', error)
   const {graphQLErrors, networkError} = error
   let errorInfo = []
 

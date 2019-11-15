@@ -26,7 +26,6 @@ const populate = async (force = true) => {
   else {
     await db.sync()
     const checkInfo = await db.models.note.count()
-    console.log(checkInfo)
     if (checkInfo === 0) {
       try {
         await createNews(db.models)
@@ -40,6 +39,7 @@ const populate = async (force = true) => {
         console.log(err);
       }
     }
+    else {console.log('database full')}
   }
 }
 
