@@ -1,4 +1,6 @@
-  const getValue = (type, isForUpdate, oldData, control) => {
+import {elementType} from "prop-types"
+
+  const getValue = (type, isForUpdate, oldData, control, label) => {
     if (type === 'file') {return ''}
     if (isForUpdate) {
       if (type === 'date') {
@@ -21,6 +23,7 @@
     }
     if (type === 'date') {return {day: '', month: new Date().getMonth(), year: new Date().getFullYear()}}
     if (type === 'datetime') {return {day: '', month: new Date().getMonth(), year: new Date().getFullYear(), hours: '00', minutes: '00' }}
+    if (type === 'radio') {return label[0].value}
     return ''
   }
 
@@ -29,8 +32,8 @@
    return template.map(element => {
         return {
         ...element,
-        value: getValue(element.type, forUpdate, post, element.title),
-        valid: forUpdate,
+        value: getValue(element.type, forUpdate, post, element.title, element.label),
+        valid: forUpdate || !element.required || element.type === 'radio' || element.type === 'check',
         touched: false
       } 
     }) 
@@ -39,9 +42,10 @@
  const postInputChange = (form, id, value) => {
     
     let isValid = true
-    
-    for (const validator of form[id].validators) {
-        isValid = isValid && validator(value)
+    if (form[id].validators && form[id].validators.length > 0) {
+      for (const validator of form[id].validators) {
+          isValid = isValid && validator(value)
+      }
     }
     const updatedForm = form.map((control, idx) => {
       if (idx !== id ) {

@@ -124,7 +124,7 @@ const Conferece = () => {
     limit: CONFERENCES_PER_PAGE
   }
 
-  const { loading: queryLodading, error: queryError, data} = useQuery(
+  const { loading: queryLoading, error: queryError, data} = useQuery(
         GET_CONFERENCE, {variables})
   const [createConference,
         { loading: creationLoading, error: creatingError }] = useMutation(CREATE_CONFERENCE, {
@@ -151,7 +151,7 @@ const Conferece = () => {
           }
         })
   
-  if (queryLodading) return <Spinner />
+  if (queryLoading) return <Spinner />
   if (queryError) return <NetworkErrorComponent error={queryError} />
   if (updatingError) return <NetworkErrorComponent error={updatingError} />
   if (deletingError) return <NetworkErrorComponent error={deletingError} />
@@ -198,7 +198,7 @@ const Conferece = () => {
     document.body.style.overflow = "scroll"
   }
 
-  const onChangeConferenceHandler = async (e, postData, valid, id) => {
+  const onChangeConferenceHandler = async (e, postData, valid) => {
     e.preventDefault()
     if (!valid) {
       setIsAbleToSave(false)

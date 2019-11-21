@@ -25,7 +25,9 @@ const link = errorLink.concat(createUploadLink({uri: process.env.REACT_APP_GRAPH
 
 const client = new ApolloClient({
   link,
-  cache: new InMemoryCache(),
+  cache: new InMemoryCache({
+    freezeResults: true
+  }),
   connectToDevTools: true
 })
 

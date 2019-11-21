@@ -1,6 +1,6 @@
 import React from 'react'
 import {Route, Redirect} from 'react-router-dom'
-import { useMutation } from '@apollo/react-hooks'
+import { useQuery, useMutation } from '@apollo/react-hooks'
 import { gql } from 'apollo-boost'
 import { required, length } from './utils/validators'
 
@@ -16,6 +16,14 @@ import getUpdateData from './utils/getObjectForUpdate'
 import ErrorBoundry from './components/Shared/ErrorHandling/ErrorBoundry'
 import NetworkErrorComponent from './components/Shared/ErrorHandling/NetworkErrorComponent'
 
+const GET_SCIENCE_ROUTE = gql`  
+  {                  
+    scienceRoutes {
+      id
+      title
+    }
+  }
+`
 const CREATE_SCIENCE_ROUTE = gql`
   mutation createScienceRoute($inputData: ScienceRouteCreateData!) {
     createScienceRoute(inputData: $inputData) {
@@ -42,6 +50,7 @@ const FORM_TEMPLATE = [
     title: 'title',
     label:'Название',
     type: 'input',
+    required: true,
     validators: [required, length({ min: 5 })]
   },
   {
@@ -51,48 +60,61 @@ const FORM_TEMPLATE = [
   }
 ] 
 
-const Science = ({links}) => {
+const Science = () => {
  
-  const {subLinks} = links
-  const [viewId, setViewId] = React.useState(subLinks[0].id)
+  const [viewId, setViewId] = React.useState(0)
 
   const [isModalOpen, setIsModalOpen] = React.useState(false)
   const [mode, setMode] = React.useState({isEditing: false, isCreating: false, isDeleting: false})
   const [updatedRoute, setUpdatedRoute] = React.useState({})
   const [isAbleToSave, setIsAbleToSave] = React.useState(true)
   
+  const { loading: queryLoading, error: queryError, data} = useQuery(GET_SCIENCE_ROUTE)
   const [createScienceRoute,
       { loading: creationLoading, error: creatingError }] = useMutation(CREATE_SCIENCE_ROUTE, 
-        // {
-        //   update(cache, { data: {createScienceRoute} }) {
-        //     const { conferences } = cache.readQuery({ query: GET_CONFERENCE, variables })
-        //     cache.writeQuery({
-        //       query: GET_CONFERENCE,
-        //       variables,
-        //       data: { conferences:  [createScienceRoute, ...conferences]}
-        //     })
-        //   }
-        // }
+        {
+          update(cache, { data: {createScienceRoute} }) {
+            const { scienceRoutes } = cache.readQuery({ query: GET_SCIENCE_ROUTE })
+            cache.writeQuery({
+              query: GET_SCIENCE_ROUTE,
+              data: { scienceRoutes:  [...scienceRoutes, createScienceRoute]}
+            })
+          }
+        }
         )
   const [updateScienceRoute,
       { loading: updatingLoading, error: updatingError }] = useMutation(UPDATE_SCIENCE_ROUTE)
   const [deleteScienceRoute,
       { loading: deletingLoading, error: deletingError }] = useMutation(DELETE_SCIENCE_ROUTE, 
-      //   {
-      //   update(cache, { data: { deleteScienceRoute } }) {
-      //     const { conferences } = cache.readQuery({ query: GET_CONFERENCE, variables})
-      //     cache.writeQuery({
-      //       query: GET_CONFERENCE,
-      //       variables,
-      //       data: { conferences: conferences.filter(el => el.id !== deleteScienceRoute)}
-      //     })
-      //   }
-      // }
+        {
+        update(cache, { data: { deleteScienceRoute } }) {
+          const { scienceRoutes } = cache.readQuery({ query: GET_SCIENCE_ROUTE})
+          cache.writeQuery({
+            query: GET_SCIENCE_ROUTE,
+            data: { scienceRoutes: scienceRoutes.filter(el => el.id !== deleteScienceRoute)}
+          })
+        }
+      }
       )
 
+  if (queryLoading) return <Spinner />
+  if (queryError) return <NetworkErrorComponent error={queryError} />
   if (updatingError) return <NetworkErrorComponent error={updatingError} />
   if (deletingError) return <NetworkErrorComponent error={deletingError} />
   if (creatingError) return <NetworkErrorComponent error={creatingError} />
+
+  const { scienceRoutes } = data
+
+  const links = scienceRoutes.map((route, idx) => {
+    return {
+      id: route.id,
+      path: `/route/${route.id}`,
+      title: route.title,
+      root: `/science`,
+      onEdit: () => onEditScienceRoute(idx),
+      onDelete: () => onDeleteScienceRoute(idx)
+    }
+  })
  
   const onSelectRoute = (sublinkId) => {
     setViewId(sublinkId)
@@ -108,13 +130,13 @@ const Science = ({links}) => {
     setIsModalOpen(true)
     setMode({...mode, isEditing: true})
     document.body.style.overflow = "hidden"
-    setUpdatedRoute(id)
+    setUpdatedRoute(scienceRoutes[id])
   }
   const onDeleteScienceRoute = (id) => {
     setIsModalOpen(true)
     document.body.style.overflow = "hidden"
     setMode({...mode, isDeleting: true})
-    setUpdatedRoute(id)
+    setUpdatedRoute(scienceRoutes[id])
     //setUpdatedRoute(blogposts[id])
   }
 
@@ -130,6 +152,7 @@ const Science = ({links}) => {
     setIsModalOpen(false)
     setMode({isDeleting: false, isEditing: false, isCreating: false})
     setUpdatedRoute({})
+    setIsAbleToSave(true)
     document.body.style.overflow = "scroll"
   }
 
@@ -139,12 +162,8 @@ const Science = ({links}) => {
       setIsAbleToSave(false)
     }
     else {
-      let postObject = postData.reduce((obj, item) => {
+      const postObject = postData.reduce((obj, item) => {
           obj[item.title] = item.value
-          if(item.type === 'date') {
-            const fullDate = new Date(Date.UTC(item.value.year, item.value.month, item.value.day))
-            obj[item.title] = fullDate.toISOString()
-          }
           return obj
       } ,{})
       setIsModalOpen(false)
@@ -168,16 +187,15 @@ const Science = ({links}) => {
   }
 
   let modalTitle = ''
-  if (mode.isEditing) {modalTitle = 'Редактирование конференции'}
-  if (mode.isCreating) {modalTitle = 'Новая конференция'}
-  if (mode.isDeleting) {modalTitle = 'Удаление конференции'}
-
+  if (mode.isEditing) {modalTitle = 'Редактирование научного направления'}
+  if (mode.isCreating) {modalTitle = 'Новое научное направление'}
+  if (mode.isDeleting) {modalTitle = 'Удаление научного направления'}
 
   return (
     <div>
       <Carousel />
-      <NavigationList subLinks={subLinks} navigationChange={onSelectRoute} selectedLink={viewId}/>
-      <Redirect from="/science" to={`/science${subLinks[0].path}`} /> 
+      <NavigationList subLinks={links} navigationChange={onSelectRoute} selectedLink={viewId}/>
+      <Redirect from="/science" to={`/science${links[0].path}`} /> 
       {isModalOpen && <Modal 
         isOpen={isModalOpen}
         title={modalTitle}

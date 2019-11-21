@@ -9,9 +9,11 @@ const NavigationList = ({subLinks, navigationChange, selectedLink}) => {
           key={subLink.id} 
           title={subLink.title} 
           id={subLink.id} 
-          path={subLink.upLink.path+subLink.path}
+          path={subLink.root+subLink.path}
           onNavigationChange={navigationChange} 
           selected={selectedLink}
+          onEdit={subLink.onEdit}
+          onDelete={subLink.onDelete}
         />
       )}
     </div>

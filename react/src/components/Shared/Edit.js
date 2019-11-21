@@ -66,7 +66,7 @@ const Edit = ({onClickSubmit, onClickCancel, formTemplate, isAbleToSave, post}) 
             />
             )
           }
-            <button type="submit" className="btn btn-primary mr-3" onClick={(e) => onClickSubmit(e, postForm, formIsValid, post.id)}>Сохранить</button>
+            <button type="submit" className="btn btn-primary mr-3" onClick={(e) => onClickSubmit(e, postForm, formIsValid)}>Сохранить</button>
             <button type="reset" className="btn btn-secondary" onClick={onClickCancel}>Отменить</button>
       </form>
     </div>

@@ -12,7 +12,7 @@ export const getValue = async (e, type, prevValue) => {
     }
     return {value: '', imagePreview: null}
   }
-  else if (type === 'textarea-long') {return {value: e}}
+  else if (type === 'textarea-long') return {value: e}
   else if (type === 'check') return {value: e.target.checked}
   else if (type === 'date' || type === 'datetime') {return { 
     value: {

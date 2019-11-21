@@ -17,7 +17,7 @@ const History = () => {
   return (
     <div className="container card mt-5 p-2">
       <div className="mt-3">
-        <img src="https://st2.depositphotos.com/1026649/12226/i/450/depositphotos_122264930-stock-photo-aerial-view-of-moscow-state.jpg"
+        <img src={process.env.REACT_APP_STATIC_URI + '/images/history/001.jpg'}
             className="rounded img-thumbnail w-50 mb-3 float-right" 
             style={{marginTop: '-60px', marginRight: '-60px', marginLeft:'5px'}}
         />
