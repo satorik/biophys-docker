@@ -13,6 +13,9 @@ export default ({onDelete, onCancel, info, instance}) => {
     case 'scienceArticle':
       question = question+'научную публикацию под названием '+info.title
       break
+    case 'history':
+      question = question+'историю кафедры?'
+      break
     default:
       question = question+'эту запись?'
   }

@@ -67,24 +67,28 @@ const FORM_TEMPLATE = [
     title: 'image',
     label:'Картинка',
     type: 'file',
+    required: true,
     validators: [required]
   },
   {
     title: 'title',
     label:'Название',
     type: 'input',
+    required: true,
     validators: [required, length({ min: 5 })]
   },
   {
     title: 'description',
     label:'Описание',
     type:'textarea',
+    required: true,
     validators: [required, length({ min: 5, max: 250 })]
   },
   {
     title: 'content',
     label:'Содержание',
     type:'textarea-long',
+    required: true,
     validators: [required, length({ min: 50 })]
   }
 ] 
@@ -96,9 +100,6 @@ const Blog = () => {
   const [pageNumber, setPageNumber] = React.useState(1)
   const [updatedPost, setUpdatedPost] = React.useState({})
   const [isAbleToSave, setIsAbleToSave] = React.useState(true)
-  const [isError, setIsError] = React.useState(null)
-  
-  if (isError) throw isError
 
   const variables = {
     offset:0, 
@@ -162,19 +163,12 @@ const Blog = () => {
     //setUpdatedPost(blogposts[id])
   }
 
-  const onDeletePostHandler = () => {
-    deleteBlogpost({ variables: {id: updatedPost.id}})
-    .then( res => {
-      setIsModalOpen(false)
-      setMode({...mode, isDeleting: false})
-      document.body.style.overflow = "scroll"
-      setUpdatedPost({})
-      }
-    )
-    .catch(e => {
-      setIsError(e)
-    }
-    )
+  const onDeletePostHandler = async () => {
+    await deleteBlogpost({ variables: {id: updatedPost.id}})
+    setIsModalOpen(false)
+    setMode({...mode, isDeleting: false})
+    document.body.style.overflow = "scroll"
+    setUpdatedPost({})
   }
 
   const onPaginate = (page) => {
@@ -213,32 +207,19 @@ const Blog = () => {
         obj[item.title] = item.value  
         return obj
         }, {})
-      setIsModalOpen(false)
-      setMode({...mode, isEditing: false})
-      setMode({...mode, isCreating: false})
       if (mode.isEditing) {
         let forUpdate = getUpdateData(updatedPost, postObject)
-        updateBlogpost({ variables: {id: updatedPost.id, inputData: forUpdate}})
-        .then( res => {
-          setIsModalOpen(false)
-          setMode({...mode, isEditing: false})
-          document.body.style.overflow = "scroll"
-          setUpdatedPost({})
-          })
-        .catch(e => {setIsError(e)})
+        await updateBlogpost({ variables: {id: updatedPost.id, inputData: forUpdate}})
+        setIsModalOpen(false)
+        setMode({...mode, isEditing: false})
+        document.body.style.overflow = "scroll"
+        setUpdatedPost({})
       }
       if (mode.isCreating) {
-        createBlogpost({ variables: {inputData: postObject}})
-        .then( res => {
-          setIsModalOpen(false)
-          setMode({...mode, isCreating: false})
-          document.body.style.overflow = "scroll"
-          }
-        )
-        .catch(e => {
-          setIsError(e)
-        }
-        )
+        await createBlogpost({ variables: {inputData: postObject}})
+        setIsModalOpen(false)
+        setMode({...mode, isCreating: false})
+        document.body.style.overflow = "scroll"
       }
     } 
   }
