@@ -12,23 +12,33 @@ const mutation =   `
     createNote(inputData: NoteCreateData!): Note!
     updateNote(id: ID!, inputData: NoteUpdateData!): Note!
     deleteNote(id: ID!): ID!
-    createOneScienceArticle(groupId: ID!, inputData: ScienceArticleCreateData!): ScienceArticle!
-    createManyScienceArticles(groupId: ID!, inputData: [ScienceArticleCreateData!]!): [ScienceArticle!]!
-    updateOneScienceArticle(id: ID!, inputData: ScienceArticleUpdateData!): ScienceArticle!
-    deleteOneScienceArticle(id: ID!):ID!
-    deleteManyScienceArticles(ids: [ID!]!):[ID!]!
-    createOneSciencePerson(groupId: ID!, inputData: SciencePeopleCreateData!): SciencePeople!
-    createManySciencePeople(groupId: ID!, inputData: [SciencePeopleCreateData!]!): [SciencePeople!]!
-    updateOneSciencePerson(id: ID!, inputData: SciencePeopleUpdateData!): SciencePeople!
-    updateManySciencePeople(ids: [ID!]!, inputData: [SciencePeopleUpdateData!]!): [SciencePeople]!
-    deleteOneSciencePerson(id: ID!):ID!
-    deleteManySciencePeople(ids: [ID!]!):[ID!]!
-    createScienceGroup(routeId: ID!, inputData: ScienceGroupCreateData!): ScienceGroup!
+    createScienceArticle(scienceGroupId: ID!, inputData: ScienceArticleCreateData!): ScienceArticle!
+    updateScienceArticle(id: ID!, inputData: ScienceArticleUpdateData!): ScienceArticle!
+    deleteScienceArticle(id: ID!):Int!
+    createSciencePerson(scienceGroupId: ID!, inputData: SciencePeopleCreateData!): SciencePeople!
+    updateSciencePerson(id: ID!, inputData: SciencePeopleUpdateData!): SciencePeople!
+    deleteSciencePerson(id: ID!):Int!
+    createScienceGroup(scienceRouteId: ID!, inputData: ScienceGroupCreateData!): ScienceGroup!
     updateScienceGroup(id: ID!, inputData: ScienceGroupUpdateData!): ScienceGroup!
     deleteScienceGroup(id: ID!):ID!
     createScienceRoute(inputData: ScienceRouteCreateData!): ScienceRoute!
     updateScienceRoute(id: ID!, inputData: ScienceRouteUpdateData!): ScienceRoute!
     deleteScienceRoute(id: ID!):ID!
+    moveSciencePerson(id: ID!, vector: VECTOR!): [SciencePeople!]!
+    moveScienceArticle(id: ID!, vector: VECTOR!): [ScienceArticle!]!
+    createHistory(section: SECTION! = HISTORY, inputData: HistoryCreateData): HistoryText!
+    updateHistory(section: SECTION! = HISTORY, inputData: HistoryUpdateData): HistoryText!
+    deleteHistory(section: SECTION! = HISTORY): Boolean!
+    createDepartmentPerson(inputData: DepartmentStaffCreateData): DepartmentStaff!
+    updateDepartmentPerson(id: ID!, inputData: DepartmentStaffUpdateData): DepartmentStaff!
+    deleteDepartmentPerson(id: ID!): Int!
+    moveDepartmentPerson(id: ID!, vector: VECTOR!):[DepartmentStaff!]!
+    createPartnership(inputData: DepartmentPartnershipCreateData):DepartmentPartnership!
+    updatePartnership(id: ID!, inputData: DepartmentPartnershipUpdateData):DepartmentPartnership!
+    deletePartnership(id: ID!): ID!
+    createPrint(inputData: DepartmentPrintCreateData):DepartmentPrint!
+    updatePrint(id: ID!, inputData: DepartmentPrintUpdateData):DepartmentPrint!
+    deletePrint(id: ID!): ID!
   }
 `
 

@@ -1,0 +1,993 @@
+Wed Nov 20 2019Wed Nov 20 2019{
+	"message": "Cannot return null for non-nullable field Mutation.moveSciencePerson.",
+	"locations": [
+		{
+			"line": 2,
+			"column": 3
+		}
+	],
+	"path": [
+		"moveSciencePerson"
+	],
+	"extensions": {
+		"code": "INTERNAL_SERVER_ERROR",
+		"exception": {
+			"stacktrace": [
+				"Error: Cannot return null for non-nullable field Mutation.moveSciencePerson.",
+				"    at completeValue (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\graphql\\execution\\execute.js:560:13)",
+				"    at C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\graphql\\execution\\execute.js:492:16"
+			]
+		}
+	}
+}2019-11-20T10:10:05.687Z{
+	"message": "Person can not go any lower",
+	"locations": [
+		{
+			"line": 2,
+			"column": 3
+		}
+	],
+	"path": [
+		"moveSciencePerson"
+	],
+	"extensions": {
+		"code": "INTERNAL_SERVER_ERROR",
+		"exception": {
+			"stacktrace": [
+				"Error: Person can not go any lower",
+				"    at _callee13$ (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\src\\resolvers\\mutation/science.js:143:54)",
+				"    at tryCatch (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\regenerator-runtime\\runtime.js:45:40)",
+				"    at Generator.invoke [as _invoke] (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\regenerator-runtime\\runtime.js:271:22)",
+				"    at Generator.prototype.(anonymous function) [as next] (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\regenerator-runtime\\runtime.js:97:21)",
+				"    at asyncGeneratorStep (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\src\\resolvers\\mutation\\science.js:26:103)",
+				"    at _next (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\src\\resolvers\\mutation\\science.js:28:194)"
+			]
+		}
+	}
+}2019-11-20T10:10:24.767Z{
+	"message": "Person can not go any higher",
+	"locations": [
+		{
+			"line": 2,
+			"column": 3
+		}
+	],
+	"path": [
+		"moveSciencePerson"
+	],
+	"extensions": {
+		"code": "INTERNAL_SERVER_ERROR",
+		"exception": {
+			"stacktrace": [
+				"Error: Person can not go any higher",
+				"    at _callee13$ (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\src\\resolvers\\mutation/science.js:138:40)",
+				"    at tryCatch (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\regenerator-runtime\\runtime.js:45:40)",
+				"    at Generator.invoke [as _invoke] (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\regenerator-runtime\\runtime.js:271:22)",
+				"    at Generator.prototype.(anonymous function) [as next] (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\regenerator-runtime\\runtime.js:97:21)",
+				"    at asyncGeneratorStep (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\src\\resolvers\\mutation\\science.js:26:103)",
+				"    at _next (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\src\\resolvers\\mutation\\science.js:28:194)"
+			]
+		}
+	}
+}2019-11-20T10:21:23.569Z{
+	"message": "Person can not go any higher",
+	"locations": [
+		{
+			"line": 2,
+			"column": 3
+		}
+	],
+	"path": [
+		"moveSciencePerson"
+	],
+	"extensions": {
+		"code": "INTERNAL_SERVER_ERROR",
+		"exception": {
+			"stacktrace": [
+				"Error: Person can not go any higher",
+				"    at _callee13$ (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\src\\resolvers\\mutation/science.js:138:40)",
+				"    at tryCatch (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\regenerator-runtime\\runtime.js:45:40)",
+				"    at Generator.invoke [as _invoke] (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\regenerator-runtime\\runtime.js:271:22)",
+				"    at Generator.prototype.(anonymous function) [as next] (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\regenerator-runtime\\runtime.js:97:21)",
+				"    at asyncGeneratorStep (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\src\\resolvers\\mutation\\science.js:26:103)",
+				"    at _next (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\src\\resolvers\\mutation\\science.js:28:194)"
+			]
+		}
+	}
+}2019-11-21T10:27:48.825Z{
+	"message": "Field \"getHistory\" argument \"section\" of type \"SECTION!\" is required, but it was not provided.",
+	"locations": [
+		{
+			"line": 2,
+			"column": 3
+		}
+	],
+	"extensions": {
+		"code": "GRAPHQL_VALIDATION_FAILED",
+		"exception": {
+			"stacktrace": [
+				"GraphQLError: Field \"getHistory\" argument \"section\" of type \"SECTION!\" is required, but it was not provided.",
+				"    at Object.leave (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\graphql\\validation\\rules\\ProvidedRequiredArguments.js:69:33)",
+				"    at Object.leave (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\graphql\\language\\visitor.js:345:29)",
+				"    at Object.leave (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\graphql\\language\\visitor.js:395:21)",
+				"    at visit (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\graphql\\language\\visitor.js:242:26)",
+				"    at Object.validate (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\graphql\\validation\\validate.js:73:24)",
+				"    at validate (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\apollo-server-core\\src\\requestPipeline.ts:426:22)",
+				"    at Object.<anonymous> (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\apollo-server-core\\src\\requestPipeline.ts:250:32)",
+				"    at Generator.next (<anonymous>)",
+				"    at fulfilled (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\apollo-server-core\\dist\\requestPipeline.js:5:58)",
+				"    at process._tickCallback (internal/process/next_tick.js:68:7)"
+			]
+		}
+	}
+}2019-11-21T10:30:46.736Z{
+	"message": "Cannot query field \"text\" on type \"Query\".",
+	"locations": [
+		{
+			"line": 2,
+			"column": 3
+		}
+	],
+	"extensions": {
+		"code": "GRAPHQL_VALIDATION_FAILED",
+		"exception": {
+			"stacktrace": [
+				"GraphQLError: Cannot query field \"text\" on type \"Query\".",
+				"    at Object.Field (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\graphql\\validation\\rules\\FieldsOnCorrectType.js:53:31)",
+				"    at Object.enter (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\graphql\\language\\visitor.js:324:29)",
+				"    at Object.enter (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\graphql\\language\\visitor.js:375:25)",
+				"    at visit (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\graphql\\language\\visitor.js:242:26)",
+				"    at Object.validate (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\graphql\\validation\\validate.js:73:24)",
+				"    at validate (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\apollo-server-core\\src\\requestPipeline.ts:426:22)",
+				"    at Object.<anonymous> (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\apollo-server-core\\src\\requestPipeline.ts:250:32)",
+				"    at Generator.next (<anonymous>)",
+				"    at fulfilled (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\apollo-server-core\\dist\\requestPipeline.js:5:58)",
+				"    at process._tickCallback (internal/process/next_tick.js:68:7)"
+			]
+		}
+	}
+}2019-11-22T09:02:28.316Z{
+	"message": "Unknown argument \"id\" on field \"deleteHistory\" of type \"Mutation\".",
+	"locations": [
+		{
+			"line": 2,
+			"column": 17
+		}
+	],
+	"extensions": {
+		"code": "GRAPHQL_VALIDATION_FAILED",
+		"exception": {
+			"stacktrace": [
+				"GraphQLError: Unknown argument \"id\" on field \"deleteHistory\" of type \"Mutation\".",
+				"    at Object.Argument (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\graphql\\validation\\rules\\KnownArgumentNames.js:60:29)",
+				"    at Object.enter (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\graphql\\language\\visitor.js:324:29)",
+				"    at Object.enter (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\graphql\\language\\visitor.js:375:25)",
+				"    at visit (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\graphql\\language\\visitor.js:242:26)",
+				"    at Object.validate (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\graphql\\validation\\validate.js:73:24)",
+				"    at validate (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\apollo-server-core\\src\\requestPipeline.ts:426:22)",
+				"    at Object.<anonymous> (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\apollo-server-core\\src\\requestPipeline.ts:250:32)",
+				"    at Generator.next (<anonymous>)",
+				"    at fulfilled (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\apollo-server-core\\dist\\requestPipeline.js:5:58)",
+				"    at process._tickCallback (internal/process/next_tick.js:68:7)"
+			]
+		}
+	}
+}2019-11-22T09:05:15.207Z{
+	"message": "Unknown argument \"id\" on field \"deleteHistory\" of type \"Mutation\".",
+	"locations": [
+		{
+			"line": 2,
+			"column": 17
+		}
+	],
+	"extensions": {
+		"code": "GRAPHQL_VALIDATION_FAILED",
+		"exception": {
+			"stacktrace": [
+				"GraphQLError: Unknown argument \"id\" on field \"deleteHistory\" of type \"Mutation\".",
+				"    at Object.Argument (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\graphql\\validation\\rules\\KnownArgumentNames.js:60:29)",
+				"    at Object.enter (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\graphql\\language\\visitor.js:324:29)",
+				"    at Object.enter (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\graphql\\language\\visitor.js:375:25)",
+				"    at visit (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\graphql\\language\\visitor.js:242:26)",
+				"    at Object.validate (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\graphql\\validation\\validate.js:73:24)",
+				"    at validate (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\apollo-server-core\\src\\requestPipeline.ts:426:22)",
+				"    at Object.<anonymous> (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\apollo-server-core\\src\\requestPipeline.ts:250:32)",
+				"    at Generator.next (<anonymous>)",
+				"    at fulfilled (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\apollo-server-core\\dist\\requestPipeline.js:5:58)",
+				"    at process._tickCallback (internal/process/next_tick.js:68:7)"
+			]
+		}
+	}
+}2019-11-22T09:05:55.793Z{
+	"message": "Cannot return null for non-nullable field Mutation.deleteHistory.",
+	"locations": [
+		{
+			"line": 2,
+			"column": 3
+		}
+	],
+	"path": [
+		"deleteHistory"
+	],
+	"extensions": {
+		"code": "INTERNAL_SERVER_ERROR",
+		"exception": {
+			"stacktrace": [
+				"Error: Cannot return null for non-nullable field Mutation.deleteHistory.",
+				"    at completeValue (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\graphql\\execution\\execute.js:560:13)",
+				"    at completeValueCatchingError (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\graphql\\execution\\execute.js:495:19)",
+				"    at resolveField (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\graphql\\execution\\execute.js:435:10)",
+				"    at C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\graphql\\execution\\execute.js:244:18",
+				"    at C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\graphql\\jsutils\\promiseReduce.js:23:10",
+				"    at Array.reduce (<anonymous>)",
+				"    at promiseReduce (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\graphql\\jsutils\\promiseReduce.js:20:17)",
+				"    at executeFieldsSerially (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\graphql\\execution\\execute.js:241:37)",
+				"    at executeOperation (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\graphql\\execution\\execute.js:219:55)",
+				"    at executeImpl (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\graphql\\execution\\execute.js:104:14)",
+				"    at Object.execute (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\graphql\\execution\\execute.js:64:35)",
+				"    at C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\apollo-server-core\\src\\requestPipeline.ts:464:30",
+				"    at Generator.next (<anonymous>)",
+				"    at C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\apollo-server-core\\dist\\requestPipeline.js:8:71",
+				"    at new Promise (<anonymous>)",
+				"    at __awaiter (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\apollo-server-core\\dist\\requestPipeline.js:4:12)",
+				"    at execute (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\apollo-server-core\\dist\\requestPipeline.js:219:20)",
+				"    at Object.<anonymous> (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\apollo-server-core\\src\\requestPipeline.ts:345:30)",
+				"    at Generator.next (<anonymous>)",
+				"    at fulfilled (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\apollo-server-core\\dist\\requestPipeline.js:5:58)",
+				"    at process._tickCallback (internal/process/next_tick.js:68:7)"
+			]
+		}
+	}
+}2019-11-22T09:07:39.998Z{
+	"message": "Cannot return null for non-nullable field Mutation.deleteHistory.",
+	"locations": [
+		{
+			"line": 2,
+			"column": 3
+		}
+	],
+	"path": [
+		"deleteHistory"
+	],
+	"extensions": {
+		"code": "INTERNAL_SERVER_ERROR",
+		"exception": {
+			"stacktrace": [
+				"Error: Cannot return null for non-nullable field Mutation.deleteHistory.",
+				"    at completeValue (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\graphql\\execution\\execute.js:560:13)",
+				"    at completeValueCatchingError (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\graphql\\execution\\execute.js:495:19)",
+				"    at resolveField (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\graphql\\execution\\execute.js:435:10)",
+				"    at C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\graphql\\execution\\execute.js:244:18",
+				"    at C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\graphql\\jsutils\\promiseReduce.js:23:10",
+				"    at Array.reduce (<anonymous>)",
+				"    at promiseReduce (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\graphql\\jsutils\\promiseReduce.js:20:17)",
+				"    at executeFieldsSerially (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\graphql\\execution\\execute.js:241:37)",
+				"    at executeOperation (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\graphql\\execution\\execute.js:219:55)",
+				"    at executeImpl (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\graphql\\execution\\execute.js:104:14)",
+				"    at Object.execute (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\graphql\\execution\\execute.js:64:35)",
+				"    at C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\apollo-server-core\\src\\requestPipeline.ts:464:30",
+				"    at Generator.next (<anonymous>)",
+				"    at C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\apollo-server-core\\dist\\requestPipeline.js:8:71",
+				"    at new Promise (<anonymous>)",
+				"    at __awaiter (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\apollo-server-core\\dist\\requestPipeline.js:4:12)",
+				"    at execute (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\apollo-server-core\\dist\\requestPipeline.js:219:20)",
+				"    at Object.<anonymous> (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\apollo-server-core\\src\\requestPipeline.ts:345:30)",
+				"    at Generator.next (<anonymous>)",
+				"    at fulfilled (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\apollo-server-core\\dist\\requestPipeline.js:5:58)",
+				"    at process._tickCallback (internal/process/next_tick.js:68:7)"
+			]
+		}
+	}
+}2019-11-22T09:08:49.545Z{
+	"message": "Cannot return null for non-nullable field Mutation.deleteHistory.",
+	"locations": [
+		{
+			"line": 2,
+			"column": 3
+		}
+	],
+	"path": [
+		"deleteHistory"
+	],
+	"extensions": {
+		"code": "INTERNAL_SERVER_ERROR",
+		"exception": {
+			"stacktrace": [
+				"Error: Cannot return null for non-nullable field Mutation.deleteHistory.",
+				"    at completeValue (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\graphql\\execution\\execute.js:560:13)",
+				"    at completeValueCatchingError (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\graphql\\execution\\execute.js:495:19)",
+				"    at resolveField (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\graphql\\execution\\execute.js:435:10)",
+				"    at C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\graphql\\execution\\execute.js:244:18",
+				"    at C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\graphql\\jsutils\\promiseReduce.js:23:10",
+				"    at Array.reduce (<anonymous>)",
+				"    at promiseReduce (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\graphql\\jsutils\\promiseReduce.js:20:17)",
+				"    at executeFieldsSerially (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\graphql\\execution\\execute.js:241:37)",
+				"    at executeOperation (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\graphql\\execution\\execute.js:219:55)",
+				"    at executeImpl (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\graphql\\execution\\execute.js:104:14)",
+				"    at Object.execute (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\graphql\\execution\\execute.js:64:35)",
+				"    at C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\apollo-server-core\\src\\requestPipeline.ts:464:30",
+				"    at Generator.next (<anonymous>)",
+				"    at C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\apollo-server-core\\dist\\requestPipeline.js:8:71",
+				"    at new Promise (<anonymous>)",
+				"    at __awaiter (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\apollo-server-core\\dist\\requestPipeline.js:4:12)",
+				"    at execute (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\apollo-server-core\\dist\\requestPipeline.js:219:20)",
+				"    at Object.<anonymous> (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\apollo-server-core\\src\\requestPipeline.ts:345:30)",
+				"    at Generator.next (<anonymous>)",
+				"    at fulfilled (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\apollo-server-core\\dist\\requestPipeline.js:5:58)",
+				"    at process._tickCallback (internal/process/next_tick.js:68:7)"
+			]
+		}
+	}
+}2019-11-22T09:10:34.491Z{
+	"message": "Cannot return null for non-nullable field Mutation.deleteHistory.",
+	"locations": [
+		{
+			"line": 2,
+			"column": 3
+		}
+	],
+	"path": [
+		"deleteHistory"
+	],
+	"extensions": {
+		"code": "INTERNAL_SERVER_ERROR",
+		"exception": {
+			"stacktrace": [
+				"Error: Cannot return null for non-nullable field Mutation.deleteHistory.",
+				"    at completeValue (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\graphql\\execution\\execute.js:560:13)",
+				"    at completeValueCatchingError (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\graphql\\execution\\execute.js:495:19)",
+				"    at resolveField (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\graphql\\execution\\execute.js:435:10)",
+				"    at C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\graphql\\execution\\execute.js:244:18",
+				"    at C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\graphql\\jsutils\\promiseReduce.js:23:10",
+				"    at Array.reduce (<anonymous>)",
+				"    at promiseReduce (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\graphql\\jsutils\\promiseReduce.js:20:17)",
+				"    at executeFieldsSerially (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\graphql\\execution\\execute.js:241:37)",
+				"    at executeOperation (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\graphql\\execution\\execute.js:219:55)",
+				"    at executeImpl (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\graphql\\execution\\execute.js:104:14)",
+				"    at Object.execute (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\graphql\\execution\\execute.js:64:35)",
+				"    at C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\apollo-server-core\\src\\requestPipeline.ts:464:30",
+				"    at Generator.next (<anonymous>)",
+				"    at C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\apollo-server-core\\dist\\requestPipeline.js:8:71",
+				"    at new Promise (<anonymous>)",
+				"    at __awaiter (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\apollo-server-core\\dist\\requestPipeline.js:4:12)",
+				"    at execute (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\apollo-server-core\\dist\\requestPipeline.js:219:20)",
+				"    at Object.<anonymous> (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\apollo-server-core\\src\\requestPipeline.ts:345:30)",
+				"    at Generator.next (<anonymous>)",
+				"    at fulfilled (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\apollo-server-core\\dist\\requestPipeline.js:5:58)",
+				"    at process._tickCallback (internal/process/next_tick.js:68:7)"
+			]
+		}
+	}
+}2019-11-22T09:12:13.560Z{
+	"message": "Cannot return null for non-nullable field Mutation.deleteHistory.",
+	"locations": [
+		{
+			"line": 2,
+			"column": 3
+		}
+	],
+	"path": [
+		"deleteHistory"
+	],
+	"extensions": {
+		"code": "INTERNAL_SERVER_ERROR",
+		"exception": {
+			"stacktrace": [
+				"Error: Cannot return null for non-nullable field Mutation.deleteHistory.",
+				"    at completeValue (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\graphql\\execution\\execute.js:560:13)",
+				"    at completeValueCatchingError (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\graphql\\execution\\execute.js:495:19)",
+				"    at resolveField (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\graphql\\execution\\execute.js:435:10)",
+				"    at C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\graphql\\execution\\execute.js:244:18",
+				"    at C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\graphql\\jsutils\\promiseReduce.js:23:10",
+				"    at Array.reduce (<anonymous>)",
+				"    at promiseReduce (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\graphql\\jsutils\\promiseReduce.js:20:17)",
+				"    at executeFieldsSerially (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\graphql\\execution\\execute.js:241:37)",
+				"    at executeOperation (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\graphql\\execution\\execute.js:219:55)",
+				"    at executeImpl (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\graphql\\execution\\execute.js:104:14)",
+				"    at Object.execute (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\graphql\\execution\\execute.js:64:35)",
+				"    at C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\apollo-server-core\\src\\requestPipeline.ts:464:30",
+				"    at Generator.next (<anonymous>)",
+				"    at C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\apollo-server-core\\dist\\requestPipeline.js:8:71",
+				"    at new Promise (<anonymous>)",
+				"    at __awaiter (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\apollo-server-core\\dist\\requestPipeline.js:4:12)",
+				"    at execute (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\apollo-server-core\\dist\\requestPipeline.js:219:20)",
+				"    at Object.<anonymous> (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\apollo-server-core\\src\\requestPipeline.ts:345:30)",
+				"    at Generator.next (<anonymous>)",
+				"    at fulfilled (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\apollo-server-core\\dist\\requestPipeline.js:5:58)",
+				"    at process._tickCallback (internal/process/next_tick.js:68:7)"
+			]
+		}
+	}
+}2019-11-22T09:13:31.166Z{
+	"message": "Cannot return null for non-nullable field Query.history.",
+	"locations": [
+		{
+			"line": 2,
+			"column": 3
+		}
+	],
+	"path": [
+		"history"
+	],
+	"extensions": {
+		"code": "INTERNAL_SERVER_ERROR",
+		"exception": {
+			"stacktrace": [
+				"Error: Cannot return null for non-nullable field Query.history.",
+				"    at completeValue (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\graphql\\execution\\execute.js:560:13)",
+				"    at C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\graphql\\execution\\execute.js:492:16",
+				"    at tryCatcher (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\bluebird\\js\\release\\util.js:16:23)",
+				"    at Promise._settlePromiseFromHandler (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\bluebird\\js\\release\\promise.js:517:31)",
+				"    at Promise._settlePromise (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\bluebird\\js\\release\\promise.js:574:18)",
+				"    at Promise._settlePromise0 (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\bluebird\\js\\release\\promise.js:619:10)",
+				"    at Promise._settlePromises (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\bluebird\\js\\release\\promise.js:699:18)",
+				"    at _drainQueueStep (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\bluebird\\js\\release\\async.js:138:12)",
+				"    at _drainQueue (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\bluebird\\js\\release\\async.js:131:9)",
+				"    at Async._drainQueues (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\bluebird\\js\\release\\async.js:147:5)",
+				"    at Immediate.Async.drainQueues [as _onImmediate] (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\bluebird\\js\\release\\async.js:17:14)",
+				"    at runCallback (timers.js:705:18)",
+				"    at tryOnImmediate (timers.js:676:5)",
+				"    at processImmediate (timers.js:658:5)"
+			]
+		}
+	}
+}2019-11-22T09:34:37.595Z{
+	"message": "Cannot query field \"desc\" on type \"DepartmentStaff\".",
+	"locations": [
+		{
+			"line": 9,
+			"column": 5
+		}
+	],
+	"extensions": {
+		"code": "GRAPHQL_VALIDATION_FAILED",
+		"exception": {
+			"stacktrace": [
+				"GraphQLError: Cannot query field \"desc\" on type \"DepartmentStaff\".",
+				"    at Object.Field (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\graphql\\validation\\rules\\FieldsOnCorrectType.js:53:31)",
+				"    at Object.enter (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\graphql\\language\\visitor.js:324:29)",
+				"    at Object.enter (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\graphql\\language\\visitor.js:375:25)",
+				"    at visit (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\graphql\\language\\visitor.js:242:26)",
+				"    at Object.validate (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\graphql\\validation\\validate.js:73:24)",
+				"    at validate (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\apollo-server-core\\src\\requestPipeline.ts:426:22)",
+				"    at Object.<anonymous> (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\apollo-server-core\\src\\requestPipeline.ts:250:32)",
+				"    at Generator.next (<anonymous>)",
+				"    at fulfilled (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\apollo-server-core\\dist\\requestPipeline.js:5:58)",
+				"    at process._tickCallback (internal/process/next_tick.js:68:7)"
+			]
+		}
+	}
+}2019-11-22T09:35:48.660Z{
+	"message": "Cannot query field \"desc\" on type \"DepartmentStaff\".",
+	"locations": [
+		{
+			"line": 9,
+			"column": 5
+		}
+	],
+	"extensions": {
+		"code": "GRAPHQL_VALIDATION_FAILED",
+		"exception": {
+			"stacktrace": [
+				"GraphQLError: Cannot query field \"desc\" on type \"DepartmentStaff\".",
+				"    at Object.Field (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\graphql\\validation\\rules\\FieldsOnCorrectType.js:53:31)",
+				"    at Object.enter (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\graphql\\language\\visitor.js:324:29)",
+				"    at Object.enter (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\graphql\\language\\visitor.js:375:25)",
+				"    at visit (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\graphql\\language\\visitor.js:242:26)",
+				"    at Object.validate (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\graphql\\validation\\validate.js:73:24)",
+				"    at validate (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\apollo-server-core\\src\\requestPipeline.ts:426:22)",
+				"    at Object.<anonymous> (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\apollo-server-core\\src\\requestPipeline.ts:250:32)",
+				"    at Generator.next (<anonymous>)",
+				"    at fulfilled (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\apollo-server-core\\dist\\requestPipeline.js:5:58)",
+				"    at process._tickCallback (internal/process/next_tick.js:68:7)"
+			]
+		}
+	}
+}2019-11-22T09:36:18.472Z{
+	"message": "column \"position\" does not exist",
+	"locations": [
+		{
+			"line": 2,
+			"column": 3
+		}
+	],
+	"path": [
+		"staff"
+	],
+	"extensions": {
+		"code": "INTERNAL_SERVER_ERROR",
+		"exception": {
+			"name": "SequelizeDatabaseError",
+			"parent": {
+				"name": "error",
+				"length": 108,
+				"severity": "ERROR",
+				"code": "42703",
+				"position": "77",
+				"file": "parse_relation.c",
+				"line": "3294",
+				"routine": "errorMissingColumn",
+				"sql": "SELECT \"id\", \"firstname\", \"middlename\", \"lastname\", \"imageUrl\", \"jobTitle\", \"position\", \"description\", \"tel\", \"mail\", \"createdAt\", \"updatedAt\" FROM \"biophys\".\"departmentStaff\" AS \"departmentStaff\";"
+			},
+			"original": {
+				"name": "error",
+				"length": 108,
+				"severity": "ERROR",
+				"code": "42703",
+				"position": "77",
+				"file": "parse_relation.c",
+				"line": "3294",
+				"routine": "errorMissingColumn",
+				"sql": "SELECT \"id\", \"firstname\", \"middlename\", \"lastname\", \"imageUrl\", \"jobTitle\", \"position\", \"description\", \"tel\", \"mail\", \"createdAt\", \"updatedAt\" FROM \"biophys\".\"departmentStaff\" AS \"departmentStaff\";"
+			},
+			"sql": "SELECT \"id\", \"firstname\", \"middlename\", \"lastname\", \"imageUrl\", \"jobTitle\", \"position\", \"description\", \"tel\", \"mail\", \"createdAt\", \"updatedAt\" FROM \"biophys\".\"departmentStaff\" AS \"departmentStaff\";",
+			"stacktrace": [
+				"SequelizeDatabaseError: column \"position\" does not exist",
+				"    at Query.formatError (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\sequelize\\lib\\dialects\\postgres\\query.js:366:16)",
+				"    at query.catch.err (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\sequelize\\lib\\dialects\\postgres\\query.js:72:18)",
+				"    at tryCatcher (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\bluebird\\js\\release\\util.js:16:23)",
+				"    at Promise._settlePromiseFromHandler (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\bluebird\\js\\release\\promise.js:517:31)",
+				"    at Promise._settlePromise (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\bluebird\\js\\release\\promise.js:574:18)",
+				"    at Promise._settlePromise0 (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\bluebird\\js\\release\\promise.js:619:10)",
+				"    at Promise._settlePromises (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\bluebird\\js\\release\\promise.js:695:18)",
+				"    at _drainQueueStep (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\bluebird\\js\\release\\async.js:138:12)",
+				"    at _drainQueue (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\bluebird\\js\\release\\async.js:131:9)",
+				"    at Async._drainQueues (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\bluebird\\js\\release\\async.js:147:5)",
+				"    at Immediate.Async.drainQueues [as _onImmediate] (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\bluebird\\js\\release\\async.js:17:14)",
+				"    at runCallback (timers.js:705:18)",
+				"    at tryOnImmediate (timers.js:676:5)",
+				"    at processImmediate (timers.js:658:5)"
+			]
+		}
+	}
+}2019-11-22T09:38:16.698Z{
+	"message": "column \"position\" does not exist",
+	"locations": [
+		{
+			"line": 2,
+			"column": 3
+		}
+	],
+	"path": [
+		"staff"
+	],
+	"extensions": {
+		"code": "INTERNAL_SERVER_ERROR",
+		"exception": {
+			"name": "SequelizeDatabaseError",
+			"parent": {
+				"name": "error",
+				"length": 108,
+				"severity": "ERROR",
+				"code": "42703",
+				"position": "77",
+				"file": "parse_relation.c",
+				"line": "3294",
+				"routine": "errorMissingColumn",
+				"sql": "SELECT \"id\", \"firstname\", \"middlename\", \"lastname\", \"imageUrl\", \"jobTitle\", \"position\", \"description\", \"tel\", \"mail\", \"createdAt\", \"updatedAt\" FROM \"biophys\".\"departmentStaff\" AS \"departmentStaff\";"
+			},
+			"original": {
+				"name": "error",
+				"length": 108,
+				"severity": "ERROR",
+				"code": "42703",
+				"position": "77",
+				"file": "parse_relation.c",
+				"line": "3294",
+				"routine": "errorMissingColumn",
+				"sql": "SELECT \"id\", \"firstname\", \"middlename\", \"lastname\", \"imageUrl\", \"jobTitle\", \"position\", \"description\", \"tel\", \"mail\", \"createdAt\", \"updatedAt\" FROM \"biophys\".\"departmentStaff\" AS \"departmentStaff\";"
+			},
+			"sql": "SELECT \"id\", \"firstname\", \"middlename\", \"lastname\", \"imageUrl\", \"jobTitle\", \"position\", \"description\", \"tel\", \"mail\", \"createdAt\", \"updatedAt\" FROM \"biophys\".\"departmentStaff\" AS \"departmentStaff\";",
+			"stacktrace": [
+				"SequelizeDatabaseError: column \"position\" does not exist",
+				"    at Query.formatError (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\sequelize\\lib\\dialects\\postgres\\query.js:366:16)",
+				"    at query.catch.err (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\sequelize\\lib\\dialects\\postgres\\query.js:72:18)",
+				"    at tryCatcher (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\bluebird\\js\\release\\util.js:16:23)",
+				"    at Promise._settlePromiseFromHandler (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\bluebird\\js\\release\\promise.js:517:31)",
+				"    at Promise._settlePromise (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\bluebird\\js\\release\\promise.js:574:18)",
+				"    at Promise._settlePromise0 (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\bluebird\\js\\release\\promise.js:619:10)",
+				"    at Promise._settlePromises (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\bluebird\\js\\release\\promise.js:695:18)",
+				"    at _drainQueueStep (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\bluebird\\js\\release\\async.js:138:12)",
+				"    at _drainQueue (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\bluebird\\js\\release\\async.js:131:9)",
+				"    at Async._drainQueues (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\bluebird\\js\\release\\async.js:147:5)",
+				"    at Immediate.Async.drainQueues [as _onImmediate] (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\bluebird\\js\\release\\async.js:17:14)",
+				"    at runCallback (timers.js:705:18)",
+				"    at tryOnImmediate (timers.js:676:5)",
+				"    at processImmediate (timers.js:658:5)"
+			]
+		}
+	}
+}2019-11-22T09:38:18.366Z{
+	"message": "column \"position\" does not exist",
+	"locations": [
+		{
+			"line": 2,
+			"column": 3
+		}
+	],
+	"path": [
+		"staff"
+	],
+	"extensions": {
+		"code": "INTERNAL_SERVER_ERROR",
+		"exception": {
+			"name": "SequelizeDatabaseError",
+			"parent": {
+				"name": "error",
+				"length": 108,
+				"severity": "ERROR",
+				"code": "42703",
+				"position": "77",
+				"file": "parse_relation.c",
+				"line": "3294",
+				"routine": "errorMissingColumn",
+				"sql": "SELECT \"id\", \"firstname\", \"middlename\", \"lastname\", \"imageUrl\", \"jobTitle\", \"position\", \"description\", \"tel\", \"mail\", \"createdAt\", \"updatedAt\" FROM \"biophys\".\"departmentStaff\" AS \"departmentStaff\";"
+			},
+			"original": {
+				"name": "error",
+				"length": 108,
+				"severity": "ERROR",
+				"code": "42703",
+				"position": "77",
+				"file": "parse_relation.c",
+				"line": "3294",
+				"routine": "errorMissingColumn",
+				"sql": "SELECT \"id\", \"firstname\", \"middlename\", \"lastname\", \"imageUrl\", \"jobTitle\", \"position\", \"description\", \"tel\", \"mail\", \"createdAt\", \"updatedAt\" FROM \"biophys\".\"departmentStaff\" AS \"departmentStaff\";"
+			},
+			"sql": "SELECT \"id\", \"firstname\", \"middlename\", \"lastname\", \"imageUrl\", \"jobTitle\", \"position\", \"description\", \"tel\", \"mail\", \"createdAt\", \"updatedAt\" FROM \"biophys\".\"departmentStaff\" AS \"departmentStaff\";",
+			"stacktrace": [
+				"SequelizeDatabaseError: column \"position\" does not exist",
+				"    at Query.formatError (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\sequelize\\lib\\dialects\\postgres\\query.js:366:16)",
+				"    at query.catch.err (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\sequelize\\lib\\dialects\\postgres\\query.js:72:18)",
+				"    at tryCatcher (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\bluebird\\js\\release\\util.js:16:23)",
+				"    at Promise._settlePromiseFromHandler (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\bluebird\\js\\release\\promise.js:517:31)",
+				"    at Promise._settlePromise (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\bluebird\\js\\release\\promise.js:574:18)",
+				"    at Promise._settlePromise0 (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\bluebird\\js\\release\\promise.js:619:10)",
+				"    at Promise._settlePromises (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\bluebird\\js\\release\\promise.js:695:18)",
+				"    at _drainQueueStep (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\bluebird\\js\\release\\async.js:138:12)",
+				"    at _drainQueue (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\bluebird\\js\\release\\async.js:131:9)",
+				"    at Async._drainQueues (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\bluebird\\js\\release\\async.js:147:5)",
+				"    at Immediate.Async.drainQueues [as _onImmediate] (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\bluebird\\js\\release\\async.js:17:14)",
+				"    at runCallback (timers.js:705:18)",
+				"    at tryOnImmediate (timers.js:676:5)",
+				"    at processImmediate (timers.js:658:5)"
+			]
+		}
+	}
+}2019-11-22T14:10:06.008Z{
+	"message": "Cannot query field \"updateDepartmentStaff\" on type \"Mutation\". Did you mean \"updateDepartmentPerson\", \"createDepartmentPerson\", \"updatePartnership\", or \"deleteDepartmentPerson\"?",
+	"locations": [
+		{
+			"line": 2,
+			"column": 3
+		}
+	],
+	"extensions": {
+		"code": "GRAPHQL_VALIDATION_FAILED",
+		"exception": {
+			"stacktrace": [
+				"GraphQLError: Cannot query field \"updateDepartmentStaff\" on type \"Mutation\". Did you mean \"updateDepartmentPerson\", \"createDepartmentPerson\", \"updatePartnership\", or \"deleteDepartmentPerson\"?",
+				"    at Object.Field (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\graphql\\validation\\rules\\FieldsOnCorrectType.js:53:31)",
+				"    at Object.enter (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\graphql\\language\\visitor.js:324:29)",
+				"    at Object.enter (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\graphql\\language\\visitor.js:375:25)",
+				"    at visit (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\graphql\\language\\visitor.js:242:26)",
+				"    at Object.validate (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\graphql\\validation\\validate.js:73:24)",
+				"    at validate (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\apollo-server-core\\src\\requestPipeline.ts:426:22)",
+				"    at Object.<anonymous> (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\apollo-server-core\\src\\requestPipeline.ts:250:32)",
+				"    at Generator.next (<anonymous>)",
+				"    at fulfilled (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\apollo-server-core\\dist\\requestPipeline.js:5:58)",
+				"    at process._tickCallback (internal/process/next_tick.js:68:7)"
+			]
+		}
+	}
+}2019-11-22T14:11:15.744Z{
+	"message": "Cannot query field \"updateDepartmnetPerson\" on type \"Mutation\". Did you mean \"updateDepartmentPerson\", \"createDepartmentPerson\", \"deleteDepartmentPerson\", \"moveDepartmentPerson\", or \"updateSciencePerson\"?",
+	"locations": [
+		{
+			"line": 2,
+			"column": 3
+		}
+	],
+	"extensions": {
+		"code": "GRAPHQL_VALIDATION_FAILED",
+		"exception": {
+			"stacktrace": [
+				"GraphQLError: Cannot query field \"updateDepartmnetPerson\" on type \"Mutation\". Did you mean \"updateDepartmentPerson\", \"createDepartmentPerson\", \"deleteDepartmentPerson\", \"moveDepartmentPerson\", or \"updateSciencePerson\"?",
+				"    at Object.Field (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\graphql\\validation\\rules\\FieldsOnCorrectType.js:53:31)",
+				"    at Object.enter (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\graphql\\language\\visitor.js:324:29)",
+				"    at Object.enter (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\graphql\\language\\visitor.js:375:25)",
+				"    at visit (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\graphql\\language\\visitor.js:242:26)",
+				"    at Object.validate (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\graphql\\validation\\validate.js:73:24)",
+				"    at validate (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\apollo-server-core\\src\\requestPipeline.ts:426:22)",
+				"    at Object.<anonymous> (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\apollo-server-core\\src\\requestPipeline.ts:250:32)",
+				"    at Generator.next (<anonymous>)",
+				"    at fulfilled (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\apollo-server-core\\dist\\requestPipeline.js:5:58)",
+				"    at process._tickCallback (internal/process/next_tick.js:68:7)"
+			]
+		}
+	}
+}2019-11-22T14:12:01.768Z{
+	"message": "Cannot query field \"desc\" on type \"DepartmentPartnership\".",
+	"locations": [
+		{
+			"line": 6,
+			"column": 5
+		}
+	],
+	"extensions": {
+		"code": "GRAPHQL_VALIDATION_FAILED",
+		"exception": {
+			"stacktrace": [
+				"GraphQLError: Cannot query field \"desc\" on type \"DepartmentPartnership\".",
+				"    at Object.Field (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\graphql\\validation\\rules\\FieldsOnCorrectType.js:53:31)",
+				"    at Object.enter (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\graphql\\language\\visitor.js:324:29)",
+				"    at Object.enter (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\graphql\\language\\visitor.js:375:25)",
+				"    at visit (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\graphql\\language\\visitor.js:242:26)",
+				"    at Object.validate (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\graphql\\validation\\validate.js:73:24)",
+				"    at validate (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\apollo-server-core\\src\\requestPipeline.ts:426:22)",
+				"    at Object.<anonymous> (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\apollo-server-core\\src\\requestPipeline.ts:250:32)",
+				"    at Generator.next (<anonymous>)",
+				"    at fulfilled (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\apollo-server-core\\dist\\requestPipeline.js:5:58)",
+				"    at process._tickCallback (internal/process/next_tick.js:68:7)"
+			]
+		}
+	}
+}2019-11-22T14:16:56.564Z{
+	"message": "Cannot query field \"desc\" on type \"DepartmentPartnership\".",
+	"locations": [
+		{
+			"line": 6,
+			"column": 5
+		}
+	],
+	"extensions": {
+		"code": "GRAPHQL_VALIDATION_FAILED",
+		"exception": {
+			"stacktrace": [
+				"GraphQLError: Cannot query field \"desc\" on type \"DepartmentPartnership\".",
+				"    at Object.Field (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\graphql\\validation\\rules\\FieldsOnCorrectType.js:53:31)",
+				"    at Object.enter (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\graphql\\language\\visitor.js:324:29)",
+				"    at Object.enter (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\graphql\\language\\visitor.js:375:25)",
+				"    at visit (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\graphql\\language\\visitor.js:242:26)",
+				"    at Object.validate (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\graphql\\validation\\validate.js:73:24)",
+				"    at validate (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\apollo-server-core\\src\\requestPipeline.ts:426:22)",
+				"    at Object.<anonymous> (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\apollo-server-core\\src\\requestPipeline.ts:250:32)",
+				"    at Generator.next (<anonymous>)",
+				"    at fulfilled (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\apollo-server-core\\dist\\requestPipeline.js:5:58)",
+				"    at process._tickCallback (internal/process/next_tick.js:68:7)"
+			]
+		}
+	}
+}2019-11-22T14:18:23.759Z{
+	"message": "Cannot return null for non-nullable field DepartmentPartnership.description.",
+	"locations": [
+		{
+			"line": 6,
+			"column": 5
+		}
+	],
+	"path": [
+		"partnership",
+		0,
+		"description"
+	],
+	"extensions": {
+		"code": "INTERNAL_SERVER_ERROR",
+		"exception": {
+			"stacktrace": [
+				"Error: Cannot return null for non-nullable field DepartmentPartnership.description.",
+				"    at completeValue (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\graphql\\execution\\execute.js:560:13)",
+				"    at completeValueCatchingError (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\graphql\\execution\\execute.js:495:19)",
+				"    at resolveField (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\graphql\\execution\\execute.js:435:10)",
+				"    at executeFields (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\graphql\\execution\\execute.js:275:18)",
+				"    at collectAndExecuteSubfields (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\graphql\\execution\\execute.js:713:10)",
+				"    at completeObjectValue (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\graphql\\execution\\execute.js:703:10)",
+				"    at completeValue (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\graphql\\execution\\execute.js:591:12)",
+				"    at completeValue (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\graphql\\execution\\execute.js:557:21)",
+				"    at completeValueCatchingError (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\graphql\\execution\\execute.js:495:19)",
+				"    at C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\graphql\\execution\\execute.js:618:25",
+				"    at Array.forEach (<anonymous>)",
+				"    at forEach (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\iterall\\index.js:83:25)",
+				"    at completeListValue (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\graphql\\execution\\execute.js:614:24)",
+				"    at completeValue (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\graphql\\execution\\execute.js:573:12)",
+				"    at completeValue (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\graphql\\execution\\execute.js:557:21)",
+				"    at C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\graphql\\execution\\execute.js:492:16",
+				"    at tryCatcher (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\bluebird\\js\\release\\util.js:16:23)",
+				"    at Promise._settlePromiseFromHandler (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\bluebird\\js\\release\\promise.js:517:31)",
+				"    at Promise._settlePromise (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\bluebird\\js\\release\\promise.js:574:18)",
+				"    at Promise._settlePromise0 (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\bluebird\\js\\release\\promise.js:619:10)",
+				"    at Promise._settlePromises (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\bluebird\\js\\release\\promise.js:699:18)",
+				"    at _drainQueueStep (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\bluebird\\js\\release\\async.js:138:12)"
+			]
+		}
+	}
+}2019-11-22T14:56:04.478Z{
+	"message": "Cannot return null for non-nullable field DepartmentPartnership.description.",
+	"locations": [
+		{
+			"line": 6,
+			"column": 5
+		}
+	],
+	"path": [
+		"partnership",
+		0,
+		"description"
+	],
+	"extensions": {
+		"code": "INTERNAL_SERVER_ERROR",
+		"exception": {
+			"stacktrace": [
+				"Error: Cannot return null for non-nullable field DepartmentPartnership.description.",
+				"    at completeValue (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\graphql\\execution\\execute.js:560:13)",
+				"    at completeValueCatchingError (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\graphql\\execution\\execute.js:495:19)",
+				"    at resolveField (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\graphql\\execution\\execute.js:435:10)",
+				"    at executeFields (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\graphql\\execution\\execute.js:275:18)",
+				"    at collectAndExecuteSubfields (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\graphql\\execution\\execute.js:713:10)",
+				"    at completeObjectValue (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\graphql\\execution\\execute.js:703:10)",
+				"    at completeValue (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\graphql\\execution\\execute.js:591:12)",
+				"    at completeValue (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\graphql\\execution\\execute.js:557:21)",
+				"    at completeValueCatchingError (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\graphql\\execution\\execute.js:495:19)",
+				"    at C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\graphql\\execution\\execute.js:618:25",
+				"    at Array.forEach (<anonymous>)",
+				"    at forEach (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\iterall\\index.js:83:25)",
+				"    at completeListValue (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\graphql\\execution\\execute.js:614:24)",
+				"    at completeValue (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\graphql\\execution\\execute.js:573:12)",
+				"    at completeValue (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\graphql\\execution\\execute.js:557:21)",
+				"    at C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\graphql\\execution\\execute.js:492:16",
+				"    at tryCatcher (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\bluebird\\js\\release\\util.js:16:23)",
+				"    at Promise._settlePromiseFromHandler (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\bluebird\\js\\release\\promise.js:517:31)",
+				"    at Promise._settlePromise (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\bluebird\\js\\release\\promise.js:574:18)",
+				"    at Promise._settlePromise0 (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\bluebird\\js\\release\\promise.js:619:10)",
+				"    at Promise._settlePromises (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\bluebird\\js\\release\\promise.js:699:18)",
+				"    at _drainQueueStep (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\bluebird\\js\\release\\async.js:138:12)"
+			]
+		}
+	}
+}2019-11-22T14:56:09.480Z{
+	"message": "Cannot query field \"desc\" on type \"DepartmentPrint\".",
+	"locations": [
+		{
+			"line": 6,
+			"column": 5
+		}
+	],
+	"extensions": {
+		"code": "GRAPHQL_VALIDATION_FAILED",
+		"exception": {
+			"stacktrace": [
+				"GraphQLError: Cannot query field \"desc\" on type \"DepartmentPrint\".",
+				"    at Object.Field (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\graphql\\validation\\rules\\FieldsOnCorrectType.js:53:31)",
+				"    at Object.enter (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\graphql\\language\\visitor.js:324:29)",
+				"    at Object.enter (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\graphql\\language\\visitor.js:375:25)",
+				"    at visit (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\graphql\\language\\visitor.js:242:26)",
+				"    at Object.validate (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\graphql\\validation\\validate.js:73:24)",
+				"    at validate (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\apollo-server-core\\src\\requestPipeline.ts:426:22)",
+				"    at Object.<anonymous> (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\apollo-server-core\\src\\requestPipeline.ts:250:32)",
+				"    at Generator.next (<anonymous>)",
+				"    at fulfilled (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\apollo-server-core\\dist\\requestPipeline.js:5:58)",
+				"    at process._tickCallback (internal/process/next_tick.js:68:7)"
+			]
+		}
+	}
+}2019-11-22T15:09:08.536Z{
+	"message": "Cannot query field \"desc\" on type \"DepartmentPrint\".",
+	"locations": [
+		{
+			"line": 6,
+			"column": 5
+		}
+	],
+	"extensions": {
+		"code": "GRAPHQL_VALIDATION_FAILED",
+		"exception": {
+			"stacktrace": [
+				"GraphQLError: Cannot query field \"desc\" on type \"DepartmentPrint\".",
+				"    at Object.Field (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\graphql\\validation\\rules\\FieldsOnCorrectType.js:53:31)",
+				"    at Object.enter (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\graphql\\language\\visitor.js:324:29)",
+				"    at Object.enter (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\graphql\\language\\visitor.js:375:25)",
+				"    at visit (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\graphql\\language\\visitor.js:242:26)",
+				"    at Object.validate (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\graphql\\validation\\validate.js:73:24)",
+				"    at validate (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\apollo-server-core\\src\\requestPipeline.ts:426:22)",
+				"    at Object.<anonymous> (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\apollo-server-core\\src\\requestPipeline.ts:250:32)",
+				"    at Generator.next (<anonymous>)",
+				"    at fulfilled (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\apollo-server-core\\dist\\requestPipeline.js:5:58)",
+				"    at process._tickCallback (internal/process/next_tick.js:68:7)"
+			]
+		}
+	}
+}2019-11-22T15:09:11.346Z{
+	"message": "Cannot query field \"desc\" on type \"DepartmentPrint\".",
+	"locations": [
+		{
+			"line": 6,
+			"column": 5
+		}
+	],
+	"extensions": {
+		"code": "GRAPHQL_VALIDATION_FAILED",
+		"exception": {
+			"stacktrace": [
+				"GraphQLError: Cannot query field \"desc\" on type \"DepartmentPrint\".",
+				"    at Object.Field (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\graphql\\validation\\rules\\FieldsOnCorrectType.js:53:31)",
+				"    at Object.enter (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\graphql\\language\\visitor.js:324:29)",
+				"    at Object.enter (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\graphql\\language\\visitor.js:375:25)",
+				"    at visit (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\graphql\\language\\visitor.js:242:26)",
+				"    at Object.validate (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\graphql\\validation\\validate.js:73:24)",
+				"    at validate (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\apollo-server-core\\src\\requestPipeline.ts:426:22)",
+				"    at Object.<anonymous> (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\apollo-server-core\\src\\requestPipeline.ts:250:32)",
+				"    at Generator.next (<anonymous>)",
+				"    at fulfilled (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\apollo-server-core\\dist\\requestPipeline.js:5:58)",
+				"    at process._tickCallback (internal/process/next_tick.js:68:7)"
+			]
+		}
+	}
+}2019-11-22T16:12:45.313Z{
+	"message": "Validation error: link required",
+	"locations": [
+		{
+			"line": 2,
+			"column": 3
+		}
+	],
+	"path": [
+		"createPartnership"
+	],
+	"extensions": {
+		"code": "INTERNAL_SERVER_ERROR",
+		"exception": {
+			"name": "SequelizeValidationError",
+			"errors": [
+				{
+					"message": "link required",
+					"type": "Validation error",
+					"path": "link",
+					"value": "",
+					"origin": "FUNCTION",
+					"instance": {
+						"id": null,
+						"link": "",
+						"description": "very much importnat client",
+						"title": "Super cat",
+						"imageUrl": "/images/partnership/6e768f26-6c37-4541-b84f-ac37298ab740.png",
+						"updatedAt": "2019-11-22T16:12:45.290Z",
+						"createdAt": "2019-11-22T16:12:45.290Z"
+					},
+					"validatorKey": "notEmpty",
+					"validatorName": "notEmpty",
+					"validatorArgs": [
+						true
+					],
+					"original": {
+						"validatorName": "notEmpty",
+						"validatorArgs": [
+							true
+						]
+					}
+				}
+			],
+			"stacktrace": [
+				"SequelizeValidationError: Validation error: link required",
+				"    at Promise.all.then (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\sequelize\\lib\\instance-validator.js:74:15)",
+				"    at tryCatcher (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\bluebird\\js\\release\\util.js:16:23)",
+				"    at Promise._settlePromiseFromHandler (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\bluebird\\js\\release\\promise.js:517:31)",
+				"    at Promise._settlePromise (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\bluebird\\js\\release\\promise.js:574:18)",
+				"    at Promise._settlePromise0 (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\bluebird\\js\\release\\promise.js:619:10)",
+				"    at Promise._settlePromises (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\bluebird\\js\\release\\promise.js:699:18)",
+				"    at Promise._fulfill (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\bluebird\\js\\release\\promise.js:643:18)",
+				"    at PromiseArray._resolve (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\bluebird\\js\\release\\promise_array.js:126:19)",
+				"    at PromiseArray._promiseFulfilled (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\bluebird\\js\\release\\promise_array.js:144:14)",
+				"    at Promise._settlePromise (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\bluebird\\js\\release\\promise.js:579:26)",
+				"    at Promise._settlePromise0 (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\bluebird\\js\\release\\promise.js:619:10)",
+				"    at Promise._settlePromises (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\bluebird\\js\\release\\promise.js:699:18)",
+				"    at _drainQueueStep (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\bluebird\\js\\release\\async.js:138:12)",
+				"    at _drainQueue (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\bluebird\\js\\release\\async.js:131:9)",
+				"    at Async._drainQueues (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\bluebird\\js\\release\\async.js:147:5)",
+				"    at Immediate.Async.drainQueues [as _onImmediate] (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\bluebird\\js\\release\\async.js:17:14)",
+				"    at runCallback (timers.js:705:18)",
+				"    at tryOnImmediate (timers.js:676:5)",
+				"    at processImmediate (timers.js:658:5)"
+			]
+		}
+	}
+}

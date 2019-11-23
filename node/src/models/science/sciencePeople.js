@@ -42,7 +42,11 @@ const sciencePeople = (sequelize, DataTypes ) => {
       }
     }
   },
-  description: {type: DataTypes.TEXT, allowNull: true},
+  position: {
+    type: DataTypes.INTEGER, 
+    allowNull: false
+  },
+  description: {type: DataTypes.STRING, allowNull: true},
   tel: {type: DataTypes.STRING, allowNull: true},
   mail: {type: DataTypes.STRING, allowNull: true},
   birthday: {type: DataTypes.DATE, allowNull: true},

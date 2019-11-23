@@ -13,14 +13,13 @@ const server = new ApolloServer({
   formatError: (err) => {
     // Don't give the specific errors to the client.
     console.log('Apollo to the Handle!!!!\r\n', err)
-    fs.writeFile('errors.txt', err, (error) => {
-      if (error) {console.log('couldnot save to file', error)}
-      else {console.log('saved to file')}
-    })
-    
-    // Otherwise return the original error.  The error can also
-    // be manipulated in other ways, so long as it's returned.
-    return err;
+ 
+    const stream = fs.createWriteStream('errors.log', {flags: 'a'})
+    const now = new Date()
+    stream.write(now.toISOString())
+    stream.write(JSON.stringify(err, null, '\t'))
+    stream.on('error', error => {console.log('couldnot save to file', error)})
+    return err
   }
 })
 

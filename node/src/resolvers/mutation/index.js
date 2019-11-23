@@ -8,13 +8,15 @@ import conferenceMutation from './conference'
 import seminarMutaion from './seminar'
 import noteMutation from './note'
 import scienceMutation from './science'
+import departmentMutation from './department'
 
 const Mutation = {
   ...blogpostMutation,
   ...conferenceMutation,
   ...seminarMutaion,
   ...noteMutation,
-  ...scienceMutation
+  ...scienceMutation,
+  ...departmentMutation
 }
 
 export default Mutation

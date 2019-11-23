@@ -1,4 +1,9 @@
 const SciencePeople = `
+  enum VECTOR {
+    UP
+    DOWN
+  }
+
   type SciencePeople {
     id: ID!
     firstname: String!
@@ -8,6 +13,7 @@ const SciencePeople = `
     tel: String
     mail: String
     birthday: String
+    position: Int!
     url: String
     type: SciencePeopleType!
   }
@@ -48,6 +54,7 @@ const ScienceArticle = `
     author: String!
     title: String!
     journal: String!
+    position: Int!
   }
 
   input ScienceArticleCreateData {
@@ -80,7 +87,7 @@ const ScienceGroup = `
     title: String!
     description: String!
     tel: String!
-    imageUrl: String!
+    image: Upload!
     mail: String!
     room: String!
     people: [SciencePeopleCreateData!]
@@ -91,7 +98,7 @@ const ScienceGroup = `
     title: String
     description: String
     tel: String
-    imageUrl: String
+    image: Upload
     mail: String
     room: String
     people: [SciencePeopleCreateData!]

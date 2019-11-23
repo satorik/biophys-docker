@@ -5,7 +5,7 @@ const createEducation = async (models) => {
 
   await models.textDescription.create({
     content: faker.lorem.paragraphs(),
-    section: 'admission'
+    section: 'ADMISSION'
   }
   )
 

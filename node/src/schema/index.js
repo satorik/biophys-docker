@@ -13,11 +13,12 @@ import blogpost from './types/blogpost'
 import conference from './types/conference'
 import seminar from './types/seminar'
 import note from './types/note'
+import plainText from './types/plainText'
 
 import resolvers from '../resolvers'
 
 export const schema = makeExecutableSchema({
-  typeDefs: ['scalar Upload  scalar Date', dateTypeDef, navigationLink, blogpost, conference, seminar, note, ...department, ...education, ...science, query, mutation],
+  typeDefs: ['scalar Upload  scalar Date', plainText, dateTypeDef, navigationLink, blogpost, conference, seminar, note, department, ...education, ...science, query, mutation],
   resolvers,
   schemaDirectives: {
     date: DateFormatDirective

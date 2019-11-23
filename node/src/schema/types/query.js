@@ -5,7 +5,6 @@ const query =   `
     seminars(offset: Int, limit: Int):[Seminar]!
     notes(offset: Int, limit: Int):[Note]!
     links: [NavigationLink!]!
-    text(section: String!): String!
     staff: [DepartmentStaff!]!
     prints: [DepartmentPrint!]!
     partnership: [DepartmentPartnership!]!
@@ -15,6 +14,8 @@ const query =   `
     timetable(yearId: ID, dayId: ID, timeId: ID): [ScheduleTimetable!]!
     scienceRoutes(id: ID): [ScienceRoute!]
     scienceGroups(id: ID, scienceRouteId: ID): [ScienceGroup!]
+    history(section: SECTION! = HISTORY):HistoryText
+    admission(section: SECTION!):AdmissionText
   }
 `
 

@@ -120,6 +120,7 @@ for (const group of groups) {
         tel: faker.phone.phoneNumber(),
         mail: faker.internet.email(),
         scienceGroupId: group.id,
+        position: faker.random.number(100),
         type:'STUDENT'
       }))
     )
@@ -132,6 +133,7 @@ for (const group of groups) {
         tel: faker.phone.phoneNumber(),
         mail: faker.internet.email(),
         scienceGroupId: group.id,
+        position: faker.random.number(100),
         type:'STAFF'
       }))
     )
@@ -141,6 +143,7 @@ for (const group of groups) {
         author: faker.fake("{{name.lastName}}, {{name.firstName}} {{name.suffix}}"),
         title: faker.lorem.paragraph(),
         journal:faker.lorem.paragraph(),
+        position: faker.random.number(100),
         scienceGroupId: group.id
       }))
     )
@@ -153,6 +156,7 @@ for (const group of groups) {
         lastname: 'Фрайкин',
         description:'доктор биологических наук, ведущий научный сотрудник, профессор',
         scienceGroupId: group.id,
+        position: faker.random.number(100),
         type:'STAFF'
       },
       {
@@ -161,6 +165,7 @@ for (const group of groups) {
         lastname: 'Страховская',
         description:'доктор биологических наук, ведущий научный сотрудник',
         scienceGroupId: group.id,
+        position: faker.random.number(100),
         type:'STAFF'
       },
       {
@@ -169,6 +174,7 @@ for (const group of groups) {
         lastname: 'Беленикина',
         description:'кандидат биологических наук, научный сотрудник',
         scienceGroupId: group.id,
+        position: faker.random.number(100),
         type:'STAFF'
       },
       {
@@ -177,6 +183,7 @@ for (const group of groups) {
         lastname: 'Холина',
         description:'2-й год обучения',
         scienceGroupId: group.id,
+        position: faker.random.number(100),
         type:'STUDENT'
       }
     ]) 
@@ -187,32 +194,53 @@ for (const group of groups) {
           author: 'Fraikin G.Ya., Belenikina N.S., Rubin A.B',
           title: 'Damaging and defense processes induced in plant cells by UVB radiation',
           journal:'Biology Bulletin, 2018, 45, 519-527',
+          position: faker.random.number(100),
           scienceGroupId: group.id
         },
         {
           author: 'Fraikin G.Ya',
           title: 'Signaling mechanisms regulating diverse plant cell responses to UVB radiation',
           journal:'Biochemistry (Moscow), 2018, 83, 972-980',
+          position: faker.random.number(100),
           scienceGroupId: group.id
         },
         {
           author: 'P.S. Orekhov, E. G. Kholina, M. E. Bozdaganyan, A. M. Nesterenko, I. B. Kovalenko, and M. G. Strakhovskaya',
           title: 'Molecular mechanism of uptake of cationic photoantimicrobial phthalocyanine across bacterial membranes revealed by molecular dynamics simulations',
           journal:'Journal of Physical Chemistry B, vol. 122, no. 14, pp. 3711–3722, 2018. DOI: 10.1021/acs.jpcb.7b11707',
+          position: faker.random.number(100),
           scienceGroupId: group.id
         },
         {
           author: 'В. Г. Жуховицкий, Е. Г. Холина, М. Г. Страховская',
           title: 'Фотодинамическая инактивация helicobacter pylori октакис(холинил)фталоцианином цинка in vitro',
           journal:'Экспериментальная и клиническая гастроэнтерология. 2018. Т. 154, №6, 10–15',
+          position: faker.random.number(100),
           scienceGroupId: group.id
         }
       ]
     )
   }
-
 }
 
+
+for (const item of groups) { 
+    const people = await models.sciencePeople.findAll({where: {scienceGroupId: item.id}, order: [['id']]})
+    const articles = await models.scienceArticle.findAll({where: {scienceGroupId: item.id}, order: [['id']]})
+    let i = 0
+    for (const person of people) {
+      person.position = i
+      await person.save()
+      i++
+    }
+    let j = 0
+    for (const article of articles) {
+      article.position = j
+      await article.save()
+      j++
+    }
+
+}
   console.log('science created')
 }
 

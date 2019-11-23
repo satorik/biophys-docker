@@ -1,19 +1,53 @@
 const departmentPartnership = (sequelize, DataTypes ) => {
   return sequelize.define('departmentPartnership', {
   link: {
-    type: DataTypes.TEXT,
-    allowNull: false
+    type: DataTypes.STRING,
+    allowNull: false,
+    validate: { 
+      notEmpty:{
+        args:true,
+        msg:"link required"
+      }
+    }
   },
   imageUrl: {
     type: DataTypes.STRING,
-    allowNull: false
+    allowNull: false,
+    validate: { 
+      notEmpty:{
+        args:true,
+        msg:"Url required"
+      }
+    }
   },
   title: {
-    type: DataTypes.STRING,
-    allowNull: false
+    type: DataTypes.STRING(100), 
+    allowNull: false,
+    validate:{
+      notEmpty:{
+          args:true,
+          msg:"Title required"
+      },
+      len:{
+          args:[5, 100],
+          msg:"Minimem 5 characters, Maximum 100 characters"
+      }
+    }
   },
-  desc: { type: DataTypes.TEXT}
-  }, 
+  description: {
+    type: DataTypes.STRING(1200), 
+    allowNull: false,
+    validate:{
+      notEmpty:{
+          args:true,
+          msg:"Description required"
+      },
+      len:{
+          args:[5, 1200],
+          msg:"Maximum 1200 characters"
+      }
+    }
+  }}, 
   {
     freezeTableName: true
   })

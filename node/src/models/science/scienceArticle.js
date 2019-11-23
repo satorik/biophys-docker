@@ -14,6 +14,10 @@ const scienceArticle = (sequelize, DataTypes ) => {
       }
     }
   },
+  position: {
+    type: DataTypes.INTEGER, 
+    allowNull: false
+  },
   title: {
     type: DataTypes.TEXT, 
     allowNull: false,

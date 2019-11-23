@@ -6,6 +6,7 @@ const scienceQuery = {
     
     const options = {
       where: WHERE,
+      order: [['createdAt', 'ASC']],
       include: [
         {
           model: models.ScienceGroup,
@@ -65,7 +66,12 @@ const scienceQuery = {
         {
           model: models.ScienceArticle
         }
-      ]
+      ],
+      order: [
+        ['createdAt', 'ASC'],
+        [{model: models.SciencePeople}, 'position', 'ASC'],
+        [{model: models.ScienceArticle}, 'position', 'ASC']
+      ],
     }
 
     

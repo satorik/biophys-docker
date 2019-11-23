@@ -1,7 +1,7 @@
-The "path" argument must be one of type string, Buffer, or URL. Received type function
+column scienceGroup.scienceGroupId does not exist
 
 GraphQL request:2:3
-1 | mutation createBlogpost($inputData: BlogpostCreateData!) {
-2 |   createBlogpost(inputData: $inputData) {
+1 | mutation {
+2 |   moveSciencePerson(id: 1, vector: DOWN) {
   |   ^
 3 |     id
