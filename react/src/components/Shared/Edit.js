@@ -20,7 +20,7 @@ const Edit = ({onClickSubmit, onClickCancel, formTemplate, isAbleToSave, post}) 
   const postInputChangeHandler = (event, id) => {
     getValue(event, postForm[id].type, postForm[id].value)
     .then(valueObj => {
-      if (postForm[id].type === 'file') {
+      if (postForm[id].title === 'image') {
          setImagePreview(valueObj.imagePreview)
       }
       const updatedState = postInputChange(postForm, id, valueObj.value)

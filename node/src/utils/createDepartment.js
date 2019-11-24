@@ -97,8 +97,7 @@ const departmentStaff = [
 
   await models.departmentPrint.bulkCreate(
     bulk(3, () => ({
-      link: faker.internet.url(),
-      imageUrl: faker.image.imageUrl(),
+      fileLink: '/files/prints/001.pdf',
       description: faker.lorem.paragraph(),
       title: faker.lorem.words()
     }))

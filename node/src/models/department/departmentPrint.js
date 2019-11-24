@@ -1,22 +1,12 @@
 const departmentPrint = (sequelize, DataTypes ) => {
   return sequelize.define('departmentPrint', {
-    link: {
+    fileLink: {
       type: DataTypes.STRING,
       allowNull: false,
       validate: { 
         notEmpty:{
           args:true,
           msg:"link required"
-        }
-      }
-    },
-    imageUrl: {
-      type: DataTypes.STRING,
-      allowNull: false,
-      validate: { 
-        notEmpty:{
-          args:true,
-          msg:"Url required"
         }
       }
     },

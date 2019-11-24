@@ -159,12 +159,13 @@ const departmentMutation = {
     return id
   },
   async createPrint(parent, {inputData}, { models }){
-    const {image, ...postData} = inputData
-    const uploadedImage = await inputData.image
-    const {file, imageUrl} = await writeImage(uploadedImage, 'prints')
+    const {file, ...postData} = inputData
+
+    const uploadedFile = await inputData.file
+    const { fileLink } = await writeImage(uploadedFile, 'prints', 'pdf')
     const postDataWithUrl = {
       ...postData,
-      imageUrl
+      fileLink
     }
 
     const print = await models.DepartmentPrint.create({...postDataWithUrl})

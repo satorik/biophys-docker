@@ -990,4 +990,234 @@ Wed Nov 20 2019Wed Nov 20 2019{
 			]
 		}
 	}
+}2019-11-23T20:39:37.260Z2019-11-23T20:39:37.263Z{
+	"message": "Cannot query field \"link\" on type \"DepartmentPrint\". Did you mean \"fileLink\"?",
+	"locations": [
+		{
+			"line": 4,
+			"column": 5
+		}
+	],
+	"extensions": {
+		"code": "GRAPHQL_VALIDATION_FAILED",
+		"exception": {
+			"stacktrace": [
+				"GraphQLError: Cannot query field \"link\" on type \"DepartmentPrint\". Did you mean \"fileLink\"?",
+				"    at Object.Field (C:\\Users\\HPPro\\Documents\\projects\\biophys-docker\\node\\node_modules\\graphql\\validation\\rules\\FieldsOnCorrectType.js:53:31)",
+				"    at Object.enter (C:\\Users\\HPPro\\Documents\\projects\\biophys-docker\\node\\node_modules\\graphql\\language\\visitor.js:324:29)",
+				"    at Object.enter (C:\\Users\\HPPro\\Documents\\projects\\biophys-docker\\node\\node_modules\\graphql\\language\\visitor.js:375:25)",
+				"    at visit (C:\\Users\\HPPro\\Documents\\projects\\biophys-docker\\node\\node_modules\\graphql\\language\\visitor.js:242:26)",
+				"    at Object.validate (C:\\Users\\HPPro\\Documents\\projects\\biophys-docker\\node\\node_modules\\graphql\\validation\\validate.js:73:24)",
+				"    at validate (C:\\Users\\HPPro\\Documents\\projects\\biophys-docker\\node\\node_modules\\apollo-server-core\\src\\requestPipeline.ts:426:22)",
+				"    at Object.<anonymous> (C:\\Users\\HPPro\\Documents\\projects\\biophys-docker\\node\\node_modules\\apollo-server-core\\src\\requestPipeline.ts:250:32)",
+				"    at Generator.next (<anonymous>)",
+				"    at fulfilled (C:\\Users\\HPPro\\Documents\\projects\\biophys-docker\\node\\node_modules\\apollo-server-core\\dist\\requestPipeline.js:5:58)",
+				"    at process._tickCallback (internal/process/next_tick.js:68:7)"
+			]
+		}
+	}
+}{
+	"message": "Cannot query field \"imageUrl\" on type \"DepartmentPrint\".",
+	"locations": [
+		{
+			"line": 5,
+			"column": 5
+		}
+	],
+	"extensions": {
+		"code": "GRAPHQL_VALIDATION_FAILED",
+		"exception": {
+			"stacktrace": [
+				"GraphQLError: Cannot query field \"imageUrl\" on type \"DepartmentPrint\".",
+				"    at Object.Field (C:\\Users\\HPPro\\Documents\\projects\\biophys-docker\\node\\node_modules\\graphql\\validation\\rules\\FieldsOnCorrectType.js:53:31)",
+				"    at Object.enter (C:\\Users\\HPPro\\Documents\\projects\\biophys-docker\\node\\node_modules\\graphql\\language\\visitor.js:324:29)",
+				"    at Object.enter (C:\\Users\\HPPro\\Documents\\projects\\biophys-docker\\node\\node_modules\\graphql\\language\\visitor.js:375:25)",
+				"    at visit (C:\\Users\\HPPro\\Documents\\projects\\biophys-docker\\node\\node_modules\\graphql\\language\\visitor.js:242:26)",
+				"    at Object.validate (C:\\Users\\HPPro\\Documents\\projects\\biophys-docker\\node\\node_modules\\graphql\\validation\\validate.js:73:24)",
+				"    at validate (C:\\Users\\HPPro\\Documents\\projects\\biophys-docker\\node\\node_modules\\apollo-server-core\\src\\requestPipeline.ts:426:22)",
+				"    at Object.<anonymous> (C:\\Users\\HPPro\\Documents\\projects\\biophys-docker\\node\\node_modules\\apollo-server-core\\src\\requestPipeline.ts:250:32)",
+				"    at Generator.next (<anonymous>)",
+				"    at fulfilled (C:\\Users\\HPPro\\Documents\\projects\\biophys-docker\\node\\node_modules\\apollo-server-core\\dist\\requestPipeline.js:5:58)",
+				"    at process._tickCallback (internal/process/next_tick.js:68:7)"
+			]
+		}
+	}
+}2019-11-23T20:42:03.015Z{
+	"message": "uploadedImage is not defined",
+	"locations": [
+		{
+			"line": 2,
+			"column": 3
+		}
+	],
+	"path": [
+		"createPrint"
+	],
+	"extensions": {
+		"code": "INTERNAL_SERVER_ERROR",
+		"exception": {
+			"stacktrace": [
+				"ReferenceError: uploadedImage is not defined",
+				"    at uploadedImage (C:\\Users\\HPPro\\Documents\\projects\\biophys-docker\\node\\src\\resolvers\\mutation/department.js:165:43)",
+				"    at tryCatch (C:\\Users\\HPPro\\Documents\\projects\\biophys-docker\\node\\node_modules\\regenerator-runtime\\runtime.js:45:40)",
+				"    at Generator.invoke [as _invoke] (C:\\Users\\HPPro\\Documents\\projects\\biophys-docker\\node\\node_modules\\regenerator-runtime\\runtime.js:271:22)",
+				"    at Generator.prototype.(anonymous function) [as next] (C:\\Users\\HPPro\\Documents\\projects\\biophys-docker\\node\\node_modules\\regenerator-runtime\\runtime.js:97:21)",
+				"    at asyncGeneratorStep (C:\\Users\\HPPro\\Documents\\projects\\biophys-docker\\node\\src\\resolvers\\mutation\\department.js:26:103)",
+				"    at _next (C:\\Users\\HPPro\\Documents\\projects\\biophys-docker\\node\\src\\resolvers\\mutation\\department.js:28:194)",
+				"    at process._tickCallback (internal/process/next_tick.js:68:7)"
+			]
+		}
+	}
+}2019-11-23T21:12:32.265Z{
+	"message": "Validation error: Title required,\nValidation error: Minimem 5 characters, Maximum 100 characters,\nValidation error: Description required,\nValidation error: Maximum 1200 characters",
+	"locations": [
+		{
+			"line": 2,
+			"column": 3
+		}
+	],
+	"path": [
+		"createPrint"
+	],
+	"extensions": {
+		"code": "INTERNAL_SERVER_ERROR",
+		"exception": {
+			"name": "SequelizeValidationError",
+			"errors": [
+				{
+					"message": "Title required",
+					"type": "Validation error",
+					"path": "title",
+					"value": "",
+					"origin": "FUNCTION",
+					"instance": {
+						"id": null,
+						"description": "",
+						"title": "",
+						"fileLink": "files/prints/520edeb5-6144-4980-97c5-4a1ce6864bf5.pdf",
+						"updatedAt": "2019-11-23T21:12:32.154Z",
+						"createdAt": "2019-11-23T21:12:32.154Z"
+					},
+					"validatorKey": "notEmpty",
+					"validatorName": "notEmpty",
+					"validatorArgs": [
+						true
+					],
+					"original": {
+						"validatorName": "notEmpty",
+						"validatorArgs": [
+							true
+						]
+					}
+				},
+				{
+					"message": "Minimem 5 characters, Maximum 100 characters",
+					"type": "Validation error",
+					"path": "title",
+					"value": "",
+					"origin": "FUNCTION",
+					"instance": {
+						"id": null,
+						"description": "",
+						"title": "",
+						"fileLink": "files/prints/520edeb5-6144-4980-97c5-4a1ce6864bf5.pdf",
+						"updatedAt": "2019-11-23T21:12:32.154Z",
+						"createdAt": "2019-11-23T21:12:32.154Z"
+					},
+					"validatorKey": "len",
+					"validatorName": "len",
+					"validatorArgs": [
+						5,
+						100
+					],
+					"original": {
+						"validatorName": "len",
+						"validatorArgs": [
+							5,
+							100
+						]
+					}
+				},
+				{
+					"message": "Description required",
+					"type": "Validation error",
+					"path": "description",
+					"value": "",
+					"origin": "FUNCTION",
+					"instance": {
+						"id": null,
+						"description": "",
+						"title": "",
+						"fileLink": "files/prints/520edeb5-6144-4980-97c5-4a1ce6864bf5.pdf",
+						"updatedAt": "2019-11-23T21:12:32.154Z",
+						"createdAt": "2019-11-23T21:12:32.154Z"
+					},
+					"validatorKey": "notEmpty",
+					"validatorName": "notEmpty",
+					"validatorArgs": [
+						true
+					],
+					"original": {
+						"validatorName": "notEmpty",
+						"validatorArgs": [
+							true
+						]
+					}
+				},
+				{
+					"message": "Maximum 1200 characters",
+					"type": "Validation error",
+					"path": "description",
+					"value": "",
+					"origin": "FUNCTION",
+					"instance": {
+						"id": null,
+						"description": "",
+						"title": "",
+						"fileLink": "files/prints/520edeb5-6144-4980-97c5-4a1ce6864bf5.pdf",
+						"updatedAt": "2019-11-23T21:12:32.154Z",
+						"createdAt": "2019-11-23T21:12:32.154Z"
+					},
+					"validatorKey": "len",
+					"validatorName": "len",
+					"validatorArgs": [
+						5,
+						1200
+					],
+					"original": {
+						"validatorName": "len",
+						"validatorArgs": [
+							5,
+							1200
+						]
+					}
+				}
+			],
+			"stacktrace": [
+				"SequelizeValidationError: Validation error: Title required,",
+				"Validation error: Minimem 5 characters, Maximum 100 characters,",
+				"Validation error: Description required,",
+				"Validation error: Maximum 1200 characters",
+				"    at Promise.all.then (C:\\Users\\HPPro\\Documents\\projects\\biophys-docker\\node\\node_modules\\sequelize\\lib\\instance-validator.js:74:15)",
+				"    at tryCatcher (C:\\Users\\HPPro\\Documents\\projects\\biophys-docker\\node\\node_modules\\bluebird\\js\\release\\util.js:16:23)",
+				"    at Promise._settlePromiseFromHandler (C:\\Users\\HPPro\\Documents\\projects\\biophys-docker\\node\\node_modules\\bluebird\\js\\release\\promise.js:517:31)",
+				"    at Promise._settlePromise (C:\\Users\\HPPro\\Documents\\projects\\biophys-docker\\node\\node_modules\\bluebird\\js\\release\\promise.js:574:18)",
+				"    at Promise._settlePromise0 (C:\\Users\\HPPro\\Documents\\projects\\biophys-docker\\node\\node_modules\\bluebird\\js\\release\\promise.js:619:10)",
+				"    at Promise._settlePromises (C:\\Users\\HPPro\\Documents\\projects\\biophys-docker\\node\\node_modules\\bluebird\\js\\release\\promise.js:699:18)",
+				"    at Promise._fulfill (C:\\Users\\HPPro\\Documents\\projects\\biophys-docker\\node\\node_modules\\bluebird\\js\\release\\promise.js:643:18)",
+				"    at PromiseArray._resolve (C:\\Users\\HPPro\\Documents\\projects\\biophys-docker\\node\\node_modules\\bluebird\\js\\release\\promise_array.js:126:19)",
+				"    at PromiseArray._promiseFulfilled (C:\\Users\\HPPro\\Documents\\projects\\biophys-docker\\node\\node_modules\\bluebird\\js\\release\\promise_array.js:144:14)",
+				"    at Promise._settlePromise (C:\\Users\\HPPro\\Documents\\projects\\biophys-docker\\node\\node_modules\\bluebird\\js\\release\\promise.js:579:26)",
+				"    at Promise._settlePromise0 (C:\\Users\\HPPro\\Documents\\projects\\biophys-docker\\node\\node_modules\\bluebird\\js\\release\\promise.js:619:10)",
+				"    at Promise._settlePromises (C:\\Users\\HPPro\\Documents\\projects\\biophys-docker\\node\\node_modules\\bluebird\\js\\release\\promise.js:699:18)",
+				"    at _drainQueueStep (C:\\Users\\HPPro\\Documents\\projects\\biophys-docker\\node\\node_modules\\bluebird\\js\\release\\async.js:138:12)",
+				"    at _drainQueue (C:\\Users\\HPPro\\Documents\\projects\\biophys-docker\\node\\node_modules\\bluebird\\js\\release\\async.js:131:9)",
+				"    at Async._drainQueues (C:\\Users\\HPPro\\Documents\\projects\\biophys-docker\\node\\node_modules\\bluebird\\js\\release\\async.js:147:5)",
+				"    at Immediate.Async.drainQueues [as _onImmediate] (C:\\Users\\HPPro\\Documents\\projects\\biophys-docker\\node\\node_modules\\bluebird\\js\\release\\async.js:17:14)",
+				"    at runCallback (timers.js:705:18)",
+				"    at tryOnImmediate (timers.js:676:5)",
+				"    at processImmediate (timers.js:658:5)"
+			]
+		}
+	}
 }
