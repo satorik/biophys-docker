@@ -36,21 +36,19 @@ const Department =   `
 
   type DepartmentPrint {
     id: ID!
-    link: String!
-    imageUrl: String!
+    fileLink: String!
+    image: String
     description: String!
     title: String!
   }
 
   input DepartmentPrintCreateData {
-    image: Upload!
     file: Upload!
     description: String!
     title: String!
   }
 
   input DepartmentPrintUpdateData {
-    image: Upload
     file: Upload
     description: String
     title: String

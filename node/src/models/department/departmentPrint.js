@@ -1,22 +1,12 @@
 const departmentPrint = (sequelize, DataTypes ) => {
   return sequelize.define('departmentPrint', {
-    link: {
+    fileLink: {
       type: DataTypes.STRING,
       allowNull: false,
       validate: { 
         notEmpty:{
           args:true,
           msg:"link required"
-        }
-      }
-    },
-    imageUrl: {
-      type: DataTypes.STRING,
-      allowNull: false,
-      validate: { 
-        notEmpty:{
-          args:true,
-          msg:"Url required"
         }
       }
     },
@@ -33,6 +23,9 @@ const departmentPrint = (sequelize, DataTypes ) => {
           msg:"Minimem 5 characters, Maximum 100 characters"
       }
     }
+  },
+  image : {
+    type: DataTypes.TEXT
   },
   description: {
     type: DataTypes.STRING(1200), 

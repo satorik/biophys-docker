@@ -2,19 +2,30 @@ import path from 'path'
 import uuidv4 from 'uuidv4'
 import fs from 'fs'
 
-export default (file, subDir) => {
+export default (file, subDir, type = 'image') => {
   return new Promise((resolve, reject) => {
     const { createReadStream : apolloStream, filename, mimetype } = file
-  
-    if (!(mimetype === 'image/png' || mimetype === 'image/jpeg' || mimetype === 'image/jpg')){
-      const error = new Error('Forbidden file type ', mimetype)
-      error.code = 415
-      reject(error)
+    let rootDir = 'images'
+
+    if (type === 'image') {
+      if (!(mimetype === 'image/png' || mimetype === 'image/jpeg' || mimetype === 'image/jpg')){
+        const error = new Error('Forbidden file type ', mimetype)
+        error.code = 415
+        reject(error)
+      }
+    }
+    if (type === 'pdf') {
+      if (!(mimetype === 'application/pdf')){
+        const error = new Error('Forbidden file type ', mimetype)
+        error.code = 415
+        reject(error)
+      }
+      rootDir = 'files'
     }
 
     const savedFileName = uuidv4()+path.extname(filename)
-    const savedFile = path.join(__dirname, '..', 'images', subDir, savedFileName)
-    const imagePath = path.join('/images', subDir, savedFileName).replace(/\\/g, "/")
+    const savedFile = path.join(__dirname, '..', rootDir, subDir, savedFileName)
+    const filePath = path.join('/', rootDir, subDir, savedFileName).replace(/\\/g, "/")
     
     const readStream  = apolloStream()
     readStream.on('error', error => {
@@ -29,6 +40,6 @@ export default (file, subDir) => {
       }
     })
     .pipe(fs.createWriteStream(savedFile))
-    .on('finish', () => resolve({file: savedFile, imageUrl: imagePath}))
+    .on('finish', () => resolve({file: savedFile, imageUrl: filePath, fileLink: filePath}))
     })
 }

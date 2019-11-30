@@ -1,6 +1,6 @@
 import { ApolloError } from "apollo-server"
 import writeImage from '../../utils/readStreamIntoFile'
-import clearImage from '../../utils/clearImage'
+import clearImage from '../../utils/imageFunctions'
 
 const scienceMutation = {
   async createScienceGroup(parent, {scienceRouteId, inputData}, { models }){

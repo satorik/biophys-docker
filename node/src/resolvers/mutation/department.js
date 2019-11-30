@@ -1,6 +1,6 @@
 import { ApolloError } from "apollo-server"
 import writeImage from '../../utils/readStreamIntoFile'
-import clearImage from '../../utils/clearImage'
+import clearImage, { convertPdfToBase64 } from '../../utils/imageFunctions'
 
 const departmentMutation = {
   async createHistory(parent, {section, inputData}, { models }){
@@ -159,30 +159,42 @@ const departmentMutation = {
     return id
   },
   async createPrint(parent, {inputData}, { models }){
-    const {image, ...postData} = inputData
-    const uploadedImage = await inputData.image
-    const {file, imageUrl} = await writeImage(uploadedImage, 'prints')
-    const postDataWithUrl = {
-      ...postData,
-      imageUrl
-    }
+    const {file, ...postData} = inputData
 
-    const print = await models.DepartmentPrint.create({...postDataWithUrl})
-    return print.dataValues
+    const uploadedFile = await inputData.file
+    const { file: filePath, fileLink } = await writeImage(uploadedFile, 'prints', 'pdf')
+    const image = await convertPdfToBase64(filePath)
+  
+    const postWithFile = {
+      ...postData,
+      fileLink,
+      image: 'data:image/jpeg;base64,'+image.base64
+    }
+    
+    return models.DepartmentPrint.create({...postWithFile})
+      
   },
   async updatePrint(parent, {id, inputData}, { models }){
     const post = await models.DepartmentPrint.findOne({where: {id}})
     if (!post) { throw new ApolloError('Post not found') }
 
     let isUploaded = {}
-    if (inputData.image) {
-      const uploadedImage = await inputData.image
-      isUploaded = await writeImage(uploadedImage, 'prints')
-      clearImage(post.imageUrl, 'prints')
+    if (inputData.file) {
+      const uploadedFile = await inputData.file
+      isUploaded = await writeImage(uploadedFile, 'prints', 'pdf')
+      const image = await convertPdfToBase64(isUploaded.file)
+      isUploaded = {
+        ...isUploaded,
+        image
+      }
+      clearImage(post.fileLink, 'prints', 'pdf')
     }
    
     Object.keys(inputData).forEach(item => post[item] = inputData[item])
-    if (isUploaded.imageUrl) { post.imageUrl = isUploaded.imageUrl }
+    if (isUploaded.fileLink) { 
+      post.fileLink = isUploaded.fileLink 
+      post.image = isUploaded.image
+    }
 
     await post.save()
     return post.dataValues
@@ -192,7 +204,7 @@ const departmentMutation = {
     if (!post) { throw new ApolloError('Post not found') }
 
     await post.destroy()
-    clearImage(post.imageUrl, 'prints')
+    clearImage(post.fileLink, 'prints', 'pdf')
     return id
   }
 }

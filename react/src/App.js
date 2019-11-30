@@ -4,7 +4,7 @@ import {BrowserRouter, Route, Redirect, Switch} from 'react-router-dom'
 import { useQuery } from '@apollo/react-hooks'
 import { gql } from 'apollo-boost'
 import { library } from '@fortawesome/fontawesome-svg-core'
-import { faAngleLeft, faAngleRight, faCaretUp, faCaretDown, faCircle, faPlus, faArrowUp, faArrowDown } from '@fortawesome/free-solid-svg-icons'
+import { faAngleLeft, faAngleRight, faCaretUp, faCaretDown, faCircle, faPlus, faArrowUp, faArrowDown, faFileDownload } from '@fortawesome/free-solid-svg-icons'
 import { faEdit, faTrashAlt } from '@fortawesome/free-regular-svg-icons'
 
 import NavBarTop from './components/Navigantion/NavBarTop'
@@ -49,7 +49,7 @@ const STYLES = {
   }
 }
 
-library.add(faAngleLeft, faAngleRight, faCaretDown, faCaretUp, faCircle, faPlus, faEdit, faTrashAlt, faArrowUp, faArrowDown)
+library.add(faAngleLeft, faAngleRight, faCaretDown, faCaretUp, faCircle, faPlus, faEdit, faTrashAlt, faArrowUp, faArrowDown, faFileDownload)
 
 const App = () => {
 

@@ -1,8 +1,9 @@
+
 const departmentQuery = {
   staff(parent, args, {models}) {
     return models.DepartmentStaff.findAll({raw: true})
   },
-  prints(parent, args, {models}) {
+  prints(parent, args, {models}) { 
     return models.DepartmentPrint.findAll({raw: true})
   },
   partnership(parent, args, {models}) {

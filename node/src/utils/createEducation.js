@@ -427,9 +427,6 @@ const createEducation = async (models) => {
             yearId: savedYear.dataValues.id,
             dayId: savedDay.dataValues.id,
             startDate: times.startDate,
-            orderNumber: orderNumber,
-            isTimeRight: isTimeRight
-
           })
 
 

@@ -95,14 +95,13 @@ const departmentStaff = [
 
   await models.departmentStaff.bulkCreate(departmentStaff)
 
-  await models.departmentPrint.bulkCreate(
-    bulk(3, () => ({
-      link: faker.internet.url(),
-      imageUrl: faker.image.imageUrl(),
-      description: faker.lorem.paragraph(),
-      title: faker.lorem.words()
-    }))
-  )
+  // await models.departmentPrint.bulkCreate(
+  //   bulk(3, () => ({
+  //     fileLink: '/files/prints/001.pdf',
+  //     description: faker.lorem.paragraph(),
+  //     title: faker.lorem.words()
+  //   }))
+  // )
 
   console.log('department created')
 }

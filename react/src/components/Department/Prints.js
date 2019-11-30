@@ -11,97 +11,70 @@ import Spinner from '../UI/Spinner'
 import ErrorBoundry from '../Shared/ErrorHandling/ErrorBoundry'
 import getUpdateData from '../../utils/getObjectForUpdate'
 import NetworkErrorComponent from '../Shared/ErrorHandling/NetworkErrorComponent'
-import LinkCard from '../Shared/LinkCard'
+import {PrintCard} from './PrintCard'
 
 const GET_DEPARTMENT_PRINTS = gql`                    
     query getDepartmentPrints {
       prints{
         id
-        link
-        imageUrl
+        fileLink
+        image
         description  
         title
     }
   }
   ` 
-const CREATE_CONFERENCE = gql`
-mutation createConference($inputData: ConferenceCreateData!) {
-  createConference(inputData: $inputData) {
+const CREATE_PRINT = gql`
+mutation createPrint($inputData: DepartmentPrintCreateData!) {
+  createPrint(inputData: $inputData) {
     id
+    fileLink
+    image
+    description  
     title
-    content
-    description
-    imageUrl
-    dateFrom
-    dateTo
-    location
   }
 }
 `
 
-const DELETE_CONFERENCE = gql`
-mutation deleteConference($id: ID!) {
-  deleteConference(id: $id) 
+const DELETE_PRINT = gql`
+mutation deletePrint($id: ID!) {
+  deletePrint(id: $id) 
 }
 `
-const UPDATE_CONFERENCE = gql`
-mutation updateConference($id: ID!, $inputData: ConferenceUpdateData!) {
-  updateConference(id: $id, inputData: $inputData) {
-      id
-      title
-      content
-      description
-      imageUrl
-      dateFrom
-      dateTo
-      location
+const UPDATE_PRINT = gql`
+mutation updatePrint($id: ID!, $inputData: DepartmentPrintUpdateData!) {
+  updatePrint(id: $id, inputData: $inputData) {
+    id
+    fileLink
+    image
+    description  
+    title
   }
 }
 `
 
 const FORM_TEMPLATE = [
-{
-  title: 'image',
-  label:'Картинка',
-  type: 'file',
-  validators: [required]
-},
-{
-  title: 'title',
-  label:'Название',
-  type: 'input',
-  validators: [required, length({ min: 5 })]
-},
-{
-  title: 'description',
-  label:'Описание',
-  type:'textarea',
-  validators: [required, length({ min: 5, max: 250 })]
-},
-{
-  title: 'content',
-  label:'Содержание',
-  type:'textarea-long',
-  validators: [required, length({ min: 50 })]
-},
-{
-  title: 'dateFrom',
-  label:'Дата старта',
-  type:'date',
-  validators: [date]
-},
-{
-  title: 'dateTo',
-  label:'Дата Конца',
-  type:'date',
-  validators: [date]
-},
-{
-  title: 'location',
-  label:'Место проведения',
-  type:'input',
-  validators: [required, length({ min: 5 })]
-}
+  {
+    title: 'file',
+    label:'Файл',
+    type: 'file',
+    required: true,
+    validators: [required]
+  },
+  {
+    title: 'title',
+    label:'Название',
+    type: 'input',
+    required: true,
+    validators: [required, length({ min: 5 })]
+  },
+  {
+    title: 'description',
+    label:'Описание',
+    type:'textarea',
+    required: true,
+    validators: [required, length({ min: 5, max: 250 })]
+  }
 ] 
 
 
@@ -109,32 +82,29 @@ const Prints = () => {
 
   const [isModalOpen, setIsModalOpen] = React.useState(false)
   const [mode, setMode] = React.useState({isEditing: false, isCreating: false, isDeleting: false})
-  const [updatedConference, setUpdatedConference] = React.useState({})
+  const [updatedPrint, setUpdatedPrint] = React.useState({})
   const [isAbleToSave, setIsAbleToSave] = React.useState(true)
 
-const { loading: queryLoading, error: queryError, data} = useQuery(
-        GET_CONFERENCE, {variables})
-  const [createConference,
-        { loading: creationLoading, error: creatingError }] = useMutation(CREATE_CONFERENCE, {
-            update(cache, { data: {createConference} }) {
-              const { conferences } = cache.readQuery({ query: GET_CONFERENCE, variables })
+const { loading: queryLoading, error: queryError, data} = useQuery(GET_DEPARTMENT_PRINTS)
+  const [createPrint,
+        { loading: creationLoading, error: creatingError }] = useMutation(CREATE_PRINT, {
+            update(cache, { data: {createPrint} }) {
+              const { prints } = cache.readQuery({ query: GET_DEPARTMENT_PRINTS })
               cache.writeQuery({
-                query: GET_CONFERENCE,
-                variables,
-                data: { conferences:  [createConference, ...conferences]}
+                query: GET_DEPARTMENT_PRINTS,
+                data: { prints:  [createPrint, ...prints]}
               })
             }
           })
-  const [updateConference,
-        { loading: updatingLoading, error: updatingError }] = useMutation(UPDATE_CONFERENCE)
-  const [deleteConference,
-        { loading: deletingLoading, error: deletingError }] = useMutation(DELETE_CONFERENCE, {
-          update(cache, { data: { deleteConference } }) {
-            const { conferences } = cache.readQuery({ query: GET_CONFERENCE, variables})
+  const [updatePrint,
+        { loading: updatingLoading, error: updatingError }] = useMutation(UPDATE_PRINT)
+  const [deletePrint,
+        { loading: deletingLoading, error: deletingError }] = useMutation(DELETE_PRINT, {
+          update(cache, { data: { deletePrint } }) {
+            const { prints } = cache.readQuery({ query: GET_DEPARTMENT_PRINTS})
             cache.writeQuery({
-              query: GET_CONFERENCE,
-              variables,
-              data: { conferences: conferences.filter(el => el.id !== deleteConference)}
+              query: GET_DEPARTMENT_PRINTS,
+              data: { prints: prints.filter(el => el.id !== deletePrint)}
             })
           }
         })
@@ -145,48 +115,44 @@ const { loading: queryLoading, error: queryError, data} = useQuery(
   if (deletingError) return <NetworkErrorComponent error={deletingError} />
   if (creatingError) return <NetworkErrorComponent error={creatingError} />
 
-  const { conferences } = data
-
-  const onShowConferenceDetails = (i) => {
-    setViewId(i)
-  }
-
-  const onAddNewConference = () => {
+  const { prints } = data
+  
+  const onAddNewPrint = () => {
     setIsModalOpen(true)
     setMode({...mode, isCreating: true})
     document.body.style.overflow = "hidden"
   }
 
-  const onEditConference = (id) => {
+  const onEditPrint = (id) => {
     setIsModalOpen(true)
     setMode({...mode, isEditing: true})
     document.body.style.overflow = "hidden"
-    setUpdatedConference(conferences[id])
+    setUpdatedPrint(prints[id])
   }
-  const onDeleteConference = (id) => {
+  const onDeletePrint = (id) => {
     setIsModalOpen(true)
     document.body.style.overflow = "hidden"
     setMode({...mode, isDeleting: true})
-    setUpdatedConference(conferences[id])
-    //setUpdatedConference(blogposts[id])
+    setUpdatedPrint(prints[id])
+    //setUpdatedPrint(blogposts[id])
   }
 
-  const onDeleteConferenceHandler = async () => {
-    await deleteConference({ variables: {id: updatedConference.id}})
+  const onDeletePrintHandler = async () => {
+    await deletePrint({ variables: {id: updatedPrint.id}})
     setIsModalOpen(false)
     setMode({...mode, isDeleting: false})
     document.body.style.overflow = "scroll"
-    setUpdatedConference({})
+    setUpdatedPrint({})
   }
 
   const onCloseModal = () => {
     setIsModalOpen(false)
     setMode({isDeleting: false, isEditing: false, isCreating: false})
-    setUpdatedConference({})
+    setUpdatedPrint({})
     document.body.style.overflow = "scroll"
   }
 
-  const onChangeConferenceHandler = async (e, postData, valid) => {
+  const onChangePrintHandler = async (e, postData, valid) => {
     e.preventDefault()
     if (!valid) {
       setIsAbleToSave(false)
@@ -194,25 +160,18 @@ const { loading: queryLoading, error: queryError, data} = useQuery(
     else {
       let postObject = postData.reduce((obj, item) => {
           obj[item.title] = item.value
-          if(item.type === 'date') {
-            const fullDate = new Date(Date.UTC(item.value.year, item.value.month, item.value.day))
-            obj[item.title] = fullDate.toISOString()
-          }
           return obj
       } ,{})
-      setIsModalOpen(false)
-      setMode({...mode, isEditing: false})
-      setMode({...mode, isCreating: false})
       if (mode.isEditing) {
-        const forUpdate = getUpdateData(updatedConference, postObject)
-        await updateConference({ variables: {id: updatedConference.id, inputData: forUpdate}})
+        const forUpdate = getUpdateData(updatedPrint, postObject)
+        await updatePrint({ variables: {id: updatedPrint.id, inputData: forUpdate}})
         setIsModalOpen(false)
         setMode({...mode, isEditing: false})
         document.body.style.overflow = "scroll"
-        setUpdatedConference({})
+        setUpdatedPrint({})
       }
       if (mode.isCreating) {
-        await createConference({ variables: {inputData: postObject}})
+        await createPrint({ variables: {inputData: postObject}})
         setIsModalOpen(false)
         setMode({...mode, isCreating: false})
         document.body.style.overflow = "scroll"
@@ -225,8 +184,6 @@ const { loading: queryLoading, error: queryError, data} = useQuery(
   if (mode.isCreating) {modalTitle = 'Новая конференция'}
   if (mode.isDeleting) {modalTitle = 'Удаление конференции'}
 
-
-  const {prints} = data
   return (
     <>
     {isModalOpen && <Modal 
@@ -235,34 +192,32 @@ const { loading: queryLoading, error: queryError, data} = useQuery(
       onClose={onCloseModal}
     >
      { (mode.isEditing || mode.isCreating) && <Edit 
-        onClickSubmit={onChangeConferenceHandler}
+        onClickSubmit={onChangePrintHandler}
         onClickCancel={onCloseModal}
         isAbleToSave={isAbleToSave}
-        post={updatedConference}
+        post={updatedPrint}
         formTemplate={FORM_TEMPLATE}
       />}
       {
-        (mode.isDeleting) &&  <YesDelete onDelete={onDeleteConferenceHandler} />   
+        (mode.isDeleting) &&  <YesDelete onDelete={onDeletePrintHandler} />   
       }
       </Modal>}
     <div className="container d-flex flex-wrap mt-5 justify-content-between">
-      {prints.map(print => 
-        <LinkCard 
+      {prints.map((print, idx) => 
+         <PrintCard 
           key={print.id}
-          link={print.link}
-          imageUrl={print.imageUrl}
+          fileLink={print.fileLink}
           title={print.title}
-          desc={print.description}
-          onEditClick={() => onEditDeaprtmentPerson(idx)}
-          onDeleteClick={() => ondeleteDepartmentPerson(idx)}
-          firstElement = {idx === 0}
-          lastElement = {idx === staff.length-1}
-        />)
+          image={print.image}
+          description={print.description}
+          onEditClick={() => onEditPrint(idx)}
+          onDeleteClick={() => onDeletePrint(idx)}
+        />) 
       }
     </div>
     <ButtonAddNew
         color='red'
-        onClickAddButton={onAddNewConference}
+        onClickAddButton={onAddNewPrint}
         fixed
         size='4'
        />
@@ -270,4 +225,4 @@ const { loading: queryLoading, error: queryError, data} = useQuery(
   )
 }
 
-export default Prints
+export default ErrorBoundry(Prints)
