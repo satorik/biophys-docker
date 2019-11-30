@@ -18,7 +18,10 @@ const GET_DEPARTMENT_PRINTS = gql`
       prints{
         id
         fileLink
+<<<<<<< HEAD
         image
+=======
+>>>>>>> 387644cbf9ab03cd84bb7d09138a9705e8cbf007
         description  
         title
     }
@@ -29,7 +32,10 @@ mutation createPrint($inputData: DepartmentPrintCreateData!) {
   createPrint(inputData: $inputData) {
     id
     fileLink
+<<<<<<< HEAD
     image
+=======
+>>>>>>> 387644cbf9ab03cd84bb7d09138a9705e8cbf007
     description  
     title
   }
@@ -46,7 +52,10 @@ mutation updatePrint($id: ID!, $inputData: DepartmentPrintUpdateData!) {
   updatePrint(id: $id, inputData: $inputData) {
     id
     fileLink
+<<<<<<< HEAD
     image
+=======
+>>>>>>> 387644cbf9ab03cd84bb7d09138a9705e8cbf007
     description  
     title
   }
@@ -116,7 +125,11 @@ const { loading: queryLoading, error: queryError, data} = useQuery(GET_DEPARTMEN
   if (creatingError) return <NetworkErrorComponent error={creatingError} />
 
   const { prints } = data
+<<<<<<< HEAD
   
+=======
+
+>>>>>>> 387644cbf9ab03cd84bb7d09138a9705e8cbf007
   const onAddNewPrint = () => {
     setIsModalOpen(true)
     setMode({...mode, isCreating: true})
@@ -204,6 +217,7 @@ const { loading: queryLoading, error: queryError, data} = useQuery(GET_DEPARTMEN
       </Modal>}
     <div className="container d-flex flex-wrap mt-5 justify-content-between">
       {prints.map((print, idx) => 
+<<<<<<< HEAD
          <PrintCard 
           key={print.id}
           fileLink={print.fileLink}
@@ -213,6 +227,16 @@ const { loading: queryLoading, error: queryError, data} = useQuery(GET_DEPARTMEN
           onEditClick={() => onEditPrint(idx)}
           onDeleteClick={() => onDeletePrint(idx)}
         />) 
+=======
+        <PrintCard 
+          key={print.id}
+          fileLink={print.fileLink}
+          title={print.title}
+          desc={print.description}
+          onEditClick={() => onEditPrint(idx)}
+          onDeleteClick={() => onDeletePrint(idx)}
+        />)
+>>>>>>> 387644cbf9ab03cd84bb7d09138a9705e8cbf007
       }
     </div>
     <ButtonAddNew
