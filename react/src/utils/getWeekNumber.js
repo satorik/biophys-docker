@@ -10,7 +10,7 @@ export default () =>  {
       startMonth = 1
     }
 
-    else {return null}
+    else return {startDate: null, startMonth: null}
 
     if (new Date(date.getFullYear(),startMonth, 1).getDay() === 0) {
       startDay = 2
@@ -19,14 +19,19 @@ export default () =>  {
       startDay = 1
     }
     
-    return new Date(date.getFullYear(),startMonth, startDay)
+    return {startDate: new Date(date.getFullYear(),startMonth, startDay), startMonth: startMonth}
   }
 
 
   let currentDate = new Date() 
-  const startDate = getStartDate(currentDate)
+  const {startDate, startMonth} = getStartDate(currentDate)
 
-  return Math.ceil(( ( (currentDate - startDate) / 86400000) + 1)/7)
+  if (startMonth === null) return {currentWeek: null, currentTerm: null, currentYear: currentDate.getFullYear()}
+
+  const weekNumber =  Math.ceil(( ( (currentDate - startDate) / 86400000) + 1)/7)
+  const term = startMonth === 1 ? 2 : 1
+
+  return {currentWeek: weekNumber, currentTerm: term, currentYear: currentDate.getFullYear()}
   }
 
   

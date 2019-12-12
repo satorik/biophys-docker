@@ -380,7 +380,7 @@ const createEducation = async (models) => {
     
       let savedYear = await models.scheduleYear.findOne({where: {title: year}})
       if (!savedYear) {
-         savedYear = await models.scheduleYear.create({title: year, calendarYear: 2019})
+         savedYear = await models.scheduleYear.create({title: year, calendarYear: 2019, term: 1})
       }
 
       for (const day in schedule[year]) {

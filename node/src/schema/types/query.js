@@ -9,7 +9,7 @@ const query =   `
     prints: [DepartmentPrint!]!
     partnership: [DepartmentPartnership!]!
     courses(id: ID): [EducationCourse!]
-    years(id: ID, calendarYear: Int): [ScheduleYear!]!
+    years(id: ID, calendarYear: Int, term: Int): [ScheduleYear!]!
     timeHeaders:[ScheduleTime!]!
     timetable(yearId: ID, dayId: ID, timeId: ID): [ScheduleTimetable!]!
     scienceRoutes(id: ID): [ScienceRoute!]

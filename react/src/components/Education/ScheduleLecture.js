@@ -8,10 +8,10 @@ const ScheduleLecture = ({timeFrom, timeTo, discipline, lector, lectureHall, wid
     return scrollHeight > clientHeight || scrollWidth > clientWidth;
   }
 
-  useEffect(() => {
-    //console.log(discipline, isOverflown(refDiv.current.clientWidth, refDiv.current.clientHeight, refDiv.current.clientWidth, refDiv.current.scrollHeight))
-    console.log(discipline, refDiv.current.clientHeight)
-  });
+  // useEffect(() => {
+  //   //console.log(discipline, isOverflown(refDiv.current.clientWidth, refDiv.current.clientHeight, refDiv.current.clientWidth, refDiv.current.scrollHeight))
+  //   console.log(discipline, refDiv.current.clientHeight)
+  // });
 
   
 

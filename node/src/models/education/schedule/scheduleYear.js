@@ -7,6 +7,10 @@ const scheduleYear = (sequelize, DataTypes ) => {
   calendarYear: {
     type: DataTypes.INTEGER,
     allowNull: false
+  },
+  term: {
+    type: DataTypes.INTEGER,
+    allowNull: false 
   }
 },
 {

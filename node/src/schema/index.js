@@ -18,7 +18,7 @@ import plainText from './types/plainText'
 import resolvers from '../resolvers'
 
 export const schema = makeExecutableSchema({
-  typeDefs: ['scalar Upload  scalar Date', plainText, dateTypeDef, navigationLink, blogpost, conference, seminar, note, department, ...education, ...science, query, mutation],
+  typeDefs: ['scalar Upload  scalar Date', plainText, dateTypeDef, navigationLink, blogpost, conference, seminar, note, department, education, ...science, query, mutation],
   resolvers,
   schemaDirectives: {
     date: DateFormatDirective

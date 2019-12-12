@@ -49,7 +49,7 @@ const scheduleTimetable = (sequelize, DataTypes ) => {
     allowNull: false 
   },
   isEven: {
-    type:DataTypes.TINYINT,
+    type:DataTypes.INTEGER,
     allowNull: false
   },
   isDouble: {

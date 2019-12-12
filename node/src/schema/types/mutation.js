@@ -39,6 +39,12 @@ const mutation =   `
     createPrint(inputData: DepartmentPrintCreateData):DepartmentPrint!
     updatePrint(id: ID!, inputData: DepartmentPrintUpdateData):DepartmentPrint!
     deletePrint(id: ID!): ID!
+    createScheduleYear(title: String!): ScheduleYear!
+    updateScheduleYear(title: String!): ScheduleYear!
+    deleteScheduleYear(id: ID!): ID!
+    createScheduleTimetable(yearId: ID!, dayId: ID!, inputData: ScheduleTimetableCreateData!): ScheduleTimetable!
+    updateScheduleTimetable(id: ID!, inputData: ScheduleTimetableUpdateData!): [ScheduleTimetable!]
+    deleteScheduleTimetable(id: ID!): ID!
   }
 `
 

@@ -1341,4 +1341,140 @@
 			]
 		}
 	}
+}2019-12-02T11:35:46.073Z{
+	"message": "Variable \"$title\" of required type \"String!\" was not provided.",
+	"locations": [
+		{
+			"line": 1,
+			"column": 29
+		}
+	],
+	"extensions": {
+		"code": "INTERNAL_SERVER_ERROR",
+		"exception": {
+			"stacktrace": [
+				"GraphQLError: Variable \"$title\" of required type \"String!\" was not provided.",
+				"    at _loop (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\graphql\\execution\\values.js:94:17)",
+				"    at coerceVariableValues (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\graphql\\execution\\values.js:121:16)",
+				"    at getVariableValues (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\graphql\\execution\\values.js:48:19)",
+				"    at buildExecutionContext (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\graphql\\execution\\execute.js:184:61)",
+				"    at executeImpl (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\graphql\\execution\\execute.js:89:20)",
+				"    at Object.execute (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\graphql\\execution\\execute.js:64:35)",
+				"    at C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\apollo-server-core\\src\\requestPipeline.ts:464:30",
+				"    at Generator.next (<anonymous>)",
+				"    at C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\apollo-server-core\\dist\\requestPipeline.js:8:71",
+				"    at new Promise (<anonymous>)",
+				"    at __awaiter (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\apollo-server-core\\dist\\requestPipeline.js:4:12)",
+				"    at execute (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\apollo-server-core\\dist\\requestPipeline.js:219:20)",
+				"    at Object.<anonymous> (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\apollo-server-core\\src\\requestPipeline.ts:345:30)",
+				"    at Generator.next (<anonymous>)",
+				"    at fulfilled (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\apollo-server-core\\dist\\requestPipeline.js:5:58)",
+				"    at process._tickCallback (internal/process/next_tick.js:68:7)"
+			]
+		}
+	}
+}2019-12-12T06:43:37.648Z{
+	"message": "Variable \"$title\" of required type \"String!\" was not provided.",
+	"locations": [
+		{
+			"line": 1,
+			"column": 29
+		}
+	],
+	"extensions": {
+		"code": "INTERNAL_SERVER_ERROR",
+		"exception": {
+			"stacktrace": [
+				"GraphQLError: Variable \"$title\" of required type \"String!\" was not provided.",
+				"    at _loop (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\graphql\\execution\\values.js:94:17)",
+				"    at coerceVariableValues (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\graphql\\execution\\values.js:121:16)",
+				"    at getVariableValues (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\graphql\\execution\\values.js:48:19)",
+				"    at buildExecutionContext (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\graphql\\execution\\execute.js:184:61)",
+				"    at executeImpl (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\graphql\\execution\\execute.js:89:20)",
+				"    at Object.execute (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\graphql\\execution\\execute.js:64:35)",
+				"    at C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\apollo-server-core\\src\\requestPipeline.ts:464:30",
+				"    at Generator.next (<anonymous>)",
+				"    at C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\apollo-server-core\\dist\\requestPipeline.js:8:71",
+				"    at new Promise (<anonymous>)",
+				"    at __awaiter (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\apollo-server-core\\dist\\requestPipeline.js:4:12)",
+				"    at execute (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\apollo-server-core\\dist\\requestPipeline.js:219:20)",
+				"    at Object.<anonymous> (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\apollo-server-core\\src\\requestPipeline.ts:345:30)",
+				"    at Generator.next (<anonymous>)",
+				"    at fulfilled (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\apollo-server-core\\dist\\requestPipeline.js:5:58)",
+				"    at process._tickCallback (internal/process/next_tick.js:68:7)"
+			]
+		}
+	}
+}2019-12-12T06:44:56.790Z{
+	"message": "Variable \"$title\" of required type \"String!\" was not provided.",
+	"locations": [
+		{
+			"line": 1,
+			"column": 29
+		}
+	],
+	"extensions": {
+		"code": "INTERNAL_SERVER_ERROR",
+		"exception": {
+			"stacktrace": [
+				"GraphQLError: Variable \"$title\" of required type \"String!\" was not provided.",
+				"    at _loop (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\graphql\\execution\\values.js:94:17)",
+				"    at coerceVariableValues (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\graphql\\execution\\values.js:121:16)",
+				"    at getVariableValues (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\graphql\\execution\\values.js:48:19)",
+				"    at buildExecutionContext (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\graphql\\execution\\execute.js:184:61)",
+				"    at executeImpl (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\graphql\\execution\\execute.js:89:20)",
+				"    at Object.execute (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\graphql\\execution\\execute.js:64:35)",
+				"    at C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\apollo-server-core\\src\\requestPipeline.ts:464:30",
+				"    at Generator.next (<anonymous>)",
+				"    at C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\apollo-server-core\\dist\\requestPipeline.js:8:71",
+				"    at new Promise (<anonymous>)",
+				"    at __awaiter (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\apollo-server-core\\dist\\requestPipeline.js:4:12)",
+				"    at execute (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\apollo-server-core\\dist\\requestPipeline.js:219:20)",
+				"    at Object.<anonymous> (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\apollo-server-core\\src\\requestPipeline.ts:345:30)",
+				"    at Generator.next (<anonymous>)",
+				"    at fulfilled (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\apollo-server-core\\dist\\requestPipeline.js:5:58)",
+				"    at process._tickCallback (internal/process/next_tick.js:68:7)"
+			]
+		}
+	}
+}2019-12-12T06:47:09.494Z{
+	"message": "Cannot return null for non-nullable field Mutation.createScheduleYear.",
+	"locations": [
+		{
+			"line": 2,
+			"column": 3
+		}
+	],
+	"path": [
+		"createScheduleYear"
+	],
+	"extensions": {
+		"code": "INTERNAL_SERVER_ERROR",
+		"exception": {
+			"stacktrace": [
+				"Error: Cannot return null for non-nullable field Mutation.createScheduleYear.",
+				"    at completeValue (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\graphql\\execution\\execute.js:560:13)",
+				"    at completeValueCatchingError (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\graphql\\execution\\execute.js:495:19)",
+				"    at resolveField (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\graphql\\execution\\execute.js:435:10)",
+				"    at C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\graphql\\execution\\execute.js:244:18",
+				"    at C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\graphql\\jsutils\\promiseReduce.js:23:10",
+				"    at Array.reduce (<anonymous>)",
+				"    at promiseReduce (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\graphql\\jsutils\\promiseReduce.js:20:17)",
+				"    at executeFieldsSerially (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\graphql\\execution\\execute.js:241:37)",
+				"    at executeOperation (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\graphql\\execution\\execute.js:219:55)",
+				"    at executeImpl (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\graphql\\execution\\execute.js:104:14)",
+				"    at Object.execute (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\graphql\\execution\\execute.js:64:35)",
+				"    at C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\apollo-server-core\\src\\requestPipeline.ts:464:30",
+				"    at Generator.next (<anonymous>)",
+				"    at C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\apollo-server-core\\dist\\requestPipeline.js:8:71",
+				"    at new Promise (<anonymous>)",
+				"    at __awaiter (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\apollo-server-core\\dist\\requestPipeline.js:4:12)",
+				"    at execute (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\apollo-server-core\\dist\\requestPipeline.js:219:20)",
+				"    at Object.<anonymous> (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\apollo-server-core\\src\\requestPipeline.ts:345:30)",
+				"    at Generator.next (<anonymous>)",
+				"    at fulfilled (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\apollo-server-core\\dist\\requestPipeline.js:5:58)",
+				"    at process._tickCallback (internal/process/next_tick.js:68:7)"
+			]
+		}
+	}
 }

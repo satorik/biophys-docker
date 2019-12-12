@@ -212,9 +212,6 @@ const Conferece = () => {
           }
           return obj
       } ,{})
-      setIsModalOpen(false)
-      setMode({...mode, isEditing: false})
-      setMode({...mode, isCreating: false})
       if (mode.isEditing) {
         const forUpdate = getUpdateData(updatedConference, postObject)
         await updateConference({ variables: {id: updatedConference.id, inputData: forUpdate}})
