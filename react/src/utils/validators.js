@@ -32,3 +32,5 @@ export const email = value =>
   );
 
 export const isUrl = value => true
+
+export const time = value => true

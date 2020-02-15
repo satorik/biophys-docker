@@ -10,12 +10,13 @@ const query =   `
     partnership: [DepartmentPartnership!]!
     courses(id: ID): [EducationCourse!]
     years(id: ID, calendarYear: Int, term: Int): [ScheduleYear!]!
+    days:[String!]! 
     timeHeaders:[ScheduleTime!]!
     timetable(yearId: ID, dayId: ID, timeId: ID): [ScheduleTimetable!]!
     scienceRoutes(id: ID): [ScienceRoute!]
     scienceGroups(id: ID, scienceRouteId: ID): [ScienceGroup!]
     history(section: SECTION! = HISTORY):HistoryText
-    admission(section: SECTION!):AdmissionText
+    admission(section: SECTION! = ADMISSION):AdmissionText
   }
 `
 

@@ -6,18 +6,33 @@ import Schedule from './components/Education/Schedule'
 import Admission from './components/Education/Admission'
 import Courses from './components/Education/Courses'
 
-const Education = ({links}) => {
-  const {subLinks} = links
-  const [selectedSubLink, setSelectedSubLink] = React.useState(subLinks[0].id)
+const sections = [
+  {path:'schedule', title:'Расписание'}, 
+  {path: 'admission', title:'Прием на кафедру'}, 
+  {path: 'courses', title:'Учебные курсы'}
+]
+
+const links = sections.map((section, idx) => {
+  return {
+    id: idx,
+    path: section.path,
+    title: section.title,
+    root: `/education/`
+  }
+})
+
+const Education = () => {
+
+  const [viewId, setViewId] = React.useState(0)
  
-  const handleNavigationItemClick = (sublinkId) => {
-    setSelectedSubLink(sublinkId)
+   const handleNavigationItemClick = (id) => {
+    setViewId(id)
   }
 
   return (
     <div>
       <Carousel />
-      <NavigationList subLinks={subLinks} navigationChange={handleNavigationItemClick} selectedLink={selectedSubLink}/>
+      <NavigationList subLinks={links} navigationChange={handleNavigationItemClick} selectedLink={viewId}/>
       <Redirect from="/education" to="/education/schedule" />
       <Route
           path="/education/schedule"

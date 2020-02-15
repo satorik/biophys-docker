@@ -9,6 +9,7 @@ import seminarMutaion from './seminar'
 import noteMutation from './note'
 import scienceMutation from './science'
 import departmentMutation from './department'
+import educationMutation from './education'
 
 const Mutation = {
   ...blogpostMutation,
@@ -16,7 +17,8 @@ const Mutation = {
   ...seminarMutaion,
   ...noteMutation,
   ...scienceMutation,
-  ...departmentMutation
+  ...departmentMutation,
+  ...educationMutation
 }
 
 export default Mutation

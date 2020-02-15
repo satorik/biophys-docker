@@ -14,7 +14,19 @@ const Schedule = `
   type ScheduleYear {
     id: ID!
     title: String!
-    calendarYear: Int!
+    year: Int!
+    term: Int!
+    timetable: [ScheduleTimetable!]
+  }
+
+  input ScheduleYearCreateData {
+    title: String!
+    year: Int!
+    term: Int!
+  }
+
+  input ScheduleYearUpdateData {
+    title: String!
   }
  
   type ScheduleTimetable {
@@ -38,8 +50,7 @@ const Schedule = `
     discipline: String!
     lectureHall: String
     startDate: String
-    isEven: Int!
-    isDouble: Int!
+    isEven: String!
   }
 
   input ScheduleTimetableUpdateData {

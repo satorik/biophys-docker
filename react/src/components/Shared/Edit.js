@@ -4,7 +4,7 @@ import { getValue } from '../../utils/getFormChangedValue'
 import { postInputChange, postInputBlur, createPostForm } from '../../utils/formHandlers'
 
 
-const Edit = ({onClickSubmit, onClickCancel, formTemplate, isAbleToSave, post}) => {
+const Edit = ({onClickSubmit, onClickCancel, formTemplate, isAbleToSave, post, border}) => {
   
   const [postForm, setPostForm] = React.useState(createPostForm(formTemplate, post))
   const [formIsValid, setFormIsValid] = React.useState(false)
@@ -37,7 +37,7 @@ const Edit = ({onClickSubmit, onClickCancel, formTemplate, isAbleToSave, post}) 
   }
 
   return (
-    <div>
+    <div className={`text-left my-3 ${border ? "border border-secondary p-3" : ""}`}>
       {!isAbleToSave && <p className="text-danger text-center">Заполните форму верно</p>}
       <p>* - обязательное поле</p>
       <form>

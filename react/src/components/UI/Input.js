@@ -1,7 +1,7 @@
 import React from 'react'
 
 
-import { InputFile, InputText, InputDate, InputTextarea, InputQuill, InputCheck, InputRadio } from './Inputs'
+import { InputFile, InputText, InputDate, InputTextarea, InputQuill, InputCheck, InputRadio, InputCourse, InputTime } from './Inputs'
 
 const Input = ({control, value, onChanged, onBlur, touched, valid, label, required}) => {
 
@@ -33,7 +33,7 @@ const Input = ({control, value, onChanged, onBlur, touched, valid, label, requir
               onBlur={onBlur}
               >{validationError}</InputText> 
     }
-    else if (control === 'date' || control === 'datetime') {
+    else if (control === 'date' || control === 'datetime' || control === 'time') {
       return <InputDate
               className={null}
               label={label}
@@ -41,8 +41,19 @@ const Input = ({control, value, onChanged, onBlur, touched, valid, label, requir
               onChanged={onChanged}
               required={required}
               onBlur={onBlur}
-              withTime={control === 'datetime' ? true : false}
+              withTime={control === 'date' ? false : true}
+              withDate={control === 'time' ? false : true}
               >{validationError}</InputDate>
+    }
+    else if (control === 'course') {
+      return <InputCourse
+              className={null}
+              label={label}
+              value={value}
+              onChanged={onChanged}
+              required={required}
+              onBlur={onBlur}
+              >{validationError}</InputCourse>
     }
     else if (control === 'textarea'){
       return <InputTextarea
@@ -75,7 +86,7 @@ const Input = ({control, value, onChanged, onBlur, touched, valid, label, requir
       return <InputRadio
               label={label}
               required={required}
-              value={label[0].value}
+              value={value}
               onChanged={onChanged}
               />
     }

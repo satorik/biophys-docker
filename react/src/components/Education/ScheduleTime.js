@@ -8,7 +8,7 @@ const ScheduleTime = ({consolidatedTime, currentWeek}) => {
 
   const fullWidthLecture = 'col-10'
   const shortWidthLecture = 'col-4'
-
+  
   if (Array.isArray(consolidatedTime)) {
     return <div className="text-center row" style={{height:'5rem'}}>
       {consolidatedTime.map(lecture =>
@@ -22,6 +22,8 @@ const ScheduleTime = ({consolidatedTime, currentWeek}) => {
           lector={lecture.lector}
           lectureHall={lecture.lectureHall}
           startFrom = {lecture.startDate && getDateToLocal(lecture.startDate)}
+          onEditClick={lecture.onEdit}
+          onDeleteClick={lecture.onDelete}
       />
       )}
     </div>
@@ -39,6 +41,8 @@ const ScheduleTime = ({consolidatedTime, currentWeek}) => {
         lector={consolidatedTime.lector}
         lectureHall={consolidatedTime.lectureHall}
         startFrom = {consolidatedTime.startDate && getDateToLocal(consolidatedTime.startDate)}
+        onEditClick={consolidatedTime.onEdit}
+        onDeleteClick={consolidatedTime.onDelete}
       />
     </div>
   }

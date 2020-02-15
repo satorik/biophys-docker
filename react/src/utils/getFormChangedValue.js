@@ -14,14 +14,13 @@ export const getValue = async (e, type, prevValue) => {
   }
   else if (type === 'textarea-long') return {value: e}
   else if (type === 'check') return {value: e.target.checked}
-  else if (type === 'date' || type === 'datetime') {return { 
+  else if (type === 'date' || type === 'datetime' || type === 'course' || type === 'time') {return { 
     value: {
         ...prevValue,
         [e.target.title]: +e.target.value
       }
     }
   }
-  return {value: e.target.value}
 
- 
+  return {value: e.target.value}
 } 

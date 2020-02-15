@@ -28,12 +28,12 @@ const PlainText =   `
   }
 
   input AdmissionCreateData {
-    section: SECTION! = HISTORY
+    section: SECTION! = ADMISSION
     content: String!
   }
 
   input AdmissionUpdateData {
-    section: SECTION! = HISTORY
+    section: SECTION! = ADMISSION
     content: String
   }
 `

@@ -1,6 +1,6 @@
 import {elementType} from "prop-types"
 
-  const getValue = (type, isForUpdate, oldData, control, label) => {
+  const getValue = (type, isForUpdate, oldData, control, label, required) => {
     if (type === 'file') {return ''}
     if (isForUpdate) {
       if (type === 'date') {
@@ -9,6 +9,12 @@ import {elementType} from "prop-types"
         month: new Date(oldData[control]).getMonth(), 
         year: new Date(oldData[control]).getFullYear()
         }
+      }
+      if (type === 'time') {
+        return {
+          hours: oldData[control] ? oldData[control].split(':')[0] : '00',
+          minutes: oldData[control] ? oldData[control].split(':')[1] : '00'
+          }
       }
       if (type === 'datetime') {
         return {
@@ -19,23 +25,35 @@ import {elementType} from "prop-types"
         minutes: new Date(oldData[control]).getMinutes()
         }
       }
-      return oldData[control] 
+      if (type === 'course') {
+        return {
+        course: oldData[control].course,  
+        year: new Date(oldData[control]).getFullYear(),
+        term: oldData[control].term
+        }
+      }
+       if (type === 'radio') {
+        return oldData[control]
+       }
+      return oldData[control] || ''
     }
     if (type === 'date') {return {day: '', month: new Date().getMonth(), year: new Date().getFullYear()}}
     if (type === 'datetime') {return {day: '', month: new Date().getMonth(), year: new Date().getFullYear(), hours: '00', minutes: '00' }}
-    if (type === 'radio') {return label[0].value}
+    if (type === 'time') {return {hours: '00', minutes: '00'}}
+    if (type === 'radio') { return label[0].value}
+    if (type === 'course') {return {course: '', year: new Date().getFullYear(), term: 1}}
     return ''
   }
 
  const createPostForm = (template, post) => {
    const forUpdate = Object.entries(post).length !== 0
    return template.map(element => {
-        return {
-        ...element,
-        value: getValue(element.type, forUpdate, post, element.title, element.label),
-        valid: forUpdate || !element.required || element.type === 'radio' || element.type === 'check',
-        touched: false
-      } 
+      return {
+      ...element,
+      value: getValue(element.type, forUpdate, post, element.title, element.label, element.required),
+      valid: forUpdate || !element.required || element.type === 'radio' || element.type === 'check',
+      touched: false
+    } 
     }) 
  }
  

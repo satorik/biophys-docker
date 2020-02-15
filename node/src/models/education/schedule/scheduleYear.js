@@ -4,7 +4,7 @@ const scheduleYear = (sequelize, DataTypes ) => {
     type: DataTypes.STRING,
     allowNull: false
   },
-  calendarYear: {
+  year: {
     type: DataTypes.INTEGER,
     allowNull: false
   },

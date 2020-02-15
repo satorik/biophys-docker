@@ -16,6 +16,10 @@ const educationQuery = {
   timeHeaders(parent, args, {models}) {
     return models.ScheduleTime.findAll({raw:true})
   },
+  async days(parent, args, {models}) {
+    const days = await models.ScheduleDay.findAll({raw:true, attributes:['title'], order: [['id', 'ASC']]})
+    return days.map(day => day.title)
+  },
   async years(parent, args, {models}, info) {
     let years
 
@@ -28,27 +32,22 @@ const educationQuery = {
     return years
   },
   async timetable(parent, args, {models}, info) {
-    let timetable
-    if (!args) {
-      timetable = await models.ScheduleTimetable.findAll({raw:true, order: [['dayId', 'ASC'], ['timeFrom', 'ASC'], ['isEven', 'ASC']]})
-    }
-    else {
-      timetable = await models.ScheduleTimetable.findAll({raw:true, where: args, order: [['dayId', 'ASC'],['timeFrom', 'ASC'], ['isEven', 'ASC']]})
-    }
-    const updatedTimetable = timetable.map(async item => {
+    const timetable = await models.ScheduleTimetable.findAll({raw:true, where: {yearId: parent.id}, order: [['dayId', 'ASC'],['timeFrom', 'ASC'], ['isEven', 'ASC']]})
+    const updatedTimetable = await Promise.all(timetable.map(async item => {
         const day = await models.ScheduleDay.findOne({raw:true, where: {id: item.dayId}})
-        const year = await models.ScheduleYear.findOne({raw:true, where: {id: item.yearId}})
         return {
           ...item,
           day: day,
-          year: year,
+          year: parent.title,
           startDate: item.startDate && item.startDate.toISOString(),
           createdAt: item.createdAt.toISOString(),
           updatedAt: item.updatedAt.toISOString()
         }
-    })
+    }))
+    //console.log(timetable)
+    //console.log(updatedTimetable)
     return updatedTimetable
-  }
+  },
 }
 
 export default educationQuery
