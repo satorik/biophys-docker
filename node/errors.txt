@@ -1,7 +1,0 @@
-column scienceGroup.scienceGroupId does not exist
-
-GraphQL request:2:3
-1 | mutation {
-2 |   moveSciencePerson(id: 1, vector: DOWN) {
-  |   ^
-3 |     id

@@ -73,7 +73,7 @@ const createEducation = async (models) => {
     title: faker.lorem.words(),
     type: 'URL',
     fileLink: 'https://www.youtube.com/playlist?list=PLcsjsqLLSfNA8FeLBKTAgQDR3Ll7aF_vu',
-    educationForm: 4,
+    educationFormId: 4,
     educationCourseId: 1
   })))
 
