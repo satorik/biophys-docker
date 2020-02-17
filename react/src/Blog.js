@@ -109,7 +109,6 @@ const Blog = () => {
   const queryUrl = useQueryUrl()
   const urlId = queryUrl.get("id")
 
-  console.log(id)
 
   const variables = {
     offset:0, 
