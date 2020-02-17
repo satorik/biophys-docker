@@ -5,7 +5,6 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 export const PrintCard = ({fileLink, description, image, title, onEditClick, onDeleteClick}) => {
  
   return (
-      <div className="col-md-6">
        <div className="container">
          <div className="row">
            <div className="col-md-8">
@@ -27,6 +26,5 @@ export const PrintCard = ({fileLink, description, image, title, onEditClick, onD
            </div>
          </div>
        </div>
-      </div>
   )
 }

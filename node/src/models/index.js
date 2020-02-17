@@ -17,8 +17,6 @@ const models = {
   ScheduleTime: sequelize.import('./education/schedule/scheduleTime'),
   ScheduleYear: sequelize.import('./education/schedule/scheduleYear'),
   ScheduleTimetable: sequelize.import('./education/schedule/scheduleTimetable'),
-  EducationCourse: sequelize.import('./education/educationCourse'),
-  EducationResourse: sequelize.import('./education/educationResourse'),
   ScienceRoute: sequelize.import('./science/scienceRoute'),
   ScienceGroup: sequelize.import('./science/scienceGroup'),
   SciencePeople: sequelize.import('./science/sciencePeople'),
@@ -26,9 +24,13 @@ const models = {
   Blogpost: sequelize.import('./blog.js'),
   Conference: sequelize.import('./conference.js'),
   Seminar: sequelize.import('./seminar.js'),
-  Note: sequelize.import('./note.js')
+  Note: sequelize.import('./note.js'),
+  EducationForm: sequelize.import('./education/courses/educationForms'),
+  EducationCourse: sequelize.import('./education/courses/educationCourse'),
+  EducationResourse: sequelize.import('./education/courses/educationResourse'),
 }
 
+models.EducationResourse.belongsTo(models.EducationForm)
 models.EducationCourse.hasMany(models.EducationResourse)
 models.ScienceRoute.hasMany(models.ScienceGroup)
 models.ScienceGroup.hasMany(models.SciencePeople)

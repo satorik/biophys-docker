@@ -2,6 +2,7 @@ import React from 'react'
 import {getDateToLocal} from '../../utils/dateFormat'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faCaretDown, faCaretUp } from '@fortawesome/free-solid-svg-icons'
+import EditButtons from '../UI/EditButtons'
 
 const Blogpost = ({blogpost, idx, onClickEdit, onClickDelete}) => {
   const [showContent, setShowContent] = React.useState(false)
@@ -31,8 +32,13 @@ const Blogpost = ({blogpost, idx, onClickEdit, onClickDelete}) => {
                       <p>{getDateToLocal(blogpost.createdAt)}</p>
                     </div>
                     <div>
-                      <button className="btn btn-outline-light mr-1" onClick={onClickEdit}>E</button>
-                      <button className="btn btn-outline-light" onClick={onClickDelete}>D</button>
+                    <EditButtons 
+                        onClickEdit={onClickEdit}
+                        onClickDelete={onClickDelete}
+                        size="lg"
+                        color="white"
+                        row
+                    />
                     </div>
                  </div>
 
@@ -49,7 +55,7 @@ const Blogpost = ({blogpost, idx, onClickEdit, onClickDelete}) => {
       </div>
       <div className="row text-justify px-5 pt-5 bg-light">
         {!showContent && <p className="m-0">{blogpost.description}</p>}
-        {showContent && <p>{blogpost.content}</p>}
+        {showContent && <p dangerouslySetInnerHTML={{__html: blogpost.content}}></p>}
         <div className="d-block w-100 m-0 text-center"><FontAwesomeIcon icon={showContent ? faCaretUp : faCaretDown} size="2x" onClick={() => onHandleCaretDown()} /></div>
       </div>
     </div>

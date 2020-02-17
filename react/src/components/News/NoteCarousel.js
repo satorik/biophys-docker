@@ -1,5 +1,6 @@
 import React from 'react'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import EditButtons from '../UI/EditButtons'
 
 const NoteCarousel = ({selectedNote, showContent, last, onClickLeft, onClickRight, onClickDown, content, title, 
   description, onClickEdit, onClickDelete, onClickNew}) => {
@@ -14,14 +15,23 @@ const NoteCarousel = ({selectedNote, showContent, last, onClickLeft, onClickRigh
           </div>
           <div className="col-8 text-center" style={{position:'relative'}}>
               <div style={{position:'absolute', right: '2%', top: '10%'}}>
-                  <button className={buttonClass} onClick={onClickNew}>N</button>
+                  {/* <button className={buttonClass} onClick={onClickNew}>N</button>
                   <button className={buttonClass} onClick={onClickEdit}>E</button>
-                  <button className={buttonClass} onClick={onClickDelete}>D</button>
+                  <button className={buttonClass} onClick={onClickDelete}>D</button> */}
+                  <EditButtons 
+                    onClickEdit={onClickEdit}
+                    onClickDelete={onClickDelete}
+                    onClickNew={onClickNew}
+                    size="lg"
+                    color="white"
+                    row
+                    withNew
+                  />
                 </div>
             <div className="text-white py-3">
                 <h3>{title}</h3>
                 <p>{description}</p>
-                {showContent && <p className="text-justify">{content}</p>}
+                {showContent && <p className="text-justify" dangerouslySetInnerHTML={{__html: content}}></p>}
                 {content && 
                 <p className="d-block m-0 text-center">
                   <FontAwesomeIcon 

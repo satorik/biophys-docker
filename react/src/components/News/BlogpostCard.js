@@ -1,6 +1,7 @@
 import React from 'react'
+import {Link} from 'react-router-dom'
 
-const BlogpostCard = ({imageUrl, title, description}) => {
+const BlogpostCard = ({imageUrl, id, title, description}) => {
   return (
     <div className="col-md-12">
       <div className="card mb-3">
@@ -12,7 +13,7 @@ const BlogpostCard = ({imageUrl, title, description}) => {
             <div className="card-body">
               <h5 className="card-title">{title}</h5>
               <p className="card-text">{description}</p>
-              <p className="card-text"><small className="text-muted">Читать дальше</small></p>
+              <p className="card-text"><small className="text-muted"><Link to={`/blogpost?id=${id}`}>читать дальше</Link></small></p>
             </div>
           </div>
         </div>

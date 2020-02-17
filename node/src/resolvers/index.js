@@ -9,7 +9,9 @@ const resolvers = {
   Mutation: Mutation,
   NavigationLink: NavigationLink,
   ScienceRoute:  {scienceGroups : scienceQuery.scienceGroups},
-  ScheduleYear: {timetable: educationQuery.timetable}
+  ScheduleYear: {timetable: educationQuery.timetable},
+  EducationCourse: {resourses: educationQuery.resourses},
+  EducationResourse: {form: educationQuery.form}
 }
 
 //console.log(resolvers)

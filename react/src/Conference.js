@@ -2,6 +2,7 @@ import React from 'react'
 import { useQuery, useMutation } from '@apollo/react-hooks'
 import { gql } from 'apollo-boost'
 import { required, length, date } from './utils/validators'
+import {useLocation} from 'react-router-dom'
 
 import HeaderConference from './components/UI/Header/HeaderConference'
 import YesDelete from './components/Shared/DoYouWantToDelete'
@@ -111,7 +112,14 @@ const FORM_TEMPLATE = [
   }
 ] 
 
+function useQueryUrl() {
+  return new URLSearchParams(useLocation().search)
+}
+
 const Conferece = () => {
+
+  const queryUrl = useQueryUrl()
+  const urlId = queryUrl.get("id")
 
   const [viewId, setViewId] = React.useState(0)
   const [isModalOpen, setIsModalOpen] = React.useState(false)
@@ -124,6 +132,7 @@ const Conferece = () => {
     limit: CONFERENCES_PER_PAGE
   }
 
+  
   const { loading: queryLoading, error: queryError, data} = useQuery(
         GET_CONFERENCE, {variables})
   const [createConference,

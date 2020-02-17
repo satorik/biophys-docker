@@ -2,6 +2,7 @@ import React from 'react'
 import { useQuery, useMutation } from '@apollo/react-hooks'
 import { gql } from 'apollo-boost'
 import { required, length } from './utils/validators'
+import { useLocation } from 'react-router-dom'
 
 import Header from './components/UI/Header/Header'
 import Blogpost from './components/Blog/Blogpost'
@@ -93,6 +94,10 @@ const FORM_TEMPLATE = [
   }
 ] 
 
+function useQueryUrl() {
+  return new URLSearchParams(useLocation().search)
+}
+
 const Blog = () => {
 
   const [isModalOpen, setIsModalOpen] = React.useState(false)
@@ -100,6 +105,9 @@ const Blog = () => {
   const [pageNumber, setPageNumber] = React.useState(1)
   const [updatedPost, setUpdatedPost] = React.useState({})
   const [isAbleToSave, setIsAbleToSave] = React.useState(true)
+
+  const queryUrl = useQueryUrl()
+  const urlId = queryUrl.get("id")
 
   const variables = {
     offset:0, 

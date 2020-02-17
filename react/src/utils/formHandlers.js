@@ -32,7 +32,7 @@ import {elementType} from "prop-types"
         term: oldData[control].term
         }
       }
-       if (type === 'radio') {
+       if (type === 'radio' || type === 'check') {
         return oldData[control]
        }
       return oldData[control] || ''
@@ -42,6 +42,7 @@ import {elementType} from "prop-types"
     if (type === 'time') {return {hours: '00', minutes: '00'}}
     if (type === 'radio') { return label[0].value}
     if (type === 'course') {return {course: '', year: new Date().getFullYear(), term: 1}}
+
     return ''
   }
 

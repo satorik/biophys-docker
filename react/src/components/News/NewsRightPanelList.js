@@ -20,6 +20,8 @@ const NewsRightPanelList = ({contentType, posts}) => {
             dateTo={item.dateTo}
             title={item.title}
             description={item.description}
+            id={item.id}
+            contentType={contentType}
           />)}
       </ul>
     </div>

@@ -6,5 +6,5 @@ export default ({title, location, imageUrl, content}) =>
   <p className="text-muted">{location}</p>
   <hr/>
   <img src={process.env.REACT_APP_STATIC_URI+imageUrl} className="img-thumbnail float-right" alt="..." style={{'width':'12rem','objectFit': 'cover', marginLeft:'10px'}} />
-  <p className="text-justify">{content}</p>
+  <p className="text-justify" dangerouslySetInnerHTML={{__html: content}}></p>
 </div>

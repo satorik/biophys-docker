@@ -26,6 +26,7 @@ const GET_NEWS = gql`
     blogposts(limit: $limitBlogposts){
       posts{
         id
+        title
         description
         imageUrl
       }
@@ -164,7 +165,6 @@ const News = () => {
 
   
   const noteOnTop = notes.filter(note => note.onTop)[0]
-  console.log(noteOnTop)
 
   const onHandleNextNote = () => {
     setShowContent(false)
@@ -235,22 +235,18 @@ const News = () => {
           obj[item.title] = item.value
           return obj
       } ,{})
+      console.log(postObject)
       setIsModalOpen(false)
-      setMode({...mode, isEditing: false})
-      setMode({...mode, isCreating: false})
+      document.body.style.overflow = "scroll"
       if (mode.isEditing) {
         const forUpdate = getUpdateData(updatedNote, postObject)
         await updateNote({ variables: {id: updatedNote.id, inputData: forUpdate}})      
-        setIsModalOpen(false)
         setMode({...mode, isEditing: false})
-        document.body.style.overflow = "scroll"
         setUpdatedNote({})
       }
       if (mode.isCreating) {
         await createNote({ variables: {inputData: postObject}})
-        setIsModalOpen(false)
         setMode({...mode, isCreating: false})
-        document.body.style.overflow = "scroll"
       }
     } 
   }
@@ -303,6 +299,7 @@ const News = () => {
             {posts.map(post => 
               <BlogpostCard 
                 key={post.id}
+                id={post.id}
                 imageUrl={post.imageUrl}
                 title={post.title}
                 description={post.description}

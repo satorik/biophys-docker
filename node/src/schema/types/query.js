@@ -9,6 +9,8 @@ const query =   `
     prints: [DepartmentPrint!]!
     partnership: [DepartmentPartnership!]!
     courses(id: ID): [EducationCourse!]
+    resourses(educationCourseId: ID!): [EducationResourse!]
+    form(id: ID!):EducationForm!
     years(id: ID, calendarYear: Int, term: Int): [ScheduleYear!]!
     days:[String!]! 
     timeHeaders:[ScheduleTime!]!

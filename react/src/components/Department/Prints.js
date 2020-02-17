@@ -204,15 +204,17 @@ const { loading: queryLoading, error: queryError, data} = useQuery(GET_DEPARTMEN
       </Modal>}
     <div className="container d-flex flex-wrap mt-5 justify-content-between">
       {prints.map((print, idx) => 
-         <PrintCard 
-          key={print.id}
-          fileLink={print.fileLink}
-          title={print.title}
-          image={print.image}
-          description={print.description}
-          onEditClick={() => onEditPrint(idx)}
-          onDeleteClick={() => onDeletePrint(idx)}
-        />) 
+        <div className="col-md-6"  key={print.id}>
+          <PrintCard 
+            fileLink={print.fileLink}
+            title={print.title}
+            image={print.image}
+            description={print.description}
+            onEditClick={() => onEditPrint(idx)}
+            onDeleteClick={() => onDeletePrint(idx)}
+          />
+        </div>
+        ) 
       }
     </div>
     <ButtonAddNew

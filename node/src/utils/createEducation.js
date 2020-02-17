@@ -11,43 +11,79 @@ const createEducation = async (models) => {
 
 
   await models.educationCourse.create({
-    title: 'Бакалавриат',
-    desc: faker.lorem.paragraphs(),
-    educationResourses: bulk(5, () => ({
-        link: faker.internet.url(),
-        desc: faker.lorem.paragraph()
-      }))
-  },
-  {
-    include: [ models.educationResourse ]
-  }
-  )
+    title: 'Биофизика',
+    description: `Лекции для студентов потоков "Биохимия, молекулярная биология", "Генетика, клеточная биология, эмбриология" и "Биотехнология, биоинженерия, биофизика"`,
+    read: 'весенний семестр 3 курса',
+    lector: 'профессор Андрей Борисович Рубин',
+    exam: 'EXAM'
+  })
 
-  await models.educationCourse.create({
-    title: 'Магистратура',
-    desc: faker.lorem.paragraphs(),
-    educationResourses: bulk(5, () => ({
-      link: faker.internet.url(),
-      desc: faker.lorem.paragraph()
-    }))
+  await models.educationResourse.bulkCreate([{
+    title: 'Учебник',
+    type: 'PDF',
+    fileLink: '/files/education/002.pdf',
+    educationForm: {
+      title: 'учебник'},
+    educationCourseId: 1
   },
   {
-    include: [ models.educationResourse ]
+    title: 'Строение мембран',
+    type: 'PDF',
+    fileLink: '/files/education/002.pdf',
+    educationForm: {
+      title: 'презентация'},
+    educationCourseId: 1
+  },
+  {
+    title: 'Программа курса',
+    type: 'PDF',
+    fileLink: '/files/education/001.docx',
+    educationForm: {
+      title: 'программа'},
+    educationCourseId: 1
+  },
+  {
+    title: 'Биофизика I',
+    type: 'URL',
+    fileLink: 'https://www.youtube.com/playlist?list=PLcsjsqLLSfNA8FeLBKTAgQDR3Ll7aF_vu',
+    educationForm: {
+      title: 'видеозапись'},
+    educationCourseId: 1
+  },
+  {
+    title: 'Задача 1',
+    type: 'PDF',
+    fileLink: '/files/education/002.pdf',
+    educationForm: {
+      title: 'практикум'},
+    educationCourseId: 1
   }
-  )
+  ], 
+  { include: [ models.educationForm ]})
 
-  await models.educationCourse.create({
-    title: 'Аспирантура',
-    desc: faker.lorem.paragraphs(),
-    educationResourses: bulk(5, () => ({
-      link: faker.internet.url(),
-      desc: faker.lorem.paragraph()
-    }))
-  },
-  {
-    include: [ models.educationResourse ]
-  }
-  )
+  await models.educationResourse.bulkCreate(bulk(4, () => ({
+    title: faker.lorem.words(),
+    type: 'PDF',
+    fileLink: '/files/education/002.pdf',
+    educationFormId: 2,
+    educationCourseId: 1
+  })))
+
+  await models.educationResourse.bulkCreate(bulk(2, () => ({
+    title: faker.lorem.words(),
+    type: 'URL',
+    fileLink: 'https://www.youtube.com/playlist?list=PLcsjsqLLSfNA8FeLBKTAgQDR3Ll7aF_vu',
+    educationForm: 4,
+    educationCourseId: 1
+  })))
+
+  await models.educationResourse.bulkCreate(bulk(15, () => ({
+    title: faker.lorem.words(),
+    type: 'PDF',
+    fileLink: '/files/education/002.pdf',
+    educationFormId: 5,
+    educationCourseId: 1
+  })))
 
   const days = ['Понедельник', 'Вторник', 'Среда', 'Четверг', 'Пятница', 'Суббота']
   const years = ['Бакалавриат 3 курс', 'Магистратура 1 курс']

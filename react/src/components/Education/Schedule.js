@@ -434,7 +434,7 @@ const Schedule = () => {
         title={modalTitle}
         onClose={onCloseModal}
         >
-          {(mode.isCreating && mode.isEditing) && <Edit 
+          {(mode.isCreating || mode.isEditing) && <Edit 
             onClickSubmit={onChangeYearHandler}
             onClickCancel={onCloseModal}
             isAbleToSave={isAbleToSave}
