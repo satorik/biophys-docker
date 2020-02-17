@@ -1,6 +1,5 @@
 import path from 'path'
 import fs from 'fs'
-import PDF2Pic from 'pdf2pic'
 
 const gmToBuffer = (data) => {
   return new Promise((resolve, reject) => {
@@ -25,6 +24,8 @@ const clearImage = (imagePath, subDir, type = 'image') => {
 }
 
 const convertPdfToBase64 = (file) => {
+
+  const PDF2Pic = require("pdf2pic")
   const pdf2pic = new PDF2Pic({
     density: 100,           // output pixels per inch
     format: "png",          // output file format

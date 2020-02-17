@@ -2,5 +2,10 @@ FROM node:10.15.2
 WORKDIR '/app'
 COPY ./package.json ./
 RUN npm install
+RUN apt-get update
+RUN apt-get install -y graphicsmagick
+CMD ["gm", "-version"]
+RUN apt-get install -y ghostscript
+CMD ["gs", "-h"]
 COPY . .
 CMD ["npm", "start"]
