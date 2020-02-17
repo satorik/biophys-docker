@@ -2,7 +2,7 @@ import React from 'react'
 import { useQuery, useMutation } from '@apollo/react-hooks'
 import { gql } from 'apollo-boost'
 import { required, length, date } from './utils/validators'
-import {useLocation} from 'react-router-dom'
+import { useLocation, useHistory } from 'react-router-dom'
 
 import HeaderConference from './components/UI/Header/HeaderConference'
 import YesDelete from './components/Shared/DoYouWantToDelete'
@@ -120,7 +120,7 @@ const Conferece = () => {
 
   const queryUrl = useQueryUrl()
   const urlId = queryUrl.get("id")
-
+  const history = useHistory()
   const [viewId, setViewId] = React.useState(0)
   const [isModalOpen, setIsModalOpen] = React.useState(false)
   const [mode, setMode] = React.useState({isEditing: false, isCreating: false, isDeleting: false})
@@ -132,9 +132,7 @@ const Conferece = () => {
     limit: CONFERENCES_PER_PAGE
   }
 
-  
-  const { loading: queryLoading, error: queryError, data} = useQuery(
-        GET_CONFERENCE, {variables})
+  const { loading: queryLoading, error: queryError, data} = useQuery(GET_CONFERENCE, {variables})
   const [createConference,
         { loading: creationLoading, error: creatingError }] = useMutation(CREATE_CONFERENCE, {
             update(cache, { data: {createConference} }) {
@@ -159,6 +157,12 @@ const Conferece = () => {
             })
           }
         })
+
+  React.useEffect(() => {
+    if (data) {
+      setViewId(data.conferences.indexOf(data.conferences.find(el => el.id === urlId)))
+    }
+  }, [data, urlId])
   
   if (queryLoading) return <Spinner />
   if (queryError) return <NetworkErrorComponent error={queryError} />
@@ -169,7 +173,10 @@ const Conferece = () => {
   const { conferences } = data
 
   const onShowConferenceDetails = (i) => {
-    setViewId(i)
+    //setViewId(i)
+    history.push({
+      search: '?id='+conferences[i].id
+    })
   }
 
   const onAddNewConference = () => {

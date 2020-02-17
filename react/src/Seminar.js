@@ -2,6 +2,7 @@ import React from 'react'
 import { useQuery, useMutation } from '@apollo/react-hooks'
 import { gql } from 'apollo-boost'
 import { required, length, date } from './utils/validators'
+import { useLocation, useHistory } from 'react-router-dom'
 
 import YesDelete from './components/Shared/DoYouWantToDelete'
 import ButtonAddNew from './components/UI/ButtonAddNew'
@@ -105,7 +106,15 @@ const FORM_TEMPLATE = [
   },
 ] 
 
+function useQueryUrl() {
+  return new URLSearchParams(useLocation().search)
+}
+
 const Seminar = () => {
+
+  const queryUrl = useQueryUrl()
+  const urlId = queryUrl.get("id")
+  const history = useHistory()
   const [viewId, setViewId] = React.useState(0)
   const [isModalOpen, setIsModalOpen] = React.useState(false)
   const [mode, setMode] = React.useState({isEditing: false, isCreating: false, isDeleting: false})
@@ -144,6 +153,12 @@ const Seminar = () => {
           }
         })
   
+  React.useEffect(() => {
+    if (data) {
+      setViewId(data.conferences.indexOf(data.conferences.find(el => el.id === urlId)))
+    }
+  }, [data, urlId])
+
   if (queryLodading) return <Spinner />
   if (queryError) return <NetworkErrorComponent error={queryError} />
   if (updatingError) return <NetworkErrorComponent error={updatingError} />
@@ -153,7 +168,10 @@ const Seminar = () => {
   const { seminars } = data
 
   const onShowSeminarDetails = (i) => {
-    setViewId(i)
+   // setViewId(i)
+   history.push({
+    search: '?id='+seminars[i].id
+   })
   }
 
   const onAddNewSeminar = () => {

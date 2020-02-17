@@ -49,7 +49,7 @@ const Blogpost = ({blogpost, idx, onClickEdit, onClickDelete}) => {
   }
 
   return (
-    <div className="container mt-5">
+    <div className="container mt-5" id={blogpost.id}>
       <div className="row">
          {content()}
       </div>
