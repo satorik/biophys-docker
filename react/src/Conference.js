@@ -159,7 +159,7 @@ const Conferece = () => {
         })
 
   React.useEffect(() => {
-    if (data) {
+    if (data && urlId) {
       setViewId(data.conferences.indexOf(data.conferences.find(el => el.id === urlId)))
     }
   }, [data, urlId])

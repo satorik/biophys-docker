@@ -3,7 +3,7 @@ import NewsCard from './NewsCard'
 
 const NewsRightPanelList = ({contentType, posts}) => {
 
-  const title = contentType === 'seminar' ? 'Доклады' : 'Конференции'
+  const title = contentType === 'seminar' ? 'Семинары' : 'Конференции'
 
   return (
     <div className="card mb-3">

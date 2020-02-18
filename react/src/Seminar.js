@@ -154,8 +154,9 @@ const Seminar = () => {
         })
   
   React.useEffect(() => {
-    if (data) {
-      setViewId(data.conferences.indexOf(data.conferences.find(el => el.id === urlId)))
+    console.log(urlId)
+    if (data && urlId) {
+      setViewId(data.seminars.indexOf(data.seminars.find(el => el.id === urlId)))
     }
   }, [data, urlId])
 
@@ -168,7 +169,6 @@ const Seminar = () => {
   const { seminars } = data
 
   const onShowSeminarDetails = (i) => {
-   // setViewId(i)
    history.push({
     search: '?id='+seminars[i].id
    })
@@ -280,7 +280,7 @@ const Seminar = () => {
                 speaker={seminar.speaker}
                 active={viewId == idx}
                 last={idx === (seminars.length-1)}
-                onSelectConference={()=>onShowSeminarDetails(idx)}
+                onSelectSeminar={()=>onShowSeminarDetails(idx)}
                 onClickEdit={() => onEditSeminar(idx)}
                 onClickDelete={() => onDeleteSeminar(idx)}
             />
