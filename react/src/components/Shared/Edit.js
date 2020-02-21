@@ -10,7 +10,6 @@ const Edit = ({onClickSubmit, onClickCancel, formTemplate, isAbleToSave, post, b
   const [formIsValid, setFormIsValid] = React.useState(false)
   const [imagePreview, setImagePreview] = React.useState(post.imageUrl ? process.env.REACT_APP_STATIC_URI+post.imageUrl : null)
 
-
   React.useEffect(() => {
     if(isAbleToSave) {
       setPostForm(createPostForm(formTemplate, post))
@@ -31,9 +30,9 @@ const Edit = ({onClickSubmit, onClickCancel, formTemplate, isAbleToSave, post, b
     .catch(e => console.log(e))
   }
 
-  const inputBlurHandler = (id) => {
-    if (!postForm[id].touched) {
-      setPostForm(postInputBlur(postForm, id))
+  const inputBlurHandler = (id, subType) => {
+    if (!postForm[id].touched || (typeof(postForm[id].touched) === 'object' && !postForm[id].touched[subType])) {
+      setPostForm(postInputBlur(postForm, id, subType))
     }
   }
 
@@ -55,11 +54,12 @@ const Edit = ({onClickSubmit, onClickCancel, formTemplate, isAbleToSave, post, b
             postForm.map((control, idx) => 
               <Input
                 key={idx}
+                idx = {idx}
                 id={control.title}
                 label={control.label}
                 control={control.type}
                 onChanged={(e) => postInputChangeHandler(e, idx)}
-                onBlur={() => inputBlurHandler(idx)}
+                onBlur={inputBlurHandler}
                 valid={control.valid}
                 touched={control.touched}
                 value={control.value}

@@ -6,7 +6,7 @@ const educationMutation = {
     if (year) { throw new ApolloError('This year already exists') }
 
     const newYear = await models.ScheduleYear.create({...inputData})
-    return newYear.dataValues
+    return {...newYear.dataValues, timetable: {}}
   },
   async updateScheduleYear(parent, {id, inputData}, { models }){
     const year = await models.ScheduleYear.findOne({where: {id}})
@@ -28,15 +28,18 @@ const educationMutation = {
     const year = await models.ScheduleYear.findOne({where: {id: yearId}})
     if (!year) { throw new ApolloError('This year does not exist ' + yearId) }
 
-    const day = await models.ScheduleDay.findOne({where: {id: dayId}})
-    if (!day) { throw new ApolloError('This day does not exist ' + dayId) }
+    const newTime = await models.ScheduleTimetable.create({...inputData, yearId, dayId})
 
-    const newTime = await models.ScheduleTimetable.create({...inputData, yearId, dayId, isEven: +inputData.isEven, isDouble: 0})
+    if (inputData.isDouble !== 0) {
+      const doubleTime = await models.ScheduleTimetable.findOne({where: {id: inputData.isDouble}})
+      doubleTime.isDouble = newTime.id
+      doubleTime.save()
 
-    return {
-      ...newTime.dataValues,
-      day
+      return {timetable: newTime, double: {id: doubleTime.id, isDouble: newTime.id}}
     }
+
+    return {timetable: newTime}
+
   },
   async updateScheduleTimetable(parent, {id, inputData}, { models }){
     const timetable = await models.ScheduleTimetable.findOne({where: {id}})
@@ -52,8 +55,17 @@ const educationMutation = {
     const timetable = await models.ScheduleTimetable.findOne({where: {id}})
     if (!timetable) { throw new ApolloError('This lecture does not exist') }
 
+    const doubleToFind = timetable.isDouble
     await timetable.destroy()
-    return id
+
+    if (doubleToFind !== 0) {
+      const doubleTime = await models.ScheduleTimetable.findOne({where: {id: doubleToFind}})
+      doubleTime.isDouble = 0
+      doubleTime.save()
+      console.log({id, double: {id: doubleTime.id, isDouble: 0}})
+      return {id, double: {id: doubleTime.id, isDouble: 0}}
+    }
+    return {id}
   },
   async createAdmission(parent, {section, inputData}, { models }){
     // if (!req.isAuth) { throw e}

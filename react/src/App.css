@@ -1,0 +1,46 @@
+.nav-link-secondary-active {
+  background-color: #6c757d;
+  cursor: pointer;
+}
+
+.nav-link-secondary {
+  cursor: pointer;
+}
+
+.nav-link-secondary:hover {
+  background-color: #d89991;
+  cursor: pointer;
+}
+
+.nav-bar-top {
+  background-color: #062642
+}
+
+.nav-link:hover{
+  background-color: #d89991;
+}
+
+.education-button-active {
+  background-color: #6610f2;
+  cursor: pointer;
+  padding: 0.5rem;
+  color: white;
+  border-radius: 6px;
+}
+
+.education-button {
+  border: 1px solid #6610f2;
+  background-color: white;
+  cursor: pointer;
+  padding: 0.5rem;
+  color: #6610f2;
+  border-radius: 6px;
+}
+
+.education-button:hover {
+  background-color: #6610f2;
+  cursor: pointer;
+  padding: 0.5rem;
+  color: white;
+  border-radius: 6px;
+}

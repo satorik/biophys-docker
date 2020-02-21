@@ -35,7 +35,7 @@ const InputCourse = ({onChanged, onBlur, label, value, children, required}) => {
               title='term'
               onChange={onChanged}
             >
-             {TERMS.map((term, idx) => <option key={idx} value={idx}>{term}</option>)} 
+             {TERMS.map((term, idx) => <option key={idx} value={term}>{term}</option>)} 
             </select>  
         </div>
         {children}

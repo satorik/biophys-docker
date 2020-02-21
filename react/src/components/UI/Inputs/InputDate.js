@@ -5,7 +5,7 @@ const currentYear = new Date().getFullYear()
 
 const YEARS = [currentYear-1, currentYear, currentYear+1]
 
-const InputDate = ({onChanged, onBlur, label, value, withTime, children, required, withDate}) => {
+const InputDate = ({onChanged, onBlur, label, value, withTime, children, required, withDate, idx}) => {
  
   // if (!required && MONTHS) {
   //   MONTHS.push('')
@@ -13,8 +13,8 @@ const InputDate = ({onChanged, onBlur, label, value, withTime, children, require
   // }
 
   return (
-    <div className="d-flex align-items-baseline">
-        <div className="input-group form-group">
+    <div className="d-flex">
+        <div className="input-group form-group align-items-center">
           <div className="input-group-prepend">
             <span className="input-group-text">{label}</span>
           </div>
@@ -26,7 +26,7 @@ const InputDate = ({onChanged, onBlur, label, value, withTime, children, require
                   title='day'
                   placeholder={`День${required ? '*': ''}`}
                   onChange={onChanged}
-                  onBlur={onBlur}
+                  onBlur={() => onBlur(idx, 'day')}
                 />
                 <select
                   className='form-control col-2'
@@ -53,8 +53,9 @@ const InputDate = ({onChanged, onBlur, label, value, withTime, children, require
               title='hours'
               placeholder='Часы'
               onChange={onChanged}
+              onBlur={() => onBlur(idx, 'hours')}
             />
-            <span>:</span>
+            <span className="px-1">:</span>
             <input
               type='text'
               className='form-control col-1 mx-1'
@@ -62,6 +63,7 @@ const InputDate = ({onChanged, onBlur, label, value, withTime, children, require
               title='minutes'
               placeholder='Минуты'
               onChange={onChanged}
+              onBlur={() => onBlur(idx, 'minutes')}
             /></>
             
             }

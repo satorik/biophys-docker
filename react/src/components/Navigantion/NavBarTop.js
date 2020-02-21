@@ -1,19 +1,45 @@
 import React from 'react'
-import {ThemeContext} from '../../context/ThemeContext'
 import NavBarTopItem from './NavBarTopItem'
+import {useLocation} from 'react-router-dom'
 
-const NavBarTop = ({links}) => {
 
-  const theme = React.useContext(ThemeContext)
-  const style = {
-    backgroundColor: theme.backgroundColor.main 
+const LINKS = [
+  {
+    path: '/department',
+    title: 'Кафедра'
+  },
+  {
+    path: '/seminar',
+    title: 'Семинары'
+  },
+  {
+    path: '/conference',
+    title: 'Конференции'
+  },
+  {
+    path: '/blogpost',
+    title: 'Блог'
+  },
+  {
+    path: '/education',
+    title: 'Учебный процесс'
+  },
+  {
+    path: '/science',
+    title: 'Наука'
   }
+]
+
+
+const NavBarTop = () => {
+
+  const currentPath = useLocation().pathname
 
   return (
-      <nav className="navbar navbar-dark navbar-expand-md" style={style}>
+      <nav className="navbar navbar-dark navbar-expand-md bg-dark" >
         <a className="navbar-brand" href="/">БИОФИЗИКА</a>
           <ul className="navbar-nav">
-            {links.map(link => <NavBarTopItem link={link} key={link.id} /> )}
+            {LINKS.map((link, idx) => <NavBarTopItem link={link} key={idx} selectedPath={currentPath.split('/')[1]} /> )}
           </ul>
       </nav>
   )

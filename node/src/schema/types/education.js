@@ -31,7 +31,7 @@ const Schedule = `
  
   type ScheduleTimetable {
     id: ID!
-    day: ScheduleDay!
+    dayId: Int!
     timeFrom: String!
     timeTo: String
     lector: String
@@ -50,7 +50,23 @@ const Schedule = `
     discipline: String!
     lectureHall: String
     startDate: String
-    isEven: String!
+    isEven: Int!
+    isDouble: Int!
+  }
+
+  type EducationDouble {
+    id: ID!
+    isDouble: Int!
+  }
+
+  type ScheduleTimetableCreateDataReturn {
+    timetable: ScheduleTimetable!
+    double: EducationDouble
+  }
+
+  type ScheduleTimetableDeleteDataReturn {
+    id: ID!
+    double: EducationDouble
   }
 
   input ScheduleTimetableUpdateData {

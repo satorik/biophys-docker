@@ -17,7 +17,7 @@ export const getValue = async (e, type, prevValue) => {
   else if (type === 'date' || type === 'datetime' || type === 'course' || type === 'time') {return { 
     value: {
         ...prevValue,
-        [e.target.title]: +e.target.value
+        [e.target.title]: type === 'course' ? e.target.value : +e.target.value
       }
     }
   }

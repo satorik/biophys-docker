@@ -3450,4 +3450,1144 @@
 			]
 		}
 	}
+}2020-02-18T14:08:32.357Z2020-02-18T14:08:32.359Z{
+	"message": "Variable \"$inputData\" got invalid value { course: { course: \"Биофизика 1 курс\", year: 2020, term: 1 }, year: 2020, term: 2 }; Field title of required type String! was not provided.",
+	"locations": [
+		{
+			"line": 1,
+			"column": 29
+		}
+	],
+	"extensions": {
+		"code": "INTERNAL_SERVER_ERROR",
+		"exception": {
+			"stacktrace": [
+				"GraphQLError: Variable \"$inputData\" got invalid value { course: { course: \"Биофизика 1 курс\", year: 2020, term: 1 }, year: 2020, term: 2 }; Field title of required type String! was not provided.",
+				"    at C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\graphql\\execution\\values.js:114:15",
+				"    at coerceInputValueImpl (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\graphql\\utilities\\coerceInputValue.js:99:11)",
+				"    at coerceInputValueImpl (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\graphql\\utilities\\coerceInputValue.js:54:14)",
+				"    at coerceInputValue (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\graphql\\utilities\\coerceInputValue.js:37:10)",
+				"    at _loop (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\graphql\\execution\\values.js:107:69)",
+				"    at coerceVariableValues (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\graphql\\execution\\values.js:119:16)",
+				"    at getVariableValues (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\graphql\\execution\\values.js:48:19)",
+				"    at buildExecutionContext (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\graphql\\execution\\execute.js:184:61)",
+				"    at executeImpl (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\graphql\\execution\\execute.js:89:20)",
+				"    at Object.execute (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\graphql\\execution\\execute.js:64:35)",
+				"    at C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\apollo-server-core\\src\\requestPipeline.ts:481:30",
+				"    at Generator.next (<anonymous>)",
+				"    at C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\apollo-server-core\\dist\\requestPipeline.js:8:71",
+				"    at new Promise (<anonymous>)",
+				"    at __awaiter (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\apollo-server-core\\dist\\requestPipeline.js:4:12)",
+				"    at execute (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\apollo-server-core\\dist\\requestPipeline.js:225:20)",
+				"    at Object.<anonymous> (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\apollo-server-core\\src\\requestPipeline.ts:364:30)",
+				"    at Generator.next (<anonymous>)",
+				"    at fulfilled (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\apollo-server-core\\dist\\requestPipeline.js:5:58)",
+				"    at process._tickCallback (internal/process/next_tick.js:68:7)"
+			]
+		}
+	}
+}{
+	"message": "Variable \"$inputData\" got invalid value { course: { course: \"Биофизика 1 курс\", year: 2020, term: 1 }, year: 2020, term: 2 }; Field \"course\" is not defined by type ScheduleYearCreateData.",
+	"locations": [
+		{
+			"line": 1,
+			"column": 29
+		}
+	],
+	"extensions": {
+		"code": "INTERNAL_SERVER_ERROR",
+		"exception": {
+			"stacktrace": [
+				"GraphQLError: Variable \"$inputData\" got invalid value { course: { course: \"Биофизика 1 курс\", year: 2020, term: 1 }, year: 2020, term: 2 }; Field \"course\" is not defined by type ScheduleYearCreateData.",
+				"    at C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\graphql\\execution\\values.js:114:15",
+				"    at coerceInputValueImpl (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\graphql\\utilities\\coerceInputValue.js:114:9)",
+				"    at coerceInputValueImpl (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\graphql\\utilities\\coerceInputValue.js:54:14)",
+				"    at coerceInputValue (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\graphql\\utilities\\coerceInputValue.js:37:10)",
+				"    at _loop (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\graphql\\execution\\values.js:107:69)",
+				"    at coerceVariableValues (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\graphql\\execution\\values.js:119:16)",
+				"    at getVariableValues (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\graphql\\execution\\values.js:48:19)",
+				"    at buildExecutionContext (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\graphql\\execution\\execute.js:184:61)",
+				"    at executeImpl (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\graphql\\execution\\execute.js:89:20)",
+				"    at Object.execute (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\graphql\\execution\\execute.js:64:35)",
+				"    at C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\apollo-server-core\\src\\requestPipeline.ts:481:30",
+				"    at Generator.next (<anonymous>)",
+				"    at C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\apollo-server-core\\dist\\requestPipeline.js:8:71",
+				"    at new Promise (<anonymous>)",
+				"    at __awaiter (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\apollo-server-core\\dist\\requestPipeline.js:4:12)",
+				"    at execute (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\apollo-server-core\\dist\\requestPipeline.js:225:20)",
+				"    at Object.<anonymous> (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\apollo-server-core\\src\\requestPipeline.ts:364:30)",
+				"    at Generator.next (<anonymous>)",
+				"    at fulfilled (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\apollo-server-core\\dist\\requestPipeline.js:5:58)",
+				"    at process._tickCallback (internal/process/next_tick.js:68:7)"
+			]
+		}
+	}
+}2020-02-18T14:10:42.605Z2020-02-18T14:10:42.606Z2020-02-18T14:10:42.608Z2020-02-18T14:10:42.609Z{
+	"message": "Variable \"$inputData\" got invalid value { course: { course: \"Биофизика 1 курс\", year: 2020, term: 1 } }; Field title of required type String! was not provided.",
+	"locations": [
+		{
+			"line": 1,
+			"column": 29
+		}
+	],
+	"extensions": {
+		"code": "INTERNAL_SERVER_ERROR",
+		"exception": {
+			"stacktrace": [
+				"GraphQLError: Variable \"$inputData\" got invalid value { course: { course: \"Биофизика 1 курс\", year: 2020, term: 1 } }; Field title of required type String! was not provided.",
+				"    at C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\graphql\\execution\\values.js:114:15",
+				"    at coerceInputValueImpl (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\graphql\\utilities\\coerceInputValue.js:99:11)",
+				"    at coerceInputValueImpl (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\graphql\\utilities\\coerceInputValue.js:54:14)",
+				"    at coerceInputValue (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\graphql\\utilities\\coerceInputValue.js:37:10)",
+				"    at _loop (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\graphql\\execution\\values.js:107:69)",
+				"    at coerceVariableValues (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\graphql\\execution\\values.js:119:16)",
+				"    at getVariableValues (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\graphql\\execution\\values.js:48:19)",
+				"    at buildExecutionContext (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\graphql\\execution\\execute.js:184:61)",
+				"    at executeImpl (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\graphql\\execution\\execute.js:89:20)",
+				"    at Object.execute (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\graphql\\execution\\execute.js:64:35)",
+				"    at C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\apollo-server-core\\src\\requestPipeline.ts:481:30",
+				"    at Generator.next (<anonymous>)",
+				"    at C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\apollo-server-core\\dist\\requestPipeline.js:8:71",
+				"    at new Promise (<anonymous>)",
+				"    at __awaiter (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\apollo-server-core\\dist\\requestPipeline.js:4:12)",
+				"    at execute (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\apollo-server-core\\dist\\requestPipeline.js:225:20)",
+				"    at Object.<anonymous> (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\apollo-server-core\\src\\requestPipeline.ts:364:30)",
+				"    at Generator.next (<anonymous>)",
+				"    at fulfilled (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\apollo-server-core\\dist\\requestPipeline.js:5:58)",
+				"    at process._tickCallback (internal/process/next_tick.js:68:7)"
+			]
+		}
+	}
+}{
+	"message": "Variable \"$inputData\" got invalid value { course: { course: \"Биофизика 1 курс\", year: 2020, term: 1 } }; Field year of required type Int! was not provided.",
+	"locations": [
+		{
+			"line": 1,
+			"column": 29
+		}
+	],
+	"extensions": {
+		"code": "INTERNAL_SERVER_ERROR",
+		"exception": {
+			"stacktrace": [
+				"GraphQLError: Variable \"$inputData\" got invalid value { course: { course: \"Биофизика 1 курс\", year: 2020, term: 1 } }; Field year of required type Int! was not provided.",
+				"    at C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\graphql\\execution\\values.js:114:15",
+				"    at coerceInputValueImpl (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\graphql\\utilities\\coerceInputValue.js:99:11)",
+				"    at coerceInputValueImpl (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\graphql\\utilities\\coerceInputValue.js:54:14)",
+				"    at coerceInputValue (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\graphql\\utilities\\coerceInputValue.js:37:10)",
+				"    at _loop (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\graphql\\execution\\values.js:107:69)",
+				"    at coerceVariableValues (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\graphql\\execution\\values.js:119:16)",
+				"    at getVariableValues (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\graphql\\execution\\values.js:48:19)",
+				"    at buildExecutionContext (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\graphql\\execution\\execute.js:184:61)",
+				"    at executeImpl (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\graphql\\execution\\execute.js:89:20)",
+				"    at Object.execute (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\graphql\\execution\\execute.js:64:35)",
+				"    at C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\apollo-server-core\\src\\requestPipeline.ts:481:30",
+				"    at Generator.next (<anonymous>)",
+				"    at C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\apollo-server-core\\dist\\requestPipeline.js:8:71",
+				"    at new Promise (<anonymous>)",
+				"    at __awaiter (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\apollo-server-core\\dist\\requestPipeline.js:4:12)",
+				"    at execute (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\apollo-server-core\\dist\\requestPipeline.js:225:20)",
+				"    at Object.<anonymous> (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\apollo-server-core\\src\\requestPipeline.ts:364:30)",
+				"    at Generator.next (<anonymous>)",
+				"    at fulfilled (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\apollo-server-core\\dist\\requestPipeline.js:5:58)",
+				"    at process._tickCallback (internal/process/next_tick.js:68:7)"
+			]
+		}
+	}
+}{
+	"message": "Variable \"$inputData\" got invalid value { course: { course: \"Биофизика 1 курс\", year: 2020, term: 1 } }; Field term of required type Int! was not provided.",
+	"locations": [
+		{
+			"line": 1,
+			"column": 29
+		}
+	],
+	"extensions": {
+		"code": "INTERNAL_SERVER_ERROR",
+		"exception": {
+			"stacktrace": [
+				"GraphQLError: Variable \"$inputData\" got invalid value { course: { course: \"Биофизика 1 курс\", year: 2020, term: 1 } }; Field term of required type Int! was not provided.",
+				"    at C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\graphql\\execution\\values.js:114:15",
+				"    at coerceInputValueImpl (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\graphql\\utilities\\coerceInputValue.js:99:11)",
+				"    at coerceInputValueImpl (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\graphql\\utilities\\coerceInputValue.js:54:14)",
+				"    at coerceInputValue (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\graphql\\utilities\\coerceInputValue.js:37:10)",
+				"    at _loop (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\graphql\\execution\\values.js:107:69)",
+				"    at coerceVariableValues (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\graphql\\execution\\values.js:119:16)",
+				"    at getVariableValues (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\graphql\\execution\\values.js:48:19)",
+				"    at buildExecutionContext (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\graphql\\execution\\execute.js:184:61)",
+				"    at executeImpl (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\graphql\\execution\\execute.js:89:20)",
+				"    at Object.execute (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\graphql\\execution\\execute.js:64:35)",
+				"    at C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\apollo-server-core\\src\\requestPipeline.ts:481:30",
+				"    at Generator.next (<anonymous>)",
+				"    at C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\apollo-server-core\\dist\\requestPipeline.js:8:71",
+				"    at new Promise (<anonymous>)",
+				"    at __awaiter (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\apollo-server-core\\dist\\requestPipeline.js:4:12)",
+				"    at execute (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\apollo-server-core\\dist\\requestPipeline.js:225:20)",
+				"    at Object.<anonymous> (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\apollo-server-core\\src\\requestPipeline.ts:364:30)",
+				"    at Generator.next (<anonymous>)",
+				"    at fulfilled (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\apollo-server-core\\dist\\requestPipeline.js:5:58)",
+				"    at process._tickCallback (internal/process/next_tick.js:68:7)"
+			]
+		}
+	}
+}{
+	"message": "Variable \"$inputData\" got invalid value { course: { course: \"Биофизика 1 курс\", year: 2020, term: 1 } }; Field \"course\" is not defined by type ScheduleYearCreateData.",
+	"locations": [
+		{
+			"line": 1,
+			"column": 29
+		}
+	],
+	"extensions": {
+		"code": "INTERNAL_SERVER_ERROR",
+		"exception": {
+			"stacktrace": [
+				"GraphQLError: Variable \"$inputData\" got invalid value { course: { course: \"Биофизика 1 курс\", year: 2020, term: 1 } }; Field \"course\" is not defined by type ScheduleYearCreateData.",
+				"    at C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\graphql\\execution\\values.js:114:15",
+				"    at coerceInputValueImpl (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\graphql\\utilities\\coerceInputValue.js:114:9)",
+				"    at coerceInputValueImpl (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\graphql\\utilities\\coerceInputValue.js:54:14)",
+				"    at coerceInputValue (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\graphql\\utilities\\coerceInputValue.js:37:10)",
+				"    at _loop (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\graphql\\execution\\values.js:107:69)",
+				"    at coerceVariableValues (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\graphql\\execution\\values.js:119:16)",
+				"    at getVariableValues (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\graphql\\execution\\values.js:48:19)",
+				"    at buildExecutionContext (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\graphql\\execution\\execute.js:184:61)",
+				"    at executeImpl (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\graphql\\execution\\execute.js:89:20)",
+				"    at Object.execute (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\graphql\\execution\\execute.js:64:35)",
+				"    at C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\apollo-server-core\\src\\requestPipeline.ts:481:30",
+				"    at Generator.next (<anonymous>)",
+				"    at C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\apollo-server-core\\dist\\requestPipeline.js:8:71",
+				"    at new Promise (<anonymous>)",
+				"    at __awaiter (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\apollo-server-core\\dist\\requestPipeline.js:4:12)",
+				"    at execute (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\apollo-server-core\\dist\\requestPipeline.js:225:20)",
+				"    at Object.<anonymous> (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\apollo-server-core\\src\\requestPipeline.ts:364:30)",
+				"    at Generator.next (<anonymous>)",
+				"    at fulfilled (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\apollo-server-core\\dist\\requestPipeline.js:5:58)",
+				"    at process._tickCallback (internal/process/next_tick.js:68:7)"
+			]
+		}
+	}
+}2020-02-18T14:11:40.875Z2020-02-18T14:11:40.876Z{
+	"message": "Variable \"$inputData\" got invalid value { course: \"Биофизика\", year: 2020, term: 1 }; Field title of required type String! was not provided.",
+	"locations": [
+		{
+			"line": 1,
+			"column": 29
+		}
+	],
+	"extensions": {
+		"code": "INTERNAL_SERVER_ERROR",
+		"exception": {
+			"stacktrace": [
+				"GraphQLError: Variable \"$inputData\" got invalid value { course: \"Биофизика\", year: 2020, term: 1 }; Field title of required type String! was not provided.",
+				"    at C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\graphql\\execution\\values.js:114:15",
+				"    at coerceInputValueImpl (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\graphql\\utilities\\coerceInputValue.js:99:11)",
+				"    at coerceInputValueImpl (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\graphql\\utilities\\coerceInputValue.js:54:14)",
+				"    at coerceInputValue (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\graphql\\utilities\\coerceInputValue.js:37:10)",
+				"    at _loop (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\graphql\\execution\\values.js:107:69)",
+				"    at coerceVariableValues (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\graphql\\execution\\values.js:119:16)",
+				"    at getVariableValues (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\graphql\\execution\\values.js:48:19)",
+				"    at buildExecutionContext (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\graphql\\execution\\execute.js:184:61)",
+				"    at executeImpl (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\graphql\\execution\\execute.js:89:20)",
+				"    at Object.execute (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\graphql\\execution\\execute.js:64:35)",
+				"    at C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\apollo-server-core\\src\\requestPipeline.ts:481:30",
+				"    at Generator.next (<anonymous>)",
+				"    at C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\apollo-server-core\\dist\\requestPipeline.js:8:71",
+				"    at new Promise (<anonymous>)",
+				"    at __awaiter (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\apollo-server-core\\dist\\requestPipeline.js:4:12)",
+				"    at execute (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\apollo-server-core\\dist\\requestPipeline.js:225:20)",
+				"    at Object.<anonymous> (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\apollo-server-core\\src\\requestPipeline.ts:364:30)",
+				"    at Generator.next (<anonymous>)",
+				"    at fulfilled (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\apollo-server-core\\dist\\requestPipeline.js:5:58)",
+				"    at process._tickCallback (internal/process/next_tick.js:68:7)"
+			]
+		}
+	}
+}{
+	"message": "Variable \"$inputData\" got invalid value { course: \"Биофизика\", year: 2020, term: 1 }; Field \"course\" is not defined by type ScheduleYearCreateData.",
+	"locations": [
+		{
+			"line": 1,
+			"column": 29
+		}
+	],
+	"extensions": {
+		"code": "INTERNAL_SERVER_ERROR",
+		"exception": {
+			"stacktrace": [
+				"GraphQLError: Variable \"$inputData\" got invalid value { course: \"Биофизика\", year: 2020, term: 1 }; Field \"course\" is not defined by type ScheduleYearCreateData.",
+				"    at C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\graphql\\execution\\values.js:114:15",
+				"    at coerceInputValueImpl (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\graphql\\utilities\\coerceInputValue.js:114:9)",
+				"    at coerceInputValueImpl (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\graphql\\utilities\\coerceInputValue.js:54:14)",
+				"    at coerceInputValue (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\graphql\\utilities\\coerceInputValue.js:37:10)",
+				"    at _loop (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\graphql\\execution\\values.js:107:69)",
+				"    at coerceVariableValues (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\graphql\\execution\\values.js:119:16)",
+				"    at getVariableValues (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\graphql\\execution\\values.js:48:19)",
+				"    at buildExecutionContext (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\graphql\\execution\\execute.js:184:61)",
+				"    at executeImpl (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\graphql\\execution\\execute.js:89:20)",
+				"    at Object.execute (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\graphql\\execution\\execute.js:64:35)",
+				"    at C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\apollo-server-core\\src\\requestPipeline.ts:481:30",
+				"    at Generator.next (<anonymous>)",
+				"    at C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\apollo-server-core\\dist\\requestPipeline.js:8:71",
+				"    at new Promise (<anonymous>)",
+				"    at __awaiter (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\apollo-server-core\\dist\\requestPipeline.js:4:12)",
+				"    at execute (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\apollo-server-core\\dist\\requestPipeline.js:225:20)",
+				"    at Object.<anonymous> (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\apollo-server-core\\src\\requestPipeline.ts:364:30)",
+				"    at Generator.next (<anonymous>)",
+				"    at fulfilled (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\apollo-server-core\\dist\\requestPipeline.js:5:58)",
+				"    at process._tickCallback (internal/process/next_tick.js:68:7)"
+			]
+		}
+	}
+}2020-02-18T14:15:18.276Z{
+	"message": "Variable \"$inputData\" got invalid value \"2\" at \"inputData.term\"; Expected type Int. Int cannot represent non-integer value: \"2\"",
+	"locations": [
+		{
+			"line": 1,
+			"column": 29
+		}
+	],
+	"extensions": {
+		"code": "INTERNAL_SERVER_ERROR",
+		"exception": {
+			"stacktrace": [
+				"TypeError: Int cannot represent non-integer value: \"2\"",
+				"    at GraphQLScalarType.coerceInt [as parseValue] (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\graphql\\type\\scalars.js:55:11)",
+				"    at coerceInputValueImpl (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\graphql\\utilities\\coerceInputValue.js:127:26)",
+				"    at coerceInputValueImpl (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\graphql\\utilities\\coerceInputValue.js:54:14)",
+				"    at coerceInputValueImpl (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\graphql\\utilities\\coerceInputValue.js:105:35)",
+				"    at coerceInputValueImpl (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\graphql\\utilities\\coerceInputValue.js:54:14)",
+				"    at coerceInputValue (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\graphql\\utilities\\coerceInputValue.js:37:10)",
+				"    at _loop (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\graphql\\execution\\values.js:107:69)",
+				"    at coerceVariableValues (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\graphql\\execution\\values.js:119:16)",
+				"    at getVariableValues (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\graphql\\execution\\values.js:48:19)",
+				"    at buildExecutionContext (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\graphql\\execution\\execute.js:184:61)",
+				"    at executeImpl (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\graphql\\execution\\execute.js:89:20)",
+				"    at Object.execute (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\graphql\\execution\\execute.js:64:35)",
+				"    at C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\apollo-server-core\\src\\requestPipeline.ts:481:30",
+				"    at Generator.next (<anonymous>)",
+				"    at C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\apollo-server-core\\dist\\requestPipeline.js:8:71",
+				"    at new Promise (<anonymous>)",
+				"    at __awaiter (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\apollo-server-core\\dist\\requestPipeline.js:4:12)",
+				"    at execute (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\apollo-server-core\\dist\\requestPipeline.js:225:20)",
+				"    at Object.<anonymous> (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\apollo-server-core\\src\\requestPipeline.ts:364:30)",
+				"    at Generator.next (<anonymous>)",
+				"    at fulfilled (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\apollo-server-core\\dist\\requestPipeline.js:5:58)",
+				"    at process._tickCallback (internal/process/next_tick.js:68:7)"
+			]
+		}
+	}
+}2020-02-18T14:17:20.917Z{
+	"message": "Variable \"$inputData\" got invalid value \"2\" at \"inputData.term\"; Expected type Int. Int cannot represent non-integer value: \"2\"",
+	"locations": [
+		{
+			"line": 1,
+			"column": 29
+		}
+	],
+	"extensions": {
+		"code": "INTERNAL_SERVER_ERROR",
+		"exception": {
+			"stacktrace": [
+				"TypeError: Int cannot represent non-integer value: \"2\"",
+				"    at GraphQLScalarType.coerceInt [as parseValue] (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\graphql\\type\\scalars.js:55:11)",
+				"    at coerceInputValueImpl (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\graphql\\utilities\\coerceInputValue.js:127:26)",
+				"    at coerceInputValueImpl (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\graphql\\utilities\\coerceInputValue.js:54:14)",
+				"    at coerceInputValueImpl (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\graphql\\utilities\\coerceInputValue.js:105:35)",
+				"    at coerceInputValueImpl (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\graphql\\utilities\\coerceInputValue.js:54:14)",
+				"    at coerceInputValue (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\graphql\\utilities\\coerceInputValue.js:37:10)",
+				"    at _loop (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\graphql\\execution\\values.js:107:69)",
+				"    at coerceVariableValues (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\graphql\\execution\\values.js:119:16)",
+				"    at getVariableValues (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\graphql\\execution\\values.js:48:19)",
+				"    at buildExecutionContext (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\graphql\\execution\\execute.js:184:61)",
+				"    at executeImpl (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\graphql\\execution\\execute.js:89:20)",
+				"    at Object.execute (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\graphql\\execution\\execute.js:64:35)",
+				"    at C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\apollo-server-core\\src\\requestPipeline.ts:481:30",
+				"    at Generator.next (<anonymous>)",
+				"    at C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\apollo-server-core\\dist\\requestPipeline.js:8:71",
+				"    at new Promise (<anonymous>)",
+				"    at __awaiter (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\apollo-server-core\\dist\\requestPipeline.js:4:12)",
+				"    at execute (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\apollo-server-core\\dist\\requestPipeline.js:225:20)",
+				"    at Object.<anonymous> (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\apollo-server-core\\src\\requestPipeline.ts:364:30)",
+				"    at Generator.next (<anonymous>)",
+				"    at fulfilled (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\apollo-server-core\\dist\\requestPipeline.js:5:58)",
+				"    at process._tickCallback (internal/process/next_tick.js:68:7)"
+			]
+		}
+	}
+}2020-02-18T16:16:33.598Z{
+	"message": "column scheduleYear.calendarYear does not exist",
+	"locations": [
+		{
+			"line": 2,
+			"column": 3
+		}
+	],
+	"path": [
+		"years"
+	],
+	"extensions": {
+		"code": "INTERNAL_SERVER_ERROR",
+		"exception": {
+			"name": "SequelizeDatabaseError",
+			"parent": {
+				"name": "error",
+				"length": 124,
+				"severity": "ERROR",
+				"code": "42703",
+				"position": "118",
+				"file": "parse_relation.c",
+				"line": "3294",
+				"routine": "errorMissingColumn",
+				"sql": "SELECT \"id\", \"title\", \"year\", \"term\", \"createdAt\", \"updatedAt\" FROM \"biophys\".\"scheduleYear\" AS \"scheduleYear\" WHERE \"scheduleYear\".\"calendarYear\" = 2020 AND \"scheduleYear\".\"term\" = 2;"
+			},
+			"original": {
+				"name": "error",
+				"length": 124,
+				"severity": "ERROR",
+				"code": "42703",
+				"position": "118",
+				"file": "parse_relation.c",
+				"line": "3294",
+				"routine": "errorMissingColumn",
+				"sql": "SELECT \"id\", \"title\", \"year\", \"term\", \"createdAt\", \"updatedAt\" FROM \"biophys\".\"scheduleYear\" AS \"scheduleYear\" WHERE \"scheduleYear\".\"calendarYear\" = 2020 AND \"scheduleYear\".\"term\" = 2;"
+			},
+			"sql": "SELECT \"id\", \"title\", \"year\", \"term\", \"createdAt\", \"updatedAt\" FROM \"biophys\".\"scheduleYear\" AS \"scheduleYear\" WHERE \"scheduleYear\".\"calendarYear\" = 2020 AND \"scheduleYear\".\"term\" = 2;",
+			"stacktrace": [
+				"SequelizeDatabaseError: column scheduleYear.calendarYear does not exist",
+				"    at Query.formatError (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\sequelize\\lib\\dialects\\postgres\\query.js:366:16)",
+				"    at query.catch.err (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\sequelize\\lib\\dialects\\postgres\\query.js:72:18)",
+				"    at tryCatcher (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\bluebird\\js\\release\\util.js:16:23)",
+				"    at Promise._settlePromiseFromHandler (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\bluebird\\js\\release\\promise.js:547:31)",
+				"    at Promise._settlePromise (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\bluebird\\js\\release\\promise.js:604:18)",
+				"    at Promise._settlePromise0 (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\bluebird\\js\\release\\promise.js:649:10)",
+				"    at Promise._settlePromises (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\bluebird\\js\\release\\promise.js:725:18)",
+				"    at _drainQueueStep (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\bluebird\\js\\release\\async.js:93:12)",
+				"    at _drainQueue (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\bluebird\\js\\release\\async.js:86:9)",
+				"    at Async._drainQueues (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\bluebird\\js\\release\\async.js:102:5)",
+				"    at Immediate.Async.drainQueues [as _onImmediate] (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\bluebird\\js\\release\\async.js:15:14)",
+				"    at runCallback (timers.js:705:18)",
+				"    at tryOnImmediate (timers.js:676:5)",
+				"    at processImmediate (timers.js:658:5)",
+				"    at process.topLevelDomainCallback (domain.js:120:23)"
+			]
+		}
+	}
+}2020-02-18T16:17:11.448Z{
+	"message": "Unknown argument \"year\" on field \"years\" of type \"Query\".",
+	"locations": [
+		{
+			"line": 2,
+			"column": 9
+		}
+	],
+	"extensions": {
+		"code": "GRAPHQL_VALIDATION_FAILED",
+		"exception": {
+			"stacktrace": [
+				"GraphQLError: Unknown argument \"year\" on field \"years\" of type \"Query\".",
+				"    at Object.Argument (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\graphql\\validation\\rules\\KnownArgumentNames.js:60:29)",
+				"    at Object.enter (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\graphql\\language\\visitor.js:324:29)",
+				"    at Object.enter (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\graphql\\language\\visitor.js:375:25)",
+				"    at visit (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\graphql\\language\\visitor.js:242:26)",
+				"    at Object.validate (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\graphql\\validation\\validate.js:73:24)",
+				"    at validate (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\apollo-server-core\\src\\requestPipeline.ts:443:22)",
+				"    at Object.<anonymous> (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\apollo-server-core\\src\\requestPipeline.ts:252:32)",
+				"    at Generator.next (<anonymous>)",
+				"    at fulfilled (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\apollo-server-core\\dist\\requestPipeline.js:5:58)",
+				"    at process._tickCallback (internal/process/next_tick.js:68:7)"
+			]
+		}
+	}
+}2020-02-18T16:50:14.046Z{
+	"message": "This day does not exist 0",
+	"locations": [
+		{
+			"line": 2,
+			"column": 3
+		}
+	],
+	"path": [
+		"createScheduleTimetable"
+	],
+	"extensions": {
+		"code": "INTERNAL_SERVER_ERROR",
+		"exception": {
+			"stacktrace": [
+				"Error: This day does not exist 0",
+				"    at _callee4$ (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\src\\resolvers\\mutation/education.js:32:23)",
+				"    at tryCatch (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\regenerator-runtime\\runtime.js:45:40)",
+				"    at Generator.invoke [as _invoke] (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\regenerator-runtime\\runtime.js:271:22)",
+				"    at Generator.prototype.(anonymous function) [as next] (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\regenerator-runtime\\runtime.js:97:21)",
+				"    at asyncGeneratorStep (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\src\\resolvers\\mutation\\education.js:16:103)",
+				"    at _next (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\src\\resolvers\\mutation\\education.js:18:194)"
+			]
+		}
+	}
+}2020-02-19T10:06:44.795Z{
+	"message": "This day does not exist 0",
+	"locations": [
+		{
+			"line": 2,
+			"column": 3
+		}
+	],
+	"path": [
+		"createScheduleTimetable"
+	],
+	"extensions": {
+		"code": "INTERNAL_SERVER_ERROR",
+		"exception": {
+			"stacktrace": [
+				"Error: This day does not exist 0",
+				"    at _callee4$ (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\src\\resolvers\\mutation/education.js:32:23)",
+				"    at tryCatch (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\regenerator-runtime\\runtime.js:45:40)",
+				"    at Generator.invoke [as _invoke] (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\regenerator-runtime\\runtime.js:271:22)",
+				"    at Generator.prototype.(anonymous function) [as next] (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\regenerator-runtime\\runtime.js:97:21)",
+				"    at asyncGeneratorStep (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\src\\resolvers\\mutation\\education.js:16:103)",
+				"    at _next (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\src\\resolvers\\mutation\\education.js:18:194)"
+			]
+		}
+	}
+}2020-02-19T12:24:52.853Z{
+	"message": "day is not defined",
+	"locations": [
+		{
+			"line": 2,
+			"column": 3
+		}
+	],
+	"path": [
+		"createScheduleTimetable"
+	],
+	"extensions": {
+		"code": "INTERNAL_SERVER_ERROR",
+		"exception": {
+			"stacktrace": [
+				"ReferenceError: day is not defined",
+				"    at _callee4$ (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\src\\resolvers\\mutation/education.js:35:7)",
+				"    at tryCatch (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\regenerator-runtime\\runtime.js:45:40)",
+				"    at Generator.invoke [as _invoke] (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\regenerator-runtime\\runtime.js:271:22)",
+				"    at Generator.prototype.(anonymous function) [as next] (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\regenerator-runtime\\runtime.js:97:21)",
+				"    at asyncGeneratorStep (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\src\\resolvers\\mutation\\education.js:16:103)",
+				"    at _next (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\src\\resolvers\\mutation\\education.js:18:194)"
+			]
+		}
+	}
+}2020-02-19T19:11:28.657Z{
+	"message": "Variable \"$inputData\" got invalid value { timeFrom: \"18:40\", timeTo: \"19:40\", discipline: \"gggggggggggggg\", lector: \"\", startDate: null, isEven: \"0\", isDouble: { isDouble: \"40\", isOneDouble: true } }; Field \"isDouble\" is not defined by type ScheduleTimetableCreateData.",
+	"locations": [
+		{
+			"line": 1,
+			"column": 61
+		}
+	],
+	"extensions": {
+		"code": "INTERNAL_SERVER_ERROR",
+		"exception": {
+			"stacktrace": [
+				"GraphQLError: Variable \"$inputData\" got invalid value { timeFrom: \"18:40\", timeTo: \"19:40\", discipline: \"gggggggggggggg\", lector: \"\", startDate: null, isEven: \"0\", isDouble: { isDouble: \"40\", isOneDouble: true } }; Field \"isDouble\" is not defined by type ScheduleTimetableCreateData.",
+				"    at C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\graphql\\execution\\values.js:114:15",
+				"    at coerceInputValueImpl (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\graphql\\utilities\\coerceInputValue.js:114:9)",
+				"    at coerceInputValueImpl (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\graphql\\utilities\\coerceInputValue.js:54:14)",
+				"    at coerceInputValue (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\graphql\\utilities\\coerceInputValue.js:37:10)",
+				"    at _loop (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\graphql\\execution\\values.js:107:69)",
+				"    at coerceVariableValues (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\graphql\\execution\\values.js:119:16)",
+				"    at getVariableValues (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\graphql\\execution\\values.js:48:19)",
+				"    at buildExecutionContext (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\graphql\\execution\\execute.js:184:61)",
+				"    at executeImpl (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\graphql\\execution\\execute.js:89:20)",
+				"    at Object.execute (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\graphql\\execution\\execute.js:64:35)",
+				"    at C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\apollo-server-core\\src\\requestPipeline.ts:481:30",
+				"    at Generator.next (<anonymous>)",
+				"    at C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\apollo-server-core\\dist\\requestPipeline.js:8:71",
+				"    at new Promise (<anonymous>)",
+				"    at __awaiter (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\apollo-server-core\\dist\\requestPipeline.js:4:12)",
+				"    at execute (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\apollo-server-core\\dist\\requestPipeline.js:225:20)",
+				"    at Object.<anonymous> (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\apollo-server-core\\src\\requestPipeline.ts:364:30)",
+				"    at Generator.next (<anonymous>)",
+				"    at fulfilled (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\apollo-server-core\\dist\\requestPipeline.js:5:58)",
+				"    at process._tickCallback (internal/process/next_tick.js:68:7)"
+			]
+		}
+	}
+}2020-02-19T19:20:26.067Z2020-02-19T19:20:26.068Z{
+	"message": "Variable \"$inputData\" got invalid value 0 at \"inputData.isEven\"; Expected type String. String cannot represent a non string value: 0",
+	"locations": [
+		{
+			"line": 1,
+			"column": 61
+		}
+	],
+	"extensions": {
+		"code": "INTERNAL_SERVER_ERROR",
+		"exception": {
+			"stacktrace": [
+				"TypeError: String cannot represent a non string value: 0",
+				"    at GraphQLScalarType.coerceString [as parseValue] (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\graphql\\type\\scalars.js:164:11)",
+				"    at coerceInputValueImpl (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\graphql\\utilities\\coerceInputValue.js:127:26)",
+				"    at coerceInputValueImpl (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\graphql\\utilities\\coerceInputValue.js:54:14)",
+				"    at coerceInputValueImpl (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\graphql\\utilities\\coerceInputValue.js:105:35)",
+				"    at coerceInputValueImpl (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\graphql\\utilities\\coerceInputValue.js:54:14)",
+				"    at coerceInputValue (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\graphql\\utilities\\coerceInputValue.js:37:10)",
+				"    at _loop (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\graphql\\execution\\values.js:107:69)",
+				"    at coerceVariableValues (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\graphql\\execution\\values.js:119:16)",
+				"    at getVariableValues (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\graphql\\execution\\values.js:48:19)",
+				"    at buildExecutionContext (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\graphql\\execution\\execute.js:184:61)",
+				"    at executeImpl (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\graphql\\execution\\execute.js:89:20)",
+				"    at Object.execute (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\graphql\\execution\\execute.js:64:35)",
+				"    at C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\apollo-server-core\\src\\requestPipeline.ts:481:30",
+				"    at Generator.next (<anonymous>)",
+				"    at C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\apollo-server-core\\dist\\requestPipeline.js:8:71",
+				"    at new Promise (<anonymous>)",
+				"    at __awaiter (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\apollo-server-core\\dist\\requestPipeline.js:4:12)",
+				"    at execute (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\apollo-server-core\\dist\\requestPipeline.js:225:20)",
+				"    at Object.<anonymous> (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\apollo-server-core\\src\\requestPipeline.ts:364:30)",
+				"    at Generator.next (<anonymous>)",
+				"    at fulfilled (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\apollo-server-core\\dist\\requestPipeline.js:5:58)",
+				"    at process._tickCallback (internal/process/next_tick.js:68:7)"
+			]
+		}
+	}
+}{
+	"message": "Variable \"$inputData\" got invalid value { timeFrom: \"18:40\", timeTo: \"19:00\", discipline: \"ddddddddddddd\", lector: \"\", startDate: null, isEven: 0, isDouble: \"40\" }; Field \"isDouble\" is not defined by type ScheduleTimetableCreateData.",
+	"locations": [
+		{
+			"line": 1,
+			"column": 61
+		}
+	],
+	"extensions": {
+		"code": "INTERNAL_SERVER_ERROR",
+		"exception": {
+			"stacktrace": [
+				"GraphQLError: Variable \"$inputData\" got invalid value { timeFrom: \"18:40\", timeTo: \"19:00\", discipline: \"ddddddddddddd\", lector: \"\", startDate: null, isEven: 0, isDouble: \"40\" }; Field \"isDouble\" is not defined by type ScheduleTimetableCreateData.",
+				"    at C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\graphql\\execution\\values.js:114:15",
+				"    at coerceInputValueImpl (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\graphql\\utilities\\coerceInputValue.js:114:9)",
+				"    at coerceInputValueImpl (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\graphql\\utilities\\coerceInputValue.js:54:14)",
+				"    at coerceInputValue (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\graphql\\utilities\\coerceInputValue.js:37:10)",
+				"    at _loop (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\graphql\\execution\\values.js:107:69)",
+				"    at coerceVariableValues (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\graphql\\execution\\values.js:119:16)",
+				"    at getVariableValues (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\graphql\\execution\\values.js:48:19)",
+				"    at buildExecutionContext (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\graphql\\execution\\execute.js:184:61)",
+				"    at executeImpl (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\graphql\\execution\\execute.js:89:20)",
+				"    at Object.execute (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\graphql\\execution\\execute.js:64:35)",
+				"    at C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\apollo-server-core\\src\\requestPipeline.ts:481:30",
+				"    at Generator.next (<anonymous>)",
+				"    at C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\apollo-server-core\\dist\\requestPipeline.js:8:71",
+				"    at new Promise (<anonymous>)",
+				"    at __awaiter (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\apollo-server-core\\dist\\requestPipeline.js:4:12)",
+				"    at execute (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\apollo-server-core\\dist\\requestPipeline.js:225:20)",
+				"    at Object.<anonymous> (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\apollo-server-core\\src\\requestPipeline.ts:364:30)",
+				"    at Generator.next (<anonymous>)",
+				"    at fulfilled (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\apollo-server-core\\dist\\requestPipeline.js:5:58)",
+				"    at process._tickCallback (internal/process/next_tick.js:68:7)"
+			]
+		}
+	}
+}2020-02-19T19:22:51.966Z{
+	"message": "Variable \"$inputData\" got invalid value \"40\" at \"inputData.isDouble\"; Expected type Int. Int cannot represent non-integer value: \"40\"",
+	"locations": [
+		{
+			"line": 1,
+			"column": 61
+		}
+	],
+	"extensions": {
+		"code": "INTERNAL_SERVER_ERROR",
+		"exception": {
+			"stacktrace": [
+				"TypeError: Int cannot represent non-integer value: \"40\"",
+				"    at GraphQLScalarType.coerceInt [as parseValue] (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\graphql\\type\\scalars.js:55:11)",
+				"    at coerceInputValueImpl (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\graphql\\utilities\\coerceInputValue.js:127:26)",
+				"    at coerceInputValueImpl (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\graphql\\utilities\\coerceInputValue.js:54:14)",
+				"    at coerceInputValueImpl (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\graphql\\utilities\\coerceInputValue.js:105:35)",
+				"    at coerceInputValueImpl (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\graphql\\utilities\\coerceInputValue.js:54:14)",
+				"    at coerceInputValue (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\graphql\\utilities\\coerceInputValue.js:37:10)",
+				"    at _loop (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\graphql\\execution\\values.js:107:69)",
+				"    at coerceVariableValues (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\graphql\\execution\\values.js:119:16)",
+				"    at getVariableValues (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\graphql\\execution\\values.js:48:19)",
+				"    at buildExecutionContext (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\graphql\\execution\\execute.js:184:61)",
+				"    at executeImpl (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\graphql\\execution\\execute.js:89:20)",
+				"    at Object.execute (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\graphql\\execution\\execute.js:64:35)",
+				"    at C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\apollo-server-core\\src\\requestPipeline.ts:481:30",
+				"    at Generator.next (<anonymous>)",
+				"    at C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\apollo-server-core\\dist\\requestPipeline.js:8:71",
+				"    at new Promise (<anonymous>)",
+				"    at __awaiter (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\apollo-server-core\\dist\\requestPipeline.js:4:12)",
+				"    at execute (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\apollo-server-core\\dist\\requestPipeline.js:225:20)",
+				"    at Object.<anonymous> (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\apollo-server-core\\src\\requestPipeline.ts:364:30)",
+				"    at Generator.next (<anonymous>)",
+				"    at fulfilled (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\apollo-server-core\\dist\\requestPipeline.js:5:58)",
+				"    at process._tickCallback (internal/process/next_tick.js:68:7)"
+			]
+		}
+	}
+}2020-02-19T19:23:20.527Z{
+	"message": "Validation error: There are 6 working days",
+	"locations": [
+		{
+			"line": 2,
+			"column": 3
+		}
+	],
+	"path": [
+		"createScheduleTimetable"
+	],
+	"extensions": {
+		"code": "INTERNAL_SERVER_ERROR",
+		"exception": {
+			"name": "SequelizeValidationError",
+			"errors": [
+				{
+					"message": "There are 6 working days",
+					"type": "Validation error",
+					"path": "dayId",
+					"value": "0",
+					"origin": "FUNCTION",
+					"instance": {
+						"id": null,
+						"timeFrom": "18:40",
+						"timeTo": "19:00",
+						"lector": "",
+						"discipline": "ggggggggggggggggggggg",
+						"startDate": null,
+						"isEven": 0,
+						"isDouble": 40,
+						"yearId": "1",
+						"dayId": "0",
+						"updatedAt": "2020-02-19T19:23:20.517Z",
+						"createdAt": "2020-02-19T19:23:20.517Z"
+					},
+					"validatorKey": "min",
+					"validatorName": "min",
+					"validatorArgs": [
+						{
+							"args": 0,
+							"msg": "There are 6 working days"
+						}
+					],
+					"original": {
+						"validatorName": "min",
+						"validatorArgs": [
+							{
+								"args": 0,
+								"msg": "There are 6 working days"
+							}
+						]
+					}
+				}
+			],
+			"stacktrace": [
+				"SequelizeValidationError: Validation error: There are 6 working days",
+				"    at Promise.all.then (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\sequelize\\lib\\instance-validator.js:74:15)",
+				"    at tryCatcher (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\bluebird\\js\\release\\util.js:16:23)",
+				"    at Promise._settlePromiseFromHandler (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\bluebird\\js\\release\\promise.js:547:31)",
+				"    at Promise._settlePromise (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\bluebird\\js\\release\\promise.js:604:18)",
+				"    at Promise._settlePromise0 (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\bluebird\\js\\release\\promise.js:649:10)",
+				"    at Promise._settlePromises (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\bluebird\\js\\release\\promise.js:729:18)",
+				"    at Promise._fulfill (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\bluebird\\js\\release\\promise.js:673:18)",
+				"    at PromiseArray._resolve (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\bluebird\\js\\release\\promise_array.js:127:19)",
+				"    at PromiseArray._promiseFulfilled (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\bluebird\\js\\release\\promise_array.js:145:14)",
+				"    at Promise._settlePromise (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\bluebird\\js\\release\\promise.js:609:26)",
+				"    at Promise._settlePromise0 (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\bluebird\\js\\release\\promise.js:649:10)",
+				"    at Promise._settlePromises (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\bluebird\\js\\release\\promise.js:729:18)",
+				"    at Promise._fulfill (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\bluebird\\js\\release\\promise.js:673:18)",
+				"    at Promise._resolveCallback (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\bluebird\\js\\release\\promise.js:466:57)",
+				"    at Promise._settlePromiseFromHandler (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\bluebird\\js\\release\\promise.js:559:17)",
+				"    at Promise._settlePromise (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\bluebird\\js\\release\\promise.js:604:18)",
+				"    at Promise._settlePromise0 (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\bluebird\\js\\release\\promise.js:649:10)",
+				"    at Promise._settlePromises (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\bluebird\\js\\release\\promise.js:729:18)",
+				"    at Promise._fulfill (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\bluebird\\js\\release\\promise.js:673:18)",
+				"    at PromiseArray._resolve (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\bluebird\\js\\release\\promise_array.js:127:19)",
+				"    at PromiseArray._promiseFulfilled (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\bluebird\\js\\release\\promise_array.js:145:14)",
+				"    at Promise._settlePromise (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\bluebird\\js\\release\\promise.js:609:26)"
+			]
+		}
+	}
+}2020-02-19T19:24:12.291Z{
+	"message": "Validation error: There are 6 working days",
+	"locations": [
+		{
+			"line": 2,
+			"column": 3
+		}
+	],
+	"path": [
+		"createScheduleTimetable"
+	],
+	"extensions": {
+		"code": "INTERNAL_SERVER_ERROR",
+		"exception": {
+			"name": "SequelizeValidationError",
+			"errors": [
+				{
+					"message": "There are 6 working days",
+					"type": "Validation error",
+					"path": "dayId",
+					"value": "0",
+					"origin": "FUNCTION",
+					"instance": {
+						"id": null,
+						"timeFrom": "18:40",
+						"timeTo": "19:00",
+						"lector": "",
+						"discipline": "ggggggggggggggggggggg",
+						"startDate": null,
+						"isEven": 0,
+						"isDouble": 40,
+						"yearId": "1",
+						"dayId": "0",
+						"updatedAt": "2020-02-19T19:24:12.280Z",
+						"createdAt": "2020-02-19T19:24:12.280Z"
+					},
+					"validatorKey": "min",
+					"validatorName": "min",
+					"validatorArgs": [
+						{
+							"args": 0,
+							"msg": "There are 6 working days"
+						}
+					],
+					"original": {
+						"validatorName": "min",
+						"validatorArgs": [
+							{
+								"args": 0,
+								"msg": "There are 6 working days"
+							}
+						]
+					}
+				}
+			],
+			"stacktrace": [
+				"SequelizeValidationError: Validation error: There are 6 working days",
+				"    at Promise.all.then (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\sequelize\\lib\\instance-validator.js:74:15)",
+				"    at tryCatcher (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\bluebird\\js\\release\\util.js:16:23)",
+				"    at Promise._settlePromiseFromHandler (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\bluebird\\js\\release\\promise.js:547:31)",
+				"    at Promise._settlePromise (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\bluebird\\js\\release\\promise.js:604:18)",
+				"    at Promise._settlePromise0 (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\bluebird\\js\\release\\promise.js:649:10)",
+				"    at Promise._settlePromises (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\bluebird\\js\\release\\promise.js:729:18)",
+				"    at Promise._fulfill (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\bluebird\\js\\release\\promise.js:673:18)",
+				"    at PromiseArray._resolve (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\bluebird\\js\\release\\promise_array.js:127:19)",
+				"    at PromiseArray._promiseFulfilled (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\bluebird\\js\\release\\promise_array.js:145:14)",
+				"    at Promise._settlePromise (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\bluebird\\js\\release\\promise.js:609:26)",
+				"    at Promise._settlePromise0 (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\bluebird\\js\\release\\promise.js:649:10)",
+				"    at Promise._settlePromises (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\bluebird\\js\\release\\promise.js:729:18)",
+				"    at Promise._fulfill (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\bluebird\\js\\release\\promise.js:673:18)",
+				"    at Promise._resolveCallback (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\bluebird\\js\\release\\promise.js:466:57)",
+				"    at Promise._settlePromiseFromHandler (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\bluebird\\js\\release\\promise.js:559:17)",
+				"    at Promise._settlePromise (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\bluebird\\js\\release\\promise.js:604:18)",
+				"    at Promise._settlePromise0 (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\bluebird\\js\\release\\promise.js:649:10)",
+				"    at Promise._settlePromises (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\bluebird\\js\\release\\promise.js:729:18)",
+				"    at Promise._fulfill (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\bluebird\\js\\release\\promise.js:673:18)",
+				"    at PromiseArray._resolve (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\bluebird\\js\\release\\promise_array.js:127:19)",
+				"    at PromiseArray._promiseFulfilled (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\bluebird\\js\\release\\promise_array.js:145:14)",
+				"    at Promise._settlePromise (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\bluebird\\js\\release\\promise.js:609:26)"
+			]
+		}
+	}
+}2020-02-20T12:30:28.951Z{
+	"message": "Variable \"$inputData\" got invalid value \"2\" at \"inputData.isDouble\"; Expected type Int. Int cannot represent non-integer value: \"2\"",
+	"locations": [
+		{
+			"line": 1,
+			"column": 44
+		}
+	],
+	"extensions": {
+		"code": "INTERNAL_SERVER_ERROR",
+		"exception": {
+			"stacktrace": [
+				"TypeError: Int cannot represent non-integer value: \"2\"",
+				"    at GraphQLScalarType.coerceInt [as parseValue] (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\graphql\\type\\scalars.js:55:11)",
+				"    at coerceInputValueImpl (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\graphql\\utilities\\coerceInputValue.js:127:26)",
+				"    at coerceInputValueImpl (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\graphql\\utilities\\coerceInputValue.js:105:35)",
+				"    at coerceInputValueImpl (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\graphql\\utilities\\coerceInputValue.js:54:14)",
+				"    at coerceInputValue (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\graphql\\utilities\\coerceInputValue.js:37:10)",
+				"    at _loop (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\graphql\\execution\\values.js:107:69)",
+				"    at coerceVariableValues (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\graphql\\execution\\values.js:119:16)",
+				"    at getVariableValues (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\graphql\\execution\\values.js:48:19)",
+				"    at buildExecutionContext (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\graphql\\execution\\execute.js:184:61)",
+				"    at executeImpl (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\graphql\\execution\\execute.js:89:20)",
+				"    at Object.execute (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\graphql\\execution\\execute.js:64:35)",
+				"    at C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\apollo-server-core\\src\\requestPipeline.ts:481:30",
+				"    at Generator.next (<anonymous>)",
+				"    at C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\apollo-server-core\\dist\\requestPipeline.js:8:71",
+				"    at new Promise (<anonymous>)",
+				"    at __awaiter (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\apollo-server-core\\dist\\requestPipeline.js:4:12)",
+				"    at execute (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\apollo-server-core\\dist\\requestPipeline.js:225:20)",
+				"    at Object.<anonymous> (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\apollo-server-core\\src\\requestPipeline.ts:364:30)",
+				"    at Generator.next (<anonymous>)",
+				"    at fulfilled (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\apollo-server-core\\dist\\requestPipeline.js:5:58)",
+				"    at process._tickCallback (internal/process/next_tick.js:68:7)"
+			]
+		}
+	}
+}2020-02-20T12:31:19.277Z{
+	"message": "Cannot set property 'isDouble' of null",
+	"locations": [
+		{
+			"line": 2,
+			"column": 3
+		}
+	],
+	"path": [
+		"deleteScheduleTimetable"
+	],
+	"extensions": {
+		"code": "INTERNAL_SERVER_ERROR",
+		"exception": {
+			"stacktrace": [
+				"TypeError: Cannot set property 'isDouble' of null",
+				"    at _callee6$ (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\src\\resolvers\\mutation/education.js:63:7)",
+				"    at tryCatch (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\regenerator-runtime\\runtime.js:45:40)",
+				"    at Generator.invoke [as _invoke] (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\regenerator-runtime\\runtime.js:271:22)",
+				"    at Generator.prototype.(anonymous function) [as next] (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\regenerator-runtime\\runtime.js:97:21)",
+				"    at asyncGeneratorStep (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\src\\resolvers\\mutation\\education.js:16:103)",
+				"    at _next (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\src\\resolvers\\mutation\\education.js:18:194)"
+			]
+		}
+	}
+}2020-02-20T12:32:02.782Z{
+	"message": "Cannot return null for non-nullable field ScheduleTimetableDeleteDataReturn.id.",
+	"locations": [
+		{
+			"line": 3,
+			"column": 5
+		}
+	],
+	"path": [
+		"deleteScheduleTimetable",
+		"id"
+	],
+	"extensions": {
+		"code": "INTERNAL_SERVER_ERROR",
+		"exception": {
+			"stacktrace": [
+				"Error: Cannot return null for non-nullable field ScheduleTimetableDeleteDataReturn.id.",
+				"    at completeValue (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\graphql\\execution\\execute.js:560:13)",
+				"    at completeValueCatchingError (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\graphql\\execution\\execute.js:495:19)",
+				"    at resolveField (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\graphql\\execution\\execute.js:435:10)",
+				"    at executeFields (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\graphql\\execution\\execute.js:275:18)",
+				"    at collectAndExecuteSubfields (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\graphql\\execution\\execute.js:713:10)",
+				"    at completeObjectValue (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\graphql\\execution\\execute.js:703:10)",
+				"    at completeValue (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\graphql\\execution\\execute.js:591:12)",
+				"    at completeValue (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\graphql\\execution\\execute.js:557:21)",
+				"    at C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\graphql\\execution\\execute.js:492:16"
+			]
+		}
+	}
+}2020-02-20T12:33:57.152Z{
+	"message": "Cannot return null for non-nullable field ScheduleTimetableDeleteDataReturn.id.",
+	"locations": [
+		{
+			"line": 3,
+			"column": 5
+		}
+	],
+	"path": [
+		"deleteScheduleTimetable",
+		"id"
+	],
+	"extensions": {
+		"code": "INTERNAL_SERVER_ERROR",
+		"exception": {
+			"stacktrace": [
+				"Error: Cannot return null for non-nullable field ScheduleTimetableDeleteDataReturn.id.",
+				"    at completeValue (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\graphql\\execution\\execute.js:560:13)",
+				"    at completeValueCatchingError (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\graphql\\execution\\execute.js:495:19)",
+				"    at resolveField (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\graphql\\execution\\execute.js:435:10)",
+				"    at executeFields (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\graphql\\execution\\execute.js:275:18)",
+				"    at collectAndExecuteSubfields (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\graphql\\execution\\execute.js:713:10)",
+				"    at completeObjectValue (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\graphql\\execution\\execute.js:703:10)",
+				"    at completeValue (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\graphql\\execution\\execute.js:591:12)",
+				"    at completeValue (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\graphql\\execution\\execute.js:557:21)",
+				"    at C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\graphql\\execution\\execute.js:492:16"
+			]
+		}
+	}
+}2020-02-20T12:38:21.739Z{
+	"message": "Cannot return null for non-nullable field ScheduleTimetableDeleteDataReturn.id.",
+	"locations": [
+		{
+			"line": 3,
+			"column": 5
+		}
+	],
+	"path": [
+		"deleteScheduleTimetable",
+		"id"
+	],
+	"extensions": {
+		"code": "INTERNAL_SERVER_ERROR",
+		"exception": {
+			"stacktrace": [
+				"Error: Cannot return null for non-nullable field ScheduleTimetableDeleteDataReturn.id.",
+				"    at completeValue (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\graphql\\execution\\execute.js:560:13)",
+				"    at completeValueCatchingError (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\graphql\\execution\\execute.js:495:19)",
+				"    at resolveField (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\graphql\\execution\\execute.js:435:10)",
+				"    at executeFields (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\graphql\\execution\\execute.js:275:18)",
+				"    at collectAndExecuteSubfields (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\graphql\\execution\\execute.js:713:10)",
+				"    at completeObjectValue (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\graphql\\execution\\execute.js:703:10)",
+				"    at completeValue (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\graphql\\execution\\execute.js:591:12)",
+				"    at completeValue (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\graphql\\execution\\execute.js:557:21)",
+				"    at C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\graphql\\execution\\execute.js:492:16"
+			]
+		}
+	}
+}2020-02-20T13:48:41.014Z{
+	"message": "Variable \"$inputData\" got invalid value \"50\" at \"inputData.isDouble\"; Expected type Int. Int cannot represent non-integer value: \"50\"",
+	"locations": [
+		{
+			"line": 1,
+			"column": 44
+		}
+	],
+	"extensions": {
+		"code": "INTERNAL_SERVER_ERROR",
+		"exception": {
+			"stacktrace": [
+				"TypeError: Int cannot represent non-integer value: \"50\"",
+				"    at GraphQLScalarType.coerceInt [as parseValue] (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\graphql\\type\\scalars.js:55:11)",
+				"    at coerceInputValueImpl (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\graphql\\utilities\\coerceInputValue.js:127:26)",
+				"    at coerceInputValueImpl (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\graphql\\utilities\\coerceInputValue.js:105:35)",
+				"    at coerceInputValueImpl (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\graphql\\utilities\\coerceInputValue.js:54:14)",
+				"    at coerceInputValue (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\graphql\\utilities\\coerceInputValue.js:37:10)",
+				"    at _loop (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\graphql\\execution\\values.js:107:69)",
+				"    at coerceVariableValues (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\graphql\\execution\\values.js:119:16)",
+				"    at getVariableValues (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\graphql\\execution\\values.js:48:19)",
+				"    at buildExecutionContext (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\graphql\\execution\\execute.js:184:61)",
+				"    at executeImpl (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\graphql\\execution\\execute.js:89:20)",
+				"    at Object.execute (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\graphql\\execution\\execute.js:64:35)",
+				"    at C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\apollo-server-core\\src\\requestPipeline.ts:481:30",
+				"    at Generator.next (<anonymous>)",
+				"    at C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\apollo-server-core\\dist\\requestPipeline.js:8:71",
+				"    at new Promise (<anonymous>)",
+				"    at __awaiter (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\apollo-server-core\\dist\\requestPipeline.js:4:12)",
+				"    at execute (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\apollo-server-core\\dist\\requestPipeline.js:225:20)",
+				"    at Object.<anonymous> (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\apollo-server-core\\src\\requestPipeline.ts:364:30)",
+				"    at Generator.next (<anonymous>)",
+				"    at fulfilled (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\apollo-server-core\\dist\\requestPipeline.js:5:58)",
+				"    at process._tickCallback (internal/process/next_tick.js:68:7)"
+			]
+		}
+	}
+}2020-02-20T14:28:18.241Z{
+	"message": "Variable \"$inputData\" got invalid value \"54\" at \"inputData.isDouble\"; Expected type Int. Int cannot represent non-integer value: \"54\"",
+	"locations": [
+		{
+			"line": 1,
+			"column": 44
+		}
+	],
+	"extensions": {
+		"code": "INTERNAL_SERVER_ERROR",
+		"exception": {
+			"stacktrace": [
+				"TypeError: Int cannot represent non-integer value: \"54\"",
+				"    at GraphQLScalarType.coerceInt [as parseValue] (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\graphql\\type\\scalars.js:55:11)",
+				"    at coerceInputValueImpl (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\graphql\\utilities\\coerceInputValue.js:127:26)",
+				"    at coerceInputValueImpl (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\graphql\\utilities\\coerceInputValue.js:105:35)",
+				"    at coerceInputValueImpl (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\graphql\\utilities\\coerceInputValue.js:54:14)",
+				"    at coerceInputValue (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\graphql\\utilities\\coerceInputValue.js:37:10)",
+				"    at _loop (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\graphql\\execution\\values.js:107:69)",
+				"    at coerceVariableValues (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\graphql\\execution\\values.js:119:16)",
+				"    at getVariableValues (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\graphql\\execution\\values.js:48:19)",
+				"    at buildExecutionContext (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\graphql\\execution\\execute.js:184:61)",
+				"    at executeImpl (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\graphql\\execution\\execute.js:89:20)",
+				"    at Object.execute (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\graphql\\execution\\execute.js:64:35)",
+				"    at C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\apollo-server-core\\src\\requestPipeline.ts:481:30",
+				"    at Generator.next (<anonymous>)",
+				"    at C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\apollo-server-core\\dist\\requestPipeline.js:8:71",
+				"    at new Promise (<anonymous>)",
+				"    at __awaiter (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\apollo-server-core\\dist\\requestPipeline.js:4:12)",
+				"    at execute (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\apollo-server-core\\dist\\requestPipeline.js:225:20)",
+				"    at Object.<anonymous> (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\apollo-server-core\\src\\requestPipeline.ts:364:30)",
+				"    at Generator.next (<anonymous>)",
+				"    at fulfilled (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\apollo-server-core\\dist\\requestPipeline.js:5:58)",
+				"    at process._tickCallback (internal/process/next_tick.js:68:7)"
+			]
+		}
+	}
+}2020-02-20T14:38:53.333Z{
+	"message": "Variable \"$id\" of required type \"ID!\" was not provided.",
+	"locations": [
+		{
+			"line": 1,
+			"column": 34
+		}
+	],
+	"extensions": {
+		"code": "INTERNAL_SERVER_ERROR",
+		"exception": {
+			"stacktrace": [
+				"GraphQLError: Variable \"$id\" of required type \"ID!\" was not provided.",
+				"    at _loop (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\graphql\\execution\\values.js:92:17)",
+				"    at coerceVariableValues (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\graphql\\execution\\values.js:119:16)",
+				"    at getVariableValues (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\graphql\\execution\\values.js:48:19)",
+				"    at buildExecutionContext (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\graphql\\execution\\execute.js:184:61)",
+				"    at executeImpl (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\graphql\\execution\\execute.js:89:20)",
+				"    at Object.execute (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\graphql\\execution\\execute.js:64:35)",
+				"    at C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\apollo-server-core\\src\\requestPipeline.ts:481:30",
+				"    at Generator.next (<anonymous>)",
+				"    at C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\apollo-server-core\\dist\\requestPipeline.js:8:71",
+				"    at new Promise (<anonymous>)",
+				"    at __awaiter (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\apollo-server-core\\dist\\requestPipeline.js:4:12)",
+				"    at execute (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\apollo-server-core\\dist\\requestPipeline.js:225:20)",
+				"    at Object.<anonymous> (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\apollo-server-core\\src\\requestPipeline.ts:364:30)",
+				"    at Generator.next (<anonymous>)",
+				"    at fulfilled (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\apollo-server-core\\dist\\requestPipeline.js:5:58)",
+				"    at process._tickCallback (internal/process/next_tick.js:68:7)"
+			]
+		}
+	}
+}2020-02-20T14:47:49.452Z{
+	"message": "This lecture does not exist",
+	"locations": [
+		{
+			"line": 2,
+			"column": 3
+		}
+	],
+	"path": [
+		"updateScheduleTimetable"
+	],
+	"extensions": {
+		"code": "INTERNAL_SERVER_ERROR",
+		"exception": {
+			"stacktrace": [
+				"Error: This lecture does not exist",
+				"    at _callee5$ (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\src\\resolvers\\mutation/education.js:46:29)",
+				"    at tryCatch (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\regenerator-runtime\\runtime.js:45:40)",
+				"    at Generator.invoke [as _invoke] (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\regenerator-runtime\\runtime.js:271:22)",
+				"    at Generator.prototype.(anonymous function) [as next] (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\regenerator-runtime\\runtime.js:97:21)",
+				"    at asyncGeneratorStep (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\src\\resolvers\\mutation\\education.js:16:103)",
+				"    at _next (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\src\\resolvers\\mutation\\education.js:18:194)"
+			]
+		}
+	}
+}2020-02-20T14:49:49.348Z{
+	"message": "This lecture does not exist",
+	"locations": [
+		{
+			"line": 2,
+			"column": 3
+		}
+	],
+	"path": [
+		"updateScheduleTimetable"
+	],
+	"extensions": {
+		"code": "INTERNAL_SERVER_ERROR",
+		"exception": {
+			"stacktrace": [
+				"Error: This lecture does not exist",
+				"    at _callee5$ (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\src\\resolvers\\mutation/education.js:46:29)",
+				"    at tryCatch (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\regenerator-runtime\\runtime.js:45:40)",
+				"    at Generator.invoke [as _invoke] (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\regenerator-runtime\\runtime.js:271:22)",
+				"    at Generator.prototype.(anonymous function) [as next] (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\regenerator-runtime\\runtime.js:97:21)",
+				"    at asyncGeneratorStep (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\src\\resolvers\\mutation\\education.js:16:103)",
+				"    at _next (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\src\\resolvers\\mutation\\education.js:18:194)"
+			]
+		}
+	}
 }

@@ -1,4 +1,3 @@
-import {elementType} from "prop-types"
 
   const getValue = (type, isForUpdate, oldData, control, label, required) => {
     if (type === 'file') {return ''}
@@ -12,8 +11,8 @@ import {elementType} from "prop-types"
       }
       if (type === 'time') {
         return {
-          hours: oldData[control] ? oldData[control].split(':')[0] : '00',
-          minutes: oldData[control] ? oldData[control].split(':')[1] : '00'
+          hours: oldData[control] ? oldData[control].split(':')[0] : '',
+          minutes: oldData[control] ? oldData[control].split(':')[1] : ''
           }
       }
       if (type === 'datetime') {
@@ -38,14 +37,36 @@ import {elementType} from "prop-types"
       return oldData[control] || ''
     }
     if (type === 'date') {return {day: '', month: new Date().getMonth(), year: new Date().getFullYear()}}
-    if (type === 'datetime') {return {day: '', month: new Date().getMonth(), year: new Date().getFullYear(), hours: '00', minutes: '00' }}
-    if (type === 'time') {return {hours: '00', minutes: '00'}}
+    if (type === 'datetime') {return {day: '', month: new Date().getMonth(), year: new Date().getFullYear(), hours: '', minutes: '' }}
+    if (type === 'time') {return {hours: '', minutes: ''}}
     if (type === 'radio') { return label[0].value}
     if (type === 'course') {return {course: '', year: new Date().getFullYear(), term: 1}}
 
     return ''
   }
 
+  const getTouched = (type, subType = null, old = null, check = false) => {
+    if (!check) {
+      if (type === 'datetime') return {
+          day: false,
+          hours: false,
+          minutes: false
+        }
+      else if (type === 'time') return {
+        hours: false,
+        minutes: false
+      }
+      else if (type === 'day') return {
+        day: false,
+      }
+      return check
+    }
+    else {
+      if (subType) return {...old, [subType]: true}
+      else return true
+    }
+  }
+  
  const createPostForm = (template, post) => {
    const forUpdate = Object.entries(post).length !== 0
    return template.map(element => {
@@ -53,17 +74,24 @@ import {elementType} from "prop-types"
       ...element,
       value: getValue(element.type, forUpdate, post, element.title, element.label, element.required),
       valid: forUpdate || !element.required || element.type === 'radio' || element.type === 'check',
-      touched: false
+      touched: getTouched(element.type),
+      validationErrors:[]
     } 
     }) 
  }
  
  const postInputChange = (form, id, value) => {
-    
+
+    let valueForCheck = value
     let isValid = true
+    
+    if (form[id].type === 'course') {
+      valueForCheck = value.course
+    }
+ 
     if (form[id].validators && form[id].validators.length > 0) {
       for (const validator of form[id].validators) {
-          isValid = isValid && validator(value)
+          isValid = isValid && validator(valueForCheck)
       }
     }
     const updatedForm = form.map((control, idx) => {
@@ -89,14 +117,14 @@ import {elementType} from "prop-types"
     }
   }
 
-  const postInputBlur = (form, id) => {
+  const postInputBlur = (form, id, subType = null) => {
     return form.map((control, idx) => {
       if (idx !== id) {
         return control
       }
       return {
         ...control,
-        touched: true
+        touched: getTouched(control.type, subType, control.touched, true)
       }
     })
   }

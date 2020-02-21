@@ -42,9 +42,9 @@ const mutation =   `
     createScheduleYear(inputData: ScheduleYearCreateData): ScheduleYear!
     updateScheduleYear(id: ID!, inputData: ScheduleYearUpdateData): ScheduleYear!
     deleteScheduleYear(id: ID!): ID!
-    createScheduleTimetable(yearId: ID!, dayId: ID!, inputData: ScheduleTimetableCreateData!): ScheduleTimetable!
+    createScheduleTimetable(yearId: ID!, dayId: ID!, inputData: ScheduleTimetableCreateData!): ScheduleTimetableCreateDataReturn!
     updateScheduleTimetable(id: ID!, inputData: ScheduleTimetableUpdateData!): ScheduleTimetable!
-    deleteScheduleTimetable(id: ID!): ID!
+    deleteScheduleTimetable(id: ID!): ScheduleTimetableDeleteDataReturn!
     updateAdmission(section: SECTION! = ADMISSION, inputData: AdmissionUpdateData): AdmissionText!
     createAdmission(section: SECTION! = ADMISSION, inputData: AdmissionCreateData): AdmissionText!
     deleteAdmission(section: SECTION! = ADMISSION): Boolean!

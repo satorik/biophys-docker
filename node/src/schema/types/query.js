@@ -11,7 +11,7 @@ const query =   `
     courses(id: ID): [EducationCourse!]
     resourses(educationCourseId: ID!): [EducationResourse!]
     form(id: ID!):EducationForm!
-    years(id: ID, calendarYear: Int, term: Int): [ScheduleYear!]!
+    years(id: ID, year: Int, term: Int): [ScheduleYear!]!
     days:[String!]! 
     timeHeaders:[ScheduleTime!]!
     timetable(yearId: ID, dayId: ID, timeId: ID): [ScheduleTimetable!]!

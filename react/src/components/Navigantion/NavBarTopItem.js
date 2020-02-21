@@ -1,15 +1,11 @@
 import React from 'react'
 import {Link} from 'react-router-dom'
 
-const NavBarTopItem = ({link}) => {
+const NavBarTopItem = ({link, selectedPath}) => {
   
-  //const isActive = window.location === link.path
-
-  //console.log(isActive)
-  //let className = isActive ? "active" : ""
-
   return (
-    <li className="nav-item active">
+
+    <li className={`nav-item ${'/'+selectedPath === link.path ? 'active' : ''}`}>
        <Link to={link.path} className="nav-link"> {link.title}</Link>
     </li>
   )

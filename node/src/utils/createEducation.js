@@ -461,7 +461,7 @@ const createEducation = async (models) => {
             isEven: times.isEven,
             isDouble:isDouble,
             yearId: savedYear.dataValues.id,
-            dayId: savedDay.dataValues.id,
+            dayId: savedDay.dataValues.id-1,
             startDate: times.startDate,
           })
 

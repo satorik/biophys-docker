@@ -3,7 +3,7 @@ import React from 'react'
 
 import { InputFile, InputText, InputDate, InputTextarea, InputQuill, InputCheck, InputRadio, InputCourse, InputTime } from './Inputs'
 
-const Input = ({control, value, onChanged, onBlur, touched, valid, label, required}) => {
+const Input = ({control, value, onChanged, onBlur, touched, valid, label, required, idx}) => {
 
   const inputClasses = control === 'file' ? ['custom-file-input'] : ['form-control']
   let validationError = null
@@ -19,7 +19,7 @@ const Input = ({control, value, onChanged, onBlur, touched, valid, label, requir
               className={inputClasses.join( ' ' )}
               label='Выберите файл'
               onChanged={onChanged}
-              onBlur={onBlur}
+              onBlur={() => onBlur(idx)}
               required={required}
               >{validationError}</InputFile>
     }
@@ -30,11 +30,12 @@ const Input = ({control, value, onChanged, onBlur, touched, valid, label, requir
               label={label}
               value={value}
               onChanged={onChanged}
-              onBlur={onBlur}
+              onBlur={() => onBlur(idx)}
               >{validationError}</InputText> 
     }
     else if (control === 'date' || control === 'datetime' || control === 'time') {
       return <InputDate
+              idx = {idx}
               className={null}
               label={label}
               value={value}
@@ -52,7 +53,7 @@ const Input = ({control, value, onChanged, onBlur, touched, valid, label, requir
               value={value}
               onChanged={onChanged}
               required={required}
-              onBlur={onBlur}
+              onBlur={() => onBlur(idx)}
               >{validationError}</InputCourse>
     }
     else if (control === 'textarea'){
@@ -62,7 +63,7 @@ const Input = ({control, value, onChanged, onBlur, touched, valid, label, requir
               value={value}
               required={required}
               onChanged={onChanged}
-              onBlur={onBlur}
+              onBlur={() => onBlur(idx)}
               >{validationError}</InputTextarea>
     }
     else if (control === 'textarea-long') {
@@ -71,7 +72,7 @@ const Input = ({control, value, onChanged, onBlur, touched, valid, label, requir
               value={value}
               required={required}
               onChanged={onChanged}
-              onBlur={onBlur}
+              onBlur={() => onBlur(idx)}
               >{validationError}</InputQuill>
     }
     else if (control === 'check') {

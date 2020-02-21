@@ -44,11 +44,11 @@ export const CourseInfo = ({title, description, read, lector, exam, video, book,
             /> </div>
           }
           {video && 
-            <div className="w-100 mt-2 text-center">
+            <div className="w-100 mt-2 text-center" >
               <p className="bg-warning font-weight-bold p-1">Видеозаписи</p>
-                {video.map(link => <iframe
-                      src="https://www.youtube.com/embed/videoseries?list=PLcsjsqLLSfNA8FeLBKTAgQDR3Ll7aF_vu" frameborder="0" 
-                      allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>)}
+                {video.map(link => <iframe key={link.id}
+                      src="https://www.youtube.com/embed/videoseries?list=PLcsjsqLLSfNA8FeLBKTAgQDR3Ll7aF_vu" frameBorder="0" 
+                      allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowFullScreen></iframe>)}
             </div>
             }
         </div>

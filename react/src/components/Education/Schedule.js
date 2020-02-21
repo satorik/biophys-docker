@@ -2,6 +2,7 @@ import React from 'react'
 import { useQuery, useMutation } from '@apollo/react-hooks'
 import { gql } from 'apollo-boost'
 import { required, length, time, date } from '../../utils/validators'
+import { getIsDouble } from '../../utils/checkDoubleLecture'
 
 import ScheduleDay from './ScheduleDay'
 import getWeekNumber from '../../utils/getWeekNumber'
@@ -13,17 +14,19 @@ import Spinner from '../UI/Spinner'
 import getUpdateData from '../../utils/getObjectForUpdate'
 import ErrorBoundry from '../Shared/ErrorHandling/ErrorBoundry'
 import NetworkErrorComponent from '../Shared/ErrorHandling/NetworkErrorComponent'
+import {EducationButtons} from '../UI/EducationButtons'
+
+const DAYS = ["Понедельник", "Вторник", "Среда", "Четверг", "Пятница", "Суббота"]
+
 
 const GET_YEARS = gql`
-  query getScheduleYears($calendarYear: Int, $term: Int) {
-    years(calendarYear: $calendarYear, term: $term){
+  query getScheduleYears($year: Int, $term: Int) {
+    years(year: $year, term: $term){
       id
       title
       timetable {
         id
-        day {
-          title
-        }
+        dayId
         timeFrom
         timeTo
         lector
@@ -34,8 +37,6 @@ const GET_YEARS = gql`
         isDouble
       }
     }
-
-    days
   }
 `
 
@@ -44,6 +45,18 @@ const CREATE_YEAR = gql`
     createScheduleYear(inputData: $inputData) {
       id
       title
+      timetable{
+        id
+        dayId
+        timeFrom
+        timeTo
+        lector
+        discipline
+        lectureHall
+        startDate
+        isEven
+        isDouble
+      }
     }
   }
 `
@@ -65,18 +78,22 @@ const UPDATE_YEAR = gql`
 const CREATE_TIMETABLE = gql`
   mutation createScheduleTimetable($yearId: ID!, $dayId: ID!, $inputData: ScheduleTimetableCreateData!) {
     createScheduleTimetable(yearId: $yearId, dayId: $dayId, inputData: $inputData) {
-      id
-      day {
-          title
+      timetable {
+        id
+        dayId
+        timeFrom
+        timeTo
+        lector
+        discipline
+        lectureHall
+        startDate
+        isEven
+        isDouble
       }
-      timeFrom
-      timeTo
-      lector
-      discipline
-      lectureHall
-      startDate
-      isEven
-      isDouble
+      double {
+        id
+        isDouble
+      }
     }
   }
 `
@@ -99,7 +116,13 @@ const UPDATE_TIMETABLE = gql`
 
 const DELETE_TIMETABLE = gql`
   mutation deleteScheduleTimetable($id: ID!) {
-    deleteScheduleTimetable(id: $id) 
+    deleteScheduleTimetable(id: $id) {
+      id
+      double {
+        id
+        isDouble
+      }
+    }
   }
 `
 
@@ -115,13 +138,13 @@ const FORM_TEMPLATE = [
 const DAY_TEMPLATE = [
   {
     title: 'timeFrom',
-    label: 'С',
+    label: 'Время от',
     type: 'time',
     validators: [time]
   },
   {
     title: 'timeTo',
-    label: 'По',
+    label: 'Время до',
     type: 'time',
     validators: [time]
   },
@@ -129,6 +152,7 @@ const DAY_TEMPLATE = [
     title: 'discipline',
     label: 'Дисциплина',
     type: 'input',
+    required: true,
     validators: [required, length({ min: 5 })]
   },
   {
@@ -145,7 +169,7 @@ const DAY_TEMPLATE = [
   },
   {
     title: 'isEven',
-    label:[{title:'Каждую неделю', value: '0'}, {title:'По четным', value: '1'}, {title:'По нечетным', value: '2'}],
+    label:[{title:'Каждую неделю', value: '0'}, {title:'По четным', value: '2'}, {title:'По нечетным', value: '1'}],
     type: 'radio',
     validators: []
   }
@@ -157,6 +181,7 @@ const Schedule = () => {
   const [isModalOpen, setIsModalOpen] = React.useState(false)
   const [mode, setMode] = React.useState({isEditing: false, isCreating: false, isDeleting: false})
   const [timeMode, setTimeMode] = React.useState({isEditing: false, isCreating: false, isDeleting: false})
+  const [doubleFound, setDoubleFound] = React.useState(false)
   const [updatedDay, setUpdatedDay] = React.useState('')
   const [updatedTime, setUpdatedTime] = React.useState({})
   const [updatedYear, setUpdatedYear] = React.useState({})
@@ -165,29 +190,25 @@ const Schedule = () => {
   const {currentWeek, currentTerm, currentYear} = getWeekNumber()
 
 
-  // const variables = {
-  //   year: currentYear, 
-  //   term: currentTerm
-  // }
   const variables = {
     year: currentYear, 
-    term: 1
+    term: currentTerm
   }
 
 
-//////////// if no shedule and no term  
+//////////// if no shedule and no term  (show if there is a schedule)
+//set current term right!
 
   const { loading: queryLoading, error: queryError, data} = useQuery(GET_YEARS, {variables})
   const [createScheduleYear,
       { loading: creationLoading, error: creatingError }] = useMutation(CREATE_YEAR, {
-          update(cache, { data: {createScheduleYear} }) {
+           update(cache, { data: {createScheduleYear} }) {
             const { years } = cache.readQuery({ query: GET_YEARS, variables })
             cache.writeQuery({
               query: GET_YEARS,
               variables,
-              data: {...data,  years:  [createScheduleYear, ...years]}
+              data: {...data,  years:  [...years, createScheduleYear]}
             })
-            setViewId(data.years.length-1)
           }
         })
   const [updateScheduleYear,
@@ -207,6 +228,20 @@ const Schedule = () => {
     { loading: createTimeTableLoading, error: createTimeTableError }] = useMutation(CREATE_TIMETABLE, {
       update(cache, { data: {createScheduleTimetable} }) {
         const { years } = cache.readQuery({ query: GET_YEARS, variables })
+        let timetable = years[viewId].timetable.slice()
+        console.log(timetable)
+        if (createScheduleTimetable.double ) {
+          timetable = timetable.map(el => {
+            if (createScheduleTimetable.double.id === el.id) {
+              return {
+                ...el,
+                isDouble: createScheduleTimetable.double.isDouble
+              }
+            }
+            return el
+          })
+        }
+        console.log(timetable)
         cache.writeQuery({
           query: GET_YEARS,
           variables,
@@ -214,7 +249,7 @@ const Schedule = () => {
             if (idx === viewId) {
               return {
                 ...year,
-                timetable: [...year.timetable, createScheduleTimetable]
+                timetable: [...timetable, createScheduleTimetable.timetable]
               }
             }
             return year
@@ -230,6 +265,7 @@ const Schedule = () => {
     { loading: deleteTimeTableLoading, error: deleteTimeTableError }] = useMutation(DELETE_TIMETABLE, {
       update(cache, { data: { deleteScheduleTimetable } }) {
         const { years } = cache.readQuery({ query: GET_YEARS, variables})
+        console.log(deleteScheduleTimetable)
         cache.writeQuery({
           query: GET_YEARS,
           variables,
@@ -237,7 +273,16 @@ const Schedule = () => {
             if (idx === viewId) {
               return {
                 ...year,
-                timetable: year.timetable.filter(el => el.id !== deleteScheduleTimetable)
+                timetable: year.timetable.filter(el => el.id !== deleteScheduleTimetable.id)
+                   .map(el => {
+                     if (deleteScheduleTimetable.double && deleteScheduleTimetable.double.id === el.id) {
+                      return {
+                        ...el,
+                        isDouble: deleteScheduleTimetable.double.isDouble
+                      }
+                     }
+                     return el
+                   })
               }
             }
             return year
@@ -251,39 +296,44 @@ const Schedule = () => {
   if (updatingError) return <NetworkErrorComponent error={updatingError} />
   if (deletingError) return <NetworkErrorComponent error={deletingError} />
   if (creatingError) return <NetworkErrorComponent error={creatingError} />
+ 
+  
+  const { years } = data
 
-
-  const { years, days } = data
-
-  const isTimetable = years[viewId].timetable.length > 0
+  let isTimetable = false
   let timetableByDay = {}
-  if (isTimetable) {
-     timetableByDay = years[viewId].timetable.reduce((acc, elem) => {
-      acc[elem.day.title] = (acc[elem.day.title] || []).concat(elem)
-      return acc
-    }, {})
-  }
-  else {
-    timetableByDay = days.reduce((acc, elem) => {
-      acc[elem] =  []
-      return acc
-    }, {})
-  }
-
   let scheduleWithActions = {}
-  for (let key in timetableByDay) {
-    scheduleWithActions = {
-      ...scheduleWithActions,
-      [key]: timetableByDay[key].map(item => {
-        return {
-          ...item,
-          onEdit:() => onEditScheduleTime(item.id),
-          onDelete:() => onDeleteScheduleTime(item.id),
-          onCancel:() => onCancelEditing(), 
-        }
-      })
+    
+  if (data.years.length !== 0 ) {
+    isTimetable = years[viewId].timetable.length > 0
+    if (isTimetable) {
+      timetableByDay = years[viewId].timetable.reduce((acc, elem) => {
+        const newElem = {...elem, day: {id: elem.dayId, title: DAYS[elem.dayId]}}
+        acc[DAYS[elem.dayId]] = (acc[DAYS[elem.dayId]] || []).concat(newElem)
+        return acc
+      }, {})
+    }
+    else {
+      timetableByDay = DAYS.reduce((acc, elem) => {
+        acc[elem] =  []
+        return acc
+      }, {})
+    }
+    for (let key in timetableByDay) {
+      scheduleWithActions = {
+        ...scheduleWithActions,
+        [key]: timetableByDay[key].map(item => {
+          return {
+            ...item,
+            onEdit:() => onEditScheduleTime(item.id),
+            onDelete:() => onDeleteScheduleTime(item.id),
+            onCancel:() => onCancelEditing(), 
+          }
+        })
+      }
     }
   }
+
 
   const isCurrentWeakEven = currentWeek % 2
   const bgColor = isCurrentWeakEven === 0 ? '#FAF1D6' : '#D9F1F1'
@@ -313,6 +363,13 @@ const Schedule = () => {
    setUpdatedTime(years[viewId].timetable.find(x => x.id === id))
  }
 
+ const onDeleteScheduleYear = (id) => {
+  setIsModalOpen(true)
+  document.body.style.overflow = "hidden"
+  setMode({...mode, isDeleting: true})
+  setUpdatedYear(years[id])
+}
+
  const onCancelEditing = () => {
     clearMode()
  }
@@ -331,7 +388,7 @@ const Schedule = () => {
   const onDeleteScheduleTimeHandler = async () => {
     await deleteScheduleTimetable({ variables: {id: updatedTime.id}})
     setIsModalOpen(false)
-    setMode({...mode, isDeleting: false})
+    setTimeMode({...mode, isDeleting: false})
     document.body.style.overflow = "scroll"
     setUpdatedTime({})
   }
@@ -349,6 +406,7 @@ const Schedule = () => {
     setMode({isDeleting: false, isEditing: false, isCreating: false})
     setUpdatedYear({})
     document.body.style.overflow = "scroll"
+    clearMode()
   }
 
   const onChangeTimeHandler = async (e, postData, valid) => {
@@ -360,6 +418,7 @@ const Schedule = () => {
       let postObject = postData.reduce((obj, item) => {
         obj[item.title] = item.value
         if(item.type === 'time') {
+          //check and set to null
           obj[item.title] = item.value.hours+':'+item.value.minutes
         }
         if(item.type === 'date') {
@@ -370,20 +429,47 @@ const Schedule = () => {
           }
           else obj[item.title] = null
         }
+        if (item.title === 'isEven'){
+          obj[item.title] = +item.value
+        }
         return obj
       } ,{})     
       if (timeMode.isEditing) {
-        const forUpdate = getUpdateData(updatedTime, postObject)
-        await updateScheduleTimetable({ variables: {id: updatedTime.id, inputData: forUpdate}})
-        setMode({...timeMode, isEditing: false})
-        setIsModalOpen(false)
-        document.body.style.overflow = "scroll"
+        const double = getIsDouble(postObject, timetableByDay[DAYS[updatedTime.dayId]], updatedTime.id)
+        const forUpdate = getUpdateData(updatedTime, {...postObject, isDouble: +double.isDouble})
+        if (double.isOneEven && double.isOneDouble) {
+          await updateScheduleTimetable({ variables: {id: updatedTime.id, inputData: forUpdate}})
+          if (forUpdate.isDouble !== undefined) {
+            const newDouble = forUpdate.isDouble === 0 ? 0 : +updatedTime.id
+            await updateScheduleTimetable({ variables: {id: updatedTime.isDouble, inputData: {isDouble: newDouble}}})
+          }
+          setTimeMode({...timeMode, isEditing: false})
+          setIsModalOpen(false)
+          setUpdatedTime({})
+          document.body.style.overflow = "scroll"
+        }
+        else {
+          if (!double.isOneDouble) {console.log('Третий дубль')}
+          if (!double.isOneEven) {console.log('Две по четным или две по нечетным')}
+          setDoubleFound(true)
+          setIsAbleToSave(false)
+        }
       }
       if (timeMode.isCreating) {
-       //console.log(postObject) 
-       await createScheduleTimetable({ variables: {yearId: viewId+1, dayId: days.indexOf(updatedDay)+1, inputData: postObject}})
-       setMode({...timeMode, isCreating: false})
-       setUpdatedDay('')
+        const double = getIsDouble(postObject, timetableByDay[updatedDay])
+        if (double.isOneDouble && double.isOneEven) {
+          await createScheduleTimetable({ variables: {
+            yearId: years[viewId].id, dayId: DAYS.indexOf(updatedDay), inputData: {...postObject, isDouble: +double.isDouble}
+          }})
+         setTimeMode({...timeMode, isCreating: false})
+         setUpdatedDay('')
+        }
+        else {
+          if (!double.isOneDouble) {console.log('Третий дубль')}
+          if (!double.isOneEven) {console.log('Две по четным или две по нечетным')}
+          setDoubleFound(true)
+          setIsAbleToSave(false)
+        }
       }
     }
   }
@@ -407,12 +493,11 @@ const Schedule = () => {
         setUpdatedYear({})
       }
       if (mode.isCreating) {
-        const postDataWithYear = {
-          ...postObject,
-          year: currentYear,
-          term: currentTerm
-        }
-        await createScheduleYear({ variables: {inputData: postDataWithYear}})
+        await createScheduleYear({ variables: {inputData: {
+          title: postObject.course.course,
+          year: +postObject.course.year,
+          term: +postObject.course.term
+        }}})
         setIsModalOpen(false)
         setMode({...mode, isCreating: false})
         document.body.style.overflow = "scroll"
@@ -424,12 +509,14 @@ const Schedule = () => {
   if (mode.isEditing) {modalTitle = 'Редактирование расписания'}
   if (mode.isCreating) {modalTitle = 'Новое расписание'}
   if (mode.isDeleting) {modalTitle = 'Удаление расписания'}
+  if (timeMode.isEditing) {modalTitle = 'Редактирование лекции'}
+  if (timeMode.isDeleting) {modalTitle = 'Удаление лекции'}
+  if (doubleFound){modalTitle = 'Одновременные лекции'}
 
  
   return (
-    <div className="container mt-5">
-      <div className="container mb-3">
-      {isModalOpen && <Modal 
+    <>
+    {isModalOpen && <Modal 
         isOpen={isModalOpen}
         title={modalTitle}
         onClose={onCloseModal}
@@ -450,15 +537,21 @@ const Schedule = () => {
          />}
           {(mode.isDeleting) &&  <YesDelete onDelete={onDeleteScheduleYearHandler} /> }
           {(timeMode.isDeleting) &&  <YesDelete onDelete={onDeleteScheduleTimeHandler} /> }
-        </Modal>}
+     </Modal>}
+    {(data.years.length !== 0 ) &&
+    <div className="container mt-5">
+      <div className="container mb-3">
         <div className="row">
-          <div className="col-md-10">
+          <div className="col-md-10 d-flex flex-wrap">
               {
-                years.map((year, idx) => {
-                  let className = 'btn-outline-primary'
-                  if (idx === viewId ) className = 'btn-primary'
-                  return <button type="button" className={`btn ${className} mx-1`} key={year.id} onClick={()=>onChangeviewId(idx)}>{year.title}</button>
-                })
+                years.map((year, idx) =>  <EducationButtons 
+                  title={year.title} 
+                  key={year.id} 
+                  onClick={()=>onChangeviewId(idx)} 
+                  onDelete={() => onDeleteScheduleYear(idx)}
+                  last = {idx === years.length-1}
+                  selected = {idx === viewId}
+                  /> )
               }
           </div>
           <div className="col-md-2">
@@ -484,13 +577,20 @@ const Schedule = () => {
             />
           )}
       </div>
-      <ButtonAddNew
-        color='red'
-        onClickAddButton={onAddNewYear}
-        fixed
-        size='4'
-       />
     </div>
+    }
+    {(data.years.length === 0 ) &&
+      <div className="container card mt-5 p-2">
+        <p className="h5 text-center">Расписания на текущий семестр пока нет</p>
+      </div>
+    }
+    <ButtonAddNew
+      color='red'
+      onClickAddButton={onAddNewYear}
+      fixed
+      size='4'
+      />
+    </>
   )
 }
 

@@ -46,7 +46,17 @@ const scheduleTimetable = (sequelize, DataTypes ) => {
   },
   dayId: {
     type: DataTypes.INTEGER,
-    allowNull: false 
+    allowNull: false,
+    validate:{
+      notEmpty:{
+          args:true,
+          msg:"day required"
+      },
+      max:{
+          args: [5],
+          msg:"There are 6 working days"
+      } 
+    }
   },
   isEven: {
     type:DataTypes.INTEGER,

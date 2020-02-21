@@ -7,27 +7,34 @@ import Modal from '../UI/Modal'
 
 const ScheduleDay = ({scheduleDay, dayTitle, currentWeek,  timeMode, onCreate, onCancel, onSave, isAbleToSave, isDayUpdating, dayTemplate, updatedTime}) => {
 
-  let startTime = ''
-  const consolidatedDayWithDoubles = []
-  
-  if (scheduleDay.length > 0) {
-    startTime = getTimeToLocal(scheduleDay[0].timeFrom)
-    scheduleDay.forEach( elem => {
-      if (elem.isDouble) {
-        const doubleArray = []
-        const doubleElem = scheduleDay.find(x => +x.id === elem.isDouble)
-        doubleArray.push(elem)
-        doubleArray.push(doubleElem)
-        scheduleDay.splice(scheduleDay.indexOf(doubleElem), 1)
-        consolidatedDayWithDoubles.push(doubleArray)  
-      }
-      else {
-        consolidatedDayWithDoubles.push(elem)
-      }
-    })
-  }
+  const [timeArray, setTimeArray] = React.useState([])
 
-  const dayEmpty = consolidatedDayWithDoubles.length === 0
+  React.useEffect( () => {
+    const consolidatedDayWithDoubles = [] 
+    if (scheduleDay.length > 0) {
+      scheduleDay.forEach( elem => {
+        if (elem.isDouble) {
+          const doubleArray = []
+          const doubleElem = scheduleDay.find(x => +x.id === elem.isDouble)
+          doubleArray.push(elem)
+          doubleArray.push(doubleElem)
+          scheduleDay.splice(scheduleDay.indexOf(doubleElem), 1)
+          consolidatedDayWithDoubles.push(doubleArray)  
+        }
+        else {
+          consolidatedDayWithDoubles.push(elem)
+        }
+      })
+    }
+    setTimeArray(consolidatedDayWithDoubles)
+
+  }, [scheduleDay])
+  
+
+
+  const dayEmpty = timeArray.length === 0
+  let startTime = ''
+  if (!dayEmpty) {startTime = getTimeToLocal(scheduleDay[0].timeFrom)} 
   return (
     <>
     <div className="row">
@@ -37,7 +44,7 @@ const ScheduleDay = ({scheduleDay, dayTitle, currentWeek,  timeMode, onCreate, o
       </div>
     </div>
     <div>
-       {!dayEmpty && consolidatedDayWithDoubles.map((scheduleDayTime, index) => 
+       {!dayEmpty && timeArray.map((scheduleDayTime, index) => 
           <ScheduleTime 
             consolidatedTime={scheduleDayTime} 
             currentWeek = {currentWeek} 
