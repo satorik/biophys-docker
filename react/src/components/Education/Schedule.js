@@ -197,7 +197,6 @@ const Schedule = () => {
 
 
 //////////// if no shedule and no term  (show if there is a schedule)
-//set current term right!
 
   const { loading: queryLoading, error: queryError, data} = useQuery(GET_YEARS, {variables})
   const [createScheduleYear,
@@ -418,13 +417,14 @@ const Schedule = () => {
       let postObject = postData.reduce((obj, item) => {
         obj[item.title] = item.value
         if(item.type === 'time') {
-          //check and set to null
-          obj[item.title] = item.value.hours+':'+item.value.minutes
+          if ( item.value.hours === '') {obj[item.title] = null}
+          if ( item.value.minutes === '') {obj[item.title] = item.value.hours+':00'}
+          else {obj[item.title] = item.value.hours+':'+item.value.minutes} 
         }
         if(item.type === 'date') {
           if (item.value.day !== '')
           {
-            const fullDate = new Date(Date.UTC(item.value.year, item.value.month, item.value.day))
+            const fullDate = new Date(item.value.year, item.value.month, item.value.day)
             obj[item.title] = fullDate.toISOString()
           }
           else obj[item.title] = null

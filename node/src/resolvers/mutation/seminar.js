@@ -12,6 +12,8 @@ const seminarMutation = {
   },
   async updateSeminar(parent, {id, inputData}, { models }){
     // if (!req.isAuth) { e }
+
+    console.log(inputData)
   
     const post = await models.Seminar.findOne({where: {id}})
     if (!post) { throw new ApolloError('Post not found') }

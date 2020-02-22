@@ -50,6 +50,9 @@ const educationQuery = {
   },
   form(parent, args, {models}) {
     return models.EducationForm.findOne({raw:true, where: {id: parent.educationFormId}})
+  },
+  admission(parent, {section}, {models}){
+    return models.TextDescription.findOne({where: {section}, raw: true})
   }
 }
 

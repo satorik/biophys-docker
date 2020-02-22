@@ -219,7 +219,7 @@ const Seminar = () => {
       let postObject = postData.reduce((obj, item) => {
           obj[item.title] = item.value
           if(item.type === 'datetime') {
-            const fullDate = new Date(Date.UTC(item.value.year, item.value.month, item.value.day, item.value.hours, item.value.minutes))
+            const fullDate = new Date(item.value.year, item.value.month, item.value.day, item.value.hours, item.value.minutes)
             obj[item.title] = fullDate.toISOString()
           }
           return obj

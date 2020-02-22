@@ -7,10 +7,22 @@ const Input = ({control, value, onChanged, onBlur, touched, valid, label, requir
 
   const inputClasses = control === 'file' ? ['custom-file-input'] : ['form-control']
   let validationError = null
- 
-  if ( !valid && touched ) {
-    inputClasses.push('is-invalid')
-    validationError = <p className="d-inline text-danger text-right">Пожалуйста, заполните {label} верно</p>
+
+  if ( !valid ) {
+    if (typeof(touched) === 'boolean' && touched) {
+      inputClasses.push('is-invalid')
+      validationError = <p className="d-inline text-danger text-right">Пожалуйста, заполните {label} верно</p>
+    }
+    else if (typeof(touched) !== 'boolean') {
+      let allTouched = true
+      Object.keys(touched).forEach( key => {
+        allTouched = allTouched && touched[key]
+      })
+      if (allTouched) {
+        inputClasses.push('is-invalid')
+        validationError = <p className="d-inline text-danger text-right">Пожалуйста, заполните {label} верно</p>
+      }
+    }
   }
 
   const getControlElement = () => {

@@ -91,6 +91,8 @@ const [deleteAdmission,
 
   const { admission } = data
 
+  console.log(admission)
+
   const onAddAdmission = () => {
     setMode({...mode, isCreating: true})
   }
