@@ -1,7 +1,7 @@
 import React from 'react'
 import { useQuery, useMutation } from '@apollo/react-hooks'
 import { gql } from 'apollo-boost'
-import { required, length, date } from './utils/validators'
+import { required, length, datetime } from './utils/validators'
 import { useLocation, useHistory } from 'react-router-dom'
 
 import YesDelete from './components/Shared/DoYouWantToDelete'
@@ -73,30 +73,42 @@ const FORM_TEMPLATE = [
     title: 'title',
     label:'Название',
     type: 'input',
+    required: true,
     validators: [required, length({ min: 5 })]
   },
   {
     title: 'description',
     label:'Описание',
     type:'textarea',
+    required: true,
     validators: [required, length({ min: 5, max: 250 })]
   },
   {
     title: 'content',
     label:'Содержание',
     type:'textarea-long',
+    required: true,
     validators: [required, length({ min: 50 })]
+  },
+  {
+    title: 'speaker',
+    label:'Лектор',
+    type:'input',
+    required: true,
+    validators: [required, length({ min: 5 })]
   },
   {
     title: 'date',
     label:'Время проведения',
     type:'datetime',
-    validators: [date]
+    required: true,
+    validators: [required, datetime]
   },
   {
     title: 'location',
     label:'Место проведения',
     type:'input',
+    required: true,
     validators: [required]
   },
   {
@@ -225,21 +237,16 @@ const Seminar = () => {
           return obj
       } ,{})
       setIsModalOpen(false)
-      setMode({...mode, isEditing: false})
-      setMode({...mode, isCreating: false})
+      document.body.style.overflow = "scroll"
       if (mode.isEditing) {
         const forUpdate = getUpdateData(updatedSeminar, postObject)
         await updateSeminar({ variables: {id: updatedSeminar.id, inputData: forUpdate}})
-        setIsModalOpen(false)
         setMode({...mode, isEditing: false})
-        document.body.style.overflow = "scroll"
         setUpdatedSeminar({})
       }
       if (mode.isCreating) {
         await createSeminar({ variables: {inputData: postObject}})
-        setIsModalOpen(false)
         setMode({...mode, isCreating: false})
-        document.body.style.overflow = "scroll"
       }
     } 
   }

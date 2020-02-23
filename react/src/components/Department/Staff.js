@@ -108,12 +108,14 @@ const FORM_TEMPLATE = [
     title: 'jobTitle',
     label:'Должность',
     type: 'input',
+    required: true,
     validators: [required, length({ min: 5 })]
   },
   {
     title: 'description',
     label:'Описание',
     type:'textarea',
+    required: true,
     validators: [required, length({ min: 5, max: 250 })]
   },
   {

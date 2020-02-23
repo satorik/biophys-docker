@@ -40,6 +40,7 @@
     if (type === 'datetime') {return {day: '', month: new Date().getMonth(), year: new Date().getFullYear(), hours: '', minutes: '' }}
     if (type === 'time') {return {hours: '', minutes: ''}}
     if (type === 'radio') { return label[0].value}
+    if (type === 'check') { return false}
     if (type === 'course') {return {course: '', year: new Date().getFullYear(), term: 1}}
 
     return ''

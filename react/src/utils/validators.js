@@ -1,5 +1,17 @@
-export const required = value => value instanceof File || value.trim() !== ''
 
+export const required = value => {
+  if (value instanceof File) return true
+  else if (typeof(value) === 'object') {
+    console.log(value)
+    let allExist = true
+    Object.keys(value).forEach(item => {
+      allExist = allExist && value[item] != ''
+    })
+    console.log(allExist)
+    return allExist
+  }
+  else return value.trim() !== ''
+}
 export const length = config => value => {
   let isValid = true;
   if (config.min) {
@@ -39,4 +51,11 @@ export const time = value => {
   }
 
   return checkValue(value.hours, 0, 24) && checkValue(value.minutes, 0, 60)
+}
+
+export const datetime = value => {
+  const ifDate = date(value)
+  const ifTime = time(value)
+
+  return ifDate && ifTime
 }

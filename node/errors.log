@@ -4590,4 +4590,433 @@
 			]
 		}
 	}
+}2020-02-23T20:14:11.606Z{
+	"message": "Validation error: jobTitle required,\nValidation error: jobTitle max 255 characters,\nValidation error: Description required,\nValidation error: Maximum 255 characters",
+	"locations": [
+		{
+			"line": 2,
+			"column": 3
+		}
+	],
+	"path": [
+		"createDepartmentPerson"
+	],
+	"extensions": {
+		"code": "INTERNAL_SERVER_ERROR",
+		"exception": {
+			"name": "SequelizeValidationError",
+			"errors": [
+				{
+					"message": "jobTitle required",
+					"type": "Validation error",
+					"path": "jobTitle",
+					"value": "",
+					"origin": "FUNCTION",
+					"instance": {
+						"id": null,
+						"firstname": "Иванок",
+						"middlename": "Иван",
+						"lastname": "Иванович",
+						"jobTitle": "",
+						"description": "",
+						"tel": "",
+						"mail": "",
+						"imageUrl": "/images/staff/710798ab-df90-4efa-8413-d4b9f9a3f67e.png",
+						"position": 5,
+						"updatedAt": "2020-02-23T20:14:11.589Z",
+						"createdAt": "2020-02-23T20:14:11.589Z"
+					},
+					"validatorKey": "notEmpty",
+					"validatorName": "notEmpty",
+					"validatorArgs": [
+						true
+					],
+					"original": {
+						"validatorName": "notEmpty",
+						"validatorArgs": [
+							true
+						]
+					}
+				},
+				{
+					"message": "jobTitle max 255 characters",
+					"type": "Validation error",
+					"path": "jobTitle",
+					"value": "",
+					"origin": "FUNCTION",
+					"instance": {
+						"id": null,
+						"firstname": "Иванок",
+						"middlename": "Иван",
+						"lastname": "Иванович",
+						"jobTitle": "",
+						"description": "",
+						"tel": "",
+						"mail": "",
+						"imageUrl": "/images/staff/710798ab-df90-4efa-8413-d4b9f9a3f67e.png",
+						"position": 5,
+						"updatedAt": "2020-02-23T20:14:11.589Z",
+						"createdAt": "2020-02-23T20:14:11.589Z"
+					},
+					"validatorKey": "len",
+					"validatorName": "len",
+					"validatorArgs": [
+						5,
+						255
+					],
+					"original": {
+						"validatorName": "len",
+						"validatorArgs": [
+							5,
+							255
+						]
+					}
+				},
+				{
+					"message": "Description required",
+					"type": "Validation error",
+					"path": "description",
+					"value": "",
+					"origin": "FUNCTION",
+					"instance": {
+						"id": null,
+						"firstname": "Иванок",
+						"middlename": "Иван",
+						"lastname": "Иванович",
+						"jobTitle": "",
+						"description": "",
+						"tel": "",
+						"mail": "",
+						"imageUrl": "/images/staff/710798ab-df90-4efa-8413-d4b9f9a3f67e.png",
+						"position": 5,
+						"updatedAt": "2020-02-23T20:14:11.589Z",
+						"createdAt": "2020-02-23T20:14:11.589Z"
+					},
+					"validatorKey": "notEmpty",
+					"validatorName": "notEmpty",
+					"validatorArgs": [
+						true
+					],
+					"original": {
+						"validatorName": "notEmpty",
+						"validatorArgs": [
+							true
+						]
+					}
+				},
+				{
+					"message": "Maximum 255 characters",
+					"type": "Validation error",
+					"path": "description",
+					"value": "",
+					"origin": "FUNCTION",
+					"instance": {
+						"id": null,
+						"firstname": "Иванок",
+						"middlename": "Иван",
+						"lastname": "Иванович",
+						"jobTitle": "",
+						"description": "",
+						"tel": "",
+						"mail": "",
+						"imageUrl": "/images/staff/710798ab-df90-4efa-8413-d4b9f9a3f67e.png",
+						"position": 5,
+						"updatedAt": "2020-02-23T20:14:11.589Z",
+						"createdAt": "2020-02-23T20:14:11.589Z"
+					},
+					"validatorKey": "len",
+					"validatorName": "len",
+					"validatorArgs": [
+						5,
+						255
+					],
+					"original": {
+						"validatorName": "len",
+						"validatorArgs": [
+							5,
+							255
+						]
+					}
+				}
+			],
+			"stacktrace": [
+				"SequelizeValidationError: Validation error: jobTitle required,",
+				"Validation error: jobTitle max 255 characters,",
+				"Validation error: Description required,",
+				"Validation error: Maximum 255 characters",
+				"    at Promise.all.then (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\sequelize\\lib\\instance-validator.js:74:15)",
+				"    at tryCatcher (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\bluebird\\js\\release\\util.js:16:23)",
+				"    at Promise._settlePromiseFromHandler (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\bluebird\\js\\release\\promise.js:547:31)",
+				"    at Promise._settlePromise (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\bluebird\\js\\release\\promise.js:604:18)",
+				"    at Promise._settlePromise0 (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\bluebird\\js\\release\\promise.js:649:10)",
+				"    at Promise._settlePromises (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\bluebird\\js\\release\\promise.js:729:18)",
+				"    at Promise._fulfill (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\bluebird\\js\\release\\promise.js:673:18)",
+				"    at PromiseArray._resolve (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\bluebird\\js\\release\\promise_array.js:127:19)",
+				"    at PromiseArray._promiseFulfilled (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\bluebird\\js\\release\\promise_array.js:145:14)",
+				"    at Promise._settlePromise (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\bluebird\\js\\release\\promise.js:609:26)",
+				"    at Promise._settlePromise0 (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\bluebird\\js\\release\\promise.js:649:10)",
+				"    at Promise._settlePromises (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\bluebird\\js\\release\\promise.js:729:18)",
+				"    at _drainQueueStep (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\bluebird\\js\\release\\async.js:93:12)",
+				"    at _drainQueue (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\bluebird\\js\\release\\async.js:86:9)",
+				"    at Async._drainQueues (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\bluebird\\js\\release\\async.js:102:5)",
+				"    at Immediate.Async.drainQueues [as _onImmediate] (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\bluebird\\js\\release\\async.js:15:14)",
+				"    at runCallback (timers.js:705:18)",
+				"    at tryOnImmediate (timers.js:676:5)",
+				"    at processImmediate (timers.js:658:5)",
+				"    at process.topLevelDomainCallback (domain.js:120:23)"
+			]
+		}
+	}
+}2020-02-23T21:23:33.310Z{
+	"message": "Variable \"$inputData\" got invalid value \"\" at \"inputData.onCampus\"; Expected type Boolean. Boolean cannot represent a non boolean value: \"\"",
+	"locations": [
+		{
+			"line": 1,
+			"column": 24
+		}
+	],
+	"extensions": {
+		"code": "INTERNAL_SERVER_ERROR",
+		"exception": {
+			"stacktrace": [
+				"TypeError: Boolean cannot represent a non boolean value: \"\"",
+				"    at GraphQLScalarType.coerceBoolean [as parseValue] (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\graphql\\type\\scalars.js:195:11)",
+				"    at coerceInputValueImpl (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\graphql\\utilities\\coerceInputValue.js:127:26)",
+				"    at coerceInputValueImpl (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\graphql\\utilities\\coerceInputValue.js:54:14)",
+				"    at coerceInputValueImpl (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\graphql\\utilities\\coerceInputValue.js:105:35)",
+				"    at coerceInputValueImpl (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\graphql\\utilities\\coerceInputValue.js:54:14)",
+				"    at coerceInputValue (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\graphql\\utilities\\coerceInputValue.js:37:10)",
+				"    at _loop (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\graphql\\execution\\values.js:107:69)",
+				"    at coerceVariableValues (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\graphql\\execution\\values.js:119:16)",
+				"    at getVariableValues (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\graphql\\execution\\values.js:48:19)",
+				"    at buildExecutionContext (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\graphql\\execution\\execute.js:184:61)",
+				"    at executeImpl (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\graphql\\execution\\execute.js:89:20)",
+				"    at Object.execute (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\graphql\\execution\\execute.js:64:35)",
+				"    at C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\apollo-server-core\\src\\requestPipeline.ts:481:30",
+				"    at Generator.next (<anonymous>)",
+				"    at C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\apollo-server-core\\dist\\requestPipeline.js:8:71",
+				"    at new Promise (<anonymous>)",
+				"    at __awaiter (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\apollo-server-core\\dist\\requestPipeline.js:4:12)",
+				"    at execute (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\apollo-server-core\\dist\\requestPipeline.js:225:20)",
+				"    at Object.<anonymous> (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\apollo-server-core\\src\\requestPipeline.ts:364:30)",
+				"    at Generator.next (<anonymous>)",
+				"    at fulfilled (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\apollo-server-core\\dist\\requestPipeline.js:5:58)",
+				"    at process._tickCallback (internal/process/next_tick.js:68:7)"
+			]
+		}
+	}
+}2020-02-23T21:26:29.726Z{
+	"message": "Validation error: Location required,\nValidation error: Maximum 255 characters",
+	"locations": [
+		{
+			"line": 2,
+			"column": 3
+		}
+	],
+	"path": [
+		"createSeminar"
+	],
+	"extensions": {
+		"code": "INTERNAL_SERVER_ERROR",
+		"exception": {
+			"name": "SequelizeValidationError",
+			"errors": [
+				{
+					"message": "Location required",
+					"type": "Validation error",
+					"path": "location",
+					"value": "",
+					"origin": "FUNCTION",
+					"instance": {
+						"new": false,
+						"id": null,
+						"title": "Новый сминар",
+						"description": "Описание",
+						"content": "<p>Apr 27, 2019 -&nbsp;<strong>Chrome breakpoints</strong>&nbsp;don't&nbsp;<strong>work</strong>&nbsp;when using create-<strong>react</strong>-app. Currently there's a bug in recent versions of create-<strong>react</strong>-app where debug&nbsp;<strong>breakpoints</strong>&nbsp;aren't&nbsp;<strong>working</strong>&nbsp;in&nbsp;<strong>Chrome</strong>. In the meantime, you can get&nbsp;<strong>breakpoints working</strong>&nbsp;again via adding a --no-cache flag to your start script.</p>",
+						"date": "2020-02-21T07:15:00.000Z",
+						"speaker": "Иванов Иван Иванович",
+						"location": "",
+						"onCampus": true,
+						"updatedAt": "2020-02-23T21:26:29.686Z",
+						"createdAt": "2020-02-23T21:26:29.686Z"
+					},
+					"validatorKey": "notEmpty",
+					"validatorName": "notEmpty",
+					"validatorArgs": [
+						true
+					],
+					"original": {
+						"validatorName": "notEmpty",
+						"validatorArgs": [
+							true
+						]
+					}
+				},
+				{
+					"message": "Maximum 255 characters",
+					"type": "Validation error",
+					"path": "location",
+					"value": "",
+					"origin": "FUNCTION",
+					"instance": {
+						"new": false,
+						"id": null,
+						"title": "Новый сминар",
+						"description": "Описание",
+						"content": "<p>Apr 27, 2019 -&nbsp;<strong>Chrome breakpoints</strong>&nbsp;don't&nbsp;<strong>work</strong>&nbsp;when using create-<strong>react</strong>-app. Currently there's a bug in recent versions of create-<strong>react</strong>-app where debug&nbsp;<strong>breakpoints</strong>&nbsp;aren't&nbsp;<strong>working</strong>&nbsp;in&nbsp;<strong>Chrome</strong>. In the meantime, you can get&nbsp;<strong>breakpoints working</strong>&nbsp;again via adding a --no-cache flag to your start script.</p>",
+						"date": "2020-02-21T07:15:00.000Z",
+						"speaker": "Иванов Иван Иванович",
+						"location": "",
+						"onCampus": true,
+						"updatedAt": "2020-02-23T21:26:29.686Z",
+						"createdAt": "2020-02-23T21:26:29.686Z"
+					},
+					"validatorKey": "len",
+					"validatorName": "len",
+					"validatorArgs": [
+						1,
+						255
+					],
+					"original": {
+						"validatorName": "len",
+						"validatorArgs": [
+							1,
+							255
+						]
+					}
+				}
+			],
+			"stacktrace": [
+				"SequelizeValidationError: Validation error: Location required,",
+				"Validation error: Maximum 255 characters",
+				"    at Promise.all.then (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\sequelize\\lib\\instance-validator.js:74:15)",
+				"    at tryCatcher (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\bluebird\\js\\release\\util.js:16:23)",
+				"    at Promise._settlePromiseFromHandler (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\bluebird\\js\\release\\promise.js:547:31)",
+				"    at Promise._settlePromise (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\bluebird\\js\\release\\promise.js:604:18)",
+				"    at Promise._settlePromise0 (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\bluebird\\js\\release\\promise.js:649:10)",
+				"    at Promise._settlePromises (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\bluebird\\js\\release\\promise.js:729:18)",
+				"    at Promise._fulfill (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\bluebird\\js\\release\\promise.js:673:18)",
+				"    at PromiseArray._resolve (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\bluebird\\js\\release\\promise_array.js:127:19)",
+				"    at PromiseArray._promiseFulfilled (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\bluebird\\js\\release\\promise_array.js:145:14)",
+				"    at Promise._settlePromise (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\bluebird\\js\\release\\promise.js:609:26)",
+				"    at Promise._settlePromise0 (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\bluebird\\js\\release\\promise.js:649:10)",
+				"    at Promise._settlePromises (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\bluebird\\js\\release\\promise.js:729:18)",
+				"    at _drainQueueStep (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\bluebird\\js\\release\\async.js:93:12)",
+				"    at _drainQueue (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\bluebird\\js\\release\\async.js:86:9)",
+				"    at Async._drainQueues (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\bluebird\\js\\release\\async.js:102:5)",
+				"    at Immediate.Async.drainQueues [as _onImmediate] (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\bluebird\\js\\release\\async.js:15:14)",
+				"    at runCallback (timers.js:705:18)",
+				"    at tryOnImmediate (timers.js:676:5)",
+				"    at processImmediate (timers.js:658:5)",
+				"    at process.topLevelDomainCallback (domain.js:120:23)"
+			]
+		}
+	}
+}2020-02-23T21:32:07.248Z{
+	"message": "Validation error: Location required,\nValidation error: Maximum 255 characters",
+	"locations": [
+		{
+			"line": 2,
+			"column": 3
+		}
+	],
+	"path": [
+		"createSeminar"
+	],
+	"extensions": {
+		"code": "INTERNAL_SERVER_ERROR",
+		"exception": {
+			"name": "SequelizeValidationError",
+			"errors": [
+				{
+					"message": "Location required",
+					"type": "Validation error",
+					"path": "location",
+					"value": "",
+					"origin": "FUNCTION",
+					"instance": {
+						"new": false,
+						"id": null,
+						"title": "Новый семинар",
+						"description": "Описание",
+						"content": "<p><strong>Dialect</strong>-Specific Things. MySQL. The underlying connector library used by&nbsp;<strong>Sequelize</strong>&nbsp;for MySQL is the mysql2 npm package (version 1.5. MariaDB. The underlying connector library used by&nbsp;<strong>Sequelize</strong>&nbsp;for MariaDB is the mariadb npm package. SQLite. PostgreSQL. MSSQL.</p>",
+						"date": "2020-02-21T07:12:00.000Z",
+						"speaker": "Иванов Иван Иванович",
+						"location": "",
+						"onCampus": false,
+						"updatedAt": "2020-02-23T21:32:07.242Z",
+						"createdAt": "2020-02-23T21:32:07.242Z"
+					},
+					"validatorKey": "notEmpty",
+					"validatorName": "notEmpty",
+					"validatorArgs": [
+						true
+					],
+					"original": {
+						"validatorName": "notEmpty",
+						"validatorArgs": [
+							true
+						]
+					}
+				},
+				{
+					"message": "Maximum 255 characters",
+					"type": "Validation error",
+					"path": "location",
+					"value": "",
+					"origin": "FUNCTION",
+					"instance": {
+						"new": false,
+						"id": null,
+						"title": "Новый семинар",
+						"description": "Описание",
+						"content": "<p><strong>Dialect</strong>-Specific Things. MySQL. The underlying connector library used by&nbsp;<strong>Sequelize</strong>&nbsp;for MySQL is the mysql2 npm package (version 1.5. MariaDB. The underlying connector library used by&nbsp;<strong>Sequelize</strong>&nbsp;for MariaDB is the mariadb npm package. SQLite. PostgreSQL. MSSQL.</p>",
+						"date": "2020-02-21T07:12:00.000Z",
+						"speaker": "Иванов Иван Иванович",
+						"location": "",
+						"onCampus": false,
+						"updatedAt": "2020-02-23T21:32:07.242Z",
+						"createdAt": "2020-02-23T21:32:07.242Z"
+					},
+					"validatorKey": "len",
+					"validatorName": "len",
+					"validatorArgs": [
+						1,
+						255
+					],
+					"original": {
+						"validatorName": "len",
+						"validatorArgs": [
+							1,
+							255
+						]
+					}
+				}
+			],
+			"stacktrace": [
+				"SequelizeValidationError: Validation error: Location required,",
+				"Validation error: Maximum 255 characters",
+				"    at Promise.all.then (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\sequelize\\lib\\instance-validator.js:74:15)",
+				"    at tryCatcher (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\bluebird\\js\\release\\util.js:16:23)",
+				"    at Promise._settlePromiseFromHandler (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\bluebird\\js\\release\\promise.js:547:31)",
+				"    at Promise._settlePromise (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\bluebird\\js\\release\\promise.js:604:18)",
+				"    at Promise._settlePromise0 (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\bluebird\\js\\release\\promise.js:649:10)",
+				"    at Promise._settlePromises (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\bluebird\\js\\release\\promise.js:729:18)",
+				"    at Promise._fulfill (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\bluebird\\js\\release\\promise.js:673:18)",
+				"    at PromiseArray._resolve (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\bluebird\\js\\release\\promise_array.js:127:19)",
+				"    at PromiseArray._promiseFulfilled (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\bluebird\\js\\release\\promise_array.js:145:14)",
+				"    at Promise._settlePromise (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\bluebird\\js\\release\\promise.js:609:26)",
+				"    at Promise._settlePromise0 (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\bluebird\\js\\release\\promise.js:649:10)",
+				"    at Promise._settlePromises (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\bluebird\\js\\release\\promise.js:729:18)",
+				"    at _drainQueueStep (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\bluebird\\js\\release\\async.js:93:12)",
+				"    at _drainQueue (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\bluebird\\js\\release\\async.js:86:9)",
+				"    at Async._drainQueues (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\bluebird\\js\\release\\async.js:102:5)",
+				"    at Immediate.Async.drainQueues [as _onImmediate] (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\bluebird\\js\\release\\async.js:15:14)",
+				"    at runCallback (timers.js:705:18)",
+				"    at tryOnImmediate (timers.js:676:5)",
+				"    at processImmediate (timers.js:658:5)",
+				"    at process.topLevelDomainCallback (domain.js:120:23)"
+			]
+		}
+	}
 }
