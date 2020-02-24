@@ -306,11 +306,12 @@ const Schedule = () => {
   if (data.years.length !== 0 ) {
     isTimetable = years[viewId].timetable.length > 0
     if (isTimetable) {
-      timetableByDay = years[viewId].timetable.reduce((acc, elem) => {
-        const newElem = {...elem, day: {id: elem.dayId, title: DAYS[elem.dayId]}}
-        acc[DAYS[elem.dayId]] = (acc[DAYS[elem.dayId]] || []).concat(newElem)
-        return acc
-      }, {})
+      DAYS.forEach((day, idx) => {
+        timetableByDay = {
+          ...timetableByDay,
+          [day]: years[viewId].timetable.filter(elem => elem.dayId === idx) 
+        }
+      })
     }
     else {
       timetableByDay = DAYS.reduce((acc, elem) => {
@@ -318,6 +319,7 @@ const Schedule = () => {
         return acc
       }, {})
     }
+
     for (let key in timetableByDay) {
       scheduleWithActions = {
         ...scheduleWithActions,
