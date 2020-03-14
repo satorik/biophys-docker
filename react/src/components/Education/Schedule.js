@@ -162,6 +162,12 @@ const DAY_TEMPLATE = [
     validators: [length({ min: 5 })]
   },
   {
+    title: 'lectureHall',
+    label: 'Аудитория',
+    type: 'input',
+    validators: []
+  },
+  {
     title: 'startDate',
     label: 'Дата начала',
     type: 'date',
@@ -427,7 +433,8 @@ const Schedule = () => {
           if (item.value.day !== '')
           {
             const fullDate = new Date(item.value.year, item.value.month, item.value.day)
-            obj[item.title] = fullDate.toISOString()
+            //console.log(fullDate)
+            obj[item.title] = fullDate
           }
           else obj[item.title] = null
         }
@@ -537,8 +544,8 @@ const Schedule = () => {
             post={updatedTime}
             formTemplate={DAY_TEMPLATE}
          />}
-          {(mode.isDeleting) &&  <YesDelete onDelete={onDeleteScheduleYearHandler} /> }
-          {(timeMode.isDeleting) &&  <YesDelete onDelete={onDeleteScheduleTimeHandler} /> }
+          {(mode.isDeleting) &&  <YesDelete onDelete={onDeleteScheduleYearHandler} onCancel={onCloseModal} /> }
+          {(timeMode.isDeleting) &&  <YesDelete onDelete={onDeleteScheduleTimeHandler} onCancel={onCloseModal}/> }
      </Modal>}
     {(data.years.length !== 0 ) &&
     <div className="container mt-5">

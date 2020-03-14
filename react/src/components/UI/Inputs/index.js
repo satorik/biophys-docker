@@ -7,5 +7,18 @@ import InputCheck from './InputCheck'
 import InputRadio from './InputRadio'
 import InputCourse from './InputCourse'
 import InputTime from './InputTime'
+import InputSelect from './InputSelect'
+import InputResourse from './InputResourse'
 
-export { InputFile, InputText, InputDate, InputTextarea, InputQuill, InputCheck, InputRadio, InputCourse, InputTime }
+
+export { InputFile, 
+  InputText, 
+  InputDate, 
+  InputTextarea, 
+  InputQuill, 
+  InputCheck, 
+  InputRadio, 
+  InputCourse, 
+  InputTime, 
+  InputSelect, 
+  InputResourse }

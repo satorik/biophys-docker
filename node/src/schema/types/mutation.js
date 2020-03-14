@@ -48,6 +48,14 @@ const mutation =   `
     updateAdmission(section: SECTION! = ADMISSION, inputData: AdmissionUpdateData): AdmissionText!
     createAdmission(section: SECTION! = ADMISSION, inputData: AdmissionCreateData): AdmissionText!
     deleteAdmission(section: SECTION! = ADMISSION): Boolean!
+    createEducationCourse(inputData: EducationCourseCreateData!): EducationCourse!
+    updateEducationCourse(id: ID!, inputData: EducationCourseUpdateData!): EducationCourse!
+    deleteEducationCourse(id: ID!): ID!
+    createEducationResoursePDF(courseId: ID!, inputData: EducationResourseCreatePDFData!): EducationResourse!
+    createEducationResourseURL(courseId: ID!, inputData: EducationResourseCreateURLData!): EducationResourse!
+    updateEducationResoursePDF(id: ID!, inputData: EducationResourseUpdatePDFData!): EducationResourse!
+    updateEducationResourseURL(id: ID!, inputData: EducationResourseUpdateURLData!): EducationResourse!
+    deleteEducationResourse(id: ID!): ID!
   }
 `
 

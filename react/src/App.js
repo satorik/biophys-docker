@@ -3,7 +3,8 @@ import './App.css'
 
 import {BrowserRouter, Route, Redirect, Switch} from 'react-router-dom'
 import { library } from '@fortawesome/fontawesome-svg-core'
-import { faAngleLeft, faAngleRight, faCaretUp, faCaretDown, faCircle, faPlus, faArrowUp, faArrowDown, faFileDownload, faEye } from '@fortawesome/free-solid-svg-icons'
+import { faAngleLeft, faAngleRight, faCaretUp, faCaretDown, faCircle, faPlus, 
+  faArrowUp, faArrowDown, faFileDownload, faEye, faPhone, faEnvelope } from '@fortawesome/free-solid-svg-icons'
 import { faEdit, faTrashAlt, faPlusSquare } from '@fortawesome/free-regular-svg-icons'
 
 import NavBarTop from './components/Navigantion/NavBarTop'
@@ -18,7 +19,7 @@ import Education from './Education'
 
 
 library.add(faAngleLeft, faAngleRight, faCaretDown, faCaretUp, faCircle, 
-  faPlus, faEdit, faTrashAlt, faArrowUp, faArrowDown, faFileDownload, faEye, faPlusSquare)
+  faPlus, faEdit, faTrashAlt, faArrowUp, faArrowDown, faFileDownload, faEye, faPlusSquare, faPhone, faEnvelope)
 
 const App = () => {
 

@@ -19,19 +19,16 @@ const educationQuery = {
   },
   async timetable(parent, args, {models}) {
     const timetable = await models.ScheduleTimetable.findAll({raw:true, where: {yearId: parent.id}, order: [['dayId', 'ASC'],['timeFrom', 'ASC'], ['isEven', 'ASC']]})
-    const updatedTimetable = await Promise.all(timetable.map(async item => {
-        const day = await models.ScheduleDay.findOne({raw:true, where: {id: item.dayId}})
+    const updatedTimetable = timetable.map(item => {
         return {
           ...item,
-          day: day,
           year: parent.title,
           startDate: item.startDate && item.startDate.toISOString(),
           createdAt: item.createdAt.toISOString(),
           updatedAt: item.updatedAt.toISOString()
         }
-    }))
-    //console.log(timetable)
-    //console.log(updatedTimetable)
+    })
+
     return updatedTimetable
   },
   async courses(parent, args, {models}) {
@@ -51,8 +48,14 @@ const educationQuery = {
   form(parent, args, {models}) {
     return models.EducationForm.findOne({raw:true, where: {id: parent.educationFormId}})
   },
+  forms(parent, {id}, {models}) {
+    return models.EducationForm.findAll({raw:true, where: {educationFormId: null}})
+  },
   admission(parent, {section}, {models}){
     return models.TextDescription.findOne({where: {section}, raw: true})
+  },
+  subSections(parent, args, {models}){
+    return models.EducationForm.findAll({raw:true, where: {educationFormId: parent.id}})
   }
 }
 

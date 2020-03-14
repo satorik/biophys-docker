@@ -13,6 +13,9 @@ const educationForm = (sequelize, DataTypes ) => {
           msg:"Minimum 5 characters, Maximum 300 characters"
       }
     }
+  },
+  type: {
+    type: DataTypes.ENUM('MULTY', 'SINGLE')
   }
   }
   )

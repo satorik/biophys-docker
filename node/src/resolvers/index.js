@@ -11,7 +11,8 @@ const resolvers = {
   ScienceRoute:  {scienceGroups : scienceQuery.scienceGroups},
   ScheduleYear: {timetable: educationQuery.timetable},
   EducationCourse: {resourses: educationQuery.resourses},
-  EducationResourse: {form: educationQuery.form}
+  EducationResourse: {form: educationQuery.form},
+  EducationForm: {subSections: educationQuery.subSections},
 }
 
 //console.log(resolvers)

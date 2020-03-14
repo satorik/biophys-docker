@@ -72,24 +72,28 @@ const FORM_TEMPLATE = [
     title: 'image',
     label:'Картинка',
     type: 'file',
+    required: true,
     validators: [required]
   },
   {
     title: 'title',
     label:'Название',
     type: 'input',
+    required: true,
     validators: [required, length({ min: 5 })]
   },
   {
     title: 'description',
     label:'Описание',
     type:'textarea',
+    required: true,
     validators: [required, length({ min: 5, max: 250 })]
   },
   {
     title: 'content',
     label:'Содержание',
     type:'textarea-long',
+    required: true,
     validators: [required, length({ min: 50 })]
   },
   {
@@ -108,6 +112,7 @@ const FORM_TEMPLATE = [
     title: 'location',
     label:'Место проведения',
     type:'input',
+    required: true,
     validators: [required, length({ min: 5 })]
   }
 ] 

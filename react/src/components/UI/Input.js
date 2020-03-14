@@ -1,7 +1,7 @@
 import React from 'react'
 
 
-import { InputFile, InputText, InputDate, InputTextarea, InputQuill, InputCheck, InputRadio, InputCourse, InputTime } from './Inputs'
+import { InputFile, InputText, InputDate, InputTextarea, InputQuill, InputCheck, InputRadio, InputCourse, InputSelect, InputResourse } from './Inputs'
 
 const Input = ({control, value, onChanged, onBlur, touched, valid, label, required, idx}) => {
 
@@ -11,7 +11,8 @@ const Input = ({control, value, onChanged, onBlur, touched, valid, label, requir
   if ( !valid ) {
     if (typeof(touched) === 'boolean' && touched) {
       inputClasses.push('is-invalid')
-      validationError = <p className="d-inline text-danger text-right">Пожалуйста, заполните {label} верно</p>
+      const field = typeof(label) === 'string' ? label : 'Материалы' //сделать лучше
+      validationError = <p className="d-inline text-danger text-right">Пожалуйста, заполните {field} верно</p>
     }
     else if (typeof(touched) !== 'boolean') {
       let allTouched = true
@@ -33,6 +34,7 @@ const Input = ({control, value, onChanged, onBlur, touched, valid, label, requir
               onChanged={onChanged}
               onBlur={() => onBlur(idx)}
               required={required}
+              value = {value}
               >{validationError}</InputFile>
     }
     else if (control === 'input') {
@@ -68,6 +70,16 @@ const Input = ({control, value, onChanged, onBlur, touched, valid, label, requir
               onBlur={() => onBlur(idx)}
               >{validationError}</InputCourse>
     }
+    else if (control === 'resourse') {
+      return <InputResourse
+              className={null}
+              label={label}
+              value={value}
+              onChanged={onChanged}
+              required={required}
+              onBlur={() => onBlur(idx)}
+              >{validationError}</InputResourse>
+    }
     else if (control === 'textarea'){
       return <InputTextarea
               className={inputClasses.join( ' ' )}
@@ -97,6 +109,14 @@ const Input = ({control, value, onChanged, onBlur, touched, valid, label, requir
     }
     else if (control === 'radio') {
       return <InputRadio
+              label={label}
+              required={required}
+              value={value}
+              onChanged={onChanged}
+              />
+    }
+    else if (control === 'select') {
+      return <InputSelect
               label={label}
               required={required}
               value={value}

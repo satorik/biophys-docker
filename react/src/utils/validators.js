@@ -47,10 +47,11 @@ export const isUrl = value => true
 
 export const time = value => {
   const checkValue = (param, min, max) => {
-    return Number.isInteger(param) && param >= min && param <= max
+    if (!Number.isInteger(+param)) return false
+    return +param >= min && +param <= max
   }
 
-  return checkValue(value.hours, 0, 24) && checkValue(value.minutes, 0, 60)
+  return checkValue(value.hours, 0, 23) && checkValue(value.minutes, 0, 59)
 }
 
 export const datetime = value => {

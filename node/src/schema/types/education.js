@@ -1,4 +1,4 @@
-const Schedule = `
+const Education = `
   type ScheduleDay {
     id: ID!
     title: String!
@@ -100,16 +100,28 @@ const Schedule = `
     resourses: [EducationResourse!]!
   }
 
+  enum SECTIONTYPE {
+    MULTY,
+    SINGLE
+  }
+
+  enum RESOURSETYPE {
+    PDF,
+    URL
+  }
+
   type EducationForm {
     id: ID!
+    type: SECTIONTYPE
     title: String!
+    subSections: [EducationForm!]
   }
 
   type EducationResourse {
     id: ID!
     title: String!
-    type: FILETYPE!
     image: String
+    type: RESOURSETYPE!
     description: String
     fileLink: String!
     form: EducationForm!
@@ -134,34 +146,31 @@ const Schedule = `
   input EducationResourseCreatePDFData {
     title: String!
     description: String
-    type: FILETYPE!
     file: Upload!
-    form: ID!
+    educationFormId: ID!
   }
 
   input EducationResourseCreateURLData {
     title: String!
     description: String
-    type: FILETYPE! = URL
-    file: String!
-    form: ID!
+    fileLink: String!
+    educationFormId: ID!
   }
 
   input EducationResourseUpdatePDFData {
     title: String
     description: String
-    type: FILETYPE
     file: Upload
-    form: ID
+    educationFormId: ID
   }
 
   input EducationResourseUpdateURLData {
     title: String
     description: String
-    file: String
-    form: ID
+    fileLink: String
+    educationFormId: ID
   }
 
 `
 
-export default Schedule
+export default Education

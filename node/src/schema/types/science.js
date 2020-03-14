@@ -14,7 +14,11 @@ const SciencePeople = `
     mail: String
     birthday: String
     position: Int!
-    url: String
+    urlIstina: String
+    urlRints: String
+    urlOrcid: String
+    urlResearcher: String
+    urlScopus: String
     type: SciencePeopleType!
   }
 
@@ -30,7 +34,11 @@ const SciencePeople = `
     description: String
     tel: String
     mail: String
-    url: String
+    urlIstina: String
+    urlRints: String
+    urlOrcid: String
+    urlResearcher: String
+    urlScopus: String
     birthday: String
     type: SciencePeopleType!
   }
@@ -42,7 +50,11 @@ const SciencePeople = `
     description: String
     tel: String
     mail: String
-    url: String
+    urlIstina: String
+    urlRints: String
+    urlOrcid: String
+    urlResearcher: String
+    urlScopus: String
     birthday: String
     type: SciencePeopleType
   }

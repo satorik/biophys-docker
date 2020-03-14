@@ -16,17 +16,7 @@ const sciencePeople = (sequelize, DataTypes ) => {
   },
   middlename: {
     type: DataTypes.STRING(100), 
-    allowNull: false,
-    validate:{
-      notEmpty:{
-          args:true,
-          msg:"Middlename required"
-      },
-      len:{
-          args:[2, 100],
-          msg:"Middlename 100 characters"
-      }
-    }
+    allowNull: true
   },
   lastname: {
     type: DataTypes.STRING(100), 
@@ -50,7 +40,11 @@ const sciencePeople = (sequelize, DataTypes ) => {
   tel: {type: DataTypes.STRING, allowNull: true},
   mail: {type: DataTypes.STRING, allowNull: true},
   birthday: {type: DataTypes.DATE, allowNull: true},
-  url:{type:DataTypes.STRING, allowNull: true},
+  urlIstina:{type:DataTypes.STRING, allowNull: true},
+  urlRints:{type:DataTypes.STRING, allowNull: true},
+  urlOrcid:{type:DataTypes.STRING, allowNull: true},
+  urlResearcher:{type:DataTypes.STRING, allowNull: true},
+  urlScopus:{type:DataTypes.STRING, allowNull: true},
   type:{type:DataTypes.ENUM('STAFF', 'STUDENT')},
   },
   {

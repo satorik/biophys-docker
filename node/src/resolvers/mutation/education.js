@@ -1,4 +1,6 @@
 import { ApolloError } from "apollo-server"
+import writeImage from '../../utils/readStreamIntoFile'
+import clearImage, { convertPdfToBase64 } from '../../utils/imageFunctions'
 
 const educationMutation = {
   async createScheduleYear(parent, {inputData}, { models }){
@@ -35,10 +37,22 @@ const educationMutation = {
       doubleTime.isDouble = newTime.id
       doubleTime.save()
 
-      return {timetable: newTime, double: {id: doubleTime.id, isDouble: newTime.id}}
+      return {
+        timetable: {
+          ...newTime.dataValues,
+          startDate: newTime.startDate && newTime.startDate.toISOString(),
+          createdAt: newTime.createdAt.toISOString(),
+          updatedAt: newTime.updatedAt.toISOString()
+        }, 
+        double: {id: doubleTime.id, isDouble: newTime.id}}
     }
 
-    return {timetable: newTime}
+    return {timetable: {
+      ...newTime.dataValues,
+      startDate: newTime.startDate && newTime.startDate.toISOString(),
+      createdAt: newTime.createdAt.toISOString(),
+      updatedAt: newTime.updatedAt.toISOString()
+    }}
 
   },
   async updateScheduleTimetable(parent, {id, inputData}, { models }){
@@ -48,7 +62,12 @@ const educationMutation = {
     Object.keys(inputData).forEach(item => timetable[item] = inputData[item])
    
     await timetable.save()
-    return timetable.dataValues
+    return {
+      ...timetable.dataValues,
+      startDate: timetable.startDate && timetable.startDate.toISOString(),
+      createdAt: timetable.createdAt.toISOString(),
+      updatedAt: timetable.updatedAt.toISOString()
+    }
 
   },
   async deleteScheduleTimetable(parent, {id}, { models }){
@@ -102,17 +121,89 @@ const educationMutation = {
     await post.destroy()
    // clearImage(post.dataValues.imageUrl, 'admission')
     return true
-  }
+  },
+  async createEducationCourse(parent, {inputData}, { models }){
+    const course = await models.EducationCourse.findOne({where: {title: inputData.title}})
+    if (course) { throw new ApolloError('This course already exists') }
+
+    const newCourse = await models.EducationCourse.create({...inputData})
+    return newCourse
+  },
+  async updateEducationCourse(parent, {id, inputData}, { models }){
+    const course = await models.EducationCourse.findOne({where: {id}})
+    if (!course) { throw new ApolloError('Course not found') }
+
+    Object.keys(inputData).forEach(item => course[item] = inputData[item])
+    await course.save()
+    return course.dataValues
+
+  },
+  async deleteEducationCourse(parent, {id}, { models }){
+    const course = await models.EducationCourse.findOne({where: {id}})
+    if (!course) { throw new ApolloError('Course not found') }
+
+    await course.destroy()
+    //ADD DELETE ALL RESOURSES
+    return id
+  },
+  async createEducationResoursePDF(parent, {courseId, inputData}, { models }){
+    const course = await models.EducationCourse.findOne({where: {id: courseId}})
+    if (!course) { throw new ApolloError('Course not found') }
+
+    const {file, ...postData} = inputData
+
+    const uploadedFile = await inputData.file
+    const { file: filePath, fileLink } = await writeImage(uploadedFile, 'education', 'pdf')
+    const image = await convertPdfToBase64(filePath)
+  
+    const postWithFile = {
+      ...postData,
+      fileLink,
+      image: 'data:image/jpeg;base64,'+image.base64,
+      educationCourseId: courseId
+    }
+    
+    return models.EducationResourse.create({...postWithFile})
+  },
+  async createEducationResourseURL(parent, {courseId, inputData}, { models }){
+    const course = await models.EducationCourse.findOne({where: {id: courseId}})
+    if (!course) { throw new ApolloError('Course not found') }
+
+    const postData = {
+      ...inputData,
+      educationCourseId: courseId
+    }
+
+    return models.EducationResourse.create({...postData})
+  },
+
+  async updateEducationResoursePDF(parent, {id, inputData}, { models }){
+    const course = await models.EducationCourse.findOne({where: {id}})
+    if (!course) { throw new ApolloError('Course not found') }
+
+    Object.keys(inputData).forEach(item => course[item] = inputData[item])
+    await course.save()
+    return course.dataValues
+
+  },
+  async updateEducationResourseURL(parent, {id, inputData}, { models }){
+    const course = await models.EducationCourse.findOne({where: {id}})
+    if (!course) { throw new ApolloError('Course not found') }
+
+    Object.keys(inputData).forEach(item => course[item] = inputData[item])
+    await course.save()
+    return course.dataValues
+
+  },
+  async deleteEducationResourse(parent, {id}, { models }){
+    const course = await models.EducationCourse.findOne({where: {id}})
+    if (!course) { throw new ApolloError('Course not found') }
+
+    await course.destroy()
+    //ADD DELETE ALL RESOURSES
+    return id
+  },
 }
 
 
 export default educationMutation
-
-
-
-// createScheduleYear(title: String!): ScheduleYear!
-// updateScheduleYear(title: String!): ScheduleYear!
-// deleteScheduleYear(id: ID!): ID!
-// createScheduleTimetable(yearId: ID!, dayId: ID!, inputData: ScheduleTimetableCreateData!): ScheduleTimetable!
-// updateScheduleTimetable(id: ID!, inputData: ScheduleTimetableUpdateData!): [ScheduleTimetable!]
-// deleteScheduleTimetable(id: ID!): ID!

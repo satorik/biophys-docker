@@ -10,6 +10,7 @@ const query =   `
     partnership: [DepartmentPartnership!]!
     courses(id: ID): [EducationCourse!]
     resourses(educationCourseId: ID!): [EducationResourse!]
+    forms(id: ID):[EducationForm!]
     form(id: ID!):EducationForm!
     years(id: ID, year: Int, term: Int): [ScheduleYear!]!
     days:[String!]! 
@@ -19,6 +20,7 @@ const query =   `
     scienceGroups(id: ID, scienceRouteId: ID): [ScienceGroup!]
     history(section: SECTION! = HISTORY):HistoryText
     admission(section: SECTION! = ADMISSION):AdmissionText
+    subSections: [EducationForm!]
   }
 `
 

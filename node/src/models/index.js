@@ -38,5 +38,6 @@ models.EducationCourse.hasMany(models.EducationResourse)
 models.ScienceRoute.hasMany(models.ScienceGroup)
 models.ScienceGroup.hasMany(models.SciencePeople)
 models.ScienceGroup.hasMany(models.ScienceArticle)
+models.EducationForm.hasOne(models.EducationForm)
 
 export { models, sequelize as default}

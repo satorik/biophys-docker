@@ -13,12 +13,20 @@ export const getValue = async (e, type, prevValue) => {
     return {value: '', imagePreview: null}
   }
   else if (type === 'textarea-long') return {value: e}
-  else if (type === 'check'){ console.log(e.target.checked); return {value: e.target.checked}}
+  else if (type === 'check'){ return {value: e.target.checked}}
   else if (type === 'date' || type === 'datetime' || type === 'course' || type === 'time') {
     return { 
       value: {
         ...prevValue,
-        [e.target.title]: type === 'course' ? e.target.value : +e.target.value
+        [e.target.title]: e.target.value
+      }
+    }
+  }
+  else if (type === 'resourse') {
+    return {
+      value : {
+        ...prevValue,
+        [e.target.title]: e.target.files ? e.target.files[0] : e.target.value
       }
     }
   }

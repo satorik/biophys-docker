@@ -42,6 +42,7 @@
     if (type === 'radio') { return label[0].value}
     if (type === 'check') { return false}
     if (type === 'course') {return {course: '', year: new Date().getFullYear(), term: 1}}
+    if (type === 'resourse') {return {form: label[0].id, file: ''}}
 
     return ''
   }
@@ -88,6 +89,9 @@
     
     if (form[id].type === 'course') {
       valueForCheck = value.course
+    }
+    if (form[id].type === 'resourse') {
+      valueForCheck = value.file
     }
  
     if (form[id].validators && form[id].validators.length > 0) {

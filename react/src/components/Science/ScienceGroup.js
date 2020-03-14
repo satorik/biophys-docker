@@ -34,6 +34,11 @@ const GET_SCIENCE_GROUPS = gql`
           birthday
           type
           position
+          urlIstina
+          urlRints
+          urlOrcid
+          urlResearcher
+          urlScopus
         }
         articles {
           id
@@ -66,6 +71,11 @@ const CREATE_SCIENCE_GROUP = gql`
           birthday
           type
           position
+          urlIstina
+          urlRints
+          urlOrcid
+          urlResearcher
+          urlScopus
         }
         articles {
           id
@@ -109,6 +119,11 @@ const CREATE_SCIENCE_GROUP = gql`
         birthday
         type
         position
+        urlIstina
+        urlRints
+        urlOrcid
+        urlResearcher
+        urlScopus
       }
     }
   `
@@ -125,6 +140,11 @@ const CREATE_SCIENCE_GROUP = gql`
         birthday
         type
         position
+        urlIstina
+        urlRints
+        urlOrcid
+        urlResearcher
+        urlScopus
       }
     }
   `
@@ -188,8 +208,7 @@ const PEOPLE_TEMPLATE= [
     title: 'middlename',
     label:'Отчество',
     type: 'input',
-    required: true,
-    validators: [required, length({ min: 3})]
+    validators: [required, length({ min: 2})]
   },
   {
     title: 'lastname',
@@ -215,8 +234,32 @@ const PEOPLE_TEMPLATE= [
     validators: [email]
   },
   {
-    title: 'url',
-    label:'Ссылка на истрину',
+    title: 'urlIstina',
+    label:'Ссылка на ИСТИНУ',
+    type:'input',
+    validators: [isUrl]
+  },
+  {
+    title: 'urlRints',
+    label:'Ссылка на РИНЦ',
+    type:'input',
+    validators: [isUrl]
+  },
+  {
+    title: 'urlOrcid',
+    label:'Ссылка на ORCID',
+    type:'input',
+    validators: [isUrl]
+  },
+  {
+    title: 'urlResearcher',
+    label:'Ссылка на Researcher',
+    type:'input',
+    validators: [isUrl]
+  },
+  {
+    title: 'urlScopus',
+    label:'Ссылка на Scopus',
     type:'input',
     validators: [isUrl]
   },
@@ -462,35 +505,60 @@ const ScienceGroup = ({match}) => {
     else setviewId(id)
   }
 
+  const clearArticleMode = () => {
+    setArticleMode({isDeleting: false, isEditing: false, isCreating: false})
+    setUpdatedArticle({})
+  }
+
+  const clearPeopleMode = () => {
+    setPeopleMode({isDeleting: false, isEditing: false, isCreating: false})
+    setUpdatedPerson({})
+  }
+
+  const clearMode = () => {
+    setMode({isDeleting: false, isEditing: false, isCreating: false})
+    setUpdatedGroup({})
+  }
+
   const onAddNewScienceGroup = (type) => {
     switch (type){
       case 'people':
         setPeopleMode({...peopleMode, isCreating: true}) 
+        clearArticleMode()
+        clearMode()  
         break
       case 'articles':
         setArticleMode({...articleMode, isCreating: true}) 
+        clearPeopleMode()
+        clearMode()
         break
       default:
         setMode({...mode, isCreating: true})
+        clearPeopleMode()
+        clearArticleMode()
     }
   }
 
   const onEditScienceGroup = (id, type) => {
     switch (type){
       case 'people':
-        console.log(id)
-        console.log(scienceGroups)
         setPeopleMode({...peopleMode, isEditing: true})
         setUpdatedPerson(scienceGroups[viewId].people[id])
+        clearArticleMode()
+        clearMode()
         break
       case 'articles':
         setArticleMode({...articleMode, isEditing: true})
         setUpdatedArticle(scienceGroups[viewId].articles[id]) 
+        clearPeopleMode()
+        clearMode()
         break
       default:
         setviewId(id)
         setMode({...mode, isEditing: true})
         setUpdatedGroup(scienceGroups[id])
+        clearPeopleMode()
+        clearArticleMode()
     }
   }
 
@@ -501,14 +569,20 @@ const ScienceGroup = ({match}) => {
       case 'people':
         setPeopleMode({...peopleMode, isDeleting: true})
         setUpdatedPerson(scienceGroups[viewId].people[id])
+        clearArticleMode()
+        clearMode()
         break
       case 'articles':
         setArticleMode({...articleMode, isDeleting: true})
         setUpdatedArticle(scienceGroups[viewId].articles[id]) 
+        clearPeopleMode()
+        clearMode()
         break
       default:
         setMode({...mode, isDeleting: true})
         setUpdatedGroup(scienceGroups[id])
+        clearPeopleMode()
+        clearArticleMode()
     }
   }
 
@@ -580,16 +654,13 @@ const ScienceGroup = ({match}) => {
   const onCancelEditing = (type) => {
     switch (type){
       case 'people':
-        setPeopleMode({isDeleting: false, isEditing: false, isCreating: false}) 
-        setUpdatedPerson({})
+        clearPeopleMode()
         break
       case 'articles':
-        setArticleMode({isDeleting: false, isEditing: false, isCreating: false})
-        setUpdatedArticle({}) 
+        clearArticleMode()
         break
       default:
-        setMode({isDeleting: false, isEditing: false, isCreating: false})
-        setUpdatedGroup({})
+        clearMode()
     }
     
     setIsAbleToSave(true)
@@ -606,8 +677,7 @@ const ScienceGroup = ({match}) => {
 
   const onCloseModal = () => {
     setIsModalOpen(false)
-    setMode({isDeleting: false, isEditing: false, isCreating: false})
-    setUpdatedGroup({})
+    clearMode()
     document.body.style.overflow = "scroll"
   }
 

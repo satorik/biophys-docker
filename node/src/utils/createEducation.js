@@ -23,7 +23,7 @@ const createEducation = async (models) => {
     type: 'PDF',
     fileLink: '/files/education/002.pdf',
     educationForm: {
-      title: 'учебник'},
+      title: 'учебник', type: 'SINGLE'},
     educationCourseId: 1
   },
   {
@@ -31,7 +31,7 @@ const createEducation = async (models) => {
     type: 'PDF',
     fileLink: '/files/education/002.pdf',
     educationForm: {
-      title: 'презентация'},
+      title: 'презентация', type: 'MULTY'},
     educationCourseId: 1
   },
   {
@@ -39,7 +39,7 @@ const createEducation = async (models) => {
     type: 'PDF',
     fileLink: '/files/education/001.docx',
     educationForm: {
-      title: 'программа'},
+      title: 'программа', type: 'SINGLE'},
     educationCourseId: 1
   },
   {
@@ -47,7 +47,7 @@ const createEducation = async (models) => {
     type: 'URL',
     fileLink: 'https://www.youtube.com/playlist?list=PLcsjsqLLSfNA8FeLBKTAgQDR3Ll7aF_vu',
     educationForm: {
-      title: 'видеозапись'},
+      title: 'видеозапись', type: 'MULTY'},
     educationCourseId: 1
   },
   {
@@ -55,7 +55,7 @@ const createEducation = async (models) => {
     type: 'PDF',
     fileLink: '/files/education/002.pdf',
     educationForm: {
-      title: 'практикум'},
+      title: 'практикум', type: 'MULTY'},
     educationCourseId: 1
   }
   ], 
