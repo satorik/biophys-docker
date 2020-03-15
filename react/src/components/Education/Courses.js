@@ -37,6 +37,7 @@ const GET_COURSES = gql`
 				id
 				title
         type
+        filetype
 			}
 		}
 	}
@@ -45,10 +46,12 @@ const GET_COURSES = gql`
     id
     title
     type
+    filetype
     subSections {
       id
       type
       title
+      filetype
     }
   }
 }
@@ -72,6 +75,14 @@ const CREATE_COURSE = gql`
         form{
           id
           title
+          type
+          filetype
+          subSections {
+            id
+            type
+            title
+            filetype
+          }
         }
       }
     }
@@ -104,8 +115,16 @@ const CREATE_RESOURSE_PDF = gql`
       description
       fileLink
       form{
-        id
-        title
+          id
+          title
+          type
+          filetype
+          subSections {
+            id
+            type
+            title
+            filetype
+          }
       }
     }
   }
@@ -120,8 +139,16 @@ const CREATE_RESOURSE_URL = gql`
       description
       fileLink
       form{
-        id
-        title
+          id
+          title
+          type
+          filetype
+          subSections {
+            id
+            type
+            title
+            filetype
+          }
       }
     }
   }
@@ -136,8 +163,16 @@ const UPDATE_RESOURSE_PDF = gql`
       description
       fileLink
       form{
-        id
-        title
+          id
+          title
+          type
+          filetype
+          subSections {
+            id
+            type
+            title
+            filetype
+          }
       }
     }
   }
@@ -151,8 +186,16 @@ const UPDATE_RESOURSE_URL = gql`
       description
       fileLink
       form{
-        id
-        title
+          id
+          title
+          type
+          filetype
+          subSections {
+            id
+            type
+            title
+            filetype
+          }
       }
     }
   }
@@ -342,17 +385,9 @@ const Courses = () => {
       }, {})
     }
     multyResourses = createResourseObject(forms)
-    console.log(multyResourses)
 
-    const materialsToAdd = forms.filter(form => {
-      // if (book && program) {return form.title !== 'учебник' && form.title !== 'программа'}
-      // else if (book) {return form.title !== 'учебник'}
-      // else if (program) {return form.title !== 'программа'}
-      return form
-    })
+    let materialsToAdd = forms.filter(form => singleResourses.filter(resourse => resourse.form.id === form.id).length === 0)
 
-    console.log(materialsToAdd)
-    
    RESOURSE_TEMPLATE = [
       {
         title: 'title',
@@ -372,7 +407,7 @@ const Courses = () => {
         label: materialsToAdd,
         type: 'resourse',
         required: true,
-        validators: []
+        validators: [required]
       }
     ]
   }
@@ -466,13 +501,17 @@ const Courses = () => {
         document.body.style.overflow = "scroll"
       }
       if (resourseMode.isCreating) {
-       console.log(postObject) 
-       if (postObject.resourse.form !== "4") {
-        await createEducationResoursePDF({ variables: {courseId: courses[viewId].id, inputData: {
-          title: postObject.title,
-          educationFormId: postObject.resourse.form,
-          file: postObject.resourse.file
-        }}})
+       console.log({
+        title: postObject.title,
+        educationFormId: postObject.resourse.subSectionSelect || postObject.resourse.subSectionText || postObject.resourse.form,
+        file: postObject.resourse.file
+        })
+       if (postObject.resourse.form.filetype === 'PDF') {
+        // await createEducationResoursePDF({ variables: {courseId: courses[viewId].id, inputData: {
+        //   title: postObject.title,
+        //   educationFormId: postObject.resourse.subSectionSelect || postObject.resourse.subSectionText || postObject.resourse.form,
+        //   file: postObject.resourse.file
+        // }}})
        }
        else {
         await createEducationResourseURL({ variables: {courseId: courses[viewId].id, inputData: {
@@ -571,34 +610,33 @@ const Courses = () => {
                                               practice: false
                                             })}
           >Материалы</p>}
-          {showResourses.basic && 
-          <>
-            {(!resourseMode.isCreating && !resourseMode.isEditing ) && 
-            <div className="p-2">
-              <div className="btn btn-outline-secondary p-3 w-100">
-                <ButtonAddNew
-                  color='orange'
-                  onClickAddButton={onAddNewResourse}
-                  size='2'
-                />
-              </div>
-            </div>  
-            }
-            {(resourseMode.isCreating || resourseMode.isEditing) && 
-            <div className="p-2">
-              <Edit 
-                onClickSubmit={onChangeResourseHandler}
-                onClickCancel={onCancelEditing}
-                isAbleToSave={isAbleToSave}
-                post={updatedResourse}
-                formTemplate={RESOURSE_TEMPLATE}
-                border
+          {(!resourseMode.isCreating && !resourseMode.isEditing ) && 
+          <div className="p-2">
+            <div className="btn btn-outline-secondary p-3 w-100">
+              <ButtonAddNew
+                color='orange'
+                onClickAddButton={onAddNewResourse}
+                size='2'
               />
             </div>
-            }   
+          </div>  
+          }
+          {(resourseMode.isCreating || resourseMode.isEditing) && 
+          <div className="p-2">
+            <Edit 
+              onClickSubmit={onChangeResourseHandler}
+              onClickCancel={onCancelEditing}
+              isAbleToSave={isAbleToSave}
+              post={updatedResourse}
+              formTemplate={RESOURSE_TEMPLATE}
+              border
+            />
+          </div>
+          }
+          {showResourses.basic && <>   
             {(singleResourses.length > 0 && Object.keys(multyResourses).length > 0) && 
             <>
-              {/* {singleResourses.length > 0 && 
+              {singleResourses.length > 0 && 
               <div className="d-flex justify-content-around">
                 {
                   singleResourses.map(resourse => 
@@ -614,18 +652,18 @@ const Courses = () => {
                   </div>)
                 }
               </div>
-              } */}
-              {Object.keys(multyResourses).length > 0 && <div className="text-danger">
-                    {Object.keys(multyResourses).join(', ')}
-                  </div>
               }
-                    {/* <CourseMaterials 
+              {Object.keys(multyResourses).length > 0 && <div>
+                    {Object.keys(multyResourses).map(form => 
+                      <CourseMaterials 
                       key={form}
                       links = {multyResourses[form]}
                       onClick = {null}
                       title = {form}
-                    /> */}
-                
+                    />
+                    )}
+                  </div>
+              }               
             </>}
           </>
         }

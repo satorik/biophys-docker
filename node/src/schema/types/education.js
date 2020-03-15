@@ -85,11 +85,6 @@ const Education = `
     TEST
   }
 
-  enum FILETYPE {
-    PDF,
-    URL
-  }
-
   type EducationCourse {
     id: ID!
     title: String!
@@ -105,7 +100,7 @@ const Education = `
     SINGLE
   }
 
-  enum RESOURSETYPE {
+  enum FILETYPE {
     PDF,
     URL
   }
@@ -114,6 +109,7 @@ const Education = `
     id: ID!
     type: SECTIONTYPE
     title: String!
+    filetype: FILETYPE!
     subSections: [EducationForm!]
   }
 
@@ -121,7 +117,6 @@ const Education = `
     id: ID!
     title: String!
     image: String
-    type: RESOURSETYPE!
     description: String
     fileLink: String!
     form: EducationForm!
@@ -150,25 +145,22 @@ const Education = `
     educationFormId: ID!
   }
 
-  input EducationResourseCreateURLData {
+  input EducationResourseCreateData {
     title: String!
     description: String
-    fileLink: String!
-    educationFormId: ID!
-  }
-
-  input EducationResourseUpdatePDFData {
-    title: String
-    description: String
+    fileLink: String
     file: Upload
     educationFormId: ID
+    educationForm: String
   }
 
-  input EducationResourseUpdateURLData {
+  input EducationResourseUpdateData {
     title: String
     description: String
     fileLink: String
+    file: Upload
     educationFormId: ID
+    educationForm: String
   }
 
 `

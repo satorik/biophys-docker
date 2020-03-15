@@ -16,6 +16,9 @@ const educationForm = (sequelize, DataTypes ) => {
   },
   type: {
     type: DataTypes.ENUM('MULTY', 'SINGLE')
+  },
+  filetype: {
+    type: DataTypes.ENUM('PDF', 'URL')
   }
   }
   )

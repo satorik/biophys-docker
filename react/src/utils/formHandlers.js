@@ -42,7 +42,7 @@
     if (type === 'radio') { return label[0].value}
     if (type === 'check') { return false}
     if (type === 'course') {return {course: '', year: new Date().getFullYear(), term: 1}}
-    if (type === 'resourse') {return {form: label[0].id, file: ''}}
+    if (type === 'resourse') {return {form: label[0].id, file: '', subSectionSelect: '', subSectionText: ''}}
 
     return ''
   }
