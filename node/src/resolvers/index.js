@@ -12,7 +12,7 @@ const resolvers = {
   ScheduleYear: {timetable: educationQuery.timetable},
   EducationCourse: {resourses: educationQuery.resourses},
   EducationResourse: {form: educationQuery.form},
-  EducationForm: {subSections: educationQuery.subSections},
+  EducationForm: {parentForm: educationQuery.parentForm},
 }
 
 //console.log(resolvers)

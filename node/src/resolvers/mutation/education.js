@@ -146,64 +146,135 @@ const educationMutation = {
     //ADD DELETE ALL RESOURSES
     return id
   },
-  async createEducationResoursePDF(parent, {courseId, inputData}, { models }){
+  async createEducationResourse(parent, {courseId, filetype,  inputData}, { models }){
     const course = await models.EducationCourse.findOne({where: {id: courseId}})
     if (!course) { throw new ApolloError('Course not found') }
 
-    const {file, ...postData} = inputData
+    let subSection = ''
 
-    const uploadedFile = await inputData.file
-    const { file: filePath, fileLink } = await writeImage(uploadedFile, 'education', 'pdf')
-    const image = await convertPdfToBase64(filePath)
+    if (inputData.subSectionId !== '' || inputData.subSectionText !== '') {
+      if (inputData.subSectionId !== '') subSection = inputData.subSectionId
+      else {
+        const parentSection = await models.EducationForm.findOne({where: {id: inputData.educationFormId}}) 
+        const newSubSection = await parentSection.createEducationForm({
+          title: inputData.subSectionText,
+          type: parentSection.type,
+          filetype
+        })
+        subSection = newSubSection.id
+      }
+    }
+
+    if (filetype === 'PDF') {
+      const {file, ...postData} = inputData
+
+      const uploadedFile = await inputData.file
+      const { file: filePath, fileLink } = await writeImage(uploadedFile, 'education', 'pdf')
+      const image = await convertPdfToBase64(filePath)
+    
+      const postWithFile = {
+        ...postData,
+        fileLink,
+        educationFormId: subSection || postData.educationFormId,
+        image: 'data:image/jpeg;base64,'+image.base64,
+        educationCourseId: courseId
+      }
+      return models.EducationResourse.create({...postWithFile})
+    }
+    else if (filetype === 'URL'){
+      const postData = {
+        ...inputData,
+        fileLink: inputData.file,
+        educationCourseId: courseId,
+        educationFormId: subSection || postData.educationFormId,
+      }
   
-    const postWithFile = {
-      ...postData,
-      fileLink,
-      image: 'data:image/jpeg;base64,'+image.base64,
-      educationCourseId: courseId
+      return models.EducationResourse.create({...postData})
     }
     
-    return models.EducationResourse.create({...postWithFile})
   },
-  async createEducationResourseURL(parent, {courseId, inputData}, { models }){
-    const course = await models.EducationCourse.findOne({where: {id: courseId}})
-    if (!course) { throw new ApolloError('Course not found') }
 
-    const postData = {
-      ...inputData,
-      educationCourseId: courseId
+  async updateEducationResourse(parent, {id, filetype, inputData}, { models }){
+    const resourse = await models.EducationResourse.findOne({where: {id}})
+    if (!resourse) { throw new ApolloError('Resourse not found') }
+
+    const form = await resourse.getEducationForm()
+   
+    if (inputData.subSectionId !== '' || inputData.subSectionText !== '') {
+      if (inputData.subSectionId !== '') resourse.educationFormId = inputData.subSectionId
+      else {
+        const parentSection = await models.EducationForm.findOne({where: {id: inputData.educationFormId}}) 
+        const newSubSection = await parentSection.createEducationForm({
+          title: inputData.subSectionText,
+          type: parentSection.type,
+          filetype
+        })
+        resourse.educationFormId = newSubSection.id
+      }
     }
 
-    return models.EducationResourse.create({...postData})
-  },
+    if (filetype === 'PDF') {
+      let isUploaded = {}
+      if (inputData.file) {
+        const uploadedFile = await inputData.file
+        isUploaded = await writeImage(uploadedFile, 'education', 'pdf')
+        const image = await convertPdfToBase64(isUploaded.file)
+        isUploaded = {
+          ...isUploaded,
+          image
+        }
+        clearImage(post.fileLink, 'education', 'pdf')
+      }
 
-  async updateEducationResoursePDF(parent, {id, inputData}, { models }){
-    const course = await models.EducationCourse.findOne({where: {id}})
-    if (!course) { throw new ApolloError('Course not found') }
+      if (isUploaded.fileLink) { 
+        resourse.fileLink = isUploaded.fileLink 
+        resourse.image = isUploaded.image
+      }
 
-    Object.keys(inputData).forEach(item => course[item] = inputData[item])
-    await course.save()
-    return course.dataValues
+      if (inputData.title) resourse.title = inputData.title
+      if (inputData.description) resourse.description = inputData.description
+    }
+    else if (filetype === 'URL'){
+      if (inputData.title) resourse.title = inputData.title
+      if (inputData.description) resourse.description = inputData.description
+      if (inputData.fileLink) resourse.fileLink = inputData.fileLink
+    }
 
-  },
-  async updateEducationResourseURL(parent, {id, inputData}, { models }){
-    const course = await models.EducationCourse.findOne({where: {id}})
-    if (!course) { throw new ApolloError('Course not found') }
+    await resourse.save()
 
-    Object.keys(inputData).forEach(item => course[item] = inputData[item])
-    await course.save()
-    return course.dataValues
+    if ((inputData.subSectionId !== '' || inputData.subSectionText !== '') && form.dataValues.educationFormId !== null ) {
+      const cntSubSectionRes = await models.EducationResourse.count({
+          where: {educationFormId: form.dataValues.id},
+        })
+      
+      if (cntSubSectionRes === 0 ) await form.destroy()
+    }
+
+
+    return resourse.dataValues
 
   },
   async deleteEducationResourse(parent, {id}, { models }){
-    const course = await models.EducationCourse.findOne({where: {id}})
-    if (!course) { throw new ApolloError('Course not found') }
+    const resourse = await models.EducationResourse.findOne({where: {id}})
+    if (!resourse) { throw new ApolloError('Resourse not found') }
 
-    await course.destroy()
-    //ADD DELETE ALL RESOURSES
+    const form = await resourse.getEducationForm()
+
+    await resourse.destroy()
+
+    if (form.dataValues.educationFormId !== null ) {
+      const cntSubSectionRes = await models.EducationResourse.count({
+          where: {educationFormId: form.dataValues.id},
+        })
+      
+      if (cntSubSectionRes === 0 ) await form.destroy()
+    }
+
     return id
   },
 }
 
 
 export default educationMutation
+
+

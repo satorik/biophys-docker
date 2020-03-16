@@ -1,36 +1,48 @@
 import React from 'react'
 import {FileCard} from './FileCard'
 
-export const CourseMaterials = ({title, links, onClick}) => {
+export const CourseMaterials = ({title, links, filetype, onClick, parentForm, onDelete, onEdit}) => {
 
-  const returnResourseDiv = (_links) => {
-    let i = 0
-    if (Array.isArray(_links)) {
-      return (
-        <div className="d-flex flex-wrap justify-content-around flex-row" key={i++}>
-          {_links.map(link => {
-            if (link.id) {return <FileCard 
-                    key={link.id}
-                    fileLink={link.fileLink}
-                    title={link.title}
-                    description={link.description}
-                    image={link.image}
-                    onEditClick={null}
-                    onDeleteClick={null}
-                />}
-            else {return returnResourseDiv(link)}
-            })
-          }
-        </div>
-      )
-    }
-    else {
-      return Object.keys(_links).map(link => <div key={link}>
-        <p className="bg-secondary text-white w-50">{link}</p>
-        {returnResourseDiv(_links[link])}
-      </div>) 
-    }
+  //console.log(links)
+  //console.log(parentForm)
+
+  const createResDiv = (reses) => {
+    return <div className="d-flex flex-wrap justify-content-around flex-row">
+      { reses.map (res => <FileCard 
+                    key={res.id}
+                    fileLink={res.fileLink}
+                    title={res.title}
+                    description={res.description}
+                    image={res.image}
+                    onEditClick={() => onEdit(res.id)}
+                    onDeleteClick={() => onDelete(res.id)}
+                    filetype={filetype}
+                />)
+
+      }
+    </div>
   }
+
+  const subSections = links.filter(link => link.form.id !== parentForm).reduce((acc, el) => {
+    acc = [...acc, {id: el.form.id, title: el.form.title}]
+    return acc
+  }, [])
+
+  console.log(subSections)
+
+  const courseMaterials = <div>
+      {
+        createResDiv(links.filter(link => link.form.id === parentForm))
+      }
+     {subSections.length > 0 && <div id="subsections">
+        {
+          subSections.map(subSecion => <div key={subSecion}>
+            <p className="bg-secondary text-white w-50">{subSecion.title}</p>
+            {createResDiv(links.filter(link => link.form.id === subSecion.id))}
+          </div>)
+        }
+      </div>}
+  </div>
 
   return (
     <div className="w-100 mt-2 text-center" >
@@ -39,9 +51,7 @@ export const CourseMaterials = ({title, links, onClick}) => {
       style={{cursor: 'pointer'}} 
       onClick={onClick}
       >{title}</p>
-
-         {returnResourseDiv(links)}
-
+        { courseMaterials }
     </div>
   )
 }

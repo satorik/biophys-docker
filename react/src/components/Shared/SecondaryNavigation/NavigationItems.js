@@ -1,17 +1,17 @@
 import React from 'react'
-import {Link} from 'react-router-dom'
+import {Link, useLocation, useHistory } from 'react-router-dom'
 import EditButtons from '../../UI/EditButtons'
 
-const NavigationItems = ({title, id, onNavigationChange, selected, path, onEdit, onDelete}) => {
+const NavigationItems = ({title, id, path, onEdit, onDelete}) => {
   
-  let divClass = 'text-wrap p-2 d-flex align-items-center justify-content-center'
+  const location = useLocation()
 
-  divClass = selected === id ? divClass+' nav-link-secondary-active' : divClass+' nav-link-secondary'
+  let divClass = 'text-wrap p-2 d-flex align-items-center justify-content-center'
+  divClass = location.pathname === path ? divClass+' nav-link-secondary-active' : divClass+' nav-link-secondary'
 
   return (
   <div 
       className={divClass}
-      onClick={() => onNavigationChange(id)}
       >
         <Link to={path} className="font-weight-bold text-center px-5 text-white" style={{ textDecoration: 'none'}}>{title}</Link>
         {

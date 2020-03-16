@@ -23,7 +23,15 @@ export const getValue = async (e, type, prevValue) => {
     }
   }
   else if (type === 'resourse') {
-    return {
+    if (e.target.title === 'form') return {
+      value : {
+        ...prevValue,
+        subSectionSelect: '',
+        subSectionText: '',
+        [e.target.title]: e.target.files ? e.target.files[0] : e.target.value
+      }
+    }
+    else return {
       value : {
         ...prevValue,
         [e.target.title]: e.target.files ? e.target.files[0] : e.target.value

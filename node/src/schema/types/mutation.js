@@ -51,10 +51,8 @@ const mutation =   `
     createEducationCourse(inputData: EducationCourseCreateData!): EducationCourse!
     updateEducationCourse(id: ID!, inputData: EducationCourseUpdateData!): EducationCourse!
     deleteEducationCourse(id: ID!): ID!
-    createEducationResoursePDF(courseId: ID!, inputData: EducationResourseCreatePDFData!): EducationResourse!
-    createEducationResourseURL(courseId: ID!, inputData: EducationResourseCreateURLData!): EducationResourse!
-    updateEducationResoursePDF(id: ID!, inputData: EducationResourseUpdatePDFData!): EducationResourse!
-    updateEducationResourseURL(id: ID!, inputData: EducationResourseUpdateURLData!): EducationResourse!
+    createEducationResourse(courseId: ID!, filetype: FILETYPE!,  inputData: EducationResourseCreateData!): EducationResourse!
+    updateEducationResourse(id: ID!, filetype: FILETYPE!, inputData: EducationResourseUpdateData!): EducationResourse!
     deleteEducationResourse(id: ID!): ID!
   }
 `

@@ -54,8 +54,8 @@ const educationQuery = {
   admission(parent, {section}, {models}){
     return models.TextDescription.findOne({where: {section}, raw: true})
   },
-  subSections(parent, args, {models}){
-    return models.EducationForm.findAll({raw:true, where: {educationFormId: parent.id}})
+  parentForm(parent, args, {models}){
+    return models.EducationForm.findOne({raw:true, where: {id: parent.educationFormId}})
   }
 }
 

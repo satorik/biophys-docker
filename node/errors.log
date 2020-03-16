@@ -6492,4 +6492,457 @@
 			]
 		}
 	}
+}2020-03-15T19:14:32.343Z{
+	"message": "Variable \"$filetype\" of required type \"FILETYPE!\" was not provided.",
+	"locations": [
+		{
+			"line": 1,
+			"column": 50
+		}
+	],
+	"extensions": {
+		"code": "INTERNAL_SERVER_ERROR",
+		"exception": {
+			"stacktrace": [
+				"GraphQLError: Variable \"$filetype\" of required type \"FILETYPE!\" was not provided.",
+				"    at _loop (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\graphql\\execution\\values.js:92:17)",
+				"    at coerceVariableValues (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\graphql\\execution\\values.js:119:16)",
+				"    at getVariableValues (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\graphql\\execution\\values.js:48:19)",
+				"    at buildExecutionContext (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\graphql\\execution\\execute.js:184:61)",
+				"    at executeImpl (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\graphql\\execution\\execute.js:89:20)",
+				"    at Object.execute (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\graphql\\execution\\execute.js:64:35)",
+				"    at C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\apollo-server-core\\src\\requestPipeline.ts:481:30",
+				"    at Generator.next (<anonymous>)",
+				"    at C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\apollo-server-core\\dist\\requestPipeline.js:8:71",
+				"    at new Promise (<anonymous>)",
+				"    at __awaiter (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\apollo-server-core\\dist\\requestPipeline.js:4:12)",
+				"    at execute (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\apollo-server-core\\dist\\requestPipeline.js:225:20)",
+				"    at Object.<anonymous> (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\apollo-server-core\\src\\requestPipeline.ts:364:30)",
+				"    at Generator.next (<anonymous>)",
+				"    at fulfilled (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\apollo-server-core\\dist\\requestPipeline.js:5:58)",
+				"    at process._tickCallback (internal/process/next_tick.js:68:7)"
+			]
+		}
+	}
+}2020-03-15T19:31:38.804Z{
+	"message": "file is not defined",
+	"locations": [
+		{
+			"line": 2,
+			"column": 3
+		}
+	],
+	"path": [
+		"createEducationResourse"
+	],
+	"extensions": {
+		"code": "INTERNAL_SERVER_ERROR",
+		"exception": {
+			"stacktrace": [
+				"ReferenceError: file is not defined",
+				"    at _callee13$ (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\src\\resolvers\\mutation/education.js:189:19)",
+				"    at tryCatch (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\regenerator-runtime\\runtime.js:45:40)",
+				"    at Generator.invoke [as _invoke] (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\regenerator-runtime\\runtime.js:271:22)",
+				"    at Generator.prototype.(anonymous function) [as next] (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\regenerator-runtime\\runtime.js:97:21)",
+				"    at asyncGeneratorStep (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\src\\resolvers\\mutation\\education.js:32:103)",
+				"    at _next (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\src\\resolvers\\mutation\\education.js:34:194)"
+			]
+		}
+	}
+}2020-03-16T09:59:32.577Z{
+	"message": "Cannot read property 'create' of undefined",
+	"locations": [
+		{
+			"line": 2,
+			"column": 3
+		}
+	],
+	"path": [
+		"createEducationResourse"
+	],
+	"extensions": {
+		"code": "INTERNAL_SERVER_ERROR",
+		"exception": {
+			"stacktrace": [
+				"TypeError: Cannot read property 'create' of undefined",
+				"    at _callee13$ (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\src\\resolvers\\mutation/education.js:158:59)",
+				"    at tryCatch (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\regenerator-runtime\\runtime.js:45:40)",
+				"    at Generator.invoke [as _invoke] (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\regenerator-runtime\\runtime.js:271:22)",
+				"    at Generator.prototype.(anonymous function) [as next] (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\regenerator-runtime\\runtime.js:97:21)",
+				"    at asyncGeneratorStep (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\src\\resolvers\\mutation\\education.js:32:103)",
+				"    at _next (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\src\\resolvers\\mutation\\education.js:34:194)"
+			]
+		}
+	}
+}2020-03-16T10:00:57.304Z{
+	"message": "Validation error",
+	"locations": [
+		{
+			"line": 2,
+			"column": 3
+		}
+	],
+	"path": [
+		"createEducationResourse"
+	],
+	"extensions": {
+		"code": "INTERNAL_SERVER_ERROR",
+		"exception": {
+			"name": "SequelizeUniqueConstraintError",
+			"errors": [
+				{
+					"message": "id must be unique",
+					"type": "unique violation",
+					"path": "id",
+					"value": "6",
+					"origin": "DB",
+					"instance": {
+						"id": null,
+						"title": "Практикум для умных",
+						"type": "MULTY",
+						"filetype": "PDF",
+						"educationFormId": "5",
+						"updatedAt": "2020-03-16T10:00:57.282Z",
+						"createdAt": "2020-03-16T10:00:57.282Z"
+					},
+					"validatorKey": "not_unique",
+					"validatorName": null,
+					"validatorArgs": []
+				}
+			],
+			"fields": {
+				"id": "6"
+			},
+			"parent": {
+				"name": "error",
+				"length": 208,
+				"severity": "ERROR",
+				"code": "23505",
+				"detail": "Key (id)=(6) already exists.",
+				"schema": "biophys",
+				"table": "educationForms",
+				"constraint": "educationForms_pkey",
+				"file": "nbtinsert.c",
+				"line": "535",
+				"routine": "_bt_check_unique",
+				"sql": "INSERT INTO \"biophys\".\"educationForms\" (\"id\",\"title\",\"type\",\"filetype\",\"createdAt\",\"updatedAt\",\"educationFormId\") VALUES (DEFAULT,$1,$2,$3,$4,$5,$6) RETURNING *;",
+				"parameters": [
+					"Практикум для умных",
+					"MULTY",
+					"PDF",
+					"2020-03-16 10:00:57.282 +00:00",
+					"2020-03-16 10:00:57.282 +00:00",
+					"5"
+				]
+			},
+			"original": {
+				"name": "error",
+				"length": 208,
+				"severity": "ERROR",
+				"code": "23505",
+				"detail": "Key (id)=(6) already exists.",
+				"schema": "biophys",
+				"table": "educationForms",
+				"constraint": "educationForms_pkey",
+				"file": "nbtinsert.c",
+				"line": "535",
+				"routine": "_bt_check_unique",
+				"sql": "INSERT INTO \"biophys\".\"educationForms\" (\"id\",\"title\",\"type\",\"filetype\",\"createdAt\",\"updatedAt\",\"educationFormId\") VALUES (DEFAULT,$1,$2,$3,$4,$5,$6) RETURNING *;",
+				"parameters": [
+					"Практикум для умных",
+					"MULTY",
+					"PDF",
+					"2020-03-16 10:00:57.282 +00:00",
+					"2020-03-16 10:00:57.282 +00:00",
+					"5"
+				]
+			},
+			"sql": "INSERT INTO \"biophys\".\"educationForms\" (\"id\",\"title\",\"type\",\"filetype\",\"createdAt\",\"updatedAt\",\"educationFormId\") VALUES (DEFAULT,$1,$2,$3,$4,$5,$6) RETURNING *;",
+			"stacktrace": [
+				"SequelizeUniqueConstraintError: Validation error",
+				"    at Query.formatError (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\sequelize\\lib\\dialects\\postgres\\query.js:324:18)",
+				"    at query.catch.err (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\sequelize\\lib\\dialects\\postgres\\query.js:72:18)",
+				"    at tryCatcher (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\bluebird\\js\\release\\util.js:16:23)",
+				"    at Promise._settlePromiseFromHandler (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\bluebird\\js\\release\\promise.js:547:31)",
+				"    at Promise._settlePromise (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\bluebird\\js\\release\\promise.js:604:18)",
+				"    at Promise._settlePromise0 (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\bluebird\\js\\release\\promise.js:649:10)",
+				"    at Promise._settlePromises (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\bluebird\\js\\release\\promise.js:725:18)",
+				"    at _drainQueueStep (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\bluebird\\js\\release\\async.js:93:12)",
+				"    at _drainQueue (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\bluebird\\js\\release\\async.js:86:9)",
+				"    at Async._drainQueues (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\bluebird\\js\\release\\async.js:102:5)",
+				"    at Immediate.Async.drainQueues [as _onImmediate] (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\bluebird\\js\\release\\async.js:15:14)",
+				"    at runCallback (timers.js:705:18)",
+				"    at tryOnImmediate (timers.js:676:5)",
+				"    at processImmediate (timers.js:658:5)",
+				"    at process.topLevelDomainCallback (domain.js:120:23)"
+			]
+		}
+	}
+}2020-03-16T10:16:30.112Z{
+	"message": "Validation error",
+	"locations": [
+		{
+			"line": 2,
+			"column": 3
+		}
+	],
+	"path": [
+		"createEducationResourse"
+	],
+	"extensions": {
+		"code": "INTERNAL_SERVER_ERROR",
+		"exception": {
+			"name": "SequelizeUniqueConstraintError",
+			"errors": [
+				{
+					"message": "id must be unique",
+					"type": "unique violation",
+					"path": "id",
+					"value": "7",
+					"origin": "DB",
+					"instance": {
+						"id": null,
+						"title": "dfgdfggggggggg",
+						"type": "MULTY",
+						"filetype": "PDF",
+						"educationFormId": 2,
+						"updatedAt": "2020-03-16T10:16:30.093Z",
+						"createdAt": "2020-03-16T10:16:30.093Z"
+					},
+					"validatorKey": "not_unique",
+					"validatorName": null,
+					"validatorArgs": []
+				}
+			],
+			"fields": {
+				"id": "7"
+			},
+			"parent": {
+				"name": "error",
+				"length": 208,
+				"severity": "ERROR",
+				"code": "23505",
+				"detail": "Key (id)=(7) already exists.",
+				"schema": "biophys",
+				"table": "educationForms",
+				"constraint": "educationForms_pkey",
+				"file": "nbtinsert.c",
+				"line": "535",
+				"routine": "_bt_check_unique",
+				"sql": "INSERT INTO \"biophys\".\"educationForms\" (\"id\",\"title\",\"type\",\"filetype\",\"createdAt\",\"updatedAt\",\"educationFormId\") VALUES (DEFAULT,$1,$2,$3,$4,$5,$6) RETURNING *;",
+				"parameters": [
+					"dfgdfggggggggg",
+					"MULTY",
+					"PDF",
+					"2020-03-16 10:16:30.093 +00:00",
+					"2020-03-16 10:16:30.093 +00:00",
+					2
+				]
+			},
+			"original": {
+				"name": "error",
+				"length": 208,
+				"severity": "ERROR",
+				"code": "23505",
+				"detail": "Key (id)=(7) already exists.",
+				"schema": "biophys",
+				"table": "educationForms",
+				"constraint": "educationForms_pkey",
+				"file": "nbtinsert.c",
+				"line": "535",
+				"routine": "_bt_check_unique",
+				"sql": "INSERT INTO \"biophys\".\"educationForms\" (\"id\",\"title\",\"type\",\"filetype\",\"createdAt\",\"updatedAt\",\"educationFormId\") VALUES (DEFAULT,$1,$2,$3,$4,$5,$6) RETURNING *;",
+				"parameters": [
+					"dfgdfggggggggg",
+					"MULTY",
+					"PDF",
+					"2020-03-16 10:16:30.093 +00:00",
+					"2020-03-16 10:16:30.093 +00:00",
+					2
+				]
+			},
+			"sql": "INSERT INTO \"biophys\".\"educationForms\" (\"id\",\"title\",\"type\",\"filetype\",\"createdAt\",\"updatedAt\",\"educationFormId\") VALUES (DEFAULT,$1,$2,$3,$4,$5,$6) RETURNING *;",
+			"stacktrace": [
+				"SequelizeUniqueConstraintError: Validation error",
+				"    at Query.formatError (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\sequelize\\lib\\dialects\\postgres\\query.js:324:18)",
+				"    at query.catch.err (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\sequelize\\lib\\dialects\\postgres\\query.js:72:18)",
+				"    at tryCatcher (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\bluebird\\js\\release\\util.js:16:23)",
+				"    at Promise._settlePromiseFromHandler (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\bluebird\\js\\release\\promise.js:547:31)",
+				"    at Promise._settlePromise (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\bluebird\\js\\release\\promise.js:604:18)",
+				"    at Promise._settlePromise0 (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\bluebird\\js\\release\\promise.js:649:10)",
+				"    at Promise._settlePromises (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\bluebird\\js\\release\\promise.js:725:18)",
+				"    at _drainQueueStep (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\bluebird\\js\\release\\async.js:93:12)",
+				"    at _drainQueue (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\bluebird\\js\\release\\async.js:86:9)",
+				"    at Async._drainQueues (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\bluebird\\js\\release\\async.js:102:5)",
+				"    at Immediate.Async.drainQueues [as _onImmediate] (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\bluebird\\js\\release\\async.js:15:14)",
+				"    at runCallback (timers.js:705:18)",
+				"    at tryOnImmediate (timers.js:676:5)",
+				"    at processImmediate (timers.js:658:5)",
+				"    at process.topLevelDomainCallback (domain.js:120:23)"
+			]
+		}
+	}
+}2020-03-16T10:52:31.125Z{
+	"message": "Cannot query field \"subSections\" on type \"EducationForm\".",
+	"locations": [
+		{
+			"line": 31,
+			"column": 5
+		}
+	],
+	"extensions": {
+		"code": "GRAPHQL_VALIDATION_FAILED",
+		"exception": {
+			"stacktrace": [
+				"GraphQLError: Cannot query field \"subSections\" on type \"EducationForm\".",
+				"    at Object.Field (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\graphql\\validation\\rules\\FieldsOnCorrectType.js:53:31)",
+				"    at Object.enter (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\graphql\\language\\visitor.js:324:29)",
+				"    at Object.enter (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\graphql\\language\\visitor.js:375:25)",
+				"    at visit (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\graphql\\language\\visitor.js:242:26)",
+				"    at Object.validate (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\graphql\\validation\\validate.js:73:24)",
+				"    at validate (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\apollo-server-core\\src\\requestPipeline.ts:443:22)",
+				"    at Object.<anonymous> (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\apollo-server-core\\src\\requestPipeline.ts:252:32)",
+				"    at Generator.next (<anonymous>)",
+				"    at fulfilled (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\apollo-server-core\\dist\\requestPipeline.js:5:58)",
+				"    at process._tickCallback (internal/process/next_tick.js:68:7)"
+			]
+		}
+	}
+}2020-03-16T10:53:40.281Z{
+	"message": "Cannot return null for non-nullable field EducationForm.parentForm.",
+	"locations": [
+		{
+			"line": 31,
+			"column": 5
+		}
+	],
+	"path": [
+		"forms",
+		0,
+		"parentForm"
+	],
+	"extensions": {
+		"code": "INTERNAL_SERVER_ERROR",
+		"exception": {
+			"stacktrace": [
+				"Error: Cannot return null for non-nullable field EducationForm.parentForm.",
+				"    at completeValue (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\graphql\\execution\\execute.js:560:13)",
+				"    at C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\graphql\\execution\\execute.js:492:16",
+				"    at tryCatcher (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\bluebird\\js\\release\\util.js:16:23)",
+				"    at Promise._settlePromiseFromHandler (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\bluebird\\js\\release\\promise.js:547:31)",
+				"    at Promise._settlePromise (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\bluebird\\js\\release\\promise.js:604:18)",
+				"    at Promise._settlePromise0 (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\bluebird\\js\\release\\promise.js:649:10)",
+				"    at Promise._settlePromises (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\bluebird\\js\\release\\promise.js:729:18)",
+				"    at _drainQueueStep (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\bluebird\\js\\release\\async.js:93:12)",
+				"    at _drainQueue (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\bluebird\\js\\release\\async.js:86:9)",
+				"    at Async._drainQueues (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\bluebird\\js\\release\\async.js:102:5)",
+				"    at Immediate.Async.drainQueues [as _onImmediate] (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\bluebird\\js\\release\\async.js:15:14)",
+				"    at runCallback (timers.js:705:18)",
+				"    at tryOnImmediate (timers.js:676:5)",
+				"    at processImmediate (timers.js:658:5)",
+				"    at process.topLevelDomainCallback (domain.js:120:23)"
+			]
+		}
+	}
+}2020-03-16T10:55:43.406Z{
+	"message": "Cannot query field \"type\" on type \"EducationResourse\".",
+	"locations": [
+		{
+			"line": 13,
+			"column": 7
+		}
+	],
+	"extensions": {
+		"code": "GRAPHQL_VALIDATION_FAILED",
+		"exception": {
+			"stacktrace": [
+				"GraphQLError: Cannot query field \"type\" on type \"EducationResourse\".",
+				"    at Object.Field (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\graphql\\validation\\rules\\FieldsOnCorrectType.js:53:31)",
+				"    at Object.enter (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\graphql\\language\\visitor.js:324:29)",
+				"    at Object.enter (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\graphql\\language\\visitor.js:375:25)",
+				"    at visit (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\graphql\\language\\visitor.js:242:26)",
+				"    at Object.validate (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\graphql\\validation\\validate.js:73:24)",
+				"    at validate (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\apollo-server-core\\src\\requestPipeline.ts:443:22)",
+				"    at Object.<anonymous> (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\apollo-server-core\\src\\requestPipeline.ts:252:32)",
+				"    at Generator.next (<anonymous>)",
+				"    at fulfilled (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\apollo-server-core\\dist\\requestPipeline.js:5:58)",
+				"    at process._tickCallback (internal/process/next_tick.js:68:7)"
+			]
+		}
+	}
+}2020-03-16T14:13:54.484Z{
+	"message": "Course not found",
+	"locations": [
+		{
+			"line": 2,
+			"column": 3
+		}
+	],
+	"path": [
+		"deleteEducationResourse"
+	],
+	"extensions": {
+		"code": "INTERNAL_SERVER_ERROR",
+		"exception": {
+			"stacktrace": [
+				"Error: Course not found",
+				"    at _callee15$ (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\src\\resolvers\\mutation/education.js:208:26)",
+				"    at tryCatch (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\regenerator-runtime\\runtime.js:45:40)",
+				"    at Generator.invoke [as _invoke] (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\regenerator-runtime\\runtime.js:271:22)",
+				"    at Generator.prototype.(anonymous function) [as next] (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\regenerator-runtime\\runtime.js:97:21)",
+				"    at asyncGeneratorStep (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\src\\resolvers\\mutation\\education.js:32:103)",
+				"    at _next (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\src\\resolvers\\mutation\\education.js:34:194)"
+			]
+		}
+	}
+}2020-03-16T14:21:24.657Z{
+	"message": "resourse.educationForm is not a function",
+	"locations": [
+		{
+			"line": 2,
+			"column": 3
+		}
+	],
+	"path": [
+		"deleteEducationResourse"
+	],
+	"extensions": {
+		"code": "INTERNAL_SERVER_ERROR",
+		"exception": {
+			"stacktrace": [
+				"TypeError: resourse.educationForm is not a function",
+				"    at _callee15$ (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\src\\resolvers\\mutation/education.js:210:33)",
+				"    at tryCatch (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\regenerator-runtime\\runtime.js:45:40)",
+				"    at Generator.invoke [as _invoke] (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\regenerator-runtime\\runtime.js:271:22)",
+				"    at Generator.prototype.(anonymous function) [as next] (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\regenerator-runtime\\runtime.js:97:21)",
+				"    at asyncGeneratorStep (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\src\\resolvers\\mutation\\education.js:32:103)",
+				"    at _next (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\src\\resolvers\\mutation\\education.js:34:194)"
+			]
+		}
+	}
+}2020-03-16T14:29:54.696Z{
+	"message": "sequelize is not defined",
+	"locations": [
+		{
+			"line": 2,
+			"column": 3
+		}
+	],
+	"path": [
+		"deleteEducationResourse"
+	],
+	"extensions": {
+		"code": "INTERNAL_SERVER_ERROR",
+		"exception": {
+			"stacktrace": [
+				"ReferenceError: sequelize is not defined",
+				"    at _callee15$ (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\src\\resolvers\\mutation/education.js:214:25)",
+				"    at tryCatch (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\regenerator-runtime\\runtime.js:45:40)",
+				"    at Generator.invoke [as _invoke] (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\regenerator-runtime\\runtime.js:271:22)",
+				"    at Generator.prototype.(anonymous function) [as next] (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\regenerator-runtime\\runtime.js:97:21)",
+				"    at asyncGeneratorStep (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\src\\resolvers\\mutation\\education.js:32:103)",
+				"    at _next (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\src\\resolvers\\mutation\\education.js:34:194)"
+			]
+		}
+	}
 }

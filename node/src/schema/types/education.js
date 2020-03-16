@@ -110,7 +110,7 @@ const Education = `
     type: SECTIONTYPE
     title: String!
     filetype: FILETYPE!
-    subSections: [EducationForm!]
+    parentForm: EducationForm
   }
 
   type EducationResourse {
@@ -138,20 +138,14 @@ const Education = `
     exam: EXAMTYPE
   }
 
-  input EducationResourseCreatePDFData {
-    title: String!
-    description: String
-    file: Upload!
-    educationFormId: ID!
-  }
-
   input EducationResourseCreateData {
     title: String!
     description: String
     fileLink: String
     file: Upload
-    educationFormId: ID
-    educationForm: String
+    educationFormId: ID!
+    subSectionText: String
+    subSectionId: ID
   }
 
   input EducationResourseUpdateData {
@@ -160,7 +154,8 @@ const Education = `
     fileLink: String
     file: Upload
     educationFormId: ID
-    educationForm: String
+    subSectionText: String
+    subSectionId: ID
   }
 
 `

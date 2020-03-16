@@ -34,10 +34,10 @@ const models = {
 }
 
 models.EducationResourse.belongsTo(models.EducationForm)
-models.EducationCourse.hasMany(models.EducationResourse)
-models.ScienceRoute.hasMany(models.ScienceGroup)
-models.ScienceGroup.hasMany(models.SciencePeople)
-models.ScienceGroup.hasMany(models.ScienceArticle)
+models.EducationCourse.hasMany(models.EducationResourse, { onDelete: 'cascade' })
+models.ScienceRoute.hasMany(models.ScienceGroup, { onDelete: 'cascade' })
+models.ScienceGroup.hasMany(models.SciencePeople, { onDelete: 'cascade' })
+models.ScienceGroup.hasMany(models.ScienceArticle, { onDelete: 'cascade' })
 models.EducationForm.hasOne(models.EducationForm)
 
 export { models, sequelize as default}

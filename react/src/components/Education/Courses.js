@@ -38,6 +38,12 @@ const GET_COURSES = gql`
 				title
         type
         filetype
+        parentForm {
+          id
+          type
+          title
+          filetype
+        }
 			}
 		}
 	}
@@ -47,7 +53,7 @@ const GET_COURSES = gql`
     title
     type
     filetype
-    subSections {
+    parentForm {
       id
       type
       title
@@ -77,7 +83,7 @@ const CREATE_COURSE = gql`
           title
           type
           filetype
-          subSections {
+          parentForm {
             id
             type
             title
@@ -106,9 +112,9 @@ const UPDATE_COURSE = gql`
     }
   }
 `
-const CREATE_RESOURSE_PDF = gql`
-  mutation createEducationResoursePDF($courseId: ID!, $inputData: EducationResourseCreatePDFData!) {
-    createEducationResoursePDF(courseId: $courseId, inputData: $inputData) {
+const CREATE_RESOURSE = gql`
+  mutation createEducationResourse($courseId: ID!, $filetype: FILETYPE!,  $inputData: EducationResourseCreateData!) {
+    createEducationResourse(courseId: $courseId, inputData: $inputData, filetype: $filetype) {
       id
       title
       image
@@ -119,7 +125,7 @@ const CREATE_RESOURSE_PDF = gql`
           title
           type
           filetype
-          subSections {
+          parentForm {
             id
             type
             title
@@ -130,9 +136,9 @@ const CREATE_RESOURSE_PDF = gql`
   }
 `
 
-const CREATE_RESOURSE_URL = gql`
-  mutation createEducationResourseURL($courseId: ID!, $inputData: EducationResourseCreateURLData!) {
-    createEducationResourseURL(courseId: $courseId, inputData: $inputData) {
+const UPDATE_RESOURSE = gql`
+  mutation updateEducationResourse($id: ID!, $filetype: FILETYPE!,  $inputData: EducationResourseUpdateData!) {
+    updateEducationResourse(id: $id, filetype: $filetype, inputData: $inputData) {
       id
       title
       image
@@ -143,54 +149,7 @@ const CREATE_RESOURSE_URL = gql`
           title
           type
           filetype
-          subSections {
-            id
-            type
-            title
-            filetype
-          }
-      }
-    }
-  }
-`
-
-const UPDATE_RESOURSE_PDF = gql`
-  mutation updateEducationResoursePDF($id: ID!, $inputData: EducationResourseUpdatePDFData!) {
-    updateEducationResoursePDF(id: $id, inputData: $inputData) {
-      id
-      title
-      image
-      description
-      fileLink
-      form{
-          id
-          title
-          type
-          filetype
-          subSections {
-            id
-            type
-            title
-            filetype
-          }
-      }
-    }
-  }
-`
-const UPDATE_RESOURSE_URL = gql`
-  mutation updateEducationResourseURL($id: ID!, $inputData: EducationResourseUpdateURLData!) {
-    updateEducationResourseURL(id: $id, inputData: $inputData) {
-      id
-      title
-      image
-      description
-      fileLink
-      form{
-          id
-          title
-          type
-          filetype
-          subSections {
+          parentForm {
             id
             type
             title
@@ -281,9 +240,9 @@ const Courses = () => {
         }
       })
 
-  const [createEducationResoursePDF,
-    { loading: createResoursePDFLoading, error: createResoursePDFError }] = useMutation(CREATE_RESOURSE_PDF, {
-      update(cache, { data: {createEducationResoursePDF} }) {
+  const [createEducationResourse,
+    { loading: createResourseLoading, error: createResourseError }] = useMutation(CREATE_RESOURSE, {
+      update(cache, { data: {createEducationResourse} }) {
         const { courses } = cache.readQuery({ query: GET_COURSES })
         cache.writeQuery({
           query: GET_COURSES,
@@ -291,7 +250,7 @@ const Courses = () => {
             if (idx === viewId) {
               return {
                 ...course,
-                resourses: [...course.resourses, createEducationResoursePDF]
+                resourses: [...course.resourses, createEducationResourse]
               }
             }
             return course
@@ -300,31 +259,9 @@ const Courses = () => {
       }
     })
   
-  const [createEducationResourseURL,
-    { loading: createResourseURLLoading, error: createResourseURLError }] = useMutation(CREATE_RESOURSE_URL, {
-      update(cache, { data: {createEducationResourseURL} }) {
-        const { courses } = cache.readQuery({ query: GET_COURSES })
-        cache.writeQuery({
-          query: GET_COURSES,
-          data: { ...data, courses: courses.map((course, idx) => {
-            if (idx === viewId) {
-              return {
-                ...course,
-                resourses: [...course.resourses, createEducationResourseURL]
-              }
-            }
-            return course
-          })}
-        })
-      }
-    })
-
-  const [updateEducationResoursePDF,
-    { loading: updateResoursePDFLoading, error: updateResoursePDFError }] = useMutation(UPDATE_RESOURSE_PDF)
+  const [updateEducationResourse,
+    { loading: updateResourseLoading, error: updateResourseError }] = useMutation(UPDATE_RESOURSE)
   
-  const [updateEducationResourseURL,
-    { loading: updateResourseURLLoading, error: updateResourseURLError }] = useMutation(UPDATE_RESOURSE_URL)
-
   const [deleteEducationResourse,
     { loading: deleteEducationResourseLoading, error: deleteEducationResourseError }] = useMutation(DELETE_RESOURSE, {
       update(cache, { data: { deleteEducationResourse } }) {
@@ -350,41 +287,23 @@ const Courses = () => {
   if (deletingError) return <NetworkErrorComponent error={deletingError} />
   if (creatingError) return <NetworkErrorComponent error={creatingError} />
 
-  if (createResoursePDFError) return <NetworkErrorComponent error={createResoursePDFError} />
-  if (createResourseURLError) return <NetworkErrorComponent error={createResourseURLError} />
-  if (updateResoursePDFError) return <NetworkErrorComponent error={updateResoursePDFError} />
-  if (updateResourseURLError) return <NetworkErrorComponent error={updateResourseURLError} />
+  if (createResourseError) return <NetworkErrorComponent error={createResourseError} />
+  if (updateResourseError) return <NetworkErrorComponent error={updateResourseError} />
   if (deleteEducationResourseError) return <NetworkErrorComponent error={deleteEducationResourseError} />
 
   const { courses, forms } = data
 
   const resourses = []
-  let multyResourses = {}
+  let multyResourses = []
   const singleResourses = []
   let RESOURSE_TEMPLATE = []
+
+  //const mainMultyForms = forms.filter(form => form.type === 'MULTY')
 
   if (courses.length > 0) {
     resourses.push(...courses[viewId].resourses)
     singleResourses.push(...courses[viewId].resourses.filter(resourse => resourse.form.type === 'SINGLE'))
-
-    const createResourseObject = (_forms) => {
-      return _forms.reduce((allResourses, _form) => {
-        if (_form.type === 'MULTY') {
-          const typedReses = courses[viewId].resourses.filter(resourse => resourse.form.id === _form.id)
-          if (typedReses.length > 0 ) {
-            allResourses[_form.title] = typedReses
-            if (_form.subSections && _form.subSections.length > 0 ) {
-              allResourses[_form.title].push(createResourseObject(_form.subSections))
-            }
-          }
-          else if (_form.subSections && _form.subSections.length > 0) {
-            allResourses[_form.title] = createResourseObject(_form.subSections)
-          }
-        }
-        return allResourses
-      }, {})
-    }
-    multyResourses = createResourseObject(forms)
+    multyResourses.push(...courses[viewId].resourses.filter(resourse => resourse.form.type === 'MULTY'))
 
     let materialsToAdd = forms.filter(form => singleResourses.filter(resourse => resourse.form.id === form.id).length === 0)
 
@@ -465,21 +384,32 @@ const Courses = () => {
     setUpdatedCourse(courses[id])
   }
 
-  const onDeleteCourseHandler = async () => {
-    await deleteEducationCourse({ variables: {id: updatedCourse.id}})
-    setIsModalOpen(false)
-    setMode({...mode, isDeleting: false})
-    document.body.style.overflow = "scroll"
-    setUpdatedCourse({})
+  const onDeleteResourse = (id) => {
+    setIsModalOpen(true)
+    document.body.style.overflow = "hidden"
+    setResourseMode({...resourseMode, isDeleting: true})
+    setUpdatedResourse(courses[viewId].resourses.find(resourse => resourse.id === id))
   }
 
-  const onDeleteResourseHandler = async () => {
-   // await deleteEducationResourse({ variables: {id: updatedTime.id}})
-   console.log('deleted resourse')
+  const onEditResourse = (id) => {
+    clearMode()
+    setResourseMode({...resourseMode, isEditing: true})
+    setUpdatedResourse(courses[viewId].resourses.find(resourse => resourse.id === id))
+  }
+
+  const onDeleteCourseHandler = async() => {
+    await deleteEducationCourse({ variables: {id: updatedCourse.id}})
     setIsModalOpen(false)
-    setMode({...resourseMode, isDeleting: false})
     document.body.style.overflow = "scroll"
-    setUpdatedResourse({})
+    clearMode()
+  }
+
+  const onDeleteResourseHandler = async() => {
+    await deleteEducationResourse({ variables: {id: updatedResourse.id}})
+    console.log('deleted resourse')
+    setIsModalOpen(false)
+    document.body.style.overflow = "scroll"
+    clearResourseMode()
   }
 
   const onChangeResourseHandler = async (e, postData, valid) => {
@@ -501,25 +431,30 @@ const Courses = () => {
         document.body.style.overflow = "scroll"
       }
       if (resourseMode.isCreating) {
+      
+       const filetype = forms.find(form => form.id === postObject.resourse.form).filetype
+       console.log(filetype)
        console.log({
-        title: postObject.title,
-        educationFormId: postObject.resourse.subSectionSelect || postObject.resourse.subSectionText || postObject.resourse.form,
-        file: postObject.resourse.file
-        })
-       if (postObject.resourse.form.filetype === 'PDF') {
-        // await createEducationResoursePDF({ variables: {courseId: courses[viewId].id, inputData: {
-        //   title: postObject.title,
-        //   educationFormId: postObject.resourse.subSectionSelect || postObject.resourse.subSectionText || postObject.resourse.form,
-        //   file: postObject.resourse.file
-        // }}})
-       }
-       else {
-        await createEducationResourseURL({ variables: {courseId: courses[viewId].id, inputData: {
           title: postObject.title,
           educationFormId: postObject.resourse.form,
-          fileLink: postObject.resourse.file
-        }}})
-       } 
+          subSectionText: postObject.resourse.subSectionText,
+          subSectionId: postObject.resourse.subSectionSelect,
+          file: postObject.resourse.file
+        })
+       
+        await createEducationResourse({
+          variables: {
+            courseId: courses[viewId].id, 
+            filetype: filetype,
+            inputData: {
+              title: postObject.title,
+              educationFormId: postObject.resourse.form,
+              subSectionText: postObject.resourse.subSectionText,
+              subSectionId: postObject.resourse.subSectionSelect,
+              file: postObject.resourse.file
+            }
+          }
+        })
        setResourseMode({...resourseMode, isCreating: false})
        setUpdatedResourse({})
       }
@@ -600,7 +535,7 @@ const Courses = () => {
           exam={courses[viewId].exam}  
           onClickEdit={onEditCourse}
         />
-        {(singleResourses.length > 0 && Object.keys(multyResourses).length > 0) && 
+        {(singleResourses.length > 0 && multyResourses.length > 0) && 
           <p 
             className="bg-danger font-weight-bold pl-3 py-2 h5 text-white" 
             style={{cursor: 'pointer'}} 
@@ -634,7 +569,7 @@ const Courses = () => {
           </div>
           }
           {showResourses.basic && <>   
-            {(singleResourses.length > 0 && Object.keys(multyResourses).length > 0) && 
+            {(singleResourses.length > 0 && multyResourses.length > 0) && 
             <>
               {singleResourses.length > 0 && 
               <div className="d-flex justify-content-around">
@@ -646,24 +581,32 @@ const Courses = () => {
                       description={resourse.description}
                       image={resourse.image}
                       title={resourse.title}
-                      onEditClick={null}
-                      onDeleteClick={null}
+                      onEditClick={() => onEditResourse(resourse.id)}
+                      onDeleteClick={() => onDeleteResourse(resourse.id)}
                     /> 
                   </div>)
                 }
               </div>
               }
-              {Object.keys(multyResourses).length > 0 && <div>
-                    {Object.keys(multyResourses).map(form => 
-                      <CourseMaterials 
-                      key={form}
-                      links = {multyResourses[form]}
-                      onClick = {null}
-                      title = {form}
-                    />
-                    )}
-                  </div>
-              }               
+             {multyResourses.length > 0 && <div>
+                {forms.map(form => {
+                    if (form.type === 'MULTY') {
+                      const typedReses = multyResourses.filter(res => (res.form.id === form.id || (res.form.parentForm && res.form.parentForm.id === form.id)))
+                      if (typedReses.length > 0) return <CourseMaterials 
+                          key={form.id}
+                          links = {typedReses}
+                          filetype = {form.filetype}
+                          onClick = {null}
+                          title = {form.title}
+                          parentForm = {form.id}
+                          onDelete={onDeleteResourse}
+                          onEdit={onEditResourse}
+                        />
+                    } 
+                  }
+
+                )}
+              </div>}
             </>}
           </>
         }

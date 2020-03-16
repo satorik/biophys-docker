@@ -20,7 +20,7 @@ const query =   `
     scienceGroups(id: ID, scienceRouteId: ID): [ScienceGroup!]
     history(section: SECTION! = HISTORY):HistoryText
     admission(section: SECTION! = ADMISSION):AdmissionText
-    subSections: [EducationForm!]
+    parentForm: EducationForm!
   }
 `
 

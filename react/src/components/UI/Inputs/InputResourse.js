@@ -2,9 +2,11 @@ import React from 'react'
 
 const InputResourse = ({onChanged, onBlur, label, value, children, required}) => {
 
-  const isLink = value.form.fileType === 'URL' //make better
+  const isLink = label.find(el => el.id === value.form).filetype === 'URL'
+  const isMulty = label.find(el => el.id === value.form).type === 'MULTY'
   const selectedForm = label.find(el => el.id === value.form)
   console.log(value)
+  console.log(isMulty)
   return (
       <div>
           <select
@@ -27,7 +29,7 @@ const InputResourse = ({onChanged, onBlur, label, value, children, required}) =>
           </select>
           <small className="form-text text-muted">Выберите подзаголовок из имеющихся или введите новый</small>
           </div>}
-          {value.subSectionSelect === '' && <input
+          {value.subSectionSelect === '' && isMulty && <input
             type='text'
             className='form-control mb-3'
             value={value.subSectionText}

@@ -24,17 +24,13 @@ const Department = () => {
     }
   })
 
-  const [viewId, setViewId] = React.useState(0)
- 
-  const handleNavigationItemClick = (id) => {
-    setViewId(id)
-  }
-
   return (
     <div>
       <Carousel />
-      <NavigationList subLinks={links} navigationChange={handleNavigationItemClick} selectedLink={viewId}/>
-      <Redirect from="/department" to="/department/history" />
+      <NavigationList subLinks={links}/>
+      <Route exact path="/department">
+            <Redirect to="/department/history" />
+      </Route>
       <Route
           path="/department/history"
           component={History}

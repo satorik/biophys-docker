@@ -22,18 +22,13 @@ const links = sections.map((section, idx) => {
 })
 
 const Education = () => {
-
-  const [viewId, setViewId] = React.useState(0)
- 
-   const handleNavigationItemClick = (id) => {
-    setViewId(id)
-  }
-
   return (
     <div>
       <Carousel />
-      <NavigationList subLinks={links} navigationChange={handleNavigationItemClick} selectedLink={viewId}/>
-      <Redirect from="/education" to="/education/schedule" />
+      <NavigationList subLinks={links}/>
+      <Route exact path="/education">
+            <Redirect to="/education/schedule" />
+      </Route>
       <Route
           path="/education/schedule"
           component={Schedule}
