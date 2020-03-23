@@ -55,7 +55,7 @@ const createEducation = async (models) => {
     type: 'PDF',
     fileLink: '/files/education/002.pdf',
     educationForm: {
-      title: 'практикум', type: 'MULTY', , filetype: 'PDF'},
+      title: 'практикум', type: 'MULTY', filetype: 'PDF'},
     educationCourseId: 1
   }
   ], 
