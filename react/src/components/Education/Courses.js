@@ -311,6 +311,8 @@ const Courses = () => {
     singleResourses.push(...courses[viewId].resourses.filter(resourse => resourse.form.type === 'SINGLE'))
     multyResourses.push(...courses[viewId].resourses.filter(resourse => resourse.form.type === 'MULTY'))
 
+    //console.log(singleResourses)
+
     let materialsToAdd = forms.filter(form => singleResourses.filter(resourse => resourse.form.id === form.id).length === 0)
 
     RESOURSE_TEMPLATE = [
@@ -412,7 +414,7 @@ const Courses = () => {
 
   const onDeleteResourseHandler = async() => {
     await deleteEducationResourse({ variables: {id: updatedResourse.id}})
-    console.log('deleted resourse')
+    //console.log('deleted resourse')
     setIsModalOpen(false)
     document.body.style.overflow = "scroll"
     clearResourseMode()
@@ -496,7 +498,7 @@ const Courses = () => {
  if (mode.isCreating) {modalTitle = 'Новый курс'}
  if (mode.isDeleting) {modalTitle = 'Удаление курса'}
 
- console.log(forms)
+ //console.log(forms)
 
   return (
     <>
@@ -542,7 +544,7 @@ const Courses = () => {
           exam={courses[viewId].exam}  
           onClickEdit={onEditCourse}
         />
-        {(singleResourses.length > 0 && multyResourses.length > 0) && 
+        {(singleResourses.length > 0 || multyResourses.length > 0) && 
           <p 
             className="bg-danger font-weight-bold pl-3 py-2 h5 text-white" 
             style={{cursor: 'pointer'}} 
@@ -576,7 +578,7 @@ const Courses = () => {
           </div>
           }
           {showResourses.basic && <>   
-            {(singleResourses.length > 0 && multyResourses.length > 0) && 
+            {(singleResourses.length > 0 || multyResourses.length > 0) && 
             <>
               {singleResourses.length > 0 && 
               <div className="d-flex justify-content-around">

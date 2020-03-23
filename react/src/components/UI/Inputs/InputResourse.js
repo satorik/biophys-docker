@@ -6,6 +6,7 @@ const InputResourse = ({onChanged, onBlur, label, value, children, required}) =>
   const isMulty = label.find(el => el.id === value.educationFormId).type === 'MULTY'
   const selectedForm = label.find(el => el.id === value.educationFormId)
 
+  console.log(selectedForm.subSections)
   return (
       <div>
           <select
@@ -16,7 +17,7 @@ const InputResourse = ({onChanged, onBlur, label, value, children, required}) =>
           >
              {label.map(select => <option key={select.id} value={select.id}>{select.title}</option>)} 
           </select> 
-          {selectedForm.subSections !== null && <div className="form-group">
+          {selectedForm.subSections.length !== 0 && <div className="form-group">
           <select
               className='form-control mb-3'
               value={value.subSectionId}
