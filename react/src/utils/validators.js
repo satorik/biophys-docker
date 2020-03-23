@@ -2,12 +2,10 @@
 export const required = value => {
   if (value instanceof File) return true
   else if (typeof(value) === 'object') {
-    console.log(value)
     let allExist = true
     Object.keys(value).forEach(item => {
       allExist = allExist && value[item] != ''
     })
-    console.log(allExist)
     return allExist
   }
   else return value.trim() !== ''

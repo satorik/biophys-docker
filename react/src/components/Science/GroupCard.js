@@ -47,6 +47,7 @@ const GroupCard = ({group, save, articleForUpdate, personForUpdate}) => {
             firstname={person.firstname}
             middlename={person.middlename}
             lastname={person.lastname}
+            englishName={person.englishName}
             tel={person.tel}
             mail={person.mail}
             urlIstina={person.urlIstina}

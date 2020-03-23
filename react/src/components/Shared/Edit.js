@@ -23,7 +23,7 @@ const Edit = ({onClickSubmit, onClickCancel, formTemplate, isAbleToSave, post, b
       if (postForm[id].title === 'image') {
          setImagePreview(valueObj.imagePreview)
       }
-      const updatedState = postInputChange(postForm, id, valueObj.value)
+      const updatedState = postInputChange(postForm, id, valueObj.value, Object.entries(post).length !== 0)
       setPostForm(updatedState.postForm)
       setFormIsValid(updatedState.formIsValid)
     })

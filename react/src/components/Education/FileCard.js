@@ -3,6 +3,7 @@ import EditButtons from '../UI/EditButtons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 
 export const FileCard = ({fileLink, description, image, title, onEditClick, onDeleteClick, filetype}) => {
+
   return (
        <div className={filetype === 'PDF' ? 'w-25 p-1' : 'w-50 p-1'}>
         <div className="border p-2">

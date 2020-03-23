@@ -3,13 +3,14 @@ import EditButtons from '../UI/EditButtons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 
 const ShortPersonCard = ({firstname, lastname, middlename, description, onEditClick, onDeleteClick, onClickUp, onClickDown, firstElement, 
-  lastElement, tel, mail, urlIstina, urlRints, urlOrcid, urlResearcher, urlScopus}) => {
+  lastElement, tel, mail, urlIstina, urlRints, urlOrcid, urlResearcher, urlScopus, englishName}) => {
 
     console.log(tel)
   return (
     <div className="pl-2 mb-2" style={{borderLeft: '4px solid #fd7e14'}}>
       <div className="d-flex align-items-start" >
         <p className="font-weight-bold mr-2 my-0">{lastname} {firstname} {middlename}</p>
+        <p className="text-muted mr-2 my-0">{englishName && `(${englishName})`}</p>
         <EditButtons 
           onClickEdit={onEditClick}
           onClickDelete={onDeleteClick}

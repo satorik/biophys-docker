@@ -4,7 +4,7 @@ import { useQuery, useMutation } from '@apollo/react-hooks'
 import { gql } from 'apollo-boost'
 import { required, length } from './utils/validators'
 
-import Carousel from './components/Carousel'
+import ScienceHeader from './components/UI/Header/QuoteHeader'
 import NavigationList from './components/Shared/SecondaryNavigation/NavigationList'
 import ScienceGroup from './components/Science/ScienceGroup'
 import YesDelete from './components/Shared/DoYouWantToDelete'
@@ -193,7 +193,16 @@ const Science = () => {
 
   return (
     <div>
-      <Carousel />
+      <ScienceHeader 
+        header={process.env.REACT_APP_STATIC_URI+'/images/header/header-news.jpg'} 
+        title='наука'
+        quote='Природа с красоты своей
+                Покрова снять не позволяет,
+                И ты машинами не вынудишь у ней,
+                Чего твой дух не угадает.'
+        author='Владимир соловьев'
+        when='(1853-1900)'
+      />
       <NavigationList subLinks={links} navigationChange={onSelectRoute} selectedLink={viewId}/>
       <Redirect from="/science" to={`/science${links[0].path}`} /> 
       {isModalOpen && <Modal 

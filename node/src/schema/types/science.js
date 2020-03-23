@@ -9,6 +9,7 @@ const SciencePeople = `
     firstname: String!
     middlename: String
     lastname: String!
+    englishName: String
     description: String
     tel: String
     mail: String
@@ -32,6 +33,7 @@ const SciencePeople = `
     middlename: String
     lastname: String!
     description: String
+    englishName: String
     tel: String
     mail: String
     urlIstina: String
@@ -48,6 +50,7 @@ const SciencePeople = `
     middlename: String
     lastname: String
     description: String
+    englishName: String
     tel: String
     mail: String
     urlIstina: String

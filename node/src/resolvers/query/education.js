@@ -45,18 +45,32 @@ const educationQuery = {
   resourses(parent, args, {models}) {
     return models.EducationResourse.findAll({raw:true, where: {educationCourseId: parent.id}, order: [['educationFormId', 'ASC']]})
   },
-  form(parent, args, {models}) {
-    return models.EducationForm.findOne({raw:true, where: {id: parent.educationFormId}})
-  },
   forms(parent, {id}, {models}) {
     return models.EducationForm.findAll({raw:true, where: {educationFormId: null}})
   },
   admission(parent, {section}, {models}){
     return models.TextDescription.findOne({where: {section}, raw: true})
   },
-  parentForm(parent, args, {models}){
-    return models.EducationForm.findOne({raw:true, where: {id: parent.educationFormId}})
+}
+
+const EducationResourse = {
+  async form(parent, args, {models}) {
+    const form =  await models.EducationForm.findOne({raw:true, where: {id: parent.educationFormId}})
+    const parentForm = await models.EducationForm.findOne({raw:true, where: {id: form.educationFormId}})
+    const subSections = await models.EducationForm.findAll({raw:true, where: {educationFormId: form.id}})
+    
+    return {
+      ...form, 
+      parentForm,
+      subSections
+    }
+
+  },
+}
+const EducationForm = {
+  subSections(parent, args, {models}){
+    return models.EducationForm.findAll({raw:true, where: {educationFormId: parent.id}})
   }
 }
 
-export default educationQuery
+export {educationQuery, EducationForm, EducationResourse}

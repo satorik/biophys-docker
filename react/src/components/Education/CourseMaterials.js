@@ -3,9 +3,6 @@ import {FileCard} from './FileCard'
 
 export const CourseMaterials = ({title, links, filetype, onClick, parentForm, onDelete, onEdit}) => {
 
-  //console.log(links)
-  //console.log(parentForm)
-
   const createResDiv = (reses) => {
     return <div className="d-flex flex-wrap justify-content-around flex-row">
       { reses.map (res => <FileCard 
@@ -23,20 +20,23 @@ export const CourseMaterials = ({title, links, filetype, onClick, parentForm, on
     </div>
   }
 
-  const subSections = links.filter(link => link.form.id !== parentForm).reduce((acc, el) => {
-    acc = [...acc, {id: el.form.id, title: el.form.title}]
-    return acc
+  const subSections = links
+  .filter(link => link.form.id !== parentForm)
+  .reduce((acc, el) => {
+      if(acc.filter(item => item.id === el.form.id).length === 0) {
+        acc = [...acc, {id: el.form.id, title: el.form.title}]
+      }
+      return acc
   }, [])
 
   console.log(subSections)
-
   const courseMaterials = <div>
       {
         createResDiv(links.filter(link => link.form.id === parentForm))
       }
      {subSections.length > 0 && <div id="subsections">
         {
-          subSections.map(subSecion => <div key={subSecion}>
+          subSections.map(subSecion => <div key={subSecion.id}>
             <p className="bg-secondary text-white w-50">{subSecion.title}</p>
             {createResDiv(links.filter(link => link.form.id === subSecion.id))}
           </div>)

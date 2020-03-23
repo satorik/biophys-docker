@@ -4,7 +4,7 @@ import { gql } from 'apollo-boost'
 import { required, length, date } from './utils/validators'
 import { useLocation, useHistory } from 'react-router-dom'
 
-import HeaderConference from './components/UI/Header/HeaderConference'
+import HeaderSeminar from './components/UI/Header/GradientHeader'
 import YesDelete from './components/Shared/DoYouWantToDelete'
 import ButtonAddNew from './components/UI/ButtonAddNew'
 import Modal from './components/UI/Modal'
@@ -258,7 +258,13 @@ const Conferece = () => {
   
   return (
     <>
-    <HeaderConference />
+    <HeaderSeminar 
+      header={process.env.REACT_APP_STATIC_URI+'/images/header/header-conference.jpg'} 
+      title='конференции'
+      quote='В науке люди пытаются объяснить как можно понятнее что-то, чего дугие не знают. Но в поэзии все наоборот.'
+      author='Поль Дирак'
+      when='(1902 - 1984)'
+    />
     {isModalOpen && <Modal 
       isOpen={isModalOpen}
       title={modalTitle}

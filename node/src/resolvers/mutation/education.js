@@ -2,6 +2,31 @@ import { ApolloError } from "apollo-server"
 import writeImage from '../../utils/readStreamIntoFile'
 import clearImage, { convertPdfToBase64 } from '../../utils/imageFunctions'
 
+const getEducationSubsection = async (subSectionId, subSectionText, educationFormId, models, filetype) => {
+  if (subSectionId || subSectionText) {
+    if (subSectionId !== '') return subSectionId
+    else {
+      const parentSection = await models.EducationForm.findOne({where: {id: educationFormId}}) 
+      const newSubSection = await parentSection.createEducationForm({
+        title: subSectionText,
+        type: parentSection.type,
+        filetype
+      })
+      return newSubSection.id
+    }
+  }
+}
+
+const clearSubSection = async (form, models) => {
+  if (form.dataValues.educationFormId !== null ) {
+    const cntSubSectionRes = await models.EducationResourse.count({
+        where: {educationFormId: form.dataValues.id},
+      })
+    
+    if (cntSubSectionRes === 0 ) await form.destroy()
+  }
+}
+
 const educationMutation = {
   async createScheduleYear(parent, {inputData}, { models }){
     const year = await models.ScheduleYear.findOne({where: {...inputData}})
@@ -150,20 +175,7 @@ const educationMutation = {
     const course = await models.EducationCourse.findOne({where: {id: courseId}})
     if (!course) { throw new ApolloError('Course not found') }
 
-    let subSection = ''
-
-    if (inputData.subSectionId !== '' || inputData.subSectionText !== '') {
-      if (inputData.subSectionId !== '') subSection = inputData.subSectionId
-      else {
-        const parentSection = await models.EducationForm.findOne({where: {id: inputData.educationFormId}}) 
-        const newSubSection = await parentSection.createEducationForm({
-          title: inputData.subSectionText,
-          type: parentSection.type,
-          filetype
-        })
-        subSection = newSubSection.id
-      }
-    }
+    const subSection = await getEducationSubsection(inputData.subSectionId, inputData.subSectionText, inputData.educationFormId, models, filetype)
 
     if (filetype === 'PDF') {
       const {file, ...postData} = inputData
@@ -199,20 +211,7 @@ const educationMutation = {
     if (!resourse) { throw new ApolloError('Resourse not found') }
 
     const form = await resourse.getEducationForm()
-   
-    if (inputData.subSectionId !== '' || inputData.subSectionText !== '') {
-      if (inputData.subSectionId !== '') resourse.educationFormId = inputData.subSectionId
-      else {
-        const parentSection = await models.EducationForm.findOne({where: {id: inputData.educationFormId}}) 
-        const newSubSection = await parentSection.createEducationForm({
-          title: inputData.subSectionText,
-          type: parentSection.type,
-          filetype
-        })
-        resourse.educationFormId = newSubSection.id
-      }
-    }
-
+  
     if (filetype === 'PDF') {
       let isUploaded = {}
       if (inputData.file) {
@@ -242,14 +241,15 @@ const educationMutation = {
 
     await resourse.save()
 
-    if ((inputData.subSectionId !== '' || inputData.subSectionText !== '') && form.dataValues.educationFormId !== null ) {
-      const cntSubSectionRes = await models.EducationResourse.count({
-          where: {educationFormId: form.dataValues.id},
-        })
-      
-      if (cntSubSectionRes === 0 ) await form.destroy()
-    }
+    if ((resourse.educationFormId === inputData.educationFormId && inputData.subSectionText === '' && inputData.subSectionId === '') ||
+    (resourse.educationFormId === inputData.subSectionId)) await resourse.save()
+    else {
+      const subSection = await getEducationSubsection(inputData.subSectionId, inputData.subSectionText, inputData.educationFormId, models, filetype)
+      resourse.educationFormId = subSection   
+      await resourse.save()
 
+      await clearSubSection(form, models)
+    }
 
     return resourse.dataValues
 
@@ -262,13 +262,7 @@ const educationMutation = {
 
     await resourse.destroy()
 
-    if (form.dataValues.educationFormId !== null ) {
-      const cntSubSectionRes = await models.EducationResourse.count({
-          where: {educationFormId: form.dataValues.id},
-        })
-      
-      if (cntSubSectionRes === 0 ) await form.destroy()
-    }
+    await clearSubSection(form, models)
 
     return id
   },

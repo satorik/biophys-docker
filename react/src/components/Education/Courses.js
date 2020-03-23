@@ -59,6 +59,12 @@ const GET_COURSES = gql`
       title
       filetype
     }
+    subSections {
+      id
+      type
+      title
+      filetype
+    }
   }
 }
 `
@@ -307,27 +313,27 @@ const Courses = () => {
 
     let materialsToAdd = forms.filter(form => singleResourses.filter(resourse => resourse.form.id === form.id).length === 0)
 
-   RESOURSE_TEMPLATE = [
-      {
-        title: 'title',
-        label:'Название',
-        type: 'input',
-        required: true,
-        validators: [required, length({ min: 5 })]
-      },
-      {
-        title: 'description',
-        label:'Описание',
-        type: 'textarea',
-        validators: [length({ min: 5 })]
-      },
-      {
-        title: 'resourse',
-        label: materialsToAdd,
-        type: 'resourse',
-        required: true,
-        validators: [required]
-      }
+    RESOURSE_TEMPLATE = [
+        {
+          title: 'title',
+          label:'Название',
+          type: 'input',
+          required: true,
+          validators: [required, length({ min: 5 })]
+        },
+        {
+          title: 'description',
+          label:'Описание',
+          type: 'textarea',
+          validators: [length({ min: 5 })]
+        },
+        {
+          title: 'resourse',
+          label: resourseMode.isCreating ? materialsToAdd : forms,
+          type: 'resourse',
+          required: true,
+          validators: [required]
+        }
     ]
   }
 
@@ -419,40 +425,39 @@ const Courses = () => {
     }
     else {
       let postObject = postData.reduce((obj, item) => {
-        obj[item.title] = item.value
+        if (item.type !== 'resourse') {
+          obj[item.title] = item.value
+        }
+        else {
+          Object.keys(item.value).forEach(key => obj[key] = item.value[key])
+        }
         return obj
-      } ,{})     
+      } ,{})    
+      
+      const filetype = forms.find(form => form.id === postObject.educationFormId).filetype
+
       if (resourseMode.isEditing) {
         const forUpdate = getUpdateData(updatedResourse, postObject)
-        //await updateScheduleTimetable({ variables: {id: updatedTime.id, inputData: forUpdate}})
-        console.log('resourseEdited')
+
+        await updateEducationResourse({
+          variables: {
+            id: updatedResourse.id, 
+            filetype: filetype,
+            inputData: {...forUpdate}
+          }
+        })
+
         setResourseMode({...resourseMode, isEditing: false})
         setIsModalOpen(false)
         document.body.style.overflow = "scroll"
       }
       if (resourseMode.isCreating) {
-      
-       const filetype = forms.find(form => form.id === postObject.resourse.form).filetype
-       console.log(filetype)
-       console.log({
-          title: postObject.title,
-          educationFormId: postObject.resourse.form,
-          subSectionText: postObject.resourse.subSectionText,
-          subSectionId: postObject.resourse.subSectionSelect,
-          file: postObject.resourse.file
-        })
-       
+    
         await createEducationResourse({
           variables: {
             courseId: courses[viewId].id, 
             filetype: filetype,
-            inputData: {
-              title: postObject.title,
-              educationFormId: postObject.resourse.form,
-              subSectionText: postObject.resourse.subSectionText,
-              subSectionId: postObject.resourse.subSectionSelect,
-              file: postObject.resourse.file
-            }
+            inputData: {...postObject}
           }
         })
        setResourseMode({...resourseMode, isCreating: false})
@@ -490,6 +495,8 @@ const Courses = () => {
  if (mode.isEditing) {modalTitle = 'Редактирование курса'}
  if (mode.isCreating) {modalTitle = 'Новый курс'}
  if (mode.isDeleting) {modalTitle = 'Удаление курса'}
+
+ console.log(forms)
 
   return (
     <>

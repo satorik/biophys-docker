@@ -11,7 +11,7 @@ import Edit from './components/Shared/Edit'
 import Spinner from './components/UI/Spinner'
 import ErrorBoundry from './components/Shared/ErrorHandling/ErrorBoundry'
 import getUpdateData from './utils/getObjectForUpdate'
-import HeaderSeminar from './components/UI/Header/HeaderSeminar'
+import HeaderSeminar from './components/UI/Header/GradientHeader'
 import SeminarCard from './components/Seminar/SeminarCard'
 import SeminarDetails from './components/Seminar/SeminarDetails'
 import NetworkErrorComponent from './components/Shared/ErrorHandling/NetworkErrorComponent'
@@ -259,7 +259,13 @@ const Seminar = () => {
   
   return (
     <>
-    <HeaderSeminar />
+    <HeaderSeminar 
+      header={process.env.REACT_APP_STATIC_URI+'/images/header/header-conference.jpg'} 
+      title='семинары & события'
+      quote='В науке люди пытаются объяснить как можно понятнее что-то, чего дугие не знают. Но в поэзии все наоборот.'
+      author='Поль Дирак'
+      when='(1902 - 1984)'
+    />
 
     {isModalOpen && <Modal 
       isOpen={isModalOpen}

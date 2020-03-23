@@ -1,6 +1,6 @@
 import React from 'react'
 import {Route, Redirect} from 'react-router-dom'
-import Carousel from './components/Carousel'
+import DepartmentHeader from './components/UI/Header/QuoteHeader'
 import NavigationList from './components/Shared/SecondaryNavigation/NavigationList'
 import Staff from './components/Department/Staff'
 import History from './components/Department/History'
@@ -26,7 +26,9 @@ const Department = () => {
 
   return (
     <div>
-      <Carousel />
+      <DepartmentHeader 
+        header={process.env.REACT_APP_STATIC_URI+'/images/header/header-department.jpg'} 
+      />
       <NavigationList subLinks={links}/>
       <Route exact path="/department">
             <Redirect to="/department/history" />

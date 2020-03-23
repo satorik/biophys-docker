@@ -2,7 +2,7 @@ import Query from './query/'
 import Mutation from './mutation/'
 import NavigationLink from './link'
 import scienceQuery from './query/science'
-import educationQuery from './query/education'
+import {educationQuery, EducationForm, EducationResourse} from './query/education'
 
 const resolvers = {
   Query: Query,
@@ -11,8 +11,9 @@ const resolvers = {
   ScienceRoute:  {scienceGroups : scienceQuery.scienceGroups},
   ScheduleYear: {timetable: educationQuery.timetable},
   EducationCourse: {resourses: educationQuery.resourses},
-  EducationResourse: {form: educationQuery.form},
-  EducationForm: {parentForm: educationQuery.parentForm},
+  EducationResourse: {form: EducationResourse.form},
+  EducationForm: {parentForm: EducationForm.parentForm},
+  EducationForm: {subSections: EducationForm.subSections},
 }
 
 //console.log(resolvers)

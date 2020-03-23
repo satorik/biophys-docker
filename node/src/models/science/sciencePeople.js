@@ -32,6 +32,10 @@ const sciencePeople = (sequelize, DataTypes ) => {
       }
     }
   },
+  englishName: {
+    type: DataTypes.STRING(500),
+    allowNull: true
+  },
   position: {
     type: DataTypes.INTEGER, 
     allowNull: false

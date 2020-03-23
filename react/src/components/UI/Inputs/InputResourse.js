@@ -2,26 +2,25 @@ import React from 'react'
 
 const InputResourse = ({onChanged, onBlur, label, value, children, required}) => {
 
-  const isLink = label.find(el => el.id === value.form).filetype === 'URL'
-  const isMulty = label.find(el => el.id === value.form).type === 'MULTY'
-  const selectedForm = label.find(el => el.id === value.form)
-  console.log(value)
-  console.log(isMulty)
+  const isLink = label.find(el => el.id === value.educationFormId).filetype === 'URL'
+  const isMulty = label.find(el => el.id === value.educationFormId).type === 'MULTY'
+  const selectedForm = label.find(el => el.id === value.educationFormId)
+
   return (
       <div>
           <select
               className='form-control mb-3'
-              value={value.form}
-              title='form'
+              value={value.educationFormId}
+              title='educationFormId'
               onChange={onChanged}
           >
              {label.map(select => <option key={select.id} value={select.id}>{select.title}</option>)} 
           </select> 
-          {selectedForm.subSections.length > 0 && <div className="form-group">
+          {selectedForm.subSections !== null && <div className="form-group">
           <select
               className='form-control mb-3'
-              value={value.subSectionSelect}
-              title='subSectionSelect'
+              value={value.subSectionId}
+              title='subSectionId'
               onChange={onChanged}
           >
               <option key='zero' value=''></option>
@@ -29,7 +28,7 @@ const InputResourse = ({onChanged, onBlur, label, value, children, required}) =>
           </select>
           <small className="form-text text-muted">Выберите подзаголовок из имеющихся или введите новый</small>
           </div>}
-          {value.subSectionSelect === '' && isMulty && <input
+          {value.subSectionId === '' && isMulty && <input
             type='text'
             className='form-control mb-3'
             value={value.subSectionText}

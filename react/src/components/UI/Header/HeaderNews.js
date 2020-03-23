@@ -15,7 +15,7 @@ const headerImage = {
 const HeaderNews = ({title, description}) => {
   return (
     <div style={headerImage}>
-      <div className='card col-md-4 ml-auto mr-5 mt-3 text-white' style={{backgroundColor:'rgba(0, 0, 0, 0.5)'}}>
+      <div className='card col-md-4 ml-auto mr-5 mt-3 text-white' style={{backgroundColor:'rgba(0, 0, 0, 0.7)'}}>
         <div className='card-header'>{title}</div>
          <div className="card-content">
            {description}

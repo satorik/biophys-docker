@@ -21,6 +21,7 @@ const query =   `
     history(section: SECTION! = HISTORY):HistoryText
     admission(section: SECTION! = ADMISSION):AdmissionText
     parentForm: EducationForm!
+    subSections: [EducationForm!]
   }
 `
 

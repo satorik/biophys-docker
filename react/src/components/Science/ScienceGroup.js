@@ -29,6 +29,7 @@ const GET_SCIENCE_GROUPS = gql`
           middlename
           lastname
           description
+          englishName
           tel
           mail
           birthday
@@ -66,6 +67,7 @@ const CREATE_SCIENCE_GROUP = gql`
           middlename
           lastname
           description
+          englishName
           tel
           mail
           birthday
@@ -114,6 +116,7 @@ const CREATE_SCIENCE_GROUP = gql`
         middlename
         lastname
         description
+        englishName
         tel
         mail
         birthday
@@ -135,6 +138,7 @@ const CREATE_SCIENCE_GROUP = gql`
         middlename
         lastname
         description
+        englishName
         tel
         mail
         birthday
@@ -220,6 +224,11 @@ const PEOPLE_TEMPLATE= [
   {
     title: 'description',
     label:'Должность',
+    type:'input',
+  },
+  {
+    title: 'englishName',
+    label:'Имя латиницей',
     type:'input',
   },
   {

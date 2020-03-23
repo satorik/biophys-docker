@@ -1,5 +1,5 @@
 import departmentQuery from './department'
-import educationQuery from './education'
+import { educationQuery } from './education'
 import scienceQuery from './science'
 import sharedQuery from './shared'
 import blogpostQuery from './blogpost'

@@ -31,6 +31,14 @@
         term: oldData[control].term
         }
       }
+      if (type === 'resourse') {
+        return {
+        educationFormId: oldData.form.parentForm.id || oldData.form.id,  
+        file: '',
+        subSectionId: oldData.form.parentForm.id ? oldData.form.id : '',
+        subSectionText:''
+        }
+      }
        if (type === 'radio' || type === 'check') {
         return oldData[control]
        }
@@ -42,7 +50,7 @@
     if (type === 'radio') { return label[0].value}
     if (type === 'check') { return false}
     if (type === 'course') {return {course: '', year: new Date().getFullYear(), term: 1}}
-    if (type === 'resourse') {return {form: label[0].id, file: '', subSectionSelect: '', subSectionText: ''}}
+    if (type === 'resourse') {return {educationFormId: label[0].id, file: '', subSectionId: '', subSectionText: ''}}
 
     return ''
   }
@@ -82,7 +90,7 @@
     }) 
  }
  
- const postInputChange = (form, id, value) => {
+ const postInputChange = (form, id, value, isForUpdate) => {
 
     let valueForCheck = value
     let isValid = true
@@ -91,7 +99,10 @@
       valueForCheck = value.course
     }
     if (form[id].type === 'resourse') {
-      valueForCheck = value.file
+      if (!isForUpdate) {
+        valueForCheck = value.file
+      }
+      else {valueForCheck = 'exists'}   
     }
  
     if (form[id].validators && form[id].validators.length > 0) {

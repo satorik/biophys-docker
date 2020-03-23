@@ -111,6 +111,7 @@ const Education = `
     title: String!
     filetype: FILETYPE!
     parentForm: EducationForm
+    subSections: [EducationForm!]
   }
 
   type EducationResourse {
