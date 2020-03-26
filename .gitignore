@@ -2,6 +2,7 @@ node/node_modules
 node/nodemon.json
 node/errors.log
 node/src/files/
-react/.env.development
-react/node_modules
+front/.env.development
+front/node_modules
 docker-compose.yml
+react

@@ -51,7 +51,7 @@ const Blogpost = (sequelize, DataTypes ) => {
         msg:"Url required"
       }
     }
-  },
+  }
   },     
   )}
 

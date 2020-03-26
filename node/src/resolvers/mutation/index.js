@@ -10,6 +10,7 @@ import noteMutation from './note'
 import scienceMutation from './science'
 import departmentMutation from './department'
 import educationMutation from './education'
+import userMutation from './user'
 
 const Mutation = {
   ...blogpostMutation,
@@ -18,7 +19,8 @@ const Mutation = {
   ...noteMutation,
   ...scienceMutation,
   ...departmentMutation,
-  ...educationMutation
+  ...educationMutation,
+  ...userMutation
 }
 
 export default Mutation

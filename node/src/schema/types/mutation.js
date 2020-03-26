@@ -54,6 +54,7 @@ const mutation =   `
     createEducationResourse(courseId: ID!, filetype: FILETYPE!,  inputData: EducationResourseCreateData!): EducationResourse!
     updateEducationResourse(id: ID!, filetype: FILETYPE!, inputData: EducationResourseUpdateData!): EducationResourse!
     deleteEducationResourse(id: ID!): ID!
+    createUser(inputData: UserCreateData!): authData!
   }
 `
 

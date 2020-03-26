@@ -22,6 +22,7 @@ const query =   `
     admission(section: SECTION! = ADMISSION):AdmissionText
     parentForm: EducationForm!
     subSections: [EducationForm!]
+    loginUser(inputData: UserLoginData!): authData!
   }
 `
 

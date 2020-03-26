@@ -31,6 +31,7 @@ const models = {
   EducationForm: sequelize.import('./education/courses/educationForms'),
   EducationCourse: sequelize.import('./education/courses/educationCourse'),
   EducationResourse: sequelize.import('./education/courses/educationResourse'),
+  User: sequelize.import('./user.js')
 }
 
 models.EducationResourse.belongsTo(models.EducationForm)
@@ -39,5 +40,15 @@ models.ScienceRoute.hasMany(models.ScienceGroup, { onDelete: 'cascade' })
 models.ScienceGroup.hasMany(models.SciencePeople, { onDelete: 'cascade' })
 models.ScienceGroup.hasMany(models.ScienceArticle, { onDelete: 'cascade' })
 models.EducationForm.hasOne(models.EducationForm)
+
+Object.keys(models).forEach(key => {
+  models[key].belongsTo(models.User, { foreignKey: 'userUpdated' })
+
+  if (key !== 'User') {
+    models[key].belongsTo(models.User, { foreignKey: 'userCreated' })
+  }
+  
+})
+
 
 export { models, sequelize as default}

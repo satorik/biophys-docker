@@ -1,24 +1,29 @@
 import { ApolloError } from "apollo-server"
 import writeImage from '../../utils/readStreamIntoFile'
 import clearImage, { convertPdfToBase64 } from '../../utils/imageFunctions'
+import getUser from '../../utils/getUser'
 
 const departmentMutation = {
-  async createHistory(parent, {section, inputData}, { models }){
-    // if (!req.isAuth) { throw e}
+  async createHistory(parent, {section, inputData}, { models, auth }){
+    
+    const user = await getUser(auth, models.User)
+
     const {image, ...postData} = inputData
     const uploadedImage = await inputData.image
     const {file, imageUrl} = await writeImage(uploadedImage, 'history')
     const postDataWithUrl = {
       ...postData,
       imageUrl,
-      section
+      section,
+      userCreated: user
     }
 
     const history = await models.TextDescription.create({...postDataWithUrl})
     return history.dataValues
   },
-  async updateHistory(parent, {section, inputData}, { models }){
-    // if (!req.isAuth) { e }
+  async updateHistory(parent, {section, inputData}, { models, auth }){
+    
+    const user = await getUser(auth, models.User)
   
     const post = await models.TextDescription.findOne({where: {section}})
     if (!post) { throw new ApolloError('History not found') }
@@ -31,37 +36,46 @@ const departmentMutation = {
    
     Object.keys(inputData).forEach(item => post[item] = inputData[item])
     if (isUploaded.imageUrl) { post.imageUrl = isUploaded.imageUrl }
+    
+    post.userUpdated = user
 
     await post.save()
     return post.dataValues
 
   },
-  async deleteHistory(parent, {section}, { models }){
+  async deleteHistory(parent, {section}, { models, auth }){
+    const user = await getUser(auth, models.User)
+
     const post = await models.TextDescription.findOne({where: {section}})
     if (!post) { throw new ApolloError('History not found') }
-    console.log(post)
+
     await post.destroy()
     clearImage(post.dataValues.imageUrl, 'history')
     return true
   },
-  async createDepartmentPerson(parent, {inputData}, { models }){
+  async createDepartmentPerson(parent, { inputData }, { models, auth }){
     
-    const {image, ...personData} = inputData
+    const user = await getUser(auth, models.User)
+
+    const { image, ...personData } = inputData
     const uploadedImage = await inputData.image
-    const {file, imageUrl} = await writeImage(uploadedImage, 'staff')
+    const { imageUrl } = await writeImage(uploadedImage, 'staff')
 
     const peopleCount = await models.DepartmentStaff.count()
 
     const personDataWithUrl = {
       ...personData,
       imageUrl,
-      position: peopleCount
+      position: peopleCount,
+      userCreated: user
     }
 
     const newPerson = await models.DepartmentStaff.create({...personDataWithUrl})
     return newPerson.dataValues
   },
-  async updateDepartmentPerson(parent, {id, inputData}, { models }){
+  async updateDepartmentPerson(parent, {id, inputData}, { models, auth }){
+
+    const user = await getUser(auth, models.User)
 
     const person = await models.DepartmentStaff.findOne({where: {id}})
     if (!person) { throw new ApolloError('person with id ${id} not found') }
@@ -76,10 +90,15 @@ const departmentMutation = {
     Object.keys(inputData).forEach(item => person[item] = inputData[item])
     if (isUploaded.imageUrl) { person.imageUrl = isUploaded.imageUrl }
    
+    person.userUpdated = user
+
     await person.save()
     return person.dataValues
   },
-  async deleteDepartmentPerson(parent, {id}, { models }){
+  async deleteDepartmentPerson(parent, {id}, { models, auth }){
+    
+    const user = await getUser(auth, models.User)
+
     const person = await models.DepartmentStaff.findOne({where: {id}})
     if (!person) { throw new ApolloError('person with id ${id} not found') }
 
@@ -96,7 +115,10 @@ const departmentMutation = {
     await person.destroy()
     return position
   },
-  async moveDepartmentPerson(parent, {id, vector}, { models }){
+  async moveDepartmentPerson(parent, {id, vector}, { models, auth }){
+    
+    const user = await getUser(auth, models.User)
+
     const person = await models.DepartmentStaff.findOne({where: {id}})
     if (!person)  throw new ApolloError('person with id ${id} not found') 
 
@@ -115,25 +137,36 @@ const departmentMutation = {
 
     const personToMove = await models.DepartmentStaff.findOne({where: {position: newPosition}})
     if (!personToMove)  throw new ApolloError('person with position ${newPosition} not found')
+    
     personToMove.position = person.position
+    person.userUpdated = user
+    
     await personToMove.save()
     person.position = newPosition
+    
     await person.save()
     return [person, personToMove]
   },
-  async createPartnership(parent, {inputData}, { models }){
+  async createPartnership(parent, {inputData}, { models, auth }){
+
+    const user = await getUser(auth, models.User)
+
     const {image, ...postData} = inputData
     const uploadedImage = await inputData.image
     const {file, imageUrl} = await writeImage(uploadedImage, 'partnership')
     const postDataWithUrl = {
       ...postData,
-      imageUrl
+      imageUrl,
+      userCreated: user
     }
 
     const partnership = await models.DepartmentPartnership.create({...postDataWithUrl})
     return partnership.dataValues
   },
-  async updatePartnership(parent, {id, inputData}, { models }){
+  async updatePartnership(parent, {id, inputData}, { models, auth }){
+
+    const user = await getUser(auth, models.User)
+
     const post = await models.DepartmentPartnership.findOne({where: {id}})
     if (!post) { throw new ApolloError('Post not found') }
 
@@ -147,10 +180,15 @@ const departmentMutation = {
     Object.keys(inputData).forEach(item => post[item] = inputData[item])
     if (isUploaded.imageUrl) { post.imageUrl = isUploaded.imageUrl }
 
+    post.userUpdated = user
+
     await post.save()
     return post.dataValues
   },
-  async deletePartnership(parent, {id}, { models }){
+  async deletePartnership(parent, {id}, { models, auth }){
+
+    const user = await getUser(auth, models.User)
+
     const post = await models.DepartmentPartnership.findOne({where: {id}})
     if (!post) { throw new ApolloError('Post not found') }
 
@@ -158,7 +196,10 @@ const departmentMutation = {
     clearImage(post.imageUrl, 'partnership')
     return id
   },
-  async createPrint(parent, {inputData}, { models }){
+  async createPrint(parent, {inputData}, { models, auth }){
+
+    const user = await getUser(auth, models.User)
+
     const {file, ...postData} = inputData
 
     const uploadedFile = await inputData.file
@@ -168,13 +209,17 @@ const departmentMutation = {
     const postWithFile = {
       ...postData,
       fileLink,
-      image: 'data:image/jpeg;base64,'+image.base64
+      image: 'data:image/jpeg;base64,'+image.base64,
+      userCreated: user
     }
     
     return models.DepartmentPrint.create({...postWithFile})
       
   },
-  async updatePrint(parent, {id, inputData}, { models }){
+  async updatePrint(parent, {id, inputData}, { models, auth }){
+
+    const user = await getUser(auth, models.User)
+
     const post = await models.DepartmentPrint.findOne({where: {id}})
     if (!post) { throw new ApolloError('Post not found') }
 
@@ -196,10 +241,15 @@ const departmentMutation = {
       post.image = isUploaded.image
     }
 
+    post.userUpdated = user
+
     await post.save()
     return post.dataValues
   },
-  async deletePrint(parent, {id}, { models }){
+  async deletePrint(parent, {id}, { models, auth }){
+
+    const user = await getUser(auth, models.User)
+
     const post = await models.DepartmentPrint.findOne({where: {id}})
     if (!post) { throw new ApolloError('Post not found') }
 

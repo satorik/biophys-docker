@@ -7726,4 +7726,443 @@
 			]
 		}
 	}
+}2020-03-26T10:40:24.046Z{
+	"message": "Context creation failed: Cannot read property 'get' of undefined",
+	"extensions": {
+		"code": "INTERNAL_SERVER_ERROR",
+		"exception": {
+			"stacktrace": [
+				"TypeError: Context creation failed: Cannot read property 'get' of undefined",
+				"    at _default (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\src\\middleware/isAuth.js:5:26)",
+				"    at ApolloServer.context (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\src/server.js:12:13)",
+				"    at ApolloServer.<anonymous> (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\apollo-server-core\\src\\ApolloServer.ts:737:24)",
+				"    at Generator.next (<anonymous>)",
+				"    at fulfilled (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\apollo-server-core\\dist\\ApolloServer.js:5:58)",
+				"    at process._tickCallback (internal/process/next_tick.js:68:7)"
+			]
+		}
+	}
+}2020-03-26T10:40:24.761Z{
+	"message": "Context creation failed: Cannot read property 'get' of undefined",
+	"extensions": {
+		"code": "INTERNAL_SERVER_ERROR",
+		"exception": {
+			"stacktrace": [
+				"TypeError: Context creation failed: Cannot read property 'get' of undefined",
+				"    at _default (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\src\\middleware/isAuth.js:5:26)",
+				"    at ApolloServer.context (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\src/server.js:12:13)",
+				"    at ApolloServer.<anonymous> (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\apollo-server-core\\src\\ApolloServer.ts:737:24)",
+				"    at Generator.next (<anonymous>)",
+				"    at fulfilled (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\apollo-server-core\\dist\\ApolloServer.js:5:58)",
+				"    at process._tickCallback (internal/process/next_tick.js:68:7)"
+			]
+		}
+	}
+}2020-03-26T10:40:29.781Z{
+	"message": "Context creation failed: Cannot read property 'get' of undefined",
+	"extensions": {
+		"code": "INTERNAL_SERVER_ERROR",
+		"exception": {
+			"stacktrace": [
+				"TypeError: Context creation failed: Cannot read property 'get' of undefined",
+				"    at _default (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\src\\middleware/isAuth.js:5:26)",
+				"    at ApolloServer.context (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\src/server.js:12:13)",
+				"    at ApolloServer.<anonymous> (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\apollo-server-core\\src\\ApolloServer.ts:737:24)",
+				"    at Generator.next (<anonymous>)",
+				"    at fulfilled (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\apollo-server-core\\dist\\ApolloServer.js:5:58)",
+				"    at process._tickCallback (internal/process/next_tick.js:68:7)"
+			]
+		}
+	}
+}2020-03-26T10:40:34.794Z{
+	"message": "Context creation failed: Cannot read property 'get' of undefined",
+	"extensions": {
+		"code": "INTERNAL_SERVER_ERROR",
+		"exception": {
+			"stacktrace": [
+				"TypeError: Context creation failed: Cannot read property 'get' of undefined",
+				"    at _default (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\src\\middleware/isAuth.js:5:26)",
+				"    at ApolloServer.context (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\src/server.js:12:13)",
+				"    at ApolloServer.<anonymous> (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\apollo-server-core\\src\\ApolloServer.ts:737:24)",
+				"    at Generator.next (<anonymous>)",
+				"    at fulfilled (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\apollo-server-core\\dist\\ApolloServer.js:5:58)",
+				"    at process._tickCallback (internal/process/next_tick.js:68:7)"
+			]
+		}
+	}
+}2020-03-26T10:40:39.808Z{
+	"message": "Context creation failed: Cannot read property 'get' of undefined",
+	"extensions": {
+		"code": "INTERNAL_SERVER_ERROR",
+		"exception": {
+			"stacktrace": [
+				"TypeError: Context creation failed: Cannot read property 'get' of undefined",
+				"    at _default (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\src\\middleware/isAuth.js:5:26)",
+				"    at ApolloServer.context (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\src/server.js:12:13)",
+				"    at ApolloServer.<anonymous> (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\apollo-server-core\\src\\ApolloServer.ts:737:24)",
+				"    at Generator.next (<anonymous>)",
+				"    at fulfilled (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\apollo-server-core\\dist\\ApolloServer.js:5:58)",
+				"    at process._tickCallback (internal/process/next_tick.js:68:7)"
+			]
+		}
+	}
+}2020-03-26T10:40:45.833Z{
+	"message": "Context creation failed: Cannot read property 'get' of undefined",
+	"extensions": {
+		"code": "INTERNAL_SERVER_ERROR",
+		"exception": {
+			"stacktrace": [
+				"TypeError: Context creation failed: Cannot read property 'get' of undefined",
+				"    at _default (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\src\\middleware/isAuth.js:5:26)",
+				"    at ApolloServer.context (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\src/server.js:12:13)",
+				"    at ApolloServer.<anonymous> (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\apollo-server-core\\src\\ApolloServer.ts:737:24)",
+				"    at Generator.next (<anonymous>)",
+				"    at fulfilled (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\apollo-server-core\\dist\\ApolloServer.js:5:58)",
+				"    at process._tickCallback (internal/process/next_tick.js:68:7)"
+			]
+		}
+	}
+}2020-03-26T10:40:54.244Z{
+	"message": "Context creation failed: Cannot read property 'get' of undefined",
+	"extensions": {
+		"code": "INTERNAL_SERVER_ERROR",
+		"exception": {
+			"stacktrace": [
+				"TypeError: Context creation failed: Cannot read property 'get' of undefined",
+				"    at _default (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\src\\middleware/isAuth.js:5:26)",
+				"    at ApolloServer.context (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\src/server.js:13:13)",
+				"    at ApolloServer.<anonymous> (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\apollo-server-core\\src\\ApolloServer.ts:737:24)",
+				"    at Generator.next (<anonymous>)",
+				"    at fulfilled (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\apollo-server-core\\dist\\ApolloServer.js:5:58)",
+				"    at process._tickCallback (internal/process/next_tick.js:68:7)"
+			]
+		}
+	}
+}2020-03-26T10:40:59.857Z{
+	"message": "Context creation failed: Cannot read property 'get' of undefined",
+	"extensions": {
+		"code": "INTERNAL_SERVER_ERROR",
+		"exception": {
+			"stacktrace": [
+				"TypeError: Context creation failed: Cannot read property 'get' of undefined",
+				"    at _default (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\src\\middleware/isAuth.js:5:26)",
+				"    at ApolloServer.context (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\src/server.js:13:13)",
+				"    at ApolloServer.<anonymous> (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\apollo-server-core\\src\\ApolloServer.ts:737:24)",
+				"    at Generator.next (<anonymous>)",
+				"    at fulfilled (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\apollo-server-core\\dist\\ApolloServer.js:5:58)",
+				"    at process._tickCallback (internal/process/next_tick.js:68:7)"
+			]
+		}
+	}
+}2020-03-26T10:41:05.862Z{
+	"message": "Context creation failed: Cannot read property 'get' of undefined",
+	"extensions": {
+		"code": "INTERNAL_SERVER_ERROR",
+		"exception": {
+			"stacktrace": [
+				"TypeError: Context creation failed: Cannot read property 'get' of undefined",
+				"    at _default (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\src\\middleware/isAuth.js:5:26)",
+				"    at ApolloServer.context (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\src/server.js:13:13)",
+				"    at ApolloServer.<anonymous> (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\apollo-server-core\\src\\ApolloServer.ts:737:24)",
+				"    at Generator.next (<anonymous>)",
+				"    at fulfilled (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\apollo-server-core\\dist\\ApolloServer.js:5:58)",
+				"    at process._tickCallback (internal/process/next_tick.js:68:7)"
+			]
+		}
+	}
+}2020-03-26T10:41:11.848Z{
+	"message": "Context creation failed: Cannot read property 'get' of undefined",
+	"extensions": {
+		"code": "INTERNAL_SERVER_ERROR",
+		"exception": {
+			"stacktrace": [
+				"TypeError: Context creation failed: Cannot read property 'get' of undefined",
+				"    at _default (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\src\\middleware/isAuth.js:5:26)",
+				"    at ApolloServer.context (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\src/server.js:13:13)",
+				"    at ApolloServer.<anonymous> (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\apollo-server-core\\src\\ApolloServer.ts:737:24)",
+				"    at Generator.next (<anonymous>)",
+				"    at fulfilled (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\apollo-server-core\\dist\\ApolloServer.js:5:58)",
+				"    at process._tickCallback (internal/process/next_tick.js:68:7)"
+			]
+		}
+	}
+}2020-03-26T10:41:17.869Z{
+	"message": "Context creation failed: Cannot read property 'get' of undefined",
+	"extensions": {
+		"code": "INTERNAL_SERVER_ERROR",
+		"exception": {
+			"stacktrace": [
+				"TypeError: Context creation failed: Cannot read property 'get' of undefined",
+				"    at _default (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\src\\middleware/isAuth.js:5:26)",
+				"    at ApolloServer.context (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\src/server.js:13:13)",
+				"    at ApolloServer.<anonymous> (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\apollo-server-core\\src\\ApolloServer.ts:737:24)",
+				"    at Generator.next (<anonymous>)",
+				"    at fulfilled (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\apollo-server-core\\dist\\ApolloServer.js:5:58)",
+				"    at process._tickCallback (internal/process/next_tick.js:68:7)"
+			]
+		}
+	}
+}2020-03-26T10:41:23.856Z{
+	"message": "Context creation failed: Cannot read property 'get' of undefined",
+	"extensions": {
+		"code": "INTERNAL_SERVER_ERROR",
+		"exception": {
+			"stacktrace": [
+				"TypeError: Context creation failed: Cannot read property 'get' of undefined",
+				"    at _default (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\src\\middleware/isAuth.js:5:26)",
+				"    at ApolloServer.context (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\src/server.js:13:13)",
+				"    at ApolloServer.<anonymous> (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\apollo-server-core\\src\\ApolloServer.ts:737:24)",
+				"    at Generator.next (<anonymous>)",
+				"    at fulfilled (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\apollo-server-core\\dist\\ApolloServer.js:5:58)",
+				"    at process._tickCallback (internal/process/next_tick.js:68:7)"
+			]
+		}
+	}
+}2020-03-26T10:41:29.866Z{
+	"message": "Context creation failed: Cannot read property 'get' of undefined",
+	"extensions": {
+		"code": "INTERNAL_SERVER_ERROR",
+		"exception": {
+			"stacktrace": [
+				"TypeError: Context creation failed: Cannot read property 'get' of undefined",
+				"    at _default (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\src\\middleware/isAuth.js:5:26)",
+				"    at ApolloServer.context (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\src/server.js:13:13)",
+				"    at ApolloServer.<anonymous> (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\apollo-server-core\\src\\ApolloServer.ts:737:24)",
+				"    at Generator.next (<anonymous>)",
+				"    at fulfilled (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\apollo-server-core\\dist\\ApolloServer.js:5:58)",
+				"    at process._tickCallback (internal/process/next_tick.js:68:7)"
+			]
+		}
+	}
+}2020-03-26T10:41:35.868Z{
+	"message": "Context creation failed: Cannot read property 'get' of undefined",
+	"extensions": {
+		"code": "INTERNAL_SERVER_ERROR",
+		"exception": {
+			"stacktrace": [
+				"TypeError: Context creation failed: Cannot read property 'get' of undefined",
+				"    at _default (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\src\\middleware/isAuth.js:5:26)",
+				"    at ApolloServer.context (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\src/server.js:13:13)",
+				"    at ApolloServer.<anonymous> (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\apollo-server-core\\src\\ApolloServer.ts:737:24)",
+				"    at Generator.next (<anonymous>)",
+				"    at fulfilled (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\apollo-server-core\\dist\\ApolloServer.js:5:58)",
+				"    at process._tickCallback (internal/process/next_tick.js:68:7)"
+			]
+		}
+	}
+}2020-03-26T10:41:43.912Z{
+	"message": "Context creation failed: Cannot read property 'get' of undefined",
+	"extensions": {
+		"code": "INTERNAL_SERVER_ERROR",
+		"exception": {
+			"stacktrace": [
+				"TypeError: Context creation failed: Cannot read property 'get' of undefined",
+				"    at _default (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\src\\middleware/isAuth.js:5:26)",
+				"    at ApolloServer.context (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\src/server.js:13:13)",
+				"    at ApolloServer.<anonymous> (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\apollo-server-core\\src\\ApolloServer.ts:737:24)",
+				"    at Generator.next (<anonymous>)",
+				"    at fulfilled (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\apollo-server-core\\dist\\ApolloServer.js:5:58)",
+				"    at process._tickCallback (internal/process/next_tick.js:68:7)"
+			]
+		}
+	}
+}2020-03-26T10:41:49.830Z{
+	"message": "Context creation failed: Cannot read property 'get' of undefined",
+	"extensions": {
+		"code": "INTERNAL_SERVER_ERROR",
+		"exception": {
+			"stacktrace": [
+				"TypeError: Context creation failed: Cannot read property 'get' of undefined",
+				"    at _default (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\src\\middleware/isAuth.js:5:26)",
+				"    at ApolloServer.context (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\src/server.js:13:13)",
+				"    at ApolloServer.<anonymous> (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\apollo-server-core\\src\\ApolloServer.ts:737:24)",
+				"    at Generator.next (<anonymous>)",
+				"    at fulfilled (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\apollo-server-core\\dist\\ApolloServer.js:5:58)",
+				"    at process._tickCallback (internal/process/next_tick.js:68:7)"
+			]
+		}
+	}
+}2020-03-26T10:41:55.824Z{
+	"message": "Context creation failed: Cannot read property 'get' of undefined",
+	"extensions": {
+		"code": "INTERNAL_SERVER_ERROR",
+		"exception": {
+			"stacktrace": [
+				"TypeError: Context creation failed: Cannot read property 'get' of undefined",
+				"    at _default (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\src\\middleware/isAuth.js:5:26)",
+				"    at ApolloServer.context (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\src/server.js:13:13)",
+				"    at ApolloServer.<anonymous> (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\apollo-server-core\\src\\ApolloServer.ts:737:24)",
+				"    at Generator.next (<anonymous>)",
+				"    at fulfilled (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\apollo-server-core\\dist\\ApolloServer.js:5:58)",
+				"    at process._tickCallback (internal/process/next_tick.js:68:7)"
+			]
+		}
+	}
+}2020-03-26T10:42:00.840Z{
+	"message": "Context creation failed: Cannot read property 'get' of undefined",
+	"extensions": {
+		"code": "INTERNAL_SERVER_ERROR",
+		"exception": {
+			"stacktrace": [
+				"TypeError: Context creation failed: Cannot read property 'get' of undefined",
+				"    at _default (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\src\\middleware/isAuth.js:5:26)",
+				"    at ApolloServer.context (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\src/server.js:13:13)",
+				"    at ApolloServer.<anonymous> (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\apollo-server-core\\src\\ApolloServer.ts:737:24)",
+				"    at Generator.next (<anonymous>)",
+				"    at fulfilled (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\apollo-server-core\\dist\\ApolloServer.js:5:58)",
+				"    at process._tickCallback (internal/process/next_tick.js:68:7)"
+			]
+		}
+	}
+}2020-03-26T10:42:05.855Z{
+	"message": "Context creation failed: Cannot read property 'get' of undefined",
+	"extensions": {
+		"code": "INTERNAL_SERVER_ERROR",
+		"exception": {
+			"stacktrace": [
+				"TypeError: Context creation failed: Cannot read property 'get' of undefined",
+				"    at _default (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\src\\middleware/isAuth.js:5:26)",
+				"    at ApolloServer.context (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\src/server.js:13:13)",
+				"    at ApolloServer.<anonymous> (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\apollo-server-core\\src\\ApolloServer.ts:737:24)",
+				"    at Generator.next (<anonymous>)",
+				"    at fulfilled (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\apollo-server-core\\dist\\ApolloServer.js:5:58)",
+				"    at process._tickCallback (internal/process/next_tick.js:68:7)"
+			]
+		}
+	}
+}2020-03-26T10:42:10.868Z{
+	"message": "Context creation failed: Cannot read property 'get' of undefined",
+	"extensions": {
+		"code": "INTERNAL_SERVER_ERROR",
+		"exception": {
+			"stacktrace": [
+				"TypeError: Context creation failed: Cannot read property 'get' of undefined",
+				"    at _default (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\src\\middleware/isAuth.js:5:26)",
+				"    at ApolloServer.context (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\src/server.js:13:13)",
+				"    at ApolloServer.<anonymous> (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\apollo-server-core\\src\\ApolloServer.ts:737:24)",
+				"    at Generator.next (<anonymous>)",
+				"    at fulfilled (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\apollo-server-core\\dist\\ApolloServer.js:5:58)",
+				"    at process._tickCallback (internal/process/next_tick.js:68:7)"
+			]
+		}
+	}
+}2020-03-26T10:42:15.883Z{
+	"message": "Context creation failed: Cannot read property 'get' of undefined",
+	"extensions": {
+		"code": "INTERNAL_SERVER_ERROR",
+		"exception": {
+			"stacktrace": [
+				"TypeError: Context creation failed: Cannot read property 'get' of undefined",
+				"    at _default (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\src\\middleware/isAuth.js:5:26)",
+				"    at ApolloServer.context (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\src/server.js:13:13)",
+				"    at ApolloServer.<anonymous> (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\apollo-server-core\\src\\ApolloServer.ts:737:24)",
+				"    at Generator.next (<anonymous>)",
+				"    at fulfilled (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\apollo-server-core\\dist\\ApolloServer.js:5:58)",
+				"    at process._tickCallback (internal/process/next_tick.js:68:7)"
+			]
+		}
+	}
+}2020-03-26T12:23:22.481Z{
+	"message": "Not Authorized!",
+	"locations": [
+		{
+			"line": 2,
+			"column": 3
+		}
+	],
+	"path": [
+		"deleteHistory"
+	],
+	"extensions": {
+		"code": "INTERNAL_SERVER_ERROR",
+		"exception": {
+			"stacktrace": [
+				"Error: Not Authorized!",
+				"    at _callee$ (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\src\\utils/getUser.js:5:11)",
+				"    at tryCatch (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\regenerator-runtime\\runtime.js:45:40)",
+				"    at Generator.invoke [as _invoke] (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\regenerator-runtime\\runtime.js:271:22)",
+				"    at Generator.prototype.(anonymous function) [as next] (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\regenerator-runtime\\runtime.js:97:21)",
+				"    at asyncGeneratorStep (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\src\\utils\\getUser.js:10:103)",
+				"    at _next (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\src\\utils\\getUser.js:12:194)",
+				"    at C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\src\\utils\\getUser.js:12:364",
+				"    at new Promise (<anonymous>)",
+				"    at C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\src\\utils\\getUser.js:12:97",
+				"    at C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\src\\utils\\getUser.js:62:17",
+				"    at _callee3$ (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\src\\resolvers\\mutation/department.js:47:24)",
+				"    at tryCatch (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\regenerator-runtime\\runtime.js:45:40)",
+				"    at Generator.invoke [as _invoke] (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\regenerator-runtime\\runtime.js:271:22)",
+				"    at Generator.prototype.(anonymous function) [as next] (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\regenerator-runtime\\runtime.js:97:21)",
+				"    at asyncGeneratorStep (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\src\\resolvers\\mutation\\department.js:34:103)",
+				"    at _next (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\src\\resolvers\\mutation\\department.js:36:194)",
+				"    at C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\src\\resolvers\\mutation\\department.js:36:364",
+				"    at new Promise (<anonymous>)",
+				"    at C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\src\\resolvers\\mutation\\department.js:36:97",
+				"    at deleteHistory (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\src\\resolvers\\mutation/department.js:6:28)",
+				"    at field.resolve (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\graphql-extensions\\src\\index.ts:274:18)",
+				"    at resolveFieldValueOrError (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\graphql\\execution\\execute.js:467:18)"
+			]
+		}
+	}
+}2020-03-26T12:28:36.173Z{
+	"message": "Unexpected error value: \"Not Authorized!\"",
+	"locations": [
+		{
+			"line": 2,
+			"column": 3
+		}
+	],
+	"path": [
+		"deleteHistory"
+	],
+	"extensions": {
+		"code": "INTERNAL_SERVER_ERROR",
+		"exception": {
+			"stacktrace": [
+				"Error: Unexpected error value: \"Not Authorized!\"",
+				"    at asErrorInstance (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\graphql\\execution\\execute.js:481:10)",
+				"    at process._tickCallback (internal/process/next_tick.js:68:7)"
+			]
+		}
+	}
+}2020-03-26T12:29:54.515Z{
+	"message": "Not Authorized!",
+	"locations": [
+		{
+			"line": 2,
+			"column": 3
+		}
+	],
+	"path": [
+		"deleteHistory"
+	],
+	"extensions": {
+		"code": "INTERNAL_SERVER_ERROR",
+		"exception": {
+			"stacktrace": [
+				"Error: Not Authorized!",
+				"    at C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\src\\utils/getUser.js:5:30",
+				"    at new Promise (<anonymous>)",
+				"    at _callee$ (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\src\\utils/getUser.js:4:10)",
+				"    at tryCatch (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\regenerator-runtime\\runtime.js:45:40)",
+				"    at Generator.invoke [as _invoke] (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\regenerator-runtime\\runtime.js:271:22)",
+				"    at Generator.prototype.(anonymous function) [as next] (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\regenerator-runtime\\runtime.js:97:21)",
+				"    at asyncGeneratorStep (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\src\\utils\\getUser.js:10:103)",
+				"    at _next (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\src\\utils\\getUser.js:12:194)",
+				"    at C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\src\\utils\\getUser.js:12:364",
+				"    at new Promise (<anonymous>)",
+				"    at C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\src\\utils\\getUser.js:12:97",
+				"    at C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\src\\utils\\getUser.js:46:17",
+				"    at _callee3$ (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\src\\resolvers\\mutation/department.js:47:24)",
+				"    at tryCatch (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\regenerator-runtime\\runtime.js:45:40)",
+				"    at Generator.invoke [as _invoke] (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\regenerator-runtime\\runtime.js:271:22)",
+				"    at Generator.prototype.(anonymous function) [as next] (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\regenerator-runtime\\runtime.js:97:21)",
+				"    at asyncGeneratorStep (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\src\\resolvers\\mutation\\department.js:34:103)",
+				"    at _next (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\src\\resolvers\\mutation\\department.js:36:194)",
+				"    at C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\src\\resolvers\\mutation\\department.js:36:364",
+				"    at new Promise (<anonymous>)",
+				"    at C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\src\\resolvers\\mutation\\department.js:36:97",
+				"    at deleteHistory (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\src\\resolvers\\mutation/department.js:6:28)"
+			]
+		}
+	}
 }

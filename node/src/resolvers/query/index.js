@@ -6,6 +6,7 @@ import blogpostQuery from './blogpost'
 import conferenceQuery from './conference'
 import seminarQuery from './seminar'
 import noteQuery from './note'
+import userQuery from './user'
 
 const Query = {
   ...departmentQuery,
@@ -15,7 +16,8 @@ const Query = {
   ...blogpostQuery,
   ...conferenceQuery,
   ...seminarQuery,
-  ...noteQuery
+  ...noteQuery,
+  ...userQuery
 }
 
 export default Query

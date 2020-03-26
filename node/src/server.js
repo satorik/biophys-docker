@@ -1,19 +1,20 @@
 import {  ApolloServer } from 'apollo-server-express'
 import { schema } from './schema'
 import { models } from './models'
+import isAuth from './middleware/isAuth'
 import fs from 'fs'
 
 const server = new ApolloServer({ 
-  // typeDefs: typeDefs,
-  // resolvers: resolvers,
   schema,
-  context: {
-    models
+  context: (req) => {
+
+    return {
+      models,
+      auth: isAuth(req)
+    }
   },
   formatError: (err) => {
-    // Don't give the specific errors to the client.
     console.log('Apollo to the Handle!!!!\r\n', err)
- 
     const stream = fs.createWriteStream('errors.log', {flags: 'a'})
     const now = new Date()
     stream.write(now.toISOString())
