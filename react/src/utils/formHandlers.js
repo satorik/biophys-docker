@@ -32,10 +32,11 @@
         }
       }
       if (type === 'resourse') {
+        console.log(oldData, oldData.form)
         return {
-        educationFormId: oldData.form.parentForm.id || oldData.form.id,  
+        educationFormId: oldData.form.parentForm? oldData.form.parentForm.id : oldData.form.id,  
         file: '',
-        subSectionId: oldData.form.parentForm.id ? oldData.form.id : '',
+        subSectionId: oldData.form.parentForm ? oldData.form.id : '',
         subSectionText:''
         }
       }

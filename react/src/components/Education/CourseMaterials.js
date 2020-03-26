@@ -29,7 +29,6 @@ export const CourseMaterials = ({title, links, filetype, onClick, parentForm, on
       return acc
   }, [])
 
-  console.log(subSections)
   const courseMaterials = <div>
       {
         createResDiv(links.filter(link => link.form.id === parentForm))

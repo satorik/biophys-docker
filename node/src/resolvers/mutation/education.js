@@ -15,6 +15,7 @@ const getEducationSubsection = async (subSectionId, subSectionText, educationFor
       return newSubSection.id
     }
   }
+  else return educationFormId
 }
 
 const clearSubSection = async (form, models) => {
@@ -176,6 +177,8 @@ const educationMutation = {
     if (!course) { throw new ApolloError('Course not found') }
 
     const subSection = await getEducationSubsection(inputData.subSectionId, inputData.subSectionText, inputData.educationFormId, models, filetype)
+
+    console.log(subSection)
 
     if (filetype === 'PDF') {
       const {file, ...postData} = inputData
