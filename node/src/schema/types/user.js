@@ -14,6 +14,7 @@ export default `
   type authData {
     userId: ID!
     token: String!
+    username: String!
     tokenExpiration: Int!
   }
 

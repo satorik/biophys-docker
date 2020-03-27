@@ -4,7 +4,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faCaretDown, faCaretUp } from '@fortawesome/free-solid-svg-icons'
 import EditButtons from '../UI/EditButtons'
 
-const Blogpost = ({blogpost, idx, onClickEdit, onClickDelete}) => {
+const Blogpost = ({blogpost, idx, onClickEdit, onClickDelete, isAuth}) => {
   const [showContent, setShowContent] = React.useState(false)
   const { innerWidth: width, innerHeight: height } = window
 
@@ -38,7 +38,7 @@ const Blogpost = ({blogpost, idx, onClickEdit, onClickDelete}) => {
                         size="lg"
                         color="white"
                         row
-                    />
+                      />
                     </div>
                  </div>
 

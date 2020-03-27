@@ -2,6 +2,8 @@ import React from 'react'
 import './App.css'
 
 import {BrowserRouter, Route, Redirect, Switch} from 'react-router-dom'
+import AuthContext from './context/AuthContext'
+
 import { library } from '@fortawesome/fontawesome-svg-core'
 import { faAngleLeft, faAngleRight, faCaretUp, faCaretDown, faCircle, faPlus, 
   faArrowUp, faArrowDown, faFileDownload, faEye, faPhone, faEnvelope, faUserGraduate } from '@fortawesome/free-solid-svg-icons'
@@ -16,29 +18,40 @@ import Department from './Department'
 import Science from './Science'
 import Education from './Education'
 
-
-
 library.add(faAngleLeft, faAngleRight, faCaretDown, faCaretUp, faCircle, faPlus, faEdit, 
   faTrashAlt, faArrowUp, faArrowDown, faFileDownload, faEye, faPlusSquare, faPhone, faEnvelope, faUserGraduate)
 
+
+const initialState = {
+  userId: localStorage.getItem('userId'),
+  token: localStorage.getItem('token'),
+  tokenExpiration: localStorage.getItem('tokenExpiration'),
+  username: localStorage.getItem('username')
+}
+
 const App = () => {
+
+  const [currentUser, setCurrentUser] = React.useState(initialState)
 
   return (
       <BrowserRouter>
-         <div>
-          <NavBarTop />
-          <Switch>
-            <Redirect from="/" exact to="/news" />
-            <Route path="/news" component={News} />
-            <Route path="/blogpost" component={Blog} />
-            <Route path="/seminar" component={Seminar} />
-            <Route path="/conference" component={Conference} />
-            <Route path="/department" 
-              render={(props) => <Department {...props}  />} />
-            <Route path="/science" component={Science} />
-            <Route path="/education" render={(props) => <Education {...props}  />} /> 
-          </Switch>
-          </div>
+         <>
+          <AuthContext.Provider 
+              value={ {currentUser, setCurrentUser}}>
+            <NavBarTop />
+            <Switch>
+              <Redirect from="/" exact to="/news" />
+              <Route path="/news" component={News} />
+              <Route path="/blogpost" component={Blog} />
+              <Route path="/seminar" component={Seminar} />
+              <Route path="/conference" component={Conference} />
+              <Route path="/department" 
+                render={(props) => <Department {...props}  />} />
+              <Route path="/science" component={Science} />
+              <Route path="/education" render={(props) => <Education {...props}  />} /> 
+            </Switch>
+            </AuthContext.Provider>
+          </>
       </BrowserRouter>
   )
 }

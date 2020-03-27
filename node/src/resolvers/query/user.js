@@ -7,7 +7,7 @@ const userQuery = {
     const user = await models.User.findOne({where: {email: inputData.email}})
     if (!user) {throw new ApolloError("User not found")}
 
-    const isEqual = await bcrypt.compare(inputData.password, user.password)
+    const isEqual = await bcrypt.compare(inputData.password, user.hashedPassword)
     if (!isEqual) {
       throw new ApolloError('Password is incorrect');
     }
@@ -16,6 +16,7 @@ const userQuery = {
 
     return {
       userId: user.id,
+      username: user.username,
       token: token,
       tokenExpiration: 1
     }

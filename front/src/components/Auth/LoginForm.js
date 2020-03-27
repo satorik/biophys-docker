@@ -1,14 +1,17 @@
 import React from 'react'
 import Edit from '../Shared/Edit'
 import { required, email, password, passwordRepeat } from '../../utils/validators'
-import { useQuery, useMutation } from '@apollo/react-hooks'
+import NetworkErrorComponent from '../Shared/ErrorHandling/NetworkErrorComponent'
+import ErrorBoundry from '../Shared/ErrorHandling/ErrorBoundry'
+import { useLazyQuery, useMutation } from '@apollo/client'
 import { gql } from 'apollo-boost'
 
 const LOGIN_USER = gql`                    
   query userLogin($inputData: UserLoginData!){
-      userLogin(inputData: $inputData) {
+      loginUser(inputData: $inputData) {
         userId
         token
+        username
         tokenExpiration
     }
   }
@@ -18,6 +21,7 @@ const REGISTER_USER = gql`
       createUser(inputData: $inputData) {
         userId
         token
+        username
         tokenExpiration
     }
   }
@@ -68,14 +72,21 @@ const LOGIN_FORM_TEMPLATE = [
 ]
 
 
-export const LoginForm = ({onCancel}) => {
+const LoginForm = ({onCancel, isAuth, onLogout}) => {
 
   const [isAbleToSave, setIsAbleToSave] = React.useState(true)
   const [isLogin, setIsLogin] = React.useState(true)
 
-  // const { loading: loadingUser, error: UserError, data} = useQuery(LOGIN_USER)
+  const [loginUser, { loading: loadingUser, error: UserError, data}] = useLazyQuery(LOGIN_USER)
   const [createUser,
         { loading: creationLoading, error: creationError }] = useMutation(REGISTER_USER)
+
+  if (data) {
+    localStorage.setItem('userId', data.loginUser.userId)
+    localStorage.setItem('token', data.loginUser.token)
+    localStorage.setItem('tokenExpiration', data.loginUser.tokenExpiration) 
+    localStorage.setItem('username', data.loginUser.username)
+  }
 
   const onCloseModal = () => {
     onCancel()
@@ -88,40 +99,60 @@ export const LoginForm = ({onCancel}) => {
     }
     else {
       const postObject = postData.reduce((obj, item) => {
-        if (item.type !== 'passwordRepeat') {
+        if (item.title !== 'passwordRepeat') {
           obj[item.title] = item.value
         }
         return obj
       } ,{})   
       
      if (isLogin) {
-
-        localStorage.setItem('key', 'value')
+        loginUser({ variables: {inputData: postObject} })
      }
      else {
-       const user = await createUser()
+       const { createUser } = await createUser({ variables: {inputData: postObject} })
+       localStorage.setItem('token', createUser.token)
+       localStorage.setItem('tokenExpiration', createUser.tokenExpiration)
      }
     } 
   }
 
-  return (
-    <>
-    <ul className="nav nav-tabs">
-      <li className="nav-item">
-        <a className={`nav-link ${isLogin ? 'active' : ''}`} href="#" onClick={() => setIsLogin(true)}>Авторизация</a>
-      </li>
-      <li className="nav-item">
-        <a className={`nav-link ${!isLogin ? 'active' : ''}`} href="#" onClick={() => setIsLogin(false)}>Регистрация</a>
-      </li>
-    </ul>
+  const handleLogout = () => {
+    localStorage.removeItem('userId')
+    localStorage.removeItem('token')
+    localStorage.removeItem('username')
+    localStorage.removeItem('tokenExpiration')
 
-    <Edit 
-        onClickSubmit={onHandleSubmit}
-        onClickCancel={onCloseModal}
-        isAbleToSave={isAbleToSave}
-        post={{}}
-        formTemplate={isLogin ? LOGIN_FORM_TEMPLATE : REGISTER_FORM_TEMPLATE}
-    />
-    </>
-  )
+    onLogout({
+      userId: null,
+      token: null,
+      username: null,
+      tokenExpiration: null
+    })
+  }
+
+  if (creationError) return <NetworkErrorComponent error={creationError} />
+
+  const content = isAuth ? <button className="btn btn-danger d-block" onClick={handleLogout}>Выйти</button> :
+      <>
+        <ul className="nav nav-tabs">
+          <li className="nav-item">
+            <a className={`nav-link ${isLogin ? 'active' : ''}`} href="#" onClick={() => setIsLogin(true)}>Авторизация</a>
+          </li>
+          <li className="nav-item">
+            <a className={`nav-link ${!isLogin ? 'active' : ''}`} href="#" onClick={() => setIsLogin(false)}>Регистрация</a>
+          </li>
+        </ul>
+
+        <Edit 
+            onClickSubmit={onHandleSubmit}
+            onClickCancel={onCloseModal}
+            isAbleToSave={isAbleToSave}
+            post={{}}
+            formTemplate={isLogin ? LOGIN_FORM_TEMPLATE : REGISTER_FORM_TEMPLATE}
+        />
+        </>
+  
+  return content 
 }
+
+export default ErrorBoundry(LoginForm)

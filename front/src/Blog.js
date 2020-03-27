@@ -1,6 +1,5 @@
 import React from 'react'
-import { useQuery, useMutation } from '@apollo/react-hooks'
-import { gql } from 'apollo-boost'
+import { useQuery, useMutation, gql } from '@apollo/client'
 import { required, length } from './utils/validators'
 import { useLocation } from 'react-router-dom'
 
@@ -13,6 +12,7 @@ import Spinner from './components/UI/Spinner'
 import Pagination from './components/UI/Pagination'
 import ErrorBoundry from './components/Shared/ErrorHandling/ErrorBoundry'
 import getUpdateData from './utils/getObjectForUpdate'
+//import AuthContext from './context/AuthContext'
 import NetworkErrorComponent from './components/Shared/ErrorHandling/NetworkErrorComponent'
 
 const POSTS_PER_PAGE = 5

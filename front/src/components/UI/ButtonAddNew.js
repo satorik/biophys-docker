@@ -1,7 +1,13 @@
 import React from 'react'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import AuthContext from '../../context/AuthContext'
 
 const ButtonAddNew = ({onClickAddButton, color, fixed, size, block, border}) => {
+
+  const { currentUser } = React.useContext(AuthContext)
+  const isAuth = currentUser.token !== null
+
+  if (!isAuth) return null
 
   const divStyle = fixed ? {position:'fixed', bottom:'35px', right:'35px', cursor:'pointer'} : {cursor:'pointer'}
   let divClass = block && border ? "d-block p-2 border border-success" : block ? "d-block p-2" : ""

@@ -1,6 +1,5 @@
 import React from 'react'
-import { useQuery, useMutation } from '@apollo/react-hooks'
-import { gql } from 'apollo-boost'
+import { useQuery, useMutation, gql } from '@apollo/client'
 import { required, length, time, date } from '../../utils/validators'
 
 import {CourseInfo} from './CourseInfo'

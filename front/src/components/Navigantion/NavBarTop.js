@@ -1,7 +1,8 @@
 import React from 'react'
 import NavBarTopItem from './NavBarTopItem'
-import { LoginForm } from '../Auth/LoginForm'
+import LoginForm  from '../Auth/LoginForm'
 import Modal from '../UI/Modal'
+import AuthContext from '../../context/AuthContext'
 import {useLocation} from 'react-router-dom'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 
@@ -37,6 +38,7 @@ const LINKS = [
 const NavBarTop = () => {
 
   const currentPath = useLocation().pathname
+  const { currentUser, setCurrentUser } = React.useContext(AuthContext)
 
   const [isModalOpen, setIsModalOpen] = React.useState(false)
   const modalTitle='Авторизация'
@@ -48,7 +50,7 @@ const NavBarTop = () => {
         title={modalTitle}
         onClose={() => setIsModalOpen(false)}
       >
-        <LoginForm onCancel={() => setIsModalOpen(false)} />
+        <LoginForm onCancel={() => setIsModalOpen(false)} isAuth={currentUser.token} onLogout={setCurrentUser} />
       </Modal> }
 
       <nav className="navbar navbar-dark navbar-expand-md bg-dark" >
@@ -57,6 +59,7 @@ const NavBarTop = () => {
             {LINKS.map((link, idx) => <NavBarTopItem link={link} key={idx} selectedPath={currentPath.split('/')[1]} /> )}
         </ul>
         <button className="btn p-0" onClick={() => setIsModalOpen(true)}><span><FontAwesomeIcon icon='user-graduate' style={{color: 'var(--light)'}} size="lg"/></span></button>
+        {currentUser.token && <p className="text-light mr-1 ml-2 my-0">{currentUser.username}</p>}
       </nav>
       </>
   )

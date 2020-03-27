@@ -22,6 +22,7 @@ const userMutation = {
     return {
       userId: user.id,
       token: token,
+      username: user.username,
       tokenExpiration: 1
     }
   }

@@ -1,6 +1,5 @@
 import React from 'react'
-import { useQuery } from '@apollo/react-hooks'
-import { gql } from 'apollo-boost'
+import { useQuery, gql } from '@apollo/client'
 import ScheduleDay from './ScheduleDay'
 
 const GET_SCHEDULE = gql`                    
@@ -37,14 +36,13 @@ const ScheduleByYear = ({yearId, currentWeek}) => {
   if (loading) return <p>Loading...</p>
   if (error) return <p>Error :(</p>
  
-  const {timetable, days} = data
+  const {timetable} = data
 
   const timetableByDay = timetable.reduce((acc, elem) => {
     acc[elem.day.title] = (acc[elem.day.title] || []).concat(elem)
     return acc
   }, {})
 
-  console.log()
   return (
     <div>
         <div>

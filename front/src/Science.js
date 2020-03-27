@@ -1,7 +1,6 @@
 import React from 'react'
 import {Route, Redirect} from 'react-router-dom'
-import { useQuery, useMutation } from '@apollo/react-hooks'
-import { gql } from 'apollo-boost'
+import { useQuery, useMutation, gql } from '@apollo/client'
 import { required, length } from './utils/validators'
 
 import ScienceHeader from './components/UI/Header/QuoteHeader'

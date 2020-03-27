@@ -1,10 +1,17 @@
 import React from 'react'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import AuthContext from '../../context/AuthContext'
+
 
 export default ({onClickEdit, onClickDelete, size, color, row, withArrowUp, withArrowDown, onClickUp, onClickDown, withNew, onClickNew}) => {
   
+  const { currentUser } = React.useContext(AuthContext)
+  const isAuth = currentUser.token !== null
+
+  if (!isAuth) return null
+
   return (
-    <div className={`d-inline-flex justify-content-start ${row ? 'flex-row' : 'flex-column'}`}>
+     <div className={`d-inline-flex justify-content-start ${row ? 'flex-row' : 'flex-column'}`}>
       {withNew &&
         <button className={`btn p-0 ${row ? 'mr-1' : ''}`} onClick={onClickNew}><span><FontAwesomeIcon icon={['far', 'plus-square']} color={color} size={size}/></span></button>
       }

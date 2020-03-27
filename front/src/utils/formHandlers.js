@@ -32,7 +32,6 @@
         }
       }
       if (type === 'resourse') {
-        console.log(oldData, oldData.form)
         return {
         educationFormId: oldData.form.parentForm? oldData.form.parentForm.id : oldData.form.id,  
         file: '',
