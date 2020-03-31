@@ -2,7 +2,6 @@ node/node_modules
 node/nodemon.json
 node/errors.log
 node/src/files/
-node/src/
 old_files/
 old_images/
 front/.env.development
