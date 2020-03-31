@@ -1,74 +1,66 @@
 import { ApolloError } from "apollo-server"
 import writeImage from '../../utils/readStreamIntoFile'
 import clearImage from '../../utils/imageFunctions'
+import getUser from '../../utils/getUser'
+
+import { createWithImage, updateWithImage, deleteWithImage } from '../../utils/mutate'
+import { valueForCreateImg, valueForUpdateImg, valueForDeleteImg } from '../../utils/getMutationValue'
 
 const scienceMutation = {
-  async createScienceGroup(parent, {scienceRouteId, inputData}, { models }){
+  async createScienceGroup(parent, {scienceRouteId, inputData}, { models, auth }){
 
     const scienceRoute = await models.ScienceRoute.findOne({where: {id: scienceRouteId}})
     if (!scienceRoute) { throw new ApolloError(`Science Route with id ${scienceRouteId} not found`) }
-    // if (!req.isAuth) { throw e}
-    const {image, people, articles, ...groupData} = inputData
-    const uploadedImage = await inputData.image
-    const {file, imageUrl} = await writeImage(uploadedImage, 'scienceGroup')
-    const groupDataWithUrl = {
-      ...groupData,
-      imageUrl,
-      scienceRouteId
-    }
 
-    const newGroup = await models.ScienceGroup.create({...groupDataWithUrl})
-    return newGroup.dataValues
-  },
-  async updateScienceGroup(parent, {id, inputData}, { models }){
-    // if (!req.isAuth) { e }
-  
-    const scienceGroup = await models.ScienceGroup.findOne({where: {id}})
-    if (!scienceGroup) { throw new ApolloError('Science Group with id ${id} not found') }
-
-    let isUploaded = {}
-    if (inputData.image) {
-      const uploadedImage = await inputData.image
-      isUploaded = await writeImage(uploadedImage, 'scienceGroup')
-      clearImage(scienceGroup.dataValues.imageUrl, 'scienceGroup')
-    }
-   
-    Object.keys(inputData).forEach(item => scienceGroup[item] = inputData[item])
-    if (isUploaded.imageUrl) { scienceGroup.imageUrl = isUploaded.imageUrl }
-
-    await scienceGroup.save()
-    return scienceGroup.dataValues
+    const {createData, imageUrl} = await valueForCreateImg(inputData, 'scienceGroup', auth, models.User)
+    return createWithImage(models.ScienceGroup, {...createData, scienceRouteId}, imageUrl, 'scienceGroup')
 
   },
-  async deleteScienceGroup(parent, {id}, { models }){
-    const scienceGroup = await models.ScienceGroup.findOne({where: {id}})
-    if (!scienceGroup) { throw new ApolloError('Science Group with id ${id} not found') }
+  async updateScienceGroup(parent, {id, inputData}, { models, auth }){
+    
+    const {updateData, imageToClear, isUploaded} = 
+    await valueForUpdateImg(id, inputData, 'scienceGroup', auth, models.ScienceGroup, models.User)
 
-    await scienceGroup.destroy()
-    clearImage(scienceGroup.dataValues.imageUrl, 'scienceGroup')
-    return id
+    return updateWithImage(updateData, imageToClear, isUploaded, 'scienceGroup')
+
   },
-  async createScienceRoute(parent, {inputData}, { models }) {
-    const scienceRoute = await models.ScienceRoute.create({...inputData})
-    return scienceRoute.dataValues
+  async deleteScienceGroup(parent, {id}, { models, auth }){
+
+    const forDelete = await valueForDeleteImg(auth, models.User, id, models.ScienceGroup)
+    return deleteWithImage(forDelete, forDelete.dataValues.imageUrl, 'scienceGroup', id)
   },
-  async updateScienceRoute(parent, {id, inputData}, { models }){
+  async createScienceRoute(parent, {inputData}, { models, auth }) {
+
+    const user = await getUser(auth, models.User)
+
+    const scienceRoute = await models.ScienceRoute.create({...inputData, userCreated: user})
+    return scienceRoute
+  },
+  async updateScienceRoute(parent, {id, inputData}, { models, auth }){
+
+    const user = await getUser(auth, models.User)
+
     const route = await models.ScienceRoute.findOne({where: {id}})
     if (!route) { throw new ApolloError('Route not found') }
 
     Object.keys(inputData).forEach(item => route[item] = inputData[item])
+    route.userUpdated = user
 
     await route.save()
-    return route.dataValues
+    return route
   },
-  async deleteScienceRoute(parent, {id}, { models }){
+  async deleteScienceRoute(parent, {id}, { models, auth }){
+
+    await getUser(auth, models.User)
     const route = await models.ScienceRoute.findOne({where: {id}})
     if (!route) { throw new ApolloError('Route not found') }
 
     await route.destroy()
     return id
   },
-  async createSciencePerson(parent, {scienceGroupId, inputData}, { models }){
+  async createSciencePerson(parent, {scienceGroupId, inputData}, { models, auth }){
+
+    const user = await getUser(auth, models.User)
 
     const scienceGroup = await models.ScienceGroup.findOne({where: {id: scienceGroupId}})
     if (!scienceGroup) { throw new ApolloError(`Science Group with id ${scienceGroupId} not found`) }
@@ -78,23 +70,31 @@ const scienceMutation = {
     const personData = {
       ...inputData,
       scienceGroupId,
-      position: peopleCount
+      position: peopleCount,
+      userCreated: user
     }
 
     const newPerson = await models.SciencePeople.create({...personData})
     return newPerson.dataValues
   },
-  async updateSciencePerson(parent, {id, inputData}, { models }){
+  async updateSciencePerson(parent, {id, inputData}, { models, auth }){
+
+    const user = await getUser(auth, models.User)
+
    const person = await models.SciencePeople.findOne({where: {id}})
     if (!person) { throw new ApolloError('person with id ${id} not found') }
 
     Object.keys(inputData).forEach(item => person[item] = inputData[item])
+    person.userUpdated= user
    
     await person.save()
     return person.dataValues
 
   },
-  async deleteSciencePerson(parent, {id}, { models }){
+  async deleteSciencePerson(parent, {id}, { models, auth }){
+
+    const user = await getUser(auth, models.User)
+
     const person = await models.SciencePeople.findOne({where: {id}})
     if (!person) { throw new ApolloError('person with id ${id} not found') }
 
@@ -110,7 +110,9 @@ const scienceMutation = {
     await person.destroy()
     return position
   },
-  async createScienceArticle(parent, {scienceGroupId, inputData}, { models }){
+  async createScienceArticle(parent, {scienceGroupId, inputData}, { models, auth }){
+
+    const user = await getUser(auth, models.User)
 
     const scienceGroup = await models.ScienceGroup.findOne({where: {id: scienceGroupId}})
     if (!scienceGroup) { throw new ApolloError(`Science Group with id ${scienceGroupId} not found`) }
@@ -120,25 +122,31 @@ const scienceMutation = {
     const articleData = {
       ...inputData,
       scienceGroupId,
-      position: articleCount
+      position: articleCount,
+      userCreated: user
     }
 
     const newArticle = await models.ScienceArticle.create({...articleData})
     return newArticle.dataValues
   },
-  async updateScienceArticle(parent, {id, inputData}, { models }){
-    // if (!req.isAuth) { e }
+  async updateScienceArticle(parent, {id, inputData}, { models, auth }){
+    
+    const user = await getUser(auth, models.User)
   
     const article = await models.ScienceArticle.findOne({where: {id}})
     if (!article) { throw new ApolloError('Article with id ${id} not found') }
 
     Object.keys(inputData).forEach(item => article[item] = inputData[item])
-   
+    article.userUpdated = user
+
     await article.save()
     return article.dataValues
 
   },
-  async deleteScienceArticle(parent, {id}, { models }){
+  async deleteScienceArticle(parent, {id}, { models, auth }){
+
+    const user = await getUser(auth, models.User)
+
     const article = await models.ScienceArticle.findOne({where: {id}})
     if (!article) { throw new ApolloError('Article with id ${id} not found') }
 
@@ -155,7 +163,10 @@ const scienceMutation = {
     await article.destroy()
     return position
   },
-  async moveSciencePerson(parent, {id, vector}, { models }) {
+  async moveSciencePerson(parent, {id, vector}, { models, auth }) {
+
+    const user = await getUser(auth, models.User)
+
     const person = await models.SciencePeople.findOne({where: {id}})
     if (!person)  throw new ApolloError('person with id ${id} not found') 
 
@@ -177,10 +188,15 @@ const scienceMutation = {
     personToMove.position = person.position
     await personToMove.save()
     person.position = newPosition
+
+    person.userUpdated = user
     await person.save()
     return [person, personToMove]
   },
-  async moveScienceArticle(parent, {id, vector}, { models }) {
+  async moveScienceArticle(parent, {id, vector}, { models, auth }) {
+
+    const user = await getUser(auth, models.User)
+
     const article = await models.ScienceArticle.findOne({where: {id}})
     if (!article)  throw new ApolloError('article with id ${id} not found') 
 
@@ -202,6 +218,8 @@ const scienceMutation = {
     articleToMove.position = article.position
     await articleToMove.save()
     article.position = newPosition
+
+    article.userUpdated = user
     await article.save()
     return [article, articleToMove]
   }

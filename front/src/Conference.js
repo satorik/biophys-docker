@@ -3,7 +3,6 @@ import { useQuery, useMutation, gql } from '@apollo/client'
 import { required, length, date } from './utils/validators'
 import { useLocation, useHistory } from 'react-router-dom'
 
-import HeaderSeminar from './components/UI/Header/GradientHeader'
 import YesDelete from './components/Shared/DoYouWantToDelete'
 import ButtonAddNew from './components/UI/ButtonAddNew'
 import Modal from './components/UI/Modal'
@@ -168,7 +167,7 @@ const Conferece = () => {
     }
   }, [data, urlId])
   
-  if (queryLoading) return <Spinner />
+  if (queryLoading || creationLoading || updatingLoading || deletingLoading) return <Spinner />
   if (queryError) return <NetworkErrorComponent error={queryError} />
   if (updatingError) return <NetworkErrorComponent error={updatingError} />
   if (deletingError) return <NetworkErrorComponent error={deletingError} />
@@ -177,7 +176,6 @@ const Conferece = () => {
   const { conferences } = data
 
   const onShowConferenceDetails = (i) => {
-    //setViewId(i)
     history.push({
       search: '?id='+conferences[i].id
     })
@@ -257,13 +255,6 @@ const Conferece = () => {
   
   return (
     <>
-    <HeaderSeminar 
-      header={process.env.REACT_APP_STATIC_URI+'/images/header/header-conference.jpg'} 
-      title='конференции'
-      quote='В науке люди пытаются объяснить как можно понятнее что-то, чего дугие не знают. Но в поэзии все наоборот.'
-      author='Поль Дирак'
-      when='(1902 - 1984)'
-    />
     {isModalOpen && <Modal 
       isOpen={isModalOpen}
       title={modalTitle}
@@ -277,7 +268,7 @@ const Conferece = () => {
         formTemplate={FORM_TEMPLATE}
       />}
       {
-        (mode.isDeleting) &&  <YesDelete onDelete={onDeleteConferenceHandler} />   
+        (mode.isDeleting) &&  <YesDelete onDelete={onDeleteConferenceHandler} onCancel={onCloseModal} info={updatedConference} instance='conference' />   
       }
     </Modal>}
       <div className="container mt-5">

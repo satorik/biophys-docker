@@ -1,9 +1,9 @@
 import React from 'react'
 import { useQuery, useMutation, gql } from '@apollo/client'
 import { required, length } from './utils/validators'
-import { useLocation } from 'react-router-dom'
+import { useLocation, useHistory } from 'react-router-dom'
 
-import Header from './components/UI/Header/Header'
+import YesDelete from './components/Shared/DoYouWantToDelete'
 import Blogpost from './components/Blog/Blogpost'
 import ButtonAddNew from './components/UI/ButtonAddNew'
 import Modal from './components/UI/Modal'
@@ -12,10 +12,9 @@ import Spinner from './components/UI/Spinner'
 import Pagination from './components/UI/Pagination'
 import ErrorBoundry from './components/Shared/ErrorHandling/ErrorBoundry'
 import getUpdateData from './utils/getObjectForUpdate'
-//import AuthContext from './context/AuthContext'
 import NetworkErrorComponent from './components/Shared/ErrorHandling/NetworkErrorComponent'
 
-const POSTS_PER_PAGE = 5
+const POSTS_PER_PAGE = 6
 
 const GET_BLOGPOSTS = gql`                    
     query getBlogposts($limit: Int, $offset: Int){
@@ -100,18 +99,22 @@ function useQueryUrl() {
 
 const Blog = () => {
 
+  const history = useHistory()
+
   const [isModalOpen, setIsModalOpen] = React.useState(false)
   const [mode, setMode] = React.useState({isEditing: false, isCreating: false, isDeleting: false})
   const [pageNumber, setPageNumber] = React.useState(1)
   const [updatedPost, setUpdatedPost] = React.useState({})
   const [isAbleToSave, setIsAbleToSave] = React.useState(true)
+  const [viewId, setViewId] = React.useState(null)
+  const [shouldScroll, setShouldScroll] = React.useState(false)
+  //const [divElement] = React.useState({})
 
   const queryUrl = useQueryUrl()
   const urlId = queryUrl.get("id")
 
-
   const variables = {
-    offset:0, 
+    offset: 0, 
     limit: POSTS_PER_PAGE
   }
 
@@ -142,7 +145,23 @@ const Blog = () => {
           }
         })
   
-  if (queryLodading) return <Spinner />
+  React.useEffect(() => {
+    if (data && urlId) {
+      const postIdx = data.blogposts.posts.indexOf(data.blogposts.posts.find(el => el.id === urlId))
+      setViewId(postIdx)
+    }
+    else if (data && !urlId) {
+      setViewId(null)
+    }
+  }, [data, urlId])
+
+  React.useEffect(() => {
+     if (urlId) {
+      setShouldScroll(true)
+     }
+  }, [])
+
+  if (queryLodading || creationLoading || updatingLoading || deletingLoading) return <Spinner />
  
   if (queryError) return <NetworkErrorComponent error={queryError} />
   if (updatingError) return <NetworkErrorComponent error={updatingError} />
@@ -151,6 +170,21 @@ const Blog = () => {
 
   const blogposts = data.blogposts.posts
   const totalPages = Math.ceil(data.blogposts.total/POSTS_PER_PAGE)
+
+  //console.log(divElement)
+
+  const onViewBlogpostDetails = (i) => {
+    if (viewId === i) {
+      history.push({
+        search: ''
+      })
+    }
+    else {
+      history.push({
+        search: '?id='+data.blogposts.posts[i].id
+      })
+    }
+  }
 
   const onAddNewBlogpost = () => {
     setIsModalOpen(true)
@@ -195,6 +229,9 @@ const Blog = () => {
         )
     }})
     setPageNumber(page)
+    history.push({
+      search: ''
+    })
   }
 
   const onCloseModal = () => {
@@ -238,9 +275,9 @@ const Blog = () => {
   if (mode.isCreating) {modalTitle = 'Новая запись в блоге'}
   if (mode.isDeleting) {modalTitle = 'Удаление записи из блога'}
 
+ 
   return (
     <>
-    <Header page='blog'/>
    {isModalOpen && <Modal 
       isOpen={isModalOpen}
       title={modalTitle}
@@ -254,10 +291,7 @@ const Blog = () => {
         formTemplate={FORM_TEMPLATE}
       />}
       {
-        (mode.isDeleting) && <div>
-          <p>Вы уверены, что хотите удалить эту запись?</p>
-          <button className="btn btn-primary" onClick={onDeletePostHandler}>Да</button>
-        </div>    
+        (mode.isDeleting) &&  <YesDelete onDelete={onDeletePostHandler} onCancel={onCloseModal} info={updatedPost} instance='blogpost' />    
       }
     </Modal>}
     <div className="container">
@@ -266,8 +300,14 @@ const Blog = () => {
             blogpost = {blogpost} 
             key={blogpost.id} 
             idx={idx} 
+            id={blogpost.id}
             onClickEdit={() => onEditBlogpost(idx)}
             onClickDelete={() => onDeleteBlogpost(idx)}
+            showContent={idx === viewId}
+            onHandleCaretDown={() => onViewBlogpostDetails(idx)}
+            toScroll={shouldScroll ? urlId : null}
+            onScroll={() => setShouldScroll(false)}
+            //divRef={el => divElement[blogpost.id] = el} 
           />)}
       <Pagination 
         totalPages={totalPages} 

@@ -2,8 +2,6 @@ import React from 'react'
 
 const QuoteHeader = ({header, title, quote, author, when}) => {
 
-  const [selectedQuote, setSelectedQuote] = React.useState(0)
-
   const imageBackground = {
     height: '20rem',
     width: '100%',
@@ -24,7 +22,7 @@ const QuoteHeader = ({header, title, quote, author, when}) => {
       <div style={imageBackground} className="p-5 text-left">
         {quote && <div className="card p-3 text-left" style={qouteStyle}>
             <blockquote className="blockquote mb-0">
-              <p className="text-white">{quote}</p>
+              {quote.split(';').map((qouteLine, idx) => <p className="text-white m-0" key={idx}>{qouteLine}</p>)}
               <footer className="blockquote-footer">
                 <small className="text-white">
                   {author} <cite title="Source Title">{when}</cite>

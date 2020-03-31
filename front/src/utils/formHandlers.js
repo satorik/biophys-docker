@@ -94,6 +94,7 @@
 
     let valueForCheck = value
     let isValid = true
+    const validationErrors = []
     
     if (form[id].type === 'course') {
       valueForCheck = value.course
@@ -107,8 +108,10 @@
  
     if (form[id].validators && form[id].validators.length > 0) {
       for (const validator of form[id].validators) {
-          isValid = isValid && validator(valueForCheck)
-      }
+        const checkValid = validator(valueForCheck)
+        isValid = isValid && checkValid.valid
+        if (!checkValid.valid) validationErrors.push(checkValid.error) 
+    }
     }
     const updatedForm = form.map((control, idx) => {
       if (idx !== id ) {
@@ -117,7 +120,8 @@
       return {
         ...control,
         value: value,
-        valid: isValid
+        valid: isValid,
+        validationErrors: validationErrors
       }
     })
 

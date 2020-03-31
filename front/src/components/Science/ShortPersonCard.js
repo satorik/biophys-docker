@@ -4,8 +4,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 
 const ShortPersonCard = ({firstname, lastname, middlename, description, onEditClick, onDeleteClick, onClickUp, onClickDown, firstElement, 
   lastElement, tel, mail, urlIstina, urlRints, urlOrcid, urlResearcher, urlScopus, englishName}) => {
-
-    console.log(tel)
+    
   return (
     <div className="pl-2 mb-2" style={{borderLeft: '4px solid #fd7e14'}}>
       <div className="d-flex align-items-start" >

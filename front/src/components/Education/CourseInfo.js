@@ -13,7 +13,7 @@ export const CourseInfo = ({title, description, read, lector, exam, onClickEdit}
         </div>
         <div className="p-3">
             <button className="btn p-0 mb-1" onClick={onClickEdit}><span><FontAwesomeIcon icon={['far', 'edit']} color="black" size="sm"/></span></button>
-            <p>{description}</p>
+            <p dangerouslySetInnerHTML={{__html: description}}></p>
             <p className="font-weight-bold">{read}</p>
             <p className="font-italic">{lector}</p>
         </div>

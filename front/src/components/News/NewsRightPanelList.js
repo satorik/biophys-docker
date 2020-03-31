@@ -7,7 +7,7 @@ const NewsRightPanelList = ({contentType, posts}) => {
 
   return (
     <div className="card mb-3">
-    <div className="card-header text-right">
+    <div className={`card-header text-right ${contentType === 'seminar' ? 'bg-info text-white' : 'bg-warning'}`}>
       <h4>{title}</h4>
     </div>
     <div className="card-body">

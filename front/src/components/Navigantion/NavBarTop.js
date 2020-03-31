@@ -50,7 +50,7 @@ const NavBarTop = () => {
         title={modalTitle}
         onClose={() => setIsModalOpen(false)}
       >
-        <LoginForm onCancel={() => setIsModalOpen(false)} isAuth={currentUser.token} onLogout={setCurrentUser} />
+        <LoginForm onCancel={() => setIsModalOpen(false)} isAuth={currentUser.token} updatedAuth={setCurrentUser} />
       </Modal> }
 
       <nav className="navbar navbar-dark navbar-expand-md bg-dark" >

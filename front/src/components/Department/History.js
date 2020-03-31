@@ -90,7 +90,7 @@ const [deleteHistory,
       }
     })
 
-  if (queryLodading) return <Spinner />
+  if (queryLodading || creationLoading || updatingLoading || deletingLoading) return <Spinner />
  
   if (queryError) return <NetworkErrorComponent error={queryError} />
   if (updatingError) return <NetworkErrorComponent error={updatingError} />

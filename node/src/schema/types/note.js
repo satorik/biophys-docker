@@ -9,6 +9,11 @@ export default `
     updatedAt: Date!
   }
 
+  type UpdatedNoteData{
+    updatedNote: Note!
+    removedFromTop: Note
+  }
+
   input NoteCreateData {
     title: String!
     description: String!

@@ -1,6 +1,8 @@
 import React from 'react'
 import { useQuery, useMutation, gql } from '@apollo/client'
 import { required, length, time, date } from '../../utils/validators'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faCaretDown, faCaretUp } from '@fortawesome/free-solid-svg-icons'
 
 import {CourseInfo} from './CourseInfo'
 import {CourseMaterials} from './CourseMaterials'
@@ -181,7 +183,7 @@ const FORM_TEMPLATE = [
   {
     title: 'description',
     label:'Описание',
-    type: 'textarea',
+    type: 'textarea-long',
     validators: [required, length({ min: 5 })]
   },
   {
@@ -286,7 +288,8 @@ const Courses = () => {
       }
     })
 
-  if (queryLoading) return <Spinner />
+  if (queryLoading || creationLoading || updatingLoading || createResourseLoading || 
+    updateResourseLoading || deleteEducationResourseLoading) return <Spinner />
   if (queryError) return <NetworkErrorComponent error={queryError} />
   if (updatingError) return <NetworkErrorComponent error={updatingError} />
   if (deletingError) return <NetworkErrorComponent error={deletingError} />
@@ -496,6 +499,7 @@ const Courses = () => {
  if (mode.isEditing) {modalTitle = 'Редактирование курса'}
  if (mode.isCreating) {modalTitle = 'Новый курс'}
  if (mode.isDeleting) {modalTitle = 'Удаление курса'}
+ if (resourseMode.isDeleting) {modalTitle = 'Удаление материалов'}
 
  //console.log(forms)
 
@@ -513,8 +517,8 @@ const Courses = () => {
             post={updatedCourse}
             formTemplate={FORM_TEMPLATE}
         />}
-          {(mode.isDeleting) &&  <YesDelete onDelete={onDeleteCourseHandler} onCancel={onCloseModal} /> }
-          {(resourseMode.isDeleting) &&  <YesDelete onDelete={onDeleteResourseHandler} onCancel={onCloseModal}/> }
+          {(mode.isDeleting) &&  <YesDelete onDelete={onDeleteCourseHandler} onCancel={onCloseModal} info={updatedCourse} instance='educationCourse' /> }
+          {(resourseMode.isDeleting) &&  <YesDelete onDelete={onDeleteResourseHandler} onCancel={onCloseModal} info={updatedResourse} instance='educationResourse'  /> }
         </Modal>}
     {(data.courses.length !== 0 ) &&
     <div className="container mt-5">
@@ -544,15 +548,18 @@ const Courses = () => {
           onClickEdit={onEditCourse}
         />
         {(singleResourses.length > 0 || multyResourses.length > 0) && 
-          <p 
-            className="bg-danger font-weight-bold pl-3 py-2 h5 text-white" 
+          <div 
+            className="bg-danger font-weight-bold p-3 text-white text-center d-flex justify-content-between align-items-center" 
             style={{cursor: 'pointer'}} 
             onClick={() => setShowResourses({ basic: !showResourses.basic,
                                               video: false,
                                               presentations: false,
                                               practice: false
                                             })}
-          >Материалы</p>}
+                  
+          ><p className="h5">Материалы</p>
+          <span><FontAwesomeIcon icon={showResourses.basic ? faCaretUp : faCaretDown} size="2x" /></span>
+          </div>}
           {(!resourseMode.isCreating && !resourseMode.isEditing ) && 
           <div className="p-2">
             <div className="btn btn-outline-secondary p-3 w-100">

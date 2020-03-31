@@ -37,14 +37,16 @@ const Note = (sequelize, DataTypes ) => {
     allowNull: false,
     defaultValue: false
   }
-  }, {
-    hooks: {
-      beforeUpdate: (note, options) => {
-        if (note.onTop === true) {
-          console.log('becoming true')
-        }
-      }
-    }
-  })}
+   }, 
+  // {
+  //   hooks: {
+  //     beforeUpdate: (note, options) => {
+  //       if (note.onTop === true) {
+  //         console.log('becoming true')
+  //       }
+  //     }
+  //   }
+  // }
+  )}
 
 export default Note

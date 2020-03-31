@@ -1,118 +1,61 @@
-import { ApolloError } from "apollo-server"
-import writeImage from '../../utils/readStreamIntoFile'
-import clearImage, { convertPdfToBase64 } from '../../utils/imageFunctions'
+import { ApolloError } from 'apollo-server'
 import getUser from '../../utils/getUser'
+import sequelize from '../../models/'
+
+import { createWithImage, updateWithImage, deleteWithImage } from '../../utils/mutate'
+import { valueForCreateImg, valueForUpdateImg, valueForDeleteImg } from '../../utils/getMutationValue'
 
 const departmentMutation = {
   async createHistory(parent, {section, inputData}, { models, auth }){
     
-    const user = await getUser(auth, models.User)
-
-    const {image, ...postData} = inputData
-    const uploadedImage = await inputData.image
-    const {file, imageUrl} = await writeImage(uploadedImage, 'history')
-    const postDataWithUrl = {
-      ...postData,
-      imageUrl,
-      section,
-      userCreated: user
-    }
-
-    const history = await models.TextDescription.create({...postDataWithUrl})
-    return history.dataValues
+    const {createData, imageUrl} = await valueForCreateImg(inputData, 'history', auth, models.User)
+    return createWithImage(models.TextDescription, {...createData, section}, imageUrl, 'history')
   },
   async updateHistory(parent, {section, inputData}, { models, auth }){
     
-    const user = await getUser(auth, models.User)
-  
-    const post = await models.TextDescription.findOne({where: {section}})
-    if (!post) { throw new ApolloError('History not found') }
+    const {updateData, imageToClear, isUploaded} = 
+    await valueForUpdateImg(section, inputData, 'history', auth, models.TextDescription, models.User)
 
-    let isUploaded = {}
-    if (inputData.image) {
-      const uploadedImage = await inputData.image
-      isUploaded = await writeImage(uploadedImage, 'history')
-    }
-   
-    Object.keys(inputData).forEach(item => post[item] = inputData[item])
-    if (isUploaded.imageUrl) { post.imageUrl = isUploaded.imageUrl }
-    
-    post.userUpdated = user
-
-    await post.save()
-    return post.dataValues
-
+    return updateWithImage(updateData, imageToClear, isUploaded, 'history')
   },
   async deleteHistory(parent, {section}, { models, auth }){
-    const user = await getUser(auth, models.User)
-
-    const post = await models.TextDescription.findOne({where: {section}})
-    if (!post) { throw new ApolloError('History not found') }
-
-    await post.destroy()
-    clearImage(post.dataValues.imageUrl, 'history')
+    
+    const forDelete = await valueForDeleteImg(auth, models.User, section, models.TextDescription)
+    await deleteWithImage(forDelete, forDelete.dataValues.imageUrl, 'history', section)
     return true
   },
   async createDepartmentPerson(parent, { inputData }, { models, auth }){
     
-    const user = await getUser(auth, models.User)
-
-    const { image, ...personData } = inputData
-    const uploadedImage = await inputData.image
-    const { imageUrl } = await writeImage(uploadedImage, 'staff')
-
+    const {createData, imageUrl} = await valueForCreateImg(inputData, 'staff', auth, models.User)  
     const peopleCount = await models.DepartmentStaff.count()
-
-    const personDataWithUrl = {
-      ...personData,
-      imageUrl,
-      position: peopleCount,
-      userCreated: user
-    }
-
-    const newPerson = await models.DepartmentStaff.create({...personDataWithUrl})
-    return newPerson.dataValues
+    return createWithImage(models.DepartmentStaff, {...createData, position: peopleCount}, imageUrl, 'staff')
   },
   async updateDepartmentPerson(parent, {id, inputData}, { models, auth }){
 
-    const user = await getUser(auth, models.User)
+    const {updateData, imageToClear, isUploaded} = 
+    await valueForUpdateImg(id, inputData, 'staff', auth, models.DepartmentStaff, models.User)
 
-    const person = await models.DepartmentStaff.findOne({where: {id}})
-    if (!person) { throw new ApolloError('person with id ${id} not found') }
+    return updateWithImage(updateData, imageToClear, isUploaded, 'staff')
 
-    let isUploaded = {}
-    if (inputData.image) {
-      const uploadedImage = await inputData.image
-      isUploaded = await writeImage(uploadedImage, 'staff')
-      clearImage(person.imageUrl, 'staff')
-    }
-
-    Object.keys(inputData).forEach(item => person[item] = inputData[item])
-    if (isUploaded.imageUrl) { person.imageUrl = isUploaded.imageUrl }
-   
-    person.userUpdated = user
-
-    await person.save()
-    return person.dataValues
   },
   async deleteDepartmentPerson(parent, {id}, { models, auth }){
     
-    const user = await getUser(auth, models.User)
-
-    const person = await models.DepartmentStaff.findOne({where: {id}})
-    if (!person) { throw new ApolloError('person with id ${id} not found') }
-
+    const forDelete = await valueForDeleteImg(auth, models.User, id, models.DepartmentStaff)
+    
     const people = await models.DepartmentStaff.findAll({order: [['position', 'ASC']]})
-  
+    
+    const t =  await sequelize.transaction()
+    
     for (const item of people) {
-      if (item.position > person.position) {
+      if (item.position > forDelete.position) {
         item.position = item.position - 1
-        await item.save()
+        await item.save({transaction: t})
       } 
     }
-    const position = person.position
-    clearImage(person.imageUrl, 'staff')
-    await person.destroy()
+    const position = forDelete.position
+
+    await deleteWithImage(forDelete, forDelete.dataValues.imageUrl, 'staff', id, t)
+
     return position
   },
   async moveDepartmentPerson(parent, {id, vector}, { models, auth }){
@@ -140,122 +83,57 @@ const departmentMutation = {
     
     personToMove.position = person.position
     person.userUpdated = user
-    
-    await personToMove.save()
     person.position = newPosition
     
-    await person.save()
-    return [person, personToMove]
+    const t =  await sequelize.transaction()
+    try {
+      await personToMove.save()   
+      await person.save()
+      t.commit()
+      return [person, personToMove]
+    } catch(error) {
+      t.rollback()
+      throw error
+    }
+
   },
   async createPartnership(parent, {inputData}, { models, auth }){
 
-    const user = await getUser(auth, models.User)
+    const {createData, imageUrl} = await valueForCreateImg(inputData, 'partnership', auth, models.User)
+    return createWithImage(models.DepartmentPartnership, createData, imageUrl, 'partnership')
 
-    const {image, ...postData} = inputData
-    const uploadedImage = await inputData.image
-    const {file, imageUrl} = await writeImage(uploadedImage, 'partnership')
-    const postDataWithUrl = {
-      ...postData,
-      imageUrl,
-      userCreated: user
-    }
-
-    const partnership = await models.DepartmentPartnership.create({...postDataWithUrl})
-    return partnership.dataValues
   },
   async updatePartnership(parent, {id, inputData}, { models, auth }){
 
-    const user = await getUser(auth, models.User)
+    const {updateData, imageToClear, isUploaded} = 
+    await valueForUpdateImg(id, inputData, 'partnership', auth, models.DepartmentPartnership, models.User)
 
-    const post = await models.DepartmentPartnership.findOne({where: {id}})
-    if (!post) { throw new ApolloError('Post not found') }
-
-    let isUploaded = {}
-    if (inputData.image) {
-      const uploadedImage = await inputData.image
-      isUploaded = await writeImage(uploadedImage, 'partnership')
-      clearImage(post.imageUrl, 'partnership')
-    }
-   
-    Object.keys(inputData).forEach(item => post[item] = inputData[item])
-    if (isUploaded.imageUrl) { post.imageUrl = isUploaded.imageUrl }
-
-    post.userUpdated = user
-
-    await post.save()
-    return post.dataValues
+    return updateWithImage(updateData, imageToClear, isUploaded, 'partnership')
   },
   async deletePartnership(parent, {id}, { models, auth }){
 
-    const user = await getUser(auth, models.User)
-
-    const post = await models.DepartmentPartnership.findOne({where: {id}})
-    if (!post) { throw new ApolloError('Post not found') }
-
-    await post.destroy()
-    clearImage(post.imageUrl, 'partnership')
-    return id
+    const forDelete = await valueForDeleteImg(auth, models.User, id, models.DepartmentPartnership)
+    return deleteWithImage(forDelete, forDelete.dataValues.imageUrl, 'partnership', id)
   },
   async createPrint(parent, {inputData}, { models, auth }){
 
-    const user = await getUser(auth, models.User)
-
-    const {file, ...postData} = inputData
-
-    const uploadedFile = await inputData.file
-    const { file: filePath, fileLink } = await writeImage(uploadedFile, 'prints', 'pdf')
-    const image = await convertPdfToBase64(filePath)
-  
-    const postWithFile = {
-      ...postData,
-      fileLink,
-      image: 'data:image/jpeg;base64,'+image.base64,
-      userCreated: user
-    }
-    
-    return models.DepartmentPrint.create({...postWithFile})
+    const {createData, fileLink} = await valueForCreateImg(inputData, 'prints', auth, models.User, 'pdf')
+    return createWithImage(models.DepartmentPrint, createData, fileLink, 'prints', 'pdf')
       
   },
   async updatePrint(parent, {id, inputData}, { models, auth }){
 
-    const user = await getUser(auth, models.User)
+    const {updateData, imageToClear, isUploaded} = 
+    await valueForUpdateImg(id, inputData, 'prints', auth, models.DepartmentPrint, models.User)
 
-    const post = await models.DepartmentPrint.findOne({where: {id}})
-    if (!post) { throw new ApolloError('Post not found') }
+    return updateWithImage(updateData, imageToClear, isUploaded, 'prints', 'pdf')
 
-    let isUploaded = {}
-    if (inputData.file) {
-      const uploadedFile = await inputData.file
-      isUploaded = await writeImage(uploadedFile, 'prints', 'pdf')
-      const image = await convertPdfToBase64(isUploaded.file)
-      isUploaded = {
-        ...isUploaded,
-        image
-      }
-      clearImage(post.fileLink, 'prints', 'pdf')
-    }
-   
-    Object.keys(inputData).forEach(item => post[item] = inputData[item])
-    if (isUploaded.fileLink) { 
-      post.fileLink = isUploaded.fileLink 
-      post.image = isUploaded.image
-    }
-
-    post.userUpdated = user
-
-    await post.save()
-    return post.dataValues
   },
   async deletePrint(parent, {id}, { models, auth }){
 
-    const user = await getUser(auth, models.User)
+    const forDelete = await valueForDeleteImg(auth, models.User, id, models.DepartmentPrint)
+    return deleteWithImage(forDelete, forDelete.dataValues.fileLink, 'prints', id, 'pdf')
 
-    const post = await models.DepartmentPrint.findOne({where: {id}})
-    if (!post) { throw new ApolloError('Post not found') }
-
-    await post.destroy()
-    clearImage(post.fileLink, 'prints', 'pdf')
-    return id
   }
 }
 

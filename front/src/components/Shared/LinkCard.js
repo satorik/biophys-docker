@@ -6,7 +6,7 @@ const LinkCard = ({imageUrl, link, desc, title, onEditClick, onDeleteClick}) => 
     <div className="card bg-light mb-3" style={{maxWidth: '22rem'}}>
       <div className="card-header d-flex justify-content-between align-items-center">
         <img src={imageUrl} alt="" className="img-fluid w-25 mr-1" />
-        <a href={link}>{title}</a>
+        <a href={link} target="_blank">{title}</a>
         <EditButtons 
             onClickEdit={onEditClick}
             onClickDelete={onDeleteClick}

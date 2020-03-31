@@ -188,7 +188,7 @@ const { loading: queryLoading, error: queryError, data} = useQuery(GET_DEPARTMEN
       }
     })
   
-  if (queryLoading) return <Spinner />
+  if (queryLoading || creationLoading || updatingLoading || deletingLoading || updatingPersonPositionLoading) return <Spinner />
   if (queryError) return <NetworkErrorComponent error={queryError} />
   if (updatingError) return <NetworkErrorComponent error={updatingError} />
   if (deletingError) return <NetworkErrorComponent error={deletingError} />
@@ -264,9 +264,9 @@ const { loading: queryLoading, error: queryError, data} = useQuery(GET_DEPARTMEN
   }
 
   let modalTitle = ''
-  if (mode.isEditing) {modalTitle = 'Редактирование конференции'}
-  if (mode.isCreating) {modalTitle = 'Новая конференция'}
-  if (mode.isDeleting) {modalTitle = 'Удаление конференции'}
+  if (mode.isEditing) {modalTitle = 'Редактирование человека'}
+  if (mode.isCreating) {modalTitle = 'Новый человек'}
+  if (mode.isDeleting) {modalTitle = 'Удаление человека'}
 
   return (
     <>
@@ -283,7 +283,7 @@ const { loading: queryLoading, error: queryError, data} = useQuery(GET_DEPARTMEN
         formTemplate={FORM_TEMPLATE}
       />}
       {
-        (mode.isDeleting) &&  <YesDelete onDelete={ondeleteDepartmentPersonHandler} />   
+        (mode.isDeleting) &&  <YesDelete onDelete={ondeleteDepartmentPersonHandler} onCancel={onCloseModal} info={updatedPerson} instance='staff' />   
       }
     </Modal>}
     <div className="container d-flex mt-5 flex-wrap align-items-top">

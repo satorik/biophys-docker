@@ -10,7 +10,7 @@ const mutation =   `
     updateSeminar(id: ID!, inputData: SeminarUpdateData!): Seminar!
     deleteSeminar(id: ID!): ID!
     createNote(inputData: NoteCreateData!): Note!
-    updateNote(id: ID!, inputData: NoteUpdateData!): Note!
+    updateNote(id: ID!, inputData: NoteUpdateData!): UpdatedNoteData!
     deleteNote(id: ID!): ID!
     createScienceArticle(scienceGroupId: ID!, inputData: ScienceArticleCreateData!): ScienceArticle!
     updateScienceArticle(id: ID!, inputData: ScienceArticleUpdateData!): ScienceArticle!
@@ -55,6 +55,7 @@ const mutation =   `
     updateEducationResourse(id: ID!, filetype: FILETYPE!, inputData: EducationResourseUpdateData!): EducationResourse!
     deleteEducationResourse(id: ID!): ID!
     createUser(inputData: UserCreateData!): authData!
+    loginUser(inputData: UserLoginData!): authData!
   }
 `
 

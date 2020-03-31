@@ -1,25 +1,32 @@
 
 export const required = value => {
-  if (value instanceof File) return true
+  if (value instanceof File) return {valid: true}
   else if (typeof(value) === 'object') {
     let allExist = true
     Object.keys(value).forEach(item => {
       allExist = allExist && value[item] != ''
     })
-    return allExist
+    return {valid: allExist, error: !allExist ? 'Поле не заполнено' : ''}
   }
-  else return value.trim() !== ''
+  else return {valid: value.trim() !== '', error: !value.trim() !== '' ? 'Поле не заполнено' : ''}
 }
+
 export const length = config => value => {
-  let isValid = true;
+  let isValid = true
+  let error = ''
   if (config.min) {
-    isValid = isValid && value.trim().length >= config.min;
+    const optionValid = value.trim().length >= config.min
+    isValid = isValid && optionValid  
+    if (!optionValid) error = `Поле не должно быть менее ${config.min} знаков`
   }
   if (config.max) {
-    isValid = isValid && value.trim().length <= config.max;
+    const optionValid = value.trim().length <= config.max
+    isValid = isValid && optionValid
+    if (!optionValid) error = `Поле не должно быть более ${config.max} знаков`
   }
-  return isValid;
-};
+
+  return {valid: isValid, error: !isValid ? error : ''}
+}
 
 export const date = value => {
   const daysInMonth = (m, y) => {
@@ -31,17 +38,22 @@ export const date = value => {
     }
   }
 
-  if (!Number.isInteger(value.year) && !Number.isInteger(value.month) && !Number.isInteger(value.day)) {return false}
+  if (!Number.isInteger(value.year) && !Number.isInteger(value.month) && !Number.isInteger(value.day)) {
+    return {valid: false, error: 'Недопустимые символы в поле Дата'}
+  }
   const daysThisMonth = daysInMonth(value.month, value.year)
-  return value.day >= 0 && value.day <= daysThisMonth
+  const isValid = value.day >= 0 && value.day <= daysThisMonth
+  return {valid: isValid, error: !isValid ? 'Такой даты не существует' : ''}
 }
 
-export const email = value =>
-  /[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?/.test(
+export const email = value => {
+  const isValid = /[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?/.test(
     value
-  );
+  )
+  return {valid: isValid, error: !isValid ? 'Неправильный формат емейл' : ''}
+}
 
-export const isUrl = value => true
+export const isUrl = value => {return {valid: true, error: ''}}
 
 export const time = value => {
   const checkValue = (param, min, max) => {
@@ -49,15 +61,23 @@ export const time = value => {
     return +param >= min && +param <= max
   }
 
-  return checkValue(value.hours, 0, 23) && checkValue(value.minutes, 0, 59)
+  const isValid = checkValue(value.hours, 0, 23) && checkValue(value.minutes, 0, 59)
+  return {valid: isValid, error: !isValid ? 'Неправильный формат времени' : ''}
 }
 
 export const datetime = value => {
   const ifDate = date(value)
   const ifTime = time(value)
+  
+  if (!ifDate) {
+    return {valid: false, error: 'Неправильный формат даты' }
+  }
+  if (!ifTime) {
+    return {valid: false, error: 'Неправильный формат времени' }
+  }
 
-  return ifDate && ifTime
+  return {valid: true, error: '' }
 }
 
-export const password = value => true
-export const passwordRepeat = value => true
+export const password = value => {return {valid: true, error: ''}}
+export const passwordRepeat = value => {return {valid: true, error: ''}}

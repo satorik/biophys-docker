@@ -1,6 +1,6 @@
 import React from 'react'
 import { useQuery, useMutation, gql } from '@apollo/client'
-import { required, length, isUrl } from '../../utils/validators'
+import { required, length } from '../../utils/validators'
 
 import YesDelete from '../Shared/DoYouWantToDelete'
 import ButtonAddNew from '../UI/ButtonAddNew'
@@ -108,7 +108,7 @@ const { loading: queryLoading, error: queryError, data} = useQuery(GET_DEPARTMEN
           }
         })
   
-  if (queryLoading) return <Spinner />
+  if (queryLoading || creationLoading || updatingLoading || deletingLoading) return <Spinner />
   if (queryError) return <NetworkErrorComponent error={queryError} />
   if (updatingError) return <NetworkErrorComponent error={updatingError} />
   if (deletingError) return <NetworkErrorComponent error={deletingError} />
@@ -179,9 +179,9 @@ const { loading: queryLoading, error: queryError, data} = useQuery(GET_DEPARTMEN
   }
 
   let modalTitle = ''
-  if (mode.isEditing) {modalTitle = 'Редактирование конференции'}
-  if (mode.isCreating) {modalTitle = 'Новая конференция'}
-  if (mode.isDeleting) {modalTitle = 'Удаление конференции'}
+  if (mode.isEditing) {modalTitle = 'Редактирование печатной продукции'}
+  if (mode.isCreating) {modalTitle = 'Новая печатная продукция'}
+  if (mode.isDeleting) {modalTitle = 'Удаление печатной продукции'}
 
   return (
     <>
@@ -198,7 +198,7 @@ const { loading: queryLoading, error: queryError, data} = useQuery(GET_DEPARTMEN
         formTemplate={FORM_TEMPLATE}
       />}
       {
-        (mode.isDeleting) &&  <YesDelete onDelete={onDeletePrintHandler} />   
+        (mode.isDeleting) &&  <YesDelete onDelete={onDeletePrintHandler} onCancel={onCloseModal} info={updatedPrint} instance='print' />   
       }
       </Modal>}
     <div className="container d-flex flex-wrap mt-5 justify-content-between">

@@ -5,10 +5,11 @@
 
 .nav-link-secondary {
   cursor: pointer;
+  color: white
 }
 
 .nav-link-secondary:hover {
-  background-color: #9DB965;
+  background-color: #9AB6C8;
   cursor: pointer;
 }
 
@@ -17,7 +18,7 @@
 }
 
 .nav-link:hover{
-  background-color:  #9DB965;
+  background-color:  #9AB6C8;
 }
 
 .education-button-active {

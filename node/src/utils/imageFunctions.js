@@ -20,7 +20,7 @@ const clearImage = (imagePath, subDir, type = 'image') => {
   const rootDir = type === 'image' ? 'images' : 'files'
   const savedFileName = path.basename(imagePath)
   const savedFile = path.join(__dirname, '..', rootDir, subDir, savedFileName)
-  fs.unlink(savedFile, err => console.log(err))
+  fs.unlinkSync(savedFile)
 }
 
 const convertPdfToBase64 = (file) => {

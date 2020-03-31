@@ -24,15 +24,6 @@ const links = sections.map((section, idx) => {
 const Education = () => {
   return (
     <div>
-      <EducationHeader 
-        header={process.env.REACT_APP_STATIC_URI+'/images/header/header-education.jpg'} 
-        quote='Природа - сфинкс. И тем она верней
-                Своим искусом губит человека,
-                Что, может статься, никакой от века
-                Загадки нет и не было у ней.'
-        author='Федор Тютчев'
-        when='(1803-1873)'
-      />
       <NavigationList subLinks={links}/>
       <Route exact path="/education">
             <Redirect to="/education/schedule" />

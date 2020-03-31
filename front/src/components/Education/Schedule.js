@@ -233,7 +233,6 @@ const Schedule = () => {
       update(cache, { data: {createScheduleTimetable} }) {
         const { years } = cache.readQuery({ query: GET_YEARS, variables })
         let timetable = years[viewId].timetable.slice()
-        console.log(timetable)
         if (createScheduleTimetable.double ) {
           timetable = timetable.map(el => {
             if (createScheduleTimetable.double.id === el.id) {
@@ -245,7 +244,6 @@ const Schedule = () => {
             return el
           })
         }
-        console.log(timetable)
         cache.writeQuery({
           query: GET_YEARS,
           variables,
@@ -269,7 +267,6 @@ const Schedule = () => {
     { loading: deleteTimeTableLoading, error: deleteTimeTableError }] = useMutation(DELETE_TIMETABLE, {
       update(cache, { data: { deleteScheduleTimetable } }) {
         const { years } = cache.readQuery({ query: GET_YEARS, variables})
-        console.log(deleteScheduleTimetable)
         cache.writeQuery({
           query: GET_YEARS,
           variables,
@@ -295,11 +292,15 @@ const Schedule = () => {
       }
     })
 
-  if (queryLoading) return <Spinner />
+  if (queryLoading || creationLoading || updatingLoading || deletingLoading || 
+    createTimeTableLoading || updateTimeTableLoading || deleteTimeTableLoading) return <Spinner />
   if (queryError) return <NetworkErrorComponent error={queryError} />
   if (updatingError) return <NetworkErrorComponent error={updatingError} />
   if (deletingError) return <NetworkErrorComponent error={deletingError} />
   if (creatingError) return <NetworkErrorComponent error={creatingError} />
+  if (createTimeTableError) return <NetworkErrorComponent error={createTimeTableError} />
+  if (updateTimeTableError) return <NetworkErrorComponent error={updateTimeTableError} />
+  if (deleteTimeTableError) return <NetworkErrorComponent error={deleteTimeTableError} />
  
   
   const { years } = data
@@ -432,7 +433,6 @@ const Schedule = () => {
           if (item.value.day !== '')
           {
             const fullDate = new Date(item.value.year, item.value.month, item.value.day)
-            //console.log(fullDate)
             obj[item.title] = fullDate
           }
           else obj[item.title] = null
@@ -543,8 +543,8 @@ const Schedule = () => {
             post={updatedTime}
             formTemplate={DAY_TEMPLATE}
          />}
-          {(mode.isDeleting) &&  <YesDelete onDelete={onDeleteScheduleYearHandler} onCancel={onCloseModal} /> }
-          {(timeMode.isDeleting) &&  <YesDelete onDelete={onDeleteScheduleTimeHandler} onCancel={onCloseModal}/> }
+          {(mode.isDeleting) &&  <YesDelete onDelete={onDeleteScheduleYearHandler} onCancel={onCloseModal} info={updatedYear} instance={'educationYear'} /> }
+          {(timeMode.isDeleting) &&  <YesDelete onDelete={onDeleteScheduleTimeHandler} onCancel={onCloseModal} info={updatedTime} instance={'scheduleDay'} /> }
      </Modal>}
     {(data.years.length !== 0 ) &&
     <div className="container mt-5">

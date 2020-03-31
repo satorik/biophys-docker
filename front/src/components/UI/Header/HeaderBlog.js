@@ -1,10 +1,46 @@
 import React from 'react'
 
+const styles = {
+  carousel: {
+    height: '20rem',
+    width: '100%',
+    margin: '0 auto',
+    overflow: 'hidden',
+    padding: 0
+  },
+  
+  carouselImg: {
+    display:'block',
+    width:'100%',
+    margin: '-15rem 0'
+  },
+
+  quote: {
+    backgroundColor:'rgba(0, 0, 0, 0.5)',
+    marginLeft: '0px',
+    marginBottom:'20px',
+    width:'30rem'
+  },
+
+  gallery: {
+    marginLeft: '0px',
+    marginBottom:'20px'
+  },
+
+  imageThumbnail:{
+    height:'5rem', 
+    width:'5rem', 
+    marginLeft:'5px', 
+    cursor:'pointer'
+  }
+}
+
+
 const gallery = [
-  process.env.REACT_APP_STATIC_URI+'/images/blog/001.jpg',
-  process.env.REACT_APP_STATIC_URI+'/images/blog/002.jpg',
-  process.env.REACT_APP_STATIC_URI+'/images/blog/003.jpg',
-  process.env.REACT_APP_STATIC_URI+'/images/blog/004.jpg'
+  process.env.REACT_APP_STATIC_URI+'/images/header/header-blog1.jpg',
+  process.env.REACT_APP_STATIC_URI+'/images/header/header-blog2.jpg',
+  process.env.REACT_APP_STATIC_URI+'/images/header/header-blog3.jpg',
+  process.env.REACT_APP_STATIC_URI+'/images/header/header-blog4.jpg'
 ]
 
 const quotes = [
@@ -39,7 +75,7 @@ const quotes = [
 ]
 
 
-const HeaderBlog = ({styles}) => {
+const HeaderBlog = () => {
 
   const [selectedQuote, setSelectedQuote] = React.useState(0)
 

@@ -13,5 +13,5 @@ export const getTimeToLocal = timeString => {
 export const getDateTimeToLocal = datetime => {
   const localDate = new Date(datetime)
   const options = {day: 'numeric', month: 'long', year: 'numeric', hour:'numeric', minute: '2-digit', timeZone:'Europe/Moscow'}
-  return localDate.toLocaleString('ru', options)
+  return localDate.toLocaleString('ru', options).replace(',', ' в ')
 }

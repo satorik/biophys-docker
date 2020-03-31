@@ -3,7 +3,7 @@ import {Link} from 'react-router-dom'
 
 const BlogpostCard = ({imageUrl, id, title, description}) => {
   return (
-    <div className="col-md-12">
+    <div className="col-md-12" id={id}>
       <div className="card mb-3">
         <div className="row no-gutters">
           <div className="col-md-4">

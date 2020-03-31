@@ -6,9 +6,10 @@ import AuthContext from './context/AuthContext'
 
 import { library } from '@fortawesome/fontawesome-svg-core'
 import { faAngleLeft, faAngleRight, faCaretUp, faCaretDown, faCircle, faPlus, 
-  faArrowUp, faArrowDown, faFileDownload, faEye, faPhone, faEnvelope, faUserGraduate } from '@fortawesome/free-solid-svg-icons'
+  faArrowUp, faArrowDown, faFileDownload, faEye, faPhone, faEnvelope, faUserGraduate, faHome } from '@fortawesome/free-solid-svg-icons'
 import { faEdit, faTrashAlt, faPlusSquare } from '@fortawesome/free-regular-svg-icons'
 
+import Header from './components/UI/Header/Header'
 import NavBarTop from './components/Navigantion/NavBarTop'
 import News from './News'
 import Blog from './Blog'
@@ -18,7 +19,7 @@ import Department from './Department'
 import Science from './Science'
 import Education from './Education'
 
-library.add(faAngleLeft, faAngleRight, faCaretDown, faCaretUp, faCircle, faPlus, faEdit, 
+library.add(faAngleLeft, faAngleRight, faCaretDown, faCaretUp, faCircle, faPlus, faEdit, faHome,
   faTrashAlt, faArrowUp, faArrowDown, faFileDownload, faEye, faPlusSquare, faPhone, faEnvelope, faUserGraduate)
 
 
@@ -39,6 +40,7 @@ const App = () => {
           <AuthContext.Provider 
               value={ {currentUser, setCurrentUser}}>
             <NavBarTop />
+            <Header />
             <Switch>
               <Redirect from="/" exact to="/news" />
               <Route path="/news" component={News} />

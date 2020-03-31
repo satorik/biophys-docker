@@ -7,7 +7,7 @@ import { useLazyQuery, useMutation } from '@apollo/client'
 import { gql } from 'apollo-boost'
 
 const LOGIN_USER = gql`                    
-  query userLogin($inputData: UserLoginData!){
+  mutation loginUser($inputData: UserLoginData!){
       loginUser(inputData: $inputData) {
         userId
         token
@@ -71,22 +71,36 @@ const LOGIN_FORM_TEMPLATE = [
   },
 ]
 
+const updateLocalStorage = (user) => {
+  localStorage.setItem('token', user.token)
+  localStorage.setItem('tokenExpiration', user.tokenExpiration)
+  localStorage.setItem('username', user.username)
+  localStorage.setItem('userId', user.userId)
+}
 
-const LoginForm = ({onCancel, isAuth, onLogout}) => {
+const clearLocalStorage = () => {
+  localStorage.removeItem('userId')
+  localStorage.removeItem('token')
+  localStorage.removeItem('username')
+  localStorage.removeItem('tokenExpiration')
+
+  return {
+    userId: null,
+    token: null,
+    username: null,
+    tokenExpiration: null
+  }
+}
+
+
+const LoginForm = ({onCancel, isAuth, updatedAuth}) => {
 
   const [isAbleToSave, setIsAbleToSave] = React.useState(true)
   const [isLogin, setIsLogin] = React.useState(true)
 
-  const [loginUser, { loading: loadingUser, error: UserError, data}] = useLazyQuery(LOGIN_USER)
-  const [createUser,
-        { loading: creationLoading, error: creationError }] = useMutation(REGISTER_USER)
+  const [loginUser, { loading: loadingUser, error: UserError}] = useMutation(LOGIN_USER)
+  const [createUser, { loading: creationLoading, error: creationError }] = useMutation(REGISTER_USER)
 
-  if (data) {
-    localStorage.setItem('userId', data.loginUser.userId)
-    localStorage.setItem('token', data.loginUser.token)
-    localStorage.setItem('tokenExpiration', data.loginUser.tokenExpiration) 
-    localStorage.setItem('username', data.loginUser.username)
-  }
 
   const onCloseModal = () => {
     onCancel()
@@ -105,31 +119,27 @@ const LoginForm = ({onCancel, isAuth, onLogout}) => {
         return obj
       } ,{})   
       
-     if (isLogin) {
-        loginUser({ variables: {inputData: postObject} })
-     }
-     else {
-       const { createUser } = await createUser({ variables: {inputData: postObject} })
-       localStorage.setItem('token', createUser.token)
-       localStorage.setItem('tokenExpiration', createUser.tokenExpiration)
-     }
+      if (isLogin) {
+        const userData = await loginUser({ variables: {inputData: postObject} })
+        updateLocalStorage(userData.data.loginUser)
+        updatedAuth({...userData.data.loginUser})   
+        onCancel()
+      }
+      else {
+        const userData = await createUser({ variables: {inputData: postObject} })
+        updateLocalStorage(userData.data.createUser)
+        updatedAuth({...userData.data.createUser})   
+        onCancel()
+      }
     } 
   }
 
   const handleLogout = () => {
-    localStorage.removeItem('userId')
-    localStorage.removeItem('token')
-    localStorage.removeItem('username')
-    localStorage.removeItem('tokenExpiration')
-
-    onLogout({
-      userId: null,
-      token: null,
-      username: null,
-      tokenExpiration: null
-    })
+    const emptyUser = clearLocalStorage()
+    updatedAuth({...emptyUser})
   }
 
+  if (UserError) return <NetworkErrorComponent error={UserError} />
   if (creationError) return <NetworkErrorComponent error={creationError} />
 
   const content = isAuth ? <button className="btn btn-danger d-block" onClick={handleLogout}>Выйти</button> :

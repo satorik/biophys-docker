@@ -7,7 +7,7 @@ const sequelize = new Sequelize(process.env.DB_NAME, process.env.DB_USER, proces
     useUTC: false,
   },
   schema:process.env.DB_SCHEMA,
-  logging: false
+  logging: false //console.log
 })
 
 const models = {

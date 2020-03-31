@@ -3,7 +3,7 @@ const query =   `
     blogposts(offset: Int, limit: Int):BlogpostWithTotal
     conferences(offset: Int, limit: Int):[Conference]!
     seminars(offset: Int, limit: Int):[Seminar]!
-    notes(offset: Int, limit: Int):[Note]!
+    notes(offset: Int, limit: Int, top: Boolean):[Note]!
     links: [NavigationLink!]!
     staff: [DepartmentStaff!]!
     prints: [DepartmentPrint!]!
@@ -22,7 +22,6 @@ const query =   `
     admission(section: SECTION! = ADMISSION):AdmissionText
     parentForm: EducationForm!
     subSections: [EducationForm!]
-    loginUser(inputData: UserLoginData!): authData!
   }
 `
 

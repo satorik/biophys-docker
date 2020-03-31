@@ -3,6 +3,7 @@ import { useQuery, useMutation, gql } from '@apollo/client'
 import { required, length, date } from './utils/validators'
 
 import HeaderNews from './components/UI/Header/HeaderNews'
+import ButtonAddNew from './components/UI/ButtonAddNew'
 import BlogpostCard from './components/News/BlogpostCard'
 import NewsRightPanelList from './components/News/NewsRightPanelList'
 import NoteCarousel from './components/News/NoteCarousel'
@@ -73,11 +74,20 @@ const DELETE_NOTE = gql`
 const UPDATE_NOTE = gql`
   mutation updateNote($id: ID!, $inputData: NoteUpdateData!) {
     updateNote(id: $id, inputData: $inputData) {
-      id
-      title
-      content
-      description
-      onTop
+      updatedNote {
+        id
+        title
+        content
+        description
+        onTop
+      }
+      removedFromTop {
+        id
+        title
+        content
+        description
+        onTop
+      }
     }
   }
 `
@@ -115,9 +125,6 @@ const News = () => {
   const [mode, setMode] = React.useState({isEditing: false, isCreating: false, isDeleting: false})
   const [updatedNote, setUpdatedNote] = React.useState({})
   const [isAbleToSave, setIsAbleToSave] = React.useState(true)
-  const [isError, setIsError] = React.useState(null)
-
- // if (isError) throw isError
 
   const variables = {
     limitConferences: CONFERENCES_PER_PAGE, 
@@ -153,7 +160,7 @@ const News = () => {
           }
         })
   
-       
+   
   if (queryLodading) return <Spinner />
   if (queryError) return <NetworkErrorComponent error={queryError} />
   if (updatingError) return <NetworkErrorComponent error={updatingError} />
@@ -161,9 +168,6 @@ const News = () => {
   if (creatingError) return <NetworkErrorComponent error={creatingError} />
 
   const {notes, conferences, seminars, blogposts: {posts}} = data
-
-  
-  const noteOnTop = notes.filter(note => note.onTop)[0]
 
   const onHandleNextNote = () => {
     setShowContent(false)
@@ -206,10 +210,10 @@ const News = () => {
     document.body.style.overflow = "hidden"
     setMode({...mode, isDeleting: true})
     setUpdatedNote(notes[id])
-    //setUpdatedNote(blogposts[id])
   }
 
-  const onDeleteConferenceHandler = async() => {
+  const onDeleteNoteHandler = async() => {
+    console.log('deteting')
     await deleteNote({ variables: {id: updatedNote.id}})
     setIsModalOpen(false)
     setMode({...mode, isDeleting: false})
@@ -224,7 +228,7 @@ const News = () => {
     document.body.style.overflow = "scroll"
   }
 
-  const onChangeConferenceHandler = async (e, postData, valid, id) => {
+  const onChangeNoteHandler = async (e, postData, valid, id) => {
     e.preventDefault()
     if (!valid) {
       setIsAbleToSave(false)
@@ -234,7 +238,6 @@ const News = () => {
           obj[item.title] = item.value
           return obj
       } ,{})
-      console.log(postObject)
       setIsModalOpen(false)
       document.body.style.overflow = "scroll"
       if (mode.isEditing) {
@@ -258,24 +261,23 @@ const News = () => {
 
   return (
     <>
-    <HeaderNews 
-      title={noteOnTop.title}
-      description={noteOnTop.description}
-    />
+    {/* <HeaderNews 
+      note={noteOnTop }
+    /> */}
     {isModalOpen && <Modal 
       isOpen={isModalOpen}
       title={modalTitle}
       onClose={onCloseModal}
     >
      { (mode.isEditing || mode.isCreating) && <Edit 
-        onClickSubmit={onChangeConferenceHandler}
+        onClickSubmit={onChangeNoteHandler}
         onClickCancel={onCloseModal}
         isAbleToSave={isAbleToSave}
         post={updatedNote}
         formTemplate={FORM_TEMPLATE}
       />}
       {
-        (mode.isDeleting) &&  <YesDelete onDelete={onDeleteConferenceHandler} />   
+        (mode.isDeleting) &&  <YesDelete onDelete={onDeleteNoteHandler} onCancel={onCloseModal} info={updatedNote} instance='note'/>   
       }
     </Modal>}
     <NoteCarousel 
@@ -290,7 +292,6 @@ const News = () => {
       onClickDown={onHandleCaretDown}
       onClickEdit={() => onEditNote(viewId)}
       onClickDelete={() => onDeleteNote(viewId)}
-      onClickNew={onAddNewNote}
     />
     <div className="container-fluid mt-5">
       <div className="row">
@@ -310,20 +311,14 @@ const News = () => {
           </div>
       </div>
     </div>
+    <ButtonAddNew
+        color='red'
+        onClickAddButton={onAddNewNote}
+        fixed
+        size='4'
+      />
     </>
   ) 
-
-  // <>
-  //   <section id="newsleeter" className="bg-light py-5">
-  //     <div className="container">
-  //       <div className="row">
-  //         {news.note.map(newsItem => <Note newsItem = {newsItem} key={newsItem.id} />)}
-  //       </div>
-  //     </div>
-  //   </section>
-
-  // </>
-  
 }
 
 export default ErrorBoundry(News)

@@ -1,7 +1,7 @@
 import React from 'react'
+import { gql, useQuery } from '@apollo/client'
 
 const header = process.env.REACT_APP_STATIC_URI+'/images/header/header-news.jpg'
-console.log(header)
 
 const headerImage = {
   height: '20rem',
@@ -12,14 +12,37 @@ const headerImage = {
   overflow: 'hidden'
 }
 
-const HeaderNews = ({title, description}) => {
+const GET_NEWS = gql`                    
+  query getNotes{  
+    notes(limit: 5) @client{
+      id
+      title
+      description
+      content
+      onTop
+    }
+  }
+`
+
+const HeaderNews = () => {
+
+  const { loading: queryLoading, error: queryError, data} = useQuery(GET_NEWS)
+
+  const [topNote, setTopNote] = React.useState({title: '', description: ''})
+ 
+  React.useEffect(() => {
+    if (data) {
+      setTopNote(data.notes.find(note => note.onTop))
+    }
+  }, [data])
+
   return (
     <div style={headerImage}>
-      <div className='card col-md-4 ml-auto mr-5 mt-3 text-white' style={{backgroundColor:'rgba(0, 0, 0, 0.7)'}}>
-        <div className='card-header'>{title}</div>
-         <div className="card-content">
-           {description}
-         </div>
+      <div className="card col-md-4 ml-auto mr-5 mt-3 text-white" style={{backgroundColor:'rgba(0, 0, 0, 0.7)'}}>
+        <div className="card-body">
+          <h5 className="card-title">{topNote.title}</h5>
+          <p className="card-text">{topNote.description}</p>
+        </div>
       </div>
     </div>
   )

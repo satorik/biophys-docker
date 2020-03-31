@@ -114,7 +114,7 @@ const Partnership = () => {
           }
         })
   
-  if (queryLoading) return <Spinner />
+  if (queryLoading || creationLoading || updatingLoading || deletingLoading) return <Spinner />
   if (queryError) return <NetworkErrorComponent error={queryError} />
   if (updatingError) return <NetworkErrorComponent error={updatingError} />
   if (deletingError) return <NetworkErrorComponent error={deletingError} />
@@ -182,9 +182,9 @@ const Partnership = () => {
   }
 
   let modalTitle = ''
-  if (mode.isEditing) {modalTitle = 'Редактирование конференции'}
-  if (mode.isCreating) {modalTitle = 'Новая конференция'}
-  if (mode.isDeleting) {modalTitle = 'Удаление конференции'}
+  if (mode.isEditing) {modalTitle = 'Редактирование сотрудничества'}
+  if (mode.isCreating) {modalTitle = 'Новое сотрудничество'}
+  if (mode.isDeleting) {modalTitle = 'Удаление сотрудничества'}
 
 
   const { partnership } = data
@@ -203,7 +203,7 @@ const Partnership = () => {
         formTemplate={FORM_TEMPLATE}
       />}
       {
-        (mode.isDeleting) &&  <YesDelete onDelete={onDeletePartnerHandler} />   
+        (mode.isDeleting) &&  <YesDelete onDelete={onDeletePartnerHandler} onCancel={onCloseModal} info={updatedPartner} instance='partnership' />   
       }
       </Modal>}
     <div className="container d-flex flex-wrap mt-5 justify-content-between">

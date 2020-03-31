@@ -33,12 +33,12 @@ export default (file, subDir, type = 'image') => {
         fs.unlinkSync(savedFile)
       reject(error)
     })
-    .on('readable', () => {
-      let chunk;
-      while (null !== (chunk = readStream.read())) {
-        console.log(`Received ${chunk.length} bytes of data.`);
-      }
-    })
+    // .on('readable', () => {
+    //   let chunk;
+    //   while (null !== (chunk = readStream.read())) {
+    //     console.log(`Received ${chunk.length} bytes of data.`);
+    //   }
+    // })
     .pipe(fs.createWriteStream(savedFile))
     .on('finish', () => resolve({file: savedFile, imageUrl: filePath, fileLink: filePath}))
     })

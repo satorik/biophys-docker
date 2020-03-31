@@ -4,13 +4,18 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faCaretDown, faCaretUp } from '@fortawesome/free-solid-svg-icons'
 import EditButtons from '../UI/EditButtons'
 
-const Blogpost = ({blogpost, idx, onClickEdit, onClickDelete, isAuth}) => {
-  const [showContent, setShowContent] = React.useState(false)
-  const { innerWidth: width, innerHeight: height } = window
+const Blogpost = ({blogpost, idx, onClickEdit, onClickDelete, showContent, onHandleCaretDown, toScroll, onScroll, id}) => {
 
-  const onHandleCaretDown = () => {
-    setShowContent(!showContent)
-  }
+  const divEl = React.useRef(null)
+
+  React.useEffect(() => {
+    if (toScroll === id) {
+      divEl.current.scrollIntoView({behavior: "smooth", block: "end", inline: "nearest"})
+      onScroll()
+    }
+  }, [])
+
+  const { innerWidth: width, innerHeight: height } = window
 
   const isEven = idx % 2 === 1
 
@@ -49,7 +54,7 @@ const Blogpost = ({blogpost, idx, onClickEdit, onClickDelete, isAuth}) => {
   }
 
   return (
-    <div className="container mt-5" id={blogpost.id}>
+    <div className="container mt-5" ref={divEl}>
       <div className="row">
          {content()}
       </div>

@@ -494,7 +494,10 @@ const ScienceGroup = ({match}) => {
           }
         })
 
-  if (queryLoading) return <Spinner />
+  if (queryLoading || creationLoading || updatingLoading || deletingLoading || creatingPersonLoading ||
+    creationArticleLoading || updatingPersonLoading || updatingArticleLoading || deletingPersonLoading ||
+    deletingArticleLoading || updatingPersonPositionLoading || updatingArticlePositionLoading
+    ) return <Spinner />
   if (queryError) return <NetworkErrorComponent error={queryError} />
   if (updatingError) return <NetworkErrorComponent error={updatingError} />
   if (deletingError) return <NetworkErrorComponent error={deletingError} />
@@ -734,8 +737,6 @@ const ScienceGroup = ({match}) => {
       }
     }
   })
-
-  
 
   let modalTitle = ''
   if (mode.isDeleting) {modalTitle = 'Удаление научной группы'}

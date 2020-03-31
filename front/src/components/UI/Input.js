@@ -3,7 +3,9 @@ import React from 'react'
 
 import { InputFile, InputText, InputDate, InputTextarea, InputQuill, InputCheck, InputRadio, InputCourse, InputSelect, InputResourse } from './Inputs'
 
-const Input = ({control, value, onChanged, onBlur, touched, valid, label, required, idx, id}) => {
+const Input = ({control, value, onChanged, onBlur, touched, valid, label, required, idx, id, errors}) => {
+
+  //console.log(errors)
 
   const inputClasses = control === 'file' ? ['custom-file-input'] : ['form-control']
   let validationError = null
@@ -12,7 +14,7 @@ const Input = ({control, value, onChanged, onBlur, touched, valid, label, requir
     if (typeof(touched) === 'boolean' && touched) {
       inputClasses.push('is-invalid')
       const field = typeof(label) === 'string' ? label : 'Материалы' //сделать лучше
-      validationError = <p className="d-inline text-danger text-right">Пожалуйста, заполните {field} верно</p>
+      validationError = errors.map((error, idx) => <p className="d-inline text-danger text-right" key={idx}>{error}</p>)
     }
     else if (typeof(touched) !== 'boolean') {
       let allTouched = true
@@ -21,7 +23,7 @@ const Input = ({control, value, onChanged, onBlur, touched, valid, label, requir
       })
       if (allTouched) {
         inputClasses.push('is-invalid')
-        validationError = <p className="d-inline text-danger text-right">Пожалуйста, заполните {label} верно</p>
+        validationError = errors.map((error, idx) => <p className="d-inline text-danger text-right" key={idx}>{error}</p>)
       }
     }
   }

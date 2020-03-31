@@ -2,7 +2,7 @@ const blogpostQuery = {
   async blogposts(parent, {limit, offset}, { models }) {
     const options = {
       raw: true,
-      order: [['updatedAt', 'DESC']],
+      order: [['updatedAt', 'DESC'], ['id', 'ASC']],
       limit: limit,
       offset: offset
     }

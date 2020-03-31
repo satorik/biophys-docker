@@ -10,7 +10,6 @@ import Edit from './components/Shared/Edit'
 import Spinner from './components/UI/Spinner'
 import ErrorBoundry from './components/Shared/ErrorHandling/ErrorBoundry'
 import getUpdateData from './utils/getObjectForUpdate'
-import HeaderSeminar from './components/UI/Header/GradientHeader'
 import SeminarCard from './components/Seminar/SeminarCard'
 import SeminarDetails from './components/Seminar/SeminarDetails'
 import NetworkErrorComponent from './components/Shared/ErrorHandling/NetworkErrorComponent'
@@ -165,13 +164,12 @@ const Seminar = () => {
         })
   
   React.useEffect(() => {
-    console.log(urlId)
     if (data && urlId) {
       setViewId(data.seminars.indexOf(data.seminars.find(el => el.id === urlId)))
     }
   }, [data, urlId])
 
-  if (queryLodading) return <Spinner />
+  if (queryLodading || creatingLoading || updatingLoading || deletingLoading) return <Spinner />
   if (queryError) return <NetworkErrorComponent error={queryError} />
   if (updatingError) return <NetworkErrorComponent error={updatingError} />
   if (deletingError) return <NetworkErrorComponent error={deletingError} />
@@ -258,14 +256,6 @@ const Seminar = () => {
   
   return (
     <>
-    <HeaderSeminar 
-      header={process.env.REACT_APP_STATIC_URI+'/images/header/header-conference.jpg'} 
-      title='семинары & события'
-      quote='В науке люди пытаются объяснить как можно понятнее что-то, чего дугие не знают. Но в поэзии все наоборот.'
-      author='Поль Дирак'
-      when='(1902 - 1984)'
-    />
-
     {isModalOpen && <Modal 
       isOpen={isModalOpen}
       title={modalTitle}
@@ -279,7 +269,7 @@ const Seminar = () => {
         formTemplate={FORM_TEMPLATE}
       />}
       {
-        (mode.isDeleting) &&  <YesDelete onDelete={onDeleteSeminarHandler} />   
+        (mode.isDeleting) &&  <YesDelete onDelete={onDeleteSeminarHandler} onCancel={onCloseModal} info={updatedSeminar} instance='seminar' />   
       }
     </Modal>}
 
@@ -292,6 +282,7 @@ const Seminar = () => {
                 speaker={seminar.speaker}
                 active={viewId == idx}
                 last={idx === (seminars.length-1)}
+                onCampus={seminar.onCampus}
                 onSelectSeminar={()=>onShowSeminarDetails(idx)}
                 onClickEdit={() => onEditSeminar(idx)}
                 onClickDelete={() => onDeleteSeminar(idx)}

@@ -10,6 +10,7 @@ const Edit = ({onClickSubmit, onClickCancel, formTemplate, isAbleToSave, post, b
   const [formIsValid, setFormIsValid] = React.useState(false)
   const [imagePreview, setImagePreview] = React.useState(post.imageUrl ? process.env.REACT_APP_STATIC_URI+post.imageUrl : null)
 
+
   React.useEffect(() => {
     if(isAbleToSave) {
       setPostForm(createPostForm(formTemplate, post))
@@ -63,6 +64,7 @@ const Edit = ({onClickSubmit, onClickCancel, formTemplate, isAbleToSave, post, b
                 valid={control.valid}
                 touched={control.touched}
                 value={control.value}
+                errors = {control.validationErrors}
                 required={control.required}
             />
             )

@@ -81,7 +81,7 @@ const [deleteAdmission,
       }
     })
 
-  if (queryLodading) return <Spinner />
+  if (queryLodading || creationLoading || updatingLoading || deletingLoading) return <Spinner />
  
   if (queryError) return <NetworkErrorComponent error={queryError} />
   if (updatingError) return <NetworkErrorComponent error={updatingError} />
@@ -89,8 +89,6 @@ const [deleteAdmission,
   if (creatingError) return <NetworkErrorComponent error={creatingError} />
 
   const { admission } = data
-
-  console.log(admission)
 
   const onAddAdmission = () => {
     setMode({...mode, isCreating: true})
