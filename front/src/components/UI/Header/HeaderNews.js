@@ -14,7 +14,7 @@ const headerImage = {
 
 const GET_NEWS = gql`                    
   query getNotes{  
-    notes(limit: 5) @client{
+    notes(limit: 5) {
       id
       title
       description
@@ -31,10 +31,13 @@ const HeaderNews = () => {
   const [topNote, setTopNote] = React.useState({title: '', description: ''})
  
   React.useEffect(() => {
-    if (data) {
-      setTopNote(data.notes.find(note => note.onTop))
+    if (data && data.notes.length > 0) {
+      const topNote = data.notes.find(note => note.onTop)
+      if (topNote) setTopNote(topNote)
+      else setTopNote({title: '', description: ''})
     }
   }, [data])
+
 
   return (
     <div style={headerImage}>

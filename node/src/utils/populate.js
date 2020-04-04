@@ -26,7 +26,7 @@ const populate = async (force = true) => {
   }
   else {
     await db.sync()
-
+    
     await createBasis(db.models)
   }
 }

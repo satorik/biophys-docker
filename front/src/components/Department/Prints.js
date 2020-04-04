@@ -1,6 +1,9 @@
 import React from 'react'
-import { useQuery, useMutation, gql } from '@apollo/client'
+import { useQuery, useMutation } from '@apollo/client'
 import { required, length } from '../../utils/validators'
+
+import { updateAfterCreate, updateAfterDelete, updateAfterMove } from '../../utils/updateCache/prints'
+import * as queries from '../../utils/queries/prints'
 
 import YesDelete from '../Shared/DoYouWantToDelete'
 import ButtonAddNew from '../UI/ButtonAddNew'
@@ -11,46 +14,7 @@ import ErrorBoundry from '../Shared/ErrorHandling/ErrorBoundry'
 import getUpdateData from '../../utils/getObjectForUpdate'
 import NetworkErrorComponent from '../Shared/ErrorHandling/NetworkErrorComponent'
 import {PrintCard} from './PrintCard'
-
-const GET_DEPARTMENT_PRINTS = gql`                    
-    query getDepartmentPrints {
-      prints{
-        id
-        fileLink
-        image
-        description  
-        title
-    }
-  }
-  ` 
-const CREATE_PRINT = gql`
-mutation createPrint($inputData: DepartmentPrintCreateData!) {
-  createPrint(inputData: $inputData) {
-    id
-    fileLink
-    image
-    description  
-    title
-  }
-}
-`
-
-const DELETE_PRINT = gql`
-mutation deletePrint($id: ID!) {
-  deletePrint(id: $id) 
-}
-`
-const UPDATE_PRINT = gql`
-mutation updatePrint($id: ID!, $inputData: DepartmentPrintUpdateData!) {
-  updatePrint(id: $id, inputData: $inputData) {
-    id
-    fileLink
-    image
-    description  
-    title
-  }
-}
-`
+import {EmptyData} from '../Shared/EmptyData'
 
 const FORM_TEMPLATE = [
   {
@@ -76,79 +40,67 @@ const FORM_TEMPLATE = [
   }
 ] 
 
-
 const Prints = () => {
 
   const [isModalOpen, setIsModalOpen] = React.useState(false)
   const [mode, setMode] = React.useState({isEditing: false, isCreating: false, isDeleting: false})
   const [updatedPrint, setUpdatedPrint] = React.useState({})
   const [isAbleToSave, setIsAbleToSave] = React.useState(true)
+  const [isError, setIsError] = React.useState(null)
 
-const { loading: queryLoading, error: queryError, data} = useQuery(GET_DEPARTMENT_PRINTS)
-  const [createPrint,
-        { loading: creationLoading, error: creatingError }] = useMutation(CREATE_PRINT, {
-            update(cache, { data: {createPrint} }) {
-              const { prints } = cache.readQuery({ query: GET_DEPARTMENT_PRINTS })
-              cache.writeQuery({
-                query: GET_DEPARTMENT_PRINTS,
-                data: { prints:  [createPrint, ...prints]}
-              })
-            }
-          })
-  const [updatePrint,
-        { loading: updatingLoading, error: updatingError }] = useMutation(UPDATE_PRINT)
-  const [deletePrint,
-        { loading: deletingLoading, error: deletingError }] = useMutation(DELETE_PRINT, {
-          update(cache, { data: { deletePrint } }) {
-            const { prints } = cache.readQuery({ query: GET_DEPARTMENT_PRINTS})
-            cache.writeQuery({
-              query: GET_DEPARTMENT_PRINTS,
-              data: { prints: prints.filter(el => el.id !== deletePrint)}
-            })
-          }
-        })
+  const { loading: queryLoading, error: queryError, data} = useQuery(queries.GET_DEPARTMENT_PRINTS)
+  const [createPrint,{ loading: creationLoading }] = useMutation(queries.CREATE_PRINT, {
+    update: (cache, res) => updateAfterCreate(cache, res, queries.GET_DEPARTMENT_PRINTS)})
+  const [updatePrint, { loading: updatingLoading }] = useMutation(queries.UPDATE_PRINT)
+  const [deletePrint, { loading: deletingLoading }] = useMutation(queries.DELETE_PRINT, {
+    update: (cache, res) => updateAfterDelete(cache, res, queries.GET_DEPARTMENT_PRINTS)})
   
   if (queryLoading || creationLoading || updatingLoading || deletingLoading) return <Spinner />
-  if (queryError) return <NetworkErrorComponent error={queryError} />
-  if (updatingError) return <NetworkErrorComponent error={updatingError} />
-  if (deletingError) return <NetworkErrorComponent error={deletingError} />
-  if (creatingError) return <NetworkErrorComponent error={creatingError} />
+  if (queryError) return <NetworkErrorComponent error={queryError} type='queryError' />
+  if (isError) return <NetworkErrorComponent error={isError} onDismiss={() => setIsError(null)} />
 
   const { prints } = data
   
-  const onAddNewPrint = () => {
+  const onClearMode = (operation, full = false) => {
+    setIsModalOpen(false)
+    document.body.style.overflow = "scroll"
+    setUpdatedPrint({})
+    setIsAbleToSave(true)
+
+    if (full) setMode({isDeleting: false, isEditing: false, isCreating: false})
+    else setMode({...mode, [operation]: false})
+  }
+
+  const onSetMode = (operation) => {
     setIsModalOpen(true)
-    setMode({...mode, isCreating: true})
+    setMode({...mode, [operation]: true})
     document.body.style.overflow = "hidden"
+  }
+
+  const onAddNewPrint = () => {
+    onSetMode('isCreating')
   }
 
   const onEditPrint = (id) => {
-    setIsModalOpen(true)
-    setMode({...mode, isEditing: true})
-    document.body.style.overflow = "hidden"
+    onSetMode('isEditing')
     setUpdatedPrint(prints[id])
   }
   const onDeletePrint = (id) => {
-    setIsModalOpen(true)
-    document.body.style.overflow = "hidden"
-    setMode({...mode, isDeleting: true})
+    onSetMode('isDeleting')
     setUpdatedPrint(prints[id])
-    //setUpdatedPrint(blogposts[id])
   }
 
   const onDeletePrintHandler = async () => {
-    await deletePrint({ variables: {id: updatedPrint.id}})
-    setIsModalOpen(false)
-    setMode({...mode, isDeleting: false})
-    document.body.style.overflow = "scroll"
-    setUpdatedPrint({})
+    try {
+      await deletePrint({ variables: {id: updatedPrint.id}})
+      onClearMode('isDeleting')
+    } catch(error) {
+      setIsError(error)
+    }
   }
 
   const onCloseModal = () => {
-    setIsModalOpen(false)
-    setMode({isDeleting: false, isEditing: false, isCreating: false})
-    setUpdatedPrint({})
-    document.body.style.overflow = "scroll"
+    onClearMode('_', true)
   }
 
   const onChangePrintHandler = async (e, postData, valid) => {
@@ -163,17 +115,20 @@ const { loading: queryLoading, error: queryError, data} = useQuery(GET_DEPARTMEN
       } ,{})
       if (mode.isEditing) {
         const forUpdate = getUpdateData(updatedPrint, postObject)
-        await updatePrint({ variables: {id: updatedPrint.id, inputData: forUpdate}})
-        setIsModalOpen(false)
-        setMode({...mode, isEditing: false})
-        document.body.style.overflow = "scroll"
-        setUpdatedPrint({})
+        try {
+          await updatePrint({ variables: {id: updatedPrint.id, inputData: forUpdate}})
+          onClearMode('isEditing')
+        } catch(error) {
+          setIsError(error)
+        }
       }
       if (mode.isCreating) {
-        await createPrint({ variables: {inputData: postObject}})
-        setIsModalOpen(false)
-        setMode({...mode, isCreating: false})
-        document.body.style.overflow = "scroll"
+        try {
+          await createPrint({ variables: {inputData: postObject}})
+          onClearMode('isCreating')
+        } catch(error) {
+          setIsError(error)
+        }
       }
     } 
   }
@@ -201,7 +156,7 @@ const { loading: queryLoading, error: queryError, data} = useQuery(GET_DEPARTMEN
         (mode.isDeleting) &&  <YesDelete onDelete={onDeletePrintHandler} onCancel={onCloseModal} info={updatedPrint} instance='print' />   
       }
       </Modal>}
-    <div className="container d-flex flex-wrap mt-5 justify-content-between">
+    {prints.length > 0 && <div className="container d-flex flex-wrap mt-5 justify-content-between">
       {prints.map((print, idx) => 
         <div className="col-md-6"  key={print.id}>
           <PrintCard 
@@ -215,7 +170,8 @@ const { loading: queryLoading, error: queryError, data} = useQuery(GET_DEPARTMEN
         </div>
         ) 
       }
-    </div>
+    </div>}
+    {prints.length === 0 && <EmptyData instance='print' />}
     <ButtonAddNew
         color='red'
         onClickAddButton={onAddNewPrint}

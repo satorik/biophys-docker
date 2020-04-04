@@ -1,6 +1,9 @@
 import React from 'react'
-import { useQuery, useMutation, gql } from '@apollo/client'
+import { useQuery, useMutation } from '@apollo/client'
 import { required, length } from '../../utils/validators'
+
+import { updateAfterCreate, updateAfterDelete } from '../../utils/updateCache/history'
+import * as queries from '../../utils/queries/history'
 
 import YesDelete from '../Shared/DoYouWantToDelete'
 import ButtonAddNew from '../UI/ButtonAddNew'
@@ -11,39 +14,8 @@ import EditButtons from '../UI/EditButtons'
 import getUpdateData from '../../utils/getObjectForUpdate'
 import ErrorBoundry from '../Shared/ErrorHandling/ErrorBoundry'
 import NetworkErrorComponent from '../Shared/ErrorHandling/NetworkErrorComponent'
+import {EmptyData} from '../Shared/EmptyData'
 
-const GET_DEPARTMENT_HISTORY = gql`                    
-    {
-      history {
-        id
-        content
-        imageUrl
-      }
-    }
-  `
-const CREATE_HISTORY = gql`
-mutation createHistory($inputData: HistoryCreateData!) {
-  createHistory(inputData: $inputData) {
-    id
-    content
-    imageUrl
-  }
-}
-`
-const DELETE_HISTORY = gql`
-mutation deleteHistory{
-  deleteHistory
-}
-`
-const UPDATE_HISTORY = gql`
-mutation updateHistory($inputData: HistoryUpdateData!) {
-  updateHistory(inputData: $inputData) {
-      id
-      content
-      imageUrl
-  }
-}
-`
 
 const FORM_TEMPLATE = [
   {
@@ -67,35 +39,19 @@ const History = () => {
   const [isModalOpen, setIsModalOpen] = React.useState(false)
   const [mode, setMode] = React.useState({isEditing: false, isCreating: false, isDeleting: false})
   const [isAbleToSave, setIsAbleToSave] = React.useState(true)
+  const [isError, setIsError] = React.useState(null)
 
-  const { loading: queryLodading, error: queryError, data } = useQuery(GET_DEPARTMENT_HISTORY)
-  const [createHistory,
-    { loading: creationLoading, error: creatingError }] = useMutation(CREATE_HISTORY, {
-        update(cache, { data: {createHistory} }) {
-          cache.writeQuery({
-            query: GET_DEPARTMENT_HISTORY,
-            data: { history: createHistory}
-          })
-        }
-      })
-const [updateHistory,
-    { loading: updatingLoading, error: updatingError }] = useMutation(UPDATE_HISTORY)
-const [deleteHistory,
-    { loading: deletingLoading, error: deletingError }] = useMutation(DELETE_HISTORY, {
-      update(cache, { data: { deleteHistory } }) {
-        cache.writeQuery({
-          query: GET_DEPARTMENT_HISTORY,
-          data: { }
-        })
-      }
-    })
-
+  const { loading: queryLodading, error: queryError, data } = useQuery(queries.GET_DEPARTMENT_HISTORY)
+  const [createHistory,{ loading: creationLoading }] = useMutation(queries.CREATE_HISTORY, {
+    update: (cache, res) => updateAfterCreate(cache, res, queries.GET_DEPARTMENT_HISTORY)})
+  const [updateHistory, { loading: updatingLoading }] = useMutation(queries.UPDATE_HISTORY)
+  const [deleteHistory, { loading: deletingLoading }] = useMutation(queries.DELETE_HISTORY, {
+    update: (cache) => updateAfterDelete(cache, queries.GET_DEPARTMENT_HISTORY)})
+ 
   if (queryLodading || creationLoading || updatingLoading || deletingLoading) return <Spinner />
  
-  if (queryError) return <NetworkErrorComponent error={queryError} />
-  if (updatingError) return <NetworkErrorComponent error={updatingError} />
-  if (deletingError) return <NetworkErrorComponent error={deletingError} />
-  if (creatingError) return <NetworkErrorComponent error={creatingError} />
+  if (queryError) return <NetworkErrorComponent error={queryError} type='queryError' />
+  if (isError) return <NetworkErrorComponent error={isError} onDismiss={() => setIsError(null)} />
 
   const {history} = data
 
@@ -118,10 +74,14 @@ const [deleteHistory,
     setMode({...mode, isDeleting: true})
   }
   const onDeleteHistoryHandler = async () => {
-    await deleteHistory()
-    setIsModalOpen(false)
-    setMode({...mode, isDeleting: false})
-    document.body.style.overflow = "scroll"
+    try {
+      await deleteHistory()
+      setIsModalOpen(false)
+      setMode({...mode, isDeleting: false})
+      document.body.style.overflow = "scroll"
+    } catch(error) {
+      setIsError(error)
+    }
   }
 
   const onChangeHistoryHandler = async (e, postData, valid) => {
@@ -138,12 +98,20 @@ const [deleteHistory,
         }, {})
       if (mode.isEditing) {
         let forUpdate = getUpdateData(history, postObject)
-        await updateHistory({ variables: {inputData: forUpdate}})
-        setMode({...mode, isEditing: false})
+        try {
+          await updateHistory({ variables: {inputData: forUpdate}})
+          setMode({...mode, isEditing: false})
+        } catch(error) {
+          setIsError(error)
+        }
       }
       if (mode.isCreating) {
-        await createHistory({ variables: {inputData: postObject}})
-        setMode({...mode, isCreating: false})
+        try {
+          await createHistory({ variables: {inputData: postObject}})
+          setMode({...mode, isCreating: false})
+        } catch(error) {
+          setIsError(error)
+        }
       }
     } 
   }
@@ -162,11 +130,16 @@ const [deleteHistory,
           (mode.isDeleting) &&  <YesDelete onDelete={onDeleteHistoryHandler} onCancel={onCloseModal} instance="history" />   
         }
       </Modal>}
-
-        <div className="container card mt-5 p-2">
+        {(mode.isCreating) && <div className="container card mt-5 p-2"><Edit 
+          onClickSubmit={onChangeHistoryHandler}
+          onClickCancel={onCloseModal}
+          isAbleToSave={isAbleToSave}
+          formTemplate={FORM_TEMPLATE}
+          post={{}}
+        /></div>}
+        {history && <div className="container card mt-5 p-2">
           <div className="mt-3">
-          {!history && <h1 className="text-center p-2">История пуста...</h1>}
-          {(mode.isEditing || mode.isCreating) && <Edit 
+          {(mode.isEditing ) && <Edit 
             onClickSubmit={onChangeHistoryHandler}
             onClickCancel={onCloseModal}
             isAbleToSave={isAbleToSave}
@@ -191,15 +164,17 @@ const [deleteHistory,
             </>
           }
           </div>
-        </div>
+        </div>}
       }
-      {!history &&
+      {!history && !mode.isCreating && <>
+        <EmptyData instance='history' />
         <ButtonAddNew
             color='red'
             onClickAddButton={onAddHistory}
             fixed
             size='4'
         />
+        </>
       }
     </>
   )

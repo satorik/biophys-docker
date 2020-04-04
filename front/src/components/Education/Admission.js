@@ -1,6 +1,9 @@
 import React from 'react'
-import { useQuery, useMutation, gql } from '@apollo/client'
+import { useQuery, useMutation } from '@apollo/client'
 import { required, length } from '../../utils/validators'
+
+import { updateAfterCreate, updateAfterDelete } from '../../utils/updateCache/admission'
+import * as queries from '../../utils/queries/admission'
 
 import YesDelete from '../Shared/DoYouWantToDelete'
 import ButtonAddNew from '../UI/ButtonAddNew'
@@ -11,36 +14,7 @@ import EditButtons from '../UI/EditButtons'
 import getUpdateData from '../../utils/getObjectForUpdate'
 import ErrorBoundry from '../Shared/ErrorHandling/ErrorBoundry'
 import NetworkErrorComponent from '../Shared/ErrorHandling/NetworkErrorComponent'
-
-const GET_ADMISSSION = gql`                    
-    {
-      admission {
-        id
-        content
-      }
-    }
-  `
-const CREATE_ADMISSION = gql`
-mutation createAdmission($inputData: AdmissionCreateData!) {
-  createAdmission(inputData: $inputData) {
-    id
-    content
-  }
-}
-`
-const DELETE_ADMISSION = gql`
-mutation deleteAdmission{
-  deleteAdmission
-}
-`
-const UPDATE_ADMISSION = gql`
-mutation updateAdmission($inputData: AdmissionUpdateData!) {
-  updateAdmission(inputData: $inputData) {
-      id
-      content
-  }
-}
-`
+import {EmptyData} from '../Shared/EmptyData'
 
 const FORM_TEMPLATE = [
   {
@@ -58,35 +32,19 @@ const Admission = () => {
   const [isModalOpen, setIsModalOpen] = React.useState(false)
   const [mode, setMode] = React.useState({isEditing: false, isCreating: false, isDeleting: false})
   const [isAbleToSave, setIsAbleToSave] = React.useState(true)
+  const [isError, setIsError] = React.useState(null)
 
-  const { loading: queryLodading, error: queryError, data } = useQuery(GET_ADMISSSION)
-  const [createAdmission,
-    { loading: creationLoading, error: creatingError }] = useMutation(CREATE_ADMISSION, {
-        update(cache, { data: {createAdmission} }) {
-          cache.writeQuery({
-            query: GET_ADMISSSION,
-            data: { admission: createAdmission}
-          })
-        }
-      })
-const [updatedAdmission,
-    { loading: updatingLoading, error: updatingError }] = useMutation(UPDATE_ADMISSION)
-const [deleteAdmission,
-    { loading: deletingLoading, error: deletingError }] = useMutation(DELETE_ADMISSION, {
-      update(cache) {
-        cache.writeQuery({
-          query: GET_ADMISSSION,
-          data: { }
-        })
-      }
-    })
+  const { loading: queryLodading, error: queryError, data } = useQuery(queries.GET_ADMISSSION)
+  const [createAdmission, { loading: creationLoading }] = useMutation(queries.CREATE_ADMISSION, {
+    update: (cache, res) => updateAfterCreate(cache, res, queries.GET_ADMISSSION)})
+  const [updatedAdmission, { loading: updatingLoading }] = useMutation(queries.UPDATE_ADMISSION)
+  const [deleteAdmission, { loading: deletingLoading }] = useMutation(queries.DELETE_ADMISSION, {
+    update: (cache) => updateAfterDelete(cache, queries.GET_ADMISSSION)})
 
   if (queryLodading || creationLoading || updatingLoading || deletingLoading) return <Spinner />
  
-  if (queryError) return <NetworkErrorComponent error={queryError} />
-  if (updatingError) return <NetworkErrorComponent error={updatingError} />
-  if (deletingError) return <NetworkErrorComponent error={deletingError} />
-  if (creatingError) return <NetworkErrorComponent error={creatingError} />
+  if (queryError) return <NetworkErrorComponent error={queryError} type='queryError' />
+  if (isError) return <NetworkErrorComponent error={isError} onDismiss={() => setIsError(null)} />
 
   const { admission } = data
 
@@ -109,10 +67,14 @@ const [deleteAdmission,
     setMode({...mode, isDeleting: true})
   }
   const onDeleteAdmissionHandler = async () => {
-    await deleteAdmission()
-    setIsModalOpen(false)
-    setMode({...mode, isDeleting: false})
-    document.body.style.overflow = "scroll"
+    try {
+      await deleteAdmission()
+      setIsModalOpen(false)
+      setMode({...mode, isDeleting: false})
+      document.body.style.overflow = "scroll"
+    } catch(error) {
+      setIsError(error)
+    }
   }
 
   const onChangeAdmissionHandler = async (e, postData, valid) => {
@@ -129,12 +91,20 @@ const [deleteAdmission,
         }, {})
       if (mode.isEditing) {
         let forUpdate = getUpdateData(admission, postObject)
-        await updatedAdmission({ variables: {inputData: forUpdate}})
-        setMode({...mode, isEditing: false})
+        try {
+          await updatedAdmission({ variables: {inputData: forUpdate}})
+          setMode({...mode, isEditing: false})
+        } catch(error) {
+          setIsError(error)
+        }
       }
       if (mode.isCreating) {
-        await createAdmission({ variables: {inputData: postObject}})
-        setMode({...mode, isCreating: false})
+        try {
+          await createAdmission({ variables: {inputData: postObject}})
+          setMode({...mode, isCreating: false})
+        } catch(error) {
+          setIsError(error)
+        }
       }
     } 
   }
@@ -153,15 +123,20 @@ const [deleteAdmission,
           (mode.isDeleting) &&  <YesDelete onDelete={onDeleteAdmissionHandler} onCancel={onCloseModal} instance="admission" />   
         }
       </Modal>}
-
-        <div className="container card mt-5 p-2">
+      {(mode.isCreating) && <div className="container card mt-5 p-2"><Edit 
+        onClickSubmit={onChangeAdmissionHandler}
+        onClickCancel={onCloseModal}
+        isAbleToSave={isAbleToSave}
+        formTemplate={FORM_TEMPLATE}
+        post={{}}
+      /></div>}
+      {admission && <div className="container card mt-5 p-2">
           <div className="mt-3">
-          {!admission && <h1 className="text-center p-2">Запись пуста...</h1>}
-          {(mode.isEditing || mode.isCreating) && <Edit 
+          {(mode.isEditing ) && <Edit 
             onClickSubmit={onChangeAdmissionHandler}
             onClickCancel={onCloseModal}
             isAbleToSave={isAbleToSave}
-            post={admission || {}}
+            post={admission }
             formTemplate={FORM_TEMPLATE}
           />}
           {(!mode.isEditing && !mode.isCreating && admission) &&
@@ -179,13 +154,15 @@ const [deleteAdmission,
           </div>
         </div>
       }
-      {!admission &&
+      {!admission && !mode.isCreating && <>
+        <EmptyData instance='admission' />
         <ButtonAddNew
             color='red'
             onClickAddButton={onAddAdmission}
             fixed
             size='4'
         />
+        </>
       }
     </>
   )

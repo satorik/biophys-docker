@@ -3,7 +3,8 @@ import Edit from '../Shared/Edit'
 import { required, email, password, passwordRepeat } from '../../utils/validators'
 import NetworkErrorComponent from '../Shared/ErrorHandling/NetworkErrorComponent'
 import ErrorBoundry from '../Shared/ErrorHandling/ErrorBoundry'
-import { useLazyQuery, useMutation } from '@apollo/client'
+import Spinner from '../UI/Spinner'
+import { useMutation } from '@apollo/client'
 import { gql } from 'apollo-boost'
 
 const LOGIN_USER = gql`                    
@@ -97,10 +98,10 @@ const LoginForm = ({onCancel, isAuth, updatedAuth}) => {
 
   const [isAbleToSave, setIsAbleToSave] = React.useState(true)
   const [isLogin, setIsLogin] = React.useState(true)
+  const [isError, setIsError] = React.useState(null)
 
-  const [loginUser, { loading: loadingUser, error: UserError}] = useMutation(LOGIN_USER)
-  const [createUser, { loading: creationLoading, error: creationError }] = useMutation(REGISTER_USER)
-
+  const [loginUser, { loading: loadingUser }] = useMutation(LOGIN_USER)
+  const [createUser, { loading: creationLoading }] = useMutation(REGISTER_USER)
 
   const onCloseModal = () => {
     onCancel()
@@ -120,16 +121,26 @@ const LoginForm = ({onCancel, isAuth, updatedAuth}) => {
       } ,{})   
       
       if (isLogin) {
-        const userData = await loginUser({ variables: {inputData: postObject} })
-        updateLocalStorage(userData.data.loginUser)
-        updatedAuth({...userData.data.loginUser})   
-        onCancel()
+        try {
+          const userData = await loginUser({ variables: {inputData: postObject} })
+          updateLocalStorage(userData.data.loginUser)
+          updatedAuth({...userData.data.loginUser})   
+          onCancel()
+        }
+        catch(error){
+          setIsError(error)
+        }
       }
       else {
-        const userData = await createUser({ variables: {inputData: postObject} })
-        updateLocalStorage(userData.data.createUser)
-        updatedAuth({...userData.data.createUser})   
-        onCancel()
+        try {
+          const userData = await createUser({ variables: {inputData: postObject} })
+          updateLocalStorage(userData.data.createUser)
+          updatedAuth({...userData.data.createUser})   
+          onCancel()
+        }
+        catch(error){
+          setIsError(error)
+        }
       }
     } 
   }
@@ -139,8 +150,8 @@ const LoginForm = ({onCancel, isAuth, updatedAuth}) => {
     updatedAuth({...emptyUser})
   }
 
-  if (UserError) return <NetworkErrorComponent error={UserError} />
-  if (creationError) return <NetworkErrorComponent error={creationError} />
+  if (loadingUser || creationLoading) return <Spinner />
+  if (isError) return <NetworkErrorComponent error={isError} onDismiss={() => setIsError(null)} />
 
   const content = isAuth ? <button className="btn btn-danger d-block" onClick={handleLogout}>Выйти</button> :
       <>

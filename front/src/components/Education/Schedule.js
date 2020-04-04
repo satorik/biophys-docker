@@ -1,7 +1,10 @@
 import React from 'react'
-import { useQuery, useMutation, gql } from '@apollo/client'
+import { useQuery, useMutation } from '@apollo/client'
 import { required, length, time, date } from '../../utils/validators'
 import { getIsDouble } from '../../utils/checkDoubleLecture'
+
+import { updateAfterCreate, updateAfterDelete, updateAfterCreateTime, updateAfterDeleteTime } from '../../utils/updateCache/schedule'
+import * as queries from '../../utils/queries/schedule'
 
 import ScheduleDay from './ScheduleDay'
 import getWeekNumber from '../../utils/getWeekNumber'
@@ -14,116 +17,9 @@ import getUpdateData from '../../utils/getObjectForUpdate'
 import ErrorBoundry from '../Shared/ErrorHandling/ErrorBoundry'
 import NetworkErrorComponent from '../Shared/ErrorHandling/NetworkErrorComponent'
 import {EducationButtons} from '../UI/EducationButtons'
+import {EmptyData} from '../Shared/EmptyData'
 
 const DAYS = ["Понедельник", "Вторник", "Среда", "Четверг", "Пятница", "Суббота"]
-
-
-const GET_YEARS = gql`
-  query getScheduleYears($year: Int, $term: Int) {
-    years(year: $year, term: $term){
-      id
-      title
-      timetable {
-        id
-        dayId
-        timeFrom
-        timeTo
-        lector
-        discipline
-        lectureHall
-        startDate
-        isEven
-        isDouble
-      }
-    }
-  }
-`
-
-const CREATE_YEAR = gql`
-  mutation createScheduleYear($inputData: ScheduleYearCreateData!) {
-    createScheduleYear(inputData: $inputData) {
-      id
-      title
-      timetable{
-        id
-        dayId
-        timeFrom
-        timeTo
-        lector
-        discipline
-        lectureHall
-        startDate
-        isEven
-        isDouble
-      }
-    }
-  }
-`
-
-const DELETE_YEAR = gql`
-  mutation deleteScheduleYear($id: ID!) {
-    deleteScheduleYear(id: $id) 
-  }
-`
-const UPDATE_YEAR = gql`
-  mutation updateScheduleYear($id: ID!, $inputData: ScheduleYearUpdateData!) {
-    updateScheduleYear(id: $id, inputData: $inputData) {
-        id
-        title
-    }
-  }
-`
-
-const CREATE_TIMETABLE = gql`
-  mutation createScheduleTimetable($yearId: ID!, $dayId: ID!, $inputData: ScheduleTimetableCreateData!) {
-    createScheduleTimetable(yearId: $yearId, dayId: $dayId, inputData: $inputData) {
-      timetable {
-        id
-        dayId
-        timeFrom
-        timeTo
-        lector
-        discipline
-        lectureHall
-        startDate
-        isEven
-        isDouble
-      }
-      double {
-        id
-        isDouble
-      }
-    }
-  }
-`
-
-const UPDATE_TIMETABLE = gql`
-  mutation updateScheduleTimetable($id: ID!, $inputData: ScheduleTimetableUpdateData!) {
-    updateScheduleTimetable(id: $id, inputData: $inputData) {
-      id
-      timeFrom
-      timeTo
-      lector
-      discipline
-      lectureHall
-      startDate
-      isEven
-      isDouble
-    }
-  }
-`
-
-const DELETE_TIMETABLE = gql`
-  mutation deleteScheduleTimetable($id: ID!) {
-    deleteScheduleTimetable(id: $id) {
-      id
-      double {
-        id
-        isDouble
-      }
-    }
-  }
-`
 
 const FORM_TEMPLATE = [
   {
@@ -191,6 +87,7 @@ const Schedule = () => {
   const [updatedTime, setUpdatedTime] = React.useState({})
   const [updatedYear, setUpdatedYear] = React.useState({})
   const [isAbleToSave, setIsAbleToSave] = React.useState(true)
+  const [isError, setIsError] = React.useState(null)
 
   const {currentWeek, currentTerm, currentYear} = getWeekNumber()
 
@@ -200,107 +97,22 @@ const Schedule = () => {
     term: currentTerm
   }
 
-
-//////////// if no shedule and no term  (show if there is a schedule)
-
-  const { loading: queryLoading, error: queryError, data} = useQuery(GET_YEARS, {variables})
-  const [createScheduleYear,
-      { loading: creationLoading, error: creatingError }] = useMutation(CREATE_YEAR, {
-           update(cache, { data: {createScheduleYear} }) {
-            const { years } = cache.readQuery({ query: GET_YEARS, variables })
-            cache.writeQuery({
-              query: GET_YEARS,
-              variables,
-              data: {...data,  years:  [...years, createScheduleYear]}
-            })
-          }
-        })
-  const [updateScheduleYear,
-      { loading: updatingLoading, error: updatingError }] = useMutation(UPDATE_YEAR)
-  const [deleteScheduleYear,
-      { loading: deletingLoading, error: deletingError }] = useMutation(DELETE_YEAR, {
-        update(cache, { data: { deleteScheduleYear } }) {
-          const { years } = cache.readQuery({ query: GET_YEARS, variables})
-          cache.writeQuery({
-            query: GET_YEARS,
-            variables,
-            data: { ...data, years: years.filter(el => el.id !== deleteScheduleYear)}
-          })
-        }
-      })
-  const [createScheduleTimetable,
-    { loading: createTimeTableLoading, error: createTimeTableError }] = useMutation(CREATE_TIMETABLE, {
-      update(cache, { data: {createScheduleTimetable} }) {
-        const { years } = cache.readQuery({ query: GET_YEARS, variables })
-        let timetable = years[viewId].timetable.slice()
-        if (createScheduleTimetable.double ) {
-          timetable = timetable.map(el => {
-            if (createScheduleTimetable.double.id === el.id) {
-              return {
-                ...el,
-                isDouble: createScheduleTimetable.double.isDouble
-              }
-            }
-            return el
-          })
-        }
-        cache.writeQuery({
-          query: GET_YEARS,
-          variables,
-          data: { ...data, years: years.map((year, idx) => {
-            if (idx === viewId) {
-              return {
-                ...year,
-                timetable: [...timetable, createScheduleTimetable.timetable]
-              }
-            }
-            return year
-          })}
-        })
-      }
-    })
-
-  const [updateScheduleTimetable,
-    { loading: updateTimeTableLoading, error: updateTimeTableError }] = useMutation(UPDATE_TIMETABLE)
-
-  const [deleteScheduleTimetable,
-    { loading: deleteTimeTableLoading, error: deleteTimeTableError }] = useMutation(DELETE_TIMETABLE, {
-      update(cache, { data: { deleteScheduleTimetable } }) {
-        const { years } = cache.readQuery({ query: GET_YEARS, variables})
-        cache.writeQuery({
-          query: GET_YEARS,
-          variables,
-          data: { ...data, years: years.map((year, idx) => {
-            if (idx === viewId) {
-              return {
-                ...year,
-                timetable: year.timetable.filter(el => el.id !== deleteScheduleTimetable.id)
-                   .map(el => {
-                     if (deleteScheduleTimetable.double && deleteScheduleTimetable.double.id === el.id) {
-                      return {
-                        ...el,
-                        isDouble: deleteScheduleTimetable.double.isDouble
-                      }
-                     }
-                     return el
-                   })
-              }
-            }
-            return year
-          })}
-        })
-      }
-    })
+  const { loading: queryLoading, error: queryError, data} = useQuery(queries.GET_YEARS, {variables})
+  const [createScheduleYear, { loading: creationLoading }] = useMutation(queries.CREATE_YEAR, {
+    update: (cache, res) => updateAfterCreate(cache, res, queries.GET_YEARS, variables)})
+  const [updateScheduleYear, { loading: updatingLoading }] = useMutation(queries.UPDATE_YEAR)
+  const [deleteScheduleYear, { loading: deletingLoading }] = useMutation(queries.DELETE_YEAR, {
+    update: (cache, res) => updateAfterDelete(cache, res, queries.GET_YEARS, variables)})
+  const [createScheduleTimetable, { loading: createTimeTableLoading }] = useMutation(queries.CREATE_TIMETABLE, {
+    update: (cache, res) => updateAfterCreateTime(cache, res, queries.GET_YEARS, variables, viewId)})
+  const [updateScheduleTimetable, { loading: updateTimeTableLoading }] = useMutation(queries.UPDATE_TIMETABLE)
+  const [deleteScheduleTimetable, { loading: deleteTimeTableLoading }] = useMutation(queries.DELETE_TIMETABLE, {
+    update: (cache, res) => updateAfterDeleteTime(cache, res, queries.GET_YEARS, variables, viewId)})
 
   if (queryLoading || creationLoading || updatingLoading || deletingLoading || 
     createTimeTableLoading || updateTimeTableLoading || deleteTimeTableLoading) return <Spinner />
-  if (queryError) return <NetworkErrorComponent error={queryError} />
-  if (updatingError) return <NetworkErrorComponent error={updatingError} />
-  if (deletingError) return <NetworkErrorComponent error={deletingError} />
-  if (creatingError) return <NetworkErrorComponent error={creatingError} />
-  if (createTimeTableError) return <NetworkErrorComponent error={createTimeTableError} />
-  if (updateTimeTableError) return <NetworkErrorComponent error={updateTimeTableError} />
-  if (deleteTimeTableError) return <NetworkErrorComponent error={deleteTimeTableError} />
+  if (queryError) return <NetworkErrorComponent error={queryError} type='queryError' />
+  if (isError) return <NetworkErrorComponent error={isError} onDismiss={() => setIsError(null)} />
  
   
   const { years } = data
@@ -345,75 +157,89 @@ const Schedule = () => {
   const isCurrentWeakEven = currentWeek % 2
   const bgColor = isCurrentWeakEven === 0 ? '#FAF1D6' : '#D9F1F1'
 
-  const clearMode = () => {
-    setTimeMode({isDeleting: false, isEditing: false, isCreating: false})
+  const clearTimeMode = (operation, full = false) => {
+    setIsModalOpen(false)
+    document.body.style.overflow = "scroll"
+    setIsAbleToSave(true)  
     setUpdatedTime({})
     setUpdatedDay('')
+
+    if (full) setTimeMode({isDeleting: false, isEditing: false, isCreating: false})
+    else setTimeMode({...mode, [operation]: false})
   }
 
+  const clearMode = (operation, full = false) => {
+    setIsModalOpen(false)
+    document.body.style.overflow = "scroll"
+    setUpdatedYear({})
+    setIsAbleToSave(true)
+
+    if (full) setMode({isDeleting: false, isEditing: false, isCreating: false})
+    else setMode({...mode, [operation]: false})
+  }
+
+  const onSetMode = (operation, instance) => {
+    setIsModalOpen(true)
+    document.body.style.overflow = "hidden"
+    if (instance === 'time') setTimeMode({...mode, [operation]: true})
+    else setMode({...mode, [operation]: true})
+  }
+  
   const onChangeviewId = (id) => {
     setViewId(id)
-    clearMode()
+    clearMode('_', true)
+    clearTimeMode('_', true)
   }
 
   const onEditScheduleTime = (id) => {
-    setIsModalOpen(true)
-    document.body.style.overflow = "hidden"
-    setTimeMode({...timeMode, isEditing: true})
+    onSetMode('isEditing', 'time')
     setUpdatedTime(years[viewId].timetable.find(x => x.id === id))
   }
 
- const onDeleteScheduleTime = (id) => {
-   setIsModalOpen(true)
-   document.body.style.overflow = "hidden"
-   setTimeMode({...timeMode, isDeleting: true})
-   setUpdatedTime(years[viewId].timetable.find(x => x.id === id))
- }
+  const onDeleteScheduleTime = (id) => {
+    onSetMode('isDeleting', 'time')
+    setUpdatedTime(years[viewId].timetable.find(x => x.id === id))
+  }
 
- const onDeleteScheduleYear = (id) => {
-  setIsModalOpen(true)
-  document.body.style.overflow = "hidden"
-  setMode({...mode, isDeleting: true})
-  setUpdatedYear(years[id])
-}
+  const onDeleteScheduleYear = (id) => {
+    onSetMode('isDeleting')
+    setUpdatedYear(years[id])
+  }
 
  const onCancelEditing = () => {
-    clearMode()
+    clearMode('_', true)
  }
 
- const onAddNewTime = (day) => {
-   setTimeMode({...timeMode, isCreating: true})
-   setUpdatedDay(day)
- }
+  const onAddNewTime = (day) => {
+    setTimeMode({...timeMode, isCreating: true})
+    setUpdatedDay(day)
+  }
 
   const onAddNewYear = () => {
-    setIsModalOpen(true)
-    setMode({...mode, isCreating: true})
-    document.body.style.overflow = "hidden"
+    onSetMode('isCreating')
   }
 
   const onDeleteScheduleTimeHandler = async () => {
-    await deleteScheduleTimetable({ variables: {id: updatedTime.id}})
-    setIsModalOpen(false)
-    setTimeMode({...mode, isDeleting: false})
-    document.body.style.overflow = "scroll"
-    setUpdatedTime({})
+    try {
+      await deleteScheduleTimetable({ variables: {id: updatedTime.id}})
+      clearTimeMode('isDeleting')
+    } catch(error) {
+      setIsError(error)
+    }
   }
 
   const onDeleteScheduleYearHandler = async () => {
-    await deleteScheduleYear({ variables: {id: updatedYear.id}})
-    setIsModalOpen(false)
-    setMode({...mode, isDeleting: false})
-    document.body.style.overflow = "scroll"
-    setUpdatedYear({})
+    try {
+      await deleteScheduleYear({ variables: {id: updatedYear.id}})
+      clearMode('isDeleting')
+    } catch(error) {
+      setIsError(error)
+    }
   }
 
   const onCloseModal = () => {
-    setIsModalOpen(false)
-    setMode({isDeleting: false, isEditing: false, isCreating: false})
-    setUpdatedYear({})
-    document.body.style.overflow = "scroll"
-    clearMode()
+    clearTimeMode('_', true)
+    clearMode('_', true)
   }
 
   const onChangeTimeHandler = async (e, postData, valid) => {
@@ -446,15 +272,17 @@ const Schedule = () => {
         const double = getIsDouble(postObject, timetableByDay[DAYS[updatedTime.dayId]], updatedTime.id)
         const forUpdate = getUpdateData(updatedTime, {...postObject, isDouble: +double.isDouble})
         if (double.isOneEven && double.isOneDouble) {
-          await updateScheduleTimetable({ variables: {id: updatedTime.id, inputData: forUpdate}})
-          if (forUpdate.isDouble !== undefined) {
-            const newDouble = forUpdate.isDouble === 0 ? 0 : +updatedTime.id
-            await updateScheduleTimetable({ variables: {id: updatedTime.isDouble, inputData: {isDouble: newDouble}}})
-          }
-          setTimeMode({...timeMode, isEditing: false})
-          setIsModalOpen(false)
-          setUpdatedTime({})
-          document.body.style.overflow = "scroll"
+
+        try {
+            await updateScheduleTimetable({ variables: {id: updatedTime.id, inputData: forUpdate}})
+            if (forUpdate.isDouble !== undefined) {
+              const newDouble = forUpdate.isDouble === 0 ? 0 : +updatedTime.id
+              await updateScheduleTimetable({ variables: {id: updatedTime.isDouble, inputData: {isDouble: newDouble}}})
+            }
+            clearTimeMode('isEditing')
+        } catch(error) {
+            setIsError(error)
+        }
         }
         else {
           if (!double.isOneDouble) {console.log('Третий дубль')}
@@ -466,11 +294,15 @@ const Schedule = () => {
       if (timeMode.isCreating) {
         const double = getIsDouble(postObject, timetableByDay[updatedDay])
         if (double.isOneDouble && double.isOneEven) {
-          await createScheduleTimetable({ variables: {
-            yearId: years[viewId].id, dayId: DAYS.indexOf(updatedDay), inputData: {...postObject, isDouble: +double.isDouble}
-          }})
-         setTimeMode({...timeMode, isCreating: false})
-         setUpdatedDay('')
+          try {
+              await createScheduleTimetable({ variables: {
+                yearId: years[viewId].id, dayId: DAYS.indexOf(updatedDay), inputData: {...postObject, isDouble: +double.isDouble}
+              }})
+            setTimeMode({...timeMode, isCreating: false})
+            setUpdatedDay('')
+          } catch(error) {
+              setIsError(error)
+          }
         }
         else {
           if (!double.isOneDouble) {console.log('Третий дубль')}
@@ -494,21 +326,24 @@ const Schedule = () => {
           return obj
       } ,{})
       if (mode.isEditing) {
-        await updateScheduleYear({ variables: {id: updatedYear.id, inputData: postObject}})
-        setIsModalOpen(false)
-        setMode({...mode, isEditing: false})
-        document.body.style.overflow = "scroll"
-        setUpdatedYear({})
+        try {
+          await updateScheduleYear({ variables: {id: updatedYear.id, inputData: postObject}})
+          clearMode('isEditing')
+        } catch(error) {
+            setIsError(error)
+        }
       }
       if (mode.isCreating) {
-        await createScheduleYear({ variables: {inputData: {
-          title: postObject.course.course,
-          year: +postObject.course.year,
-          term: +postObject.course.term
-        }}})
-        setIsModalOpen(false)
-        setMode({...mode, isCreating: false})
-        document.body.style.overflow = "scroll"
+        try {
+          await createScheduleYear({ variables: {inputData: {
+            title: postObject.course.course,
+            year: +postObject.course.year,
+            term: +postObject.course.term
+          }}})
+          clearMode('isCreating')
+        } catch(error) {
+            setIsError(error)
+        }
       }
     } 
   }
@@ -587,11 +422,7 @@ const Schedule = () => {
       </div>
     </div>
     }
-    {(data.years.length === 0 ) &&
-      <div className="container card mt-5 p-2">
-        <p className="h5 text-center">Расписания на текущий семестр пока нет</p>
-      </div>
-    }
+    {(data.years.length === 0 ) && <EmptyData instance='schedule' />}
     <ButtonAddNew
       color='red'
       onClickAddButton={onAddNewYear}

@@ -1,12 +1,14 @@
 import React from 'react'
-import { useQuery, useMutation, gql } from '@apollo/client'
+import { useQuery, useMutation } from '@apollo/client'
 import { required, length, time, date } from '../../utils/validators'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faCaretDown, faCaretUp } from '@fortawesome/free-solid-svg-icons'
 
+import { updateAfterCreate, updateAfterDelete, updateAfterCreateResourse, updateAfterDeleteResourse } from '../../utils/updateCache/courses'
+import * as queries from '../../utils/queries/courses'
+
 import {CourseInfo} from './CourseInfo'
 import {CourseMaterials} from './CourseMaterials'
-
 import YesDelete from '../Shared/DoYouWantToDelete'
 import ButtonAddNew from '../UI/ButtonAddNew'
 import Modal from '../UI/Modal'
@@ -17,161 +19,9 @@ import ErrorBoundry from '../Shared/ErrorHandling/ErrorBoundry'
 import NetworkErrorComponent from '../Shared/ErrorHandling/NetworkErrorComponent'
 import {EducationButtons} from '../UI/EducationButtons'
 import {PrintCard} from '../Department/PrintCard'
-import EditButtons from '../UI/EditButtons'
+import {EmptyData} from '../Shared/EmptyData'
 
-const GET_COURSES = gql`
-  query getEducationCourses {
-    courses {
-		id
-		title
-		description
-		read
-		lector
-		exam
-		resourses{
-			id
-			title
-      image
-      description
-			fileLink
-			form {
-				id
-				title
-        type
-        filetype
-        parentForm {
-          id
-          type
-          title
-          filetype
-        }
-			}
-		}
-	}
 
-  forms {
-    id
-    title
-    type
-    filetype
-    parentForm {
-      id
-      type
-      title
-      filetype
-    }
-    subSections {
-      id
-      type
-      title
-      filetype
-    }
-  }
-}
-`
-
-const CREATE_COURSE = gql`
-  mutation createEducationCourse($inputData: EducationCourseCreateData!) {
-    createEducationCourse(inputData: $inputData) {
-      id
-      title
-      description
-      read
-      lector
-      exam
-      resourses{
-        id
-        title
-        image
-        description
-        fileLink
-        form{
-          id
-          title
-          type
-          filetype
-          parentForm {
-            id
-            type
-            title
-            filetype
-          }
-        }
-      }
-    }
-  }
-`
-
-const DELETE_COURSE = gql`
-  mutation deleteEducationCourse($id: ID!) {
-    deleteEducationCourse(id: $id) 
-  }
-`
-const UPDATE_COURSE = gql`
-  mutation updateEducationCourse($id: ID!, $inputData: EducationCourseUpdateData!) {
-    updateEducationCourse(id: $id, inputData: $inputData) {
-        id
-        title
-        description
-        read
-        lector
-        exam
-    }
-  }
-`
-const CREATE_RESOURSE = gql`
-  mutation createEducationResourse($courseId: ID!, $filetype: FILETYPE!,  $inputData: EducationResourseCreateData!) {
-    createEducationResourse(courseId: $courseId, inputData: $inputData, filetype: $filetype) {
-      id
-      title
-      image
-      description
-      fileLink
-      form{
-          id
-          title
-          type
-          filetype
-          parentForm {
-            id
-            type
-            title
-            filetype
-          }
-      }
-    }
-  }
-`
-
-const UPDATE_RESOURSE = gql`
-  mutation updateEducationResourse($id: ID!, $filetype: FILETYPE!,  $inputData: EducationResourseUpdateData!) {
-    updateEducationResourse(id: $id, filetype: $filetype, inputData: $inputData) {
-      id
-      title
-      image
-      description
-      fileLink
-      form{
-          id
-          title
-          type
-          filetype
-          parentForm {
-            id
-            type
-            title
-            filetype
-          }
-      }
-    }
-  }
-`
-
-const DELETE_RESOURSE = gql`
-  mutation deleteEducationResourse($id: ID!) {
-    deleteEducationResourse(id: $id)
-  }
-`
 
 const FORM_TEMPLATE = [
   {
@@ -215,6 +65,7 @@ const Courses = () => {
   const [updatedCourse, setUpdatedCourse] = React.useState({})
   const [updatedResourse, setUpdatedResourse] = React.useState({})
   const [isAbleToSave, setIsAbleToSave] = React.useState(true)
+  const [isError, setIsError] = React.useState(null)
 
   const [showResourses, setShowResourses] = React.useState({
     basic: false,
@@ -223,81 +74,23 @@ const Courses = () => {
     practice: true
   })
 
-  const { loading: queryLoading, error: queryError, data} = useQuery(GET_COURSES)
-  const [createEducationCourse,
-    { loading: creationLoading, error: creatingError }] = useMutation(CREATE_COURSE, {
-         update(cache, { data: {createEducationCourse} }) {
-          const { courses } = cache.readQuery({ query: GET_COURSES })
-          cache.writeQuery({
-            query: GET_COURSES,
-            data: {...data,  courses:  [...courses, createEducationCourse]}
-          })
-        }
-      })
-  const [updateEducationCourse,
-      { loading: updatingLoading, error: updatingError }] = useMutation(UPDATE_COURSE)
-  const [deleteEducationCourse,
-      { loading: deletingLoading, error: deletingError }] = useMutation(DELETE_COURSE, {
-        update(cache, { data: { deleteEducationCourse } }) {
-          const { courses } = cache.readQuery({ query: GET_COURSES})
-          cache.writeQuery({
-            query: GET_COURSES,
-            data: { ...data, courses: courses.filter(el => el.id !== deleteEducationCourse)}
-          })
-        }
-      })
+  const { loading: queryLoading, error: queryError, data} = useQuery(queries.GET_COURSES)
+  const [createEducationCourse, { loading: creationLoading }] = useMutation(queries.CREATE_COURSE, {
+    update: (cache, res) => updateAfterCreate(cache, res, queries.GET_COURSES)})
+  const [updateEducationCourse, { loading: updatingLoading }] = useMutation(queries.UPDATE_COURSE)
+  const [deleteEducationCourse, { loading: deletingLoading }] = useMutation(queries.DELETE_COURSE, {
+    update: (cache, res) => updateAfterDelete(cache, res, queries.GET_COURSES)})
+  const [createEducationResourse, { loading: createResourseLoading }] = useMutation(queries.CREATE_RESOURSE, {
+    update: (cache, res) => updateAfterCreateResourse(cache, res, queries.GET_COURSES, viewId)})
+  const [updateEducationResourse, { loading: updateResourseLoading }] = useMutation(queries.UPDATE_RESOURSE)
+  const [deleteEducationResourse, { loading: deleteEducationResourseLoading }] = useMutation(queries.DELETE_RESOURSE, {
+    update: (cache, res) => updateAfterDeleteResourse(cache, res, queries.GET_COURSES, viewId)})
 
-  const [createEducationResourse,
-    { loading: createResourseLoading, error: createResourseError }] = useMutation(CREATE_RESOURSE, {
-      update(cache, { data: {createEducationResourse} }) {
-        const { courses } = cache.readQuery({ query: GET_COURSES })
-        cache.writeQuery({
-          query: GET_COURSES,
-          data: { ...data, courses: courses.map((course, idx) => {
-            if (idx === viewId) {
-              return {
-                ...course,
-                resourses: [...course.resourses, createEducationResourse]
-              }
-            }
-            return course
-          })}
-        })
-      }
-    })
-  
-  const [updateEducationResourse,
-    { loading: updateResourseLoading, error: updateResourseError }] = useMutation(UPDATE_RESOURSE)
-  
-  const [deleteEducationResourse,
-    { loading: deleteEducationResourseLoading, error: deleteEducationResourseError }] = useMutation(DELETE_RESOURSE, {
-      update(cache, { data: { deleteEducationResourse } }) {
-        const { courses } = cache.readQuery({ query: GET_COURSES })
-        cache.writeQuery({
-          query: GET_COURSES,
-          data: { ...data, courses: courses.map((course, idx) => {
-            if (idx === viewId) {
-              return {
-                ...course,
-                resourses: course.resourses.filter(el => el.id !== deleteEducationResourse)
-              }
-            }
-            return course
-          })}
-        })
-      }
-    })
-
-  if (queryLoading || creationLoading || updatingLoading || createResourseLoading || 
+  if (queryLoading || creationLoading || updatingLoading || deletingLoading || createResourseLoading || 
     updateResourseLoading || deleteEducationResourseLoading) return <Spinner />
-  if (queryError) return <NetworkErrorComponent error={queryError} />
-  if (updatingError) return <NetworkErrorComponent error={updatingError} />
-  if (deletingError) return <NetworkErrorComponent error={deletingError} />
-  if (creatingError) return <NetworkErrorComponent error={creatingError} />
 
-  if (createResourseError) return <NetworkErrorComponent error={createResourseError} />
-  if (updateResourseError) return <NetworkErrorComponent error={updateResourseError} />
-  if (deleteEducationResourseError) return <NetworkErrorComponent error={deleteEducationResourseError} />
+  if (queryError) return <NetworkErrorComponent error={queryError} type='queryError' />
+  if (isError) return <NetworkErrorComponent error={isError} onDismiss={() => setIsError(null)} />
 
   const { courses, forms } = data
 
@@ -306,14 +99,10 @@ const Courses = () => {
   const singleResourses = []
   let RESOURSE_TEMPLATE = []
 
-  //const mainMultyForms = forms.filter(form => form.type === 'MULTY')
-
   if (courses.length > 0) {
     resourses.push(...courses[viewId].resourses)
     singleResourses.push(...courses[viewId].resourses.filter(resourse => resourse.form.type === 'SINGLE'))
     multyResourses.push(...courses[viewId].resourses.filter(resourse => resourse.form.type === 'MULTY'))
-
-    //console.log(singleResourses)
 
     let materialsToAdd = forms.filter(form => singleResourses.filter(resourse => resourse.form.id === form.id).length === 0)
 
@@ -408,18 +197,26 @@ const Courses = () => {
   }
 
   const onDeleteCourseHandler = async() => {
-    await deleteEducationCourse({ variables: {id: updatedCourse.id}})
-    setIsModalOpen(false)
-    document.body.style.overflow = "scroll"
-    clearMode()
+    try {
+      await deleteEducationCourse({ variables: {id: updatedCourse.id}})
+      setIsModalOpen(false)
+      document.body.style.overflow = "scroll"
+      clearMode()
+    } catch(error) {
+      setIsError(error)
+    }
   }
 
   const onDeleteResourseHandler = async() => {
-    await deleteEducationResourse({ variables: {id: updatedResourse.id}})
-    //console.log('deleted resourse')
-    setIsModalOpen(false)
-    document.body.style.overflow = "scroll"
-    clearResourseMode()
+    try {
+      await deleteEducationResourse({ variables: {id: updatedResourse.id}})
+      setIsModalOpen(false)
+      document.body.style.overflow = "scroll"
+      clearResourseMode()
+      clearMode()
+    } catch(error) {
+      setIsError(error)
+    }
   }
 
   const onChangeResourseHandler = async (e, postData, valid) => {
@@ -441,31 +238,38 @@ const Courses = () => {
       const filetype = forms.find(form => form.id === postObject.educationFormId).filetype
 
       if (resourseMode.isEditing) {
+        
         const forUpdate = getUpdateData(updatedResourse, postObject)
-
-        await updateEducationResourse({
-          variables: {
-            id: updatedResourse.id, 
-            filetype: filetype,
-            inputData: {...forUpdate}
-          }
-        })
-
-        setResourseMode({...resourseMode, isEditing: false})
-        setIsModalOpen(false)
-        document.body.style.overflow = "scroll"
+        try {
+          await updateEducationResourse({
+            variables: {
+              id: updatedResourse.id, 
+              filetype: filetype,
+              inputData: {...forUpdate}
+            }
+          })
+  
+          setResourseMode({...resourseMode, isEditing: false})
+          setIsModalOpen(false)
+          document.body.style.overflow = "scroll"
+        } catch(error) {
+          setIsError(error)
+        }
       }
       if (resourseMode.isCreating) {
-    
-        await createEducationResourse({
-          variables: {
-            courseId: courses[viewId].id, 
-            filetype: filetype,
-            inputData: {...postObject}
-          }
-        })
-       setResourseMode({...resourseMode, isCreating: false})
-       setUpdatedResourse({})
+        try {
+          await createEducationResourse({
+            variables: {
+              courseId: courses[viewId].id, 
+              filetype: filetype,
+              inputData: {...postObject}
+            }
+          })
+         setResourseMode({...resourseMode, isCreating: false})
+         setUpdatedResourse({})
+        } catch(error) {
+          setIsError(error)
+        }
       }
     }
   }
@@ -484,13 +288,22 @@ const Courses = () => {
       document.body.style.overflow = "scroll"
       if (mode.isEditing) {
         const forUpdate = getUpdateData(updatedCourse, postObject)
-        await updateEducationCourse({ variables: {id: updatedCourse.id, inputData: forUpdate}})
-        setMode({...mode, isEditing: false})
-        setUpdatedCourse({})
+        try {
+          await updateEducationCourse({ variables: {id: updatedCourse.id, inputData: forUpdate}})
+          setMode({...mode, isEditing: false})
+          setUpdatedCourse({})
+        } catch(error) {
+          setIsError(error)
+        }
+ 
       }
       if (mode.isCreating) {
-        await createEducationCourse({ variables: {inputData: postObject}})
-        setMode({...mode, isCreating: false})
+        try {
+          await createEducationCourse({ variables: {inputData: postObject}})
+          setMode({...mode, isCreating: false})
+        } catch(error) {
+          setIsError(error)
+        }
       }
     } 
   }
@@ -629,9 +442,7 @@ const Courses = () => {
     </div>
     }
     {(data.courses.length === 0 ) &&
-      <div className="container card mt-5 p-2">
-        <p className="h5 text-center">Пока нет ни одного курса. Создайте.</p>
-      </div>
+      <EmptyData instance='educationCourse' />
     }
       <ButtonAddNew
         color='red'

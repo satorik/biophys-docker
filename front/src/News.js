@@ -1,8 +1,10 @@
 import React from 'react'
-import { useQuery, useMutation, gql } from '@apollo/client'
-import { required, length, date } from './utils/validators'
+import { useQuery, useMutation } from '@apollo/client'
+import { required, length } from './utils/validators'
 
-import HeaderNews from './components/UI/Header/HeaderNews'
+import { updateAfterCreate, updateAfterDelete } from './utils/updateCache/news'
+import * as queries from './utils/queries/news'
+
 import ButtonAddNew from './components/UI/ButtonAddNew'
 import BlogpostCard from './components/News/BlogpostCard'
 import NewsRightPanelList from './components/News/NewsRightPanelList'
@@ -14,83 +16,14 @@ import Spinner from './components/UI/Spinner'
 import ErrorBoundry from './components/Shared/ErrorHandling/ErrorBoundry'
 import getUpdateData from './utils/getObjectForUpdate'
 import NetworkErrorComponent from './components/Shared/ErrorHandling/NetworkErrorComponent'
-
+import {EmptyData} from './components/Shared/EmptyData'
 
 const CONFERENCES_PER_PAGE = 4
 const SEMINARS_PER_PAGE = 4
 const BLOGPOSTS_PER_PAGE = 6
 const NOTES_PER_PAGE = 5
 
-const GET_NEWS = gql`                    
-  query getNews($limitConferences: Int, $limitSeminars: Int, $limitBlogposts: Int, $limitNotes: Int){
-    blogposts(limit: $limitBlogposts){
-      posts{
-        id
-        title
-        description
-        imageUrl
-      }
-    }
-    seminars(limit: $limitSeminars) {
-      id
-      date
-      title
-      description
-    }
-    notes(limit: $limitNotes) {
-      id
-      title
-      description
-      content
-      onTop
-    }
-    conferences(limit: $limitConferences) {
-      id
-      title
-      description
-      dateFrom
-      dateTo
-    }
-  }
-`
 
-const CREATE_NOTE = gql`
-  mutation createNote($inputData: NoteCreateData!) {
-    createNote(inputData: $inputData) {
-      id
-      title
-      content
-      description
-      onTop
-    }
-  }
-`
-
-const DELETE_NOTE = gql`
-  mutation deleteNote($id: ID!) {
-    deleteNote(id: $id) 
-  }
-`
-const UPDATE_NOTE = gql`
-  mutation updateNote($id: ID!, $inputData: NoteUpdateData!) {
-    updateNote(id: $id, inputData: $inputData) {
-      updatedNote {
-        id
-        title
-        content
-        description
-        onTop
-      }
-      removedFromTop {
-        id
-        title
-        content
-        description
-        onTop
-      }
-    }
-  }
-`
 const FORM_TEMPLATE = [
   {
     title: 'title',
@@ -125,6 +58,7 @@ const News = () => {
   const [mode, setMode] = React.useState({isEditing: false, isCreating: false, isDeleting: false})
   const [updatedNote, setUpdatedNote] = React.useState({})
   const [isAbleToSave, setIsAbleToSave] = React.useState(true)
+  const [isError, setIsError] = React.useState(null)
 
   const variables = {
     limitConferences: CONFERENCES_PER_PAGE, 
@@ -133,41 +67,35 @@ const News = () => {
     limitNotes: NOTES_PER_PAGE
   }
 
-  const { loading: queryLodading, error: queryError, data } = useQuery(GET_NEWS, {variables})
-
-  const [createNote,
-        { loading: creationLoading, error: creatingError }] = useMutation(CREATE_NOTE, {
-            update(cache, { data: {createNote} }) {
-              const { notes } = cache.readQuery({ query: GET_NEWS, variables })
-              cache.writeQuery({
-                query: GET_NEWS,
-                variables,
-                data: { ...data, notes:  [createNote, ...notes]}
-              })
-            }
-          })
-  const [updateNote,
-        { loading: updatingLoading, error: updatingError }] = useMutation(UPDATE_NOTE)
-  const [deleteNote,
-        { loading: deletingLoading, error: deletingError }] = useMutation(DELETE_NOTE, {
-          update(cache, { data: { deleteNote } }) {
-            const { notes } = cache.readQuery({ query: GET_NEWS, variables})
-            cache.writeQuery({
-              query: GET_NEWS,
-              variables,
-              data: { ...data, notes: notes.filter(el => el.id !== deleteNote)}
-            })
-          }
-        })
+  const { loading: queryLodading, error: queryError, data } = useQuery(queries.GET_NEWS, {variables})
+  const [createNote, { loading: creationLoading }] = useMutation(queries.CREATE_NOTE, {
+    update: (cache, res) => updateAfterCreate(cache, res, queries.GET_NEWS, variables)})
+  const [updateNote, { loading: updatingLoading}] = useMutation(queries.UPDATE_NOTE)
+  const [deleteNote, { loading: deletingLoading }] = useMutation(queries.DELETE_NOTE, {
+    update: (cache, res) => updateAfterDelete(cache, res, queries.GET_NEWS, variables)})
   
    
-  if (queryLodading) return <Spinner />
-  if (queryError) return <NetworkErrorComponent error={queryError} />
-  if (updatingError) return <NetworkErrorComponent error={updatingError} />
-  if (deletingError) return <NetworkErrorComponent error={deletingError} />
-  if (creatingError) return <NetworkErrorComponent error={creatingError} />
+  if (queryLodading || creationLoading || updatingLoading || deletingLoading) return <Spinner />
+  if (queryError) return <NetworkErrorComponent error={queryError} type='queryError' />
+  if (isError) return <NetworkErrorComponent error={isError} onDismiss={() => setIsError(null)} />
 
   const {notes, conferences, seminars, blogposts: {posts}} = data
+
+  const onClearMode = (operation, full = false) => {
+    setIsModalOpen(false)
+    document.body.style.overflow = "scroll"
+    setUpdatedNote({})
+    setIsAbleToSave(true)
+
+    if (full) setMode({isDeleting: false, isEditing: false, isCreating: false})
+    else setMode({...mode, [operation]: false})
+  }
+
+  const onSetMode = (operation) => {
+    setIsModalOpen(true)
+    setMode({...mode, [operation]: true})
+    document.body.style.overflow = "hidden"
+  }
 
   const onHandleNextNote = () => {
     setShowContent(false)
@@ -194,38 +122,29 @@ const News = () => {
   }
 
   const onAddNewNote = () => {
-    setIsModalOpen(true)
-    setMode({...mode, isCreating: true})
-    document.body.style.overflow = "hidden"
+    onSetMode('isCreating')
   }
 
   const onEditNote = (id) => {
-    setIsModalOpen(true)
-    setMode({...mode, isEditing: true})
-    document.body.style.overflow = "hidden"
+    onSetMode('isEditing')
     setUpdatedNote(notes[id])
   }
   const onDeleteNote = (id) => {
-    setIsModalOpen(true)
-    document.body.style.overflow = "hidden"
-    setMode({...mode, isDeleting: true})
+    onSetMode('isDeleting')
     setUpdatedNote(notes[id])
   }
 
   const onDeleteNoteHandler = async() => {
-    console.log('deteting')
-    await deleteNote({ variables: {id: updatedNote.id}})
-    setIsModalOpen(false)
-    setMode({...mode, isDeleting: false})
-    document.body.style.overflow = "scroll"
-    setUpdatedNote({})
+    try {
+      await deleteNote({ variables: {id: updatedNote.id}})
+      onClearMode('isDeleting')
+    } catch(error) {
+      setIsError(error)
+    }
   }
 
   const onCloseModal = () => {
-    setIsModalOpen(false)
-    setMode({isDeleting: false, isEditing: false, isCreating: false})
-    setUpdatedNote({})
-    document.body.style.overflow = "scroll"
+    onClearMode('_', true)
   }
 
   const onChangeNoteHandler = async (e, postData, valid, id) => {
@@ -238,17 +157,22 @@ const News = () => {
           obj[item.title] = item.value
           return obj
       } ,{})
-      setIsModalOpen(false)
-      document.body.style.overflow = "scroll"
       if (mode.isEditing) {
         const forUpdate = getUpdateData(updatedNote, postObject)
-        await updateNote({ variables: {id: updatedNote.id, inputData: forUpdate}})      
-        setMode({...mode, isEditing: false})
-        setUpdatedNote({})
+        try {
+          await updateNote({ variables: {id: updatedNote.id, inputData: forUpdate}})
+          onClearMode('isEditing')
+        } catch(error) {
+          setIsError(error)
+        }
       }
       if (mode.isCreating) {
-        await createNote({ variables: {inputData: postObject}})
-        setMode({...mode, isCreating: false})
+        try {
+          await createNote({ variables: {inputData: postObject}})
+          onClearMode('isCreating')
+        } catch(error) {
+          setIsError(error)
+        }
       }
     } 
   }
@@ -261,9 +185,6 @@ const News = () => {
 
   return (
     <>
-    {/* <HeaderNews 
-      note={noteOnTop }
-    /> */}
     {isModalOpen && <Modal 
       isOpen={isModalOpen}
       title={modalTitle}
@@ -280,8 +201,8 @@ const News = () => {
         (mode.isDeleting) &&  <YesDelete onDelete={onDeleteNoteHandler} onCancel={onCloseModal} info={updatedNote} instance='note'/>   
       }
     </Modal>}
-    <NoteCarousel 
-      viewId={viewId}
+    {notes.length > 0 && <NoteCarousel 
+      selectedNote={viewId}
       showContent={showContent}
       last={notes.length-1}
       content={notes[viewId].content}
@@ -292,7 +213,8 @@ const News = () => {
       onClickDown={onHandleCaretDown}
       onClickEdit={() => onEditNote(viewId)}
       onClickDelete={() => onDeleteNote(viewId)}
-    />
+    />}
+    {notes.length === 0 && <EmptyData instance='note' />}
     <div className="container-fluid mt-5">
       <div className="row">
           <div className="col-md-8">
@@ -304,6 +226,7 @@ const News = () => {
                 title={post.title}
                 description={post.description}
               />)}
+              {posts.length === 0 && <EmptyData instance='blogpost' secondary />}
           </div>
           <div className="col-md-4">
           <NewsRightPanelList posts={seminars} contentType='seminar'  />

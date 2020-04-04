@@ -6,21 +6,28 @@ export default (file, subDir, type = 'image') => {
   return new Promise((resolve, reject) => {
     const { createReadStream : apolloStream, filename, mimetype } = file
     let rootDir = 'images'
-
+  
     if (type === 'image') {
       if (!(mimetype === 'image/png' || mimetype === 'image/jpeg' || mimetype === 'image/jpg')){
         const error = new Error('Forbidden file type ', mimetype)
         error.code = 415
-        reject(error)
+        return reject(error)
       }
     }
     if (type === 'pdf') {
       if (!(mimetype === 'application/pdf')){
         const error = new Error('Forbidden file type ', mimetype)
         error.code = 415
-        reject(error)
+        return reject(error)
       }
       rootDir = 'files'
+    }
+
+    try {
+      fs.mkdirSync(path.join(__dirname, '..', rootDir, subDir), {recursive: true})
+    }
+    catch (error) {
+      return reject(error)
     }
 
     const savedFileName = uuidv4()+path.extname(filename)
@@ -29,9 +36,8 @@ export default (file, subDir, type = 'image') => {
     
     const readStream  = apolloStream()
     readStream.on('error', error => {
-      if (readStream.truncated)
-        fs.unlinkSync(savedFile)
-      reject(error)
+      if (readStream.truncated) fs.unlinkSync(savedFile)
+      return reject(error)
     })
     // .on('readable', () => {
     //   let chunk;

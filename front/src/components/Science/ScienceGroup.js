@@ -1,6 +1,8 @@
 import React from 'react'
 import { useQuery, useMutation, gql } from '@apollo/client'
 import { required, length, isUrl, email } from '../../utils/validators'
+import updates  from '../../utils/updateCache/scienceGroup'
+import * as queries from '../../utils/queries/scienceGroup'
 
 import ScienceGroupListItem from './ScienceGroupListItem'
 import ButtonAddNew from '../UI/ButtonAddNew'
@@ -12,193 +14,7 @@ import ErrorBoundry from '../Shared/ErrorHandling/ErrorBoundry'
 import getUpdateData from '../../utils/getObjectForUpdate'
 import NetworkErrorComponent from '../Shared/ErrorHandling/NetworkErrorComponent'
 
-const GET_SCIENCE_GROUPS = gql`                    
-    query getSienceGroups($scienceRouteId: ID!){
-      scienceGroups(scienceRouteId: $scienceRouteId){
-        id
-        title
-        description
-        tel
-        imageUrl
-        mail
-        room
-        people {
-          id
-          firstname
-          middlename
-          lastname
-          description
-          englishName
-          tel
-          mail
-          birthday
-          type
-          position
-          urlIstina
-          urlRints
-          urlOrcid
-          urlResearcher
-          urlScopus
-        }
-        articles {
-          id
-          author
-          title
-          journal
-          position
-        }
-    }
-  }
-  `
-const CREATE_SCIENCE_GROUP = gql`
-  mutation createScienceGroup($scienceRouteId: ID!, $inputData: ScienceGroupCreateData!) {
-    createScienceGroup(scienceRouteId: $scienceRouteId, inputData: $inputData) {
-      id
-      title
-      description
-      tel
-      imageUrl
-      mail
-      room
-      people {
-          id
-          firstname
-          middlename
-          lastname
-          description
-          englishName
-          tel
-          mail
-          birthday
-          type
-          position
-          urlIstina
-          urlRints
-          urlOrcid
-          urlResearcher
-          urlScopus
-        }
-        articles {
-          id
-          author
-          title
-          journal
-          position
-        }
-    }
-  }
-  `
 
-  const DELETE_SCIENCE_GROUP = gql`
-    mutation deleteScienceGroup($id: ID!) {
-      deleteScienceGroup(id: $id) 
-    }
-  `
-  const UPDATE_SCIENCE_GROUP = gql`
-   mutation updateScienceGroup($id: ID!, $inputData:ScienceGroupUpdateData!) {
-    updateScienceGroup(id: $id, inputData: $inputData) {
-      id
-      title
-      description
-      tel
-      imageUrl
-      mail
-      room
-    }
-  }
-  `
-  const CREATE_SCIENCE_PERSON = gql`
-    mutation createSciencePerson($scienceGroupId: ID!, $inputData: SciencePeopleCreateData!){
-      createSciencePerson(scienceGroupId: $scienceGroupId, inputData: $inputData){
-        id
-        firstname
-        middlename
-        lastname
-        description
-        englishName
-        tel
-        mail
-        birthday
-        type
-        position
-        urlIstina
-        urlRints
-        urlOrcid
-        urlResearcher
-        urlScopus
-      }
-    }
-  `
-  const UPDATE_SCIENCE_PERSON = gql`
-    mutation updateSciencePerson($id: ID!, $inputData: SciencePeopleUpdateData!){
-      updateSciencePerson(id: $id, inputData: $inputData){
-        id
-        firstname
-        middlename
-        lastname
-        description
-        englishName
-        tel
-        mail
-        birthday
-        type
-        position
-        urlIstina
-        urlRints
-        urlOrcid
-        urlResearcher
-        urlScopus
-      }
-    }
-  `
-  const CREATE_SCIENCE_ARTICLE = gql`
-    mutation createScienceArticle($scienceGroupId: ID!, $inputData: ScienceArticleCreateData!){
-      createScienceArticle(scienceGroupId: $scienceGroupId, inputData: $inputData){
-        id
-        author
-        title
-        journal
-        position
-      }
-    }
-  `
-  const UPDATE_SCIENCE_ARTICLE = gql`
-    mutation updateScienceArticle($id: ID!, $inputData: ScienceArticleUpdateData!){
-      updateScienceArticle(id: $id, inputData: $inputData){
-        id
-        author
-        title
-        journal
-        position
-      }
-    }
-  `
-  const DELETE_SCIENCE_PERSON = gql`
-    mutation deleteSciencePerson($id: ID!){
-      deleteSciencePerson(id: $id)
-    }
-  `
-  const DELETE_SCIENCE_ARTICLE = gql`
-    mutation deleteScienceArticle($id: ID!){
-      deleteScienceArticle(id: $id)
-    }
-  `
-  const MOVE_PERSON = gql`
-    mutation movePersonPosition($id: ID!, $vector: VECTOR!){
-      moveSciencePerson(id: $id, vector:$vector){
-        id
-        position
-	    } 
-    }
-  `
-  const MOVE_ARTICLE = gql`
-    mutation moveArticlePosition($id: ID!, $vector: VECTOR!){
-      moveScienceArticle(id: $id, vector:$vector){
-        id
-        position
-	    } 
-    }
-  `
 const PEOPLE_TEMPLATE= [
   {
     title: 'firstname',
@@ -354,162 +170,47 @@ const ScienceGroup = ({match}) => {
   const [updatedGroup, setUpdatedGroup] = React.useState({})
   const [updatedPerson, setUpdatedPerson] = React.useState({})
   const [updatedArticle, setUpdatedArticle] = React.useState({})
-
+  const [isError, setIsError] = React.useState(null)
 
   const scienceRouteId = match.params.id || 1
   const variables = {scienceRouteId}
 
-  const {loading: queryLoading, error: queryError, data } = useQuery(GET_SCIENCE_GROUPS, {variables})
-  const [createScienceGroup,
-    { loading: creationLoading, error: creatingError }] = useMutation(CREATE_SCIENCE_GROUP, {
-        update(cache, { data: {createScienceGroup} }) {
-          const { scienceGroups } = cache.readQuery({ query: GET_SCIENCE_GROUPS, variables })
-          const newGroup = {
-            ...createScienceGroup,
-            people: [],
-            articles: []
-          }
-          cache.writeQuery({
-            query: GET_SCIENCE_GROUPS,
-            variables,
-            data: { scienceGroups:  [...scienceGroups, newGroup]}
-          })
-          setviewId(scienceGroups.length-1)
-        }
-      })
-  const [updateScienceGroup,
-      { loading: updatingLoading, error: updatingError }] = useMutation(UPDATE_SCIENCE_GROUP)
-  const [deleteScienceGroup,
-      { loading: deletingLoading, error: deletingError }] = useMutation(DELETE_SCIENCE_GROUP, {
-        update(cache, { data: { deleteScienceGroup } }) {
-          const { scienceGroups } = cache.readQuery({ query: GET_SCIENCE_GROUPS, variables})
-          cache.writeQuery({
-            query: GET_SCIENCE_GROUPS,
-            variables,
-            data: { scienceGroups: scienceGroups.filter(el => el.id !== deleteScienceGroup)}
-          })
-        }
-      })
+  const {loading: queryLoading, error: queryError, data } = useQuery(queries.GET_SCIENCE_GROUPS, {variables})
+  const [createScienceGroup, { loading: creationLoading }] = useMutation(queries.CREATE_SCIENCE_GROUP, {
+    update: (cache, res) => updates.updateAfterCreate(cache, res, queries.GET_SCIENCE_GROUPS, variables)})
 
-  const [createSciencePerson,
-    { loading: creatingPersonLoading, error: creatingPersonError }] = useMutation(CREATE_SCIENCE_PERSON, {
-        update(cache, { data: {createSciencePerson} }) {
-          const { scienceGroups } = cache.readQuery({ query: GET_SCIENCE_GROUPS, variables })
-          cache.writeQuery({
-            query: GET_SCIENCE_GROUPS,
-            variables,
-            data: {scienceGroups: Object.assign([], scienceGroups, {[viewId]: {...scienceGroups[viewId], people: [...scienceGroups[viewId].people, createSciencePerson]}})}
-          })
-        }
-      })
-  const [createScienceArticle,
-    { loading: creationArticleLoading, error: creatingArticleError }] = useMutation(CREATE_SCIENCE_ARTICLE, {
-        update(cache, { data: {createScienceArticle} }) {
-          const { scienceGroups } = cache.readQuery({ query: GET_SCIENCE_GROUPS, variables })
-          cache.writeQuery({
-            query: GET_SCIENCE_GROUPS,
-            variables,
-            data: {scienceGroups: Object.assign([], scienceGroups, {[viewId]: {...scienceGroups[viewId], articles: [...scienceGroups[viewId].articles, createScienceArticle]}})}
-          })
-        }
-      })
-  const [updateSciencePerson,
-    { loading: updatingPersonLoading, error: updatingPersonError }] = useMutation(UPDATE_SCIENCE_PERSON)
-  const [updateScienceArticle,
-    { loading: updatingArticleLoading, error: updatingArticleError }] = useMutation(UPDATE_SCIENCE_ARTICLE)
-  const [deleteSciencePerson,
-    { loading: deletingPersonLoading, error: deletingPersonError }] = useMutation(DELETE_SCIENCE_PERSON, {
-      update(cache, { data: { deleteSciencePerson } }) {
-        const { scienceGroups } = cache.readQuery({ query: GET_SCIENCE_GROUPS, variables })
-        const newPeople = scienceGroups[viewId].people.filter(person => person.position !== deleteSciencePerson)
-        .map(person => {
-          if (person.position > deleteSciencePerson)
-            return {...person, position: person.position - 1}
-          if (person.position < deleteSciencePerson){
-            return person
-          }
-        })
-        .sort((a, b) => a.position - b.position)
-        cache.writeQuery({
-          query: GET_SCIENCE_GROUPS,
-          variables,
-          data: {scienceGroups: Object.assign([], scienceGroups, {[viewId]: {...scienceGroups[viewId], people: newPeople}})}
-        })
-      }
-    })
-  const [deleteScienceArticle,
-    { loading: deletingArticleLoading, error: deletingArticleError }] = useMutation(DELETE_SCIENCE_ARTICLE, {
-      update(cache, { data: { deleteScienceArticle } }) {
-        const { scienceGroups } = cache.readQuery({ query: GET_SCIENCE_GROUPS, variables })
-        const newArticles = scienceGroups[viewId].articles.filter(article => article.position !== deleteScienceArticle)
-        .map(article => {
-          if (article.position > deleteScienceArticle)
-            return {...article, position: article.position - 1}
-          if (article.position < deleteScienceArticle){
-            return article
-          }
-        })
-        .sort((a, b) => a.position - b.position)
-        cache.writeQuery({
-          query: GET_SCIENCE_GROUPS,
-          variables,
-          data: {scienceGroups: Object.assign([], scienceGroups, {[viewId]: {...scienceGroups[viewId], articles: newArticles}})}
-        })
-      }
-    })
-  const [movePersonPosition,
-      { loading: updatingPersonPositionLoading, error: updatingPersonPositionError }] = useMutation(MOVE_PERSON, {
-        update(cache, { data: { moveSciencePerson } }) {
-          const { scienceGroups } = cache.readQuery({ query: GET_SCIENCE_GROUPS, variables })
-          const newPeople = scienceGroups[viewId].people.map(person => {
-            const foundPerson = moveSciencePerson.find(newPos => newPos.id === person.id)
-             if (foundPerson) {
-               return {...person, position: foundPerson.position}
-             }
-             return person
-          }).sort((a, b) => a.position - b.position)
-          cache.writeQuery({
-            query: GET_SCIENCE_GROUPS,
-            variables,
-            data: {scienceGroups: Object.assign([], scienceGroups, {[viewId]: {...scienceGroups[viewId], people: newPeople}})}
-          })
-        }
-      })
-  const [moveArticlePosition,
-        { loading: updatingArticlePositionLoading, error: updatingArticlePositionError }] = useMutation(MOVE_ARTICLE, {
-          update(cache, { data: { moveScienceArticle } }) {
-            const { scienceGroups } = cache.readQuery({ query: GET_SCIENCE_GROUPS, variables })
-            const newArticles = scienceGroups[viewId].articles.map(article => {
-              const foundArticle = moveScienceArticle.find(newPos => newPos.id === article.id)
-               if (foundArticle) {
-                 return {...article, position: foundArticle.position}
-               }
-               return article
-            }).sort((a, b) => a.position - b.position)
-            cache.writeQuery({
-              query: GET_SCIENCE_GROUPS,
-              variables,
-              data: {scienceGroups: Object.assign([], scienceGroups, {[viewId]: {...scienceGroups[viewId], articles: newArticles}})}
-            })
-          }
-        })
+  const [updateScienceGroup, { loading: updatingLoading }] = useMutation(queries.UPDATE_SCIENCE_GROUP)
+  const [deleteScienceGroup, { loading: deletingLoading }] = useMutation(queries.DELETE_SCIENCE_GROUP, {
+    update: (cache, res) => updates.updateAfterDelete(cache, res, queries.GET_SCIENCE_GROUPS, variables)})
+
+  const [createSciencePerson, { loading: creatingPersonLoading }] = useMutation(queries.CREATE_SCIENCE_PERSON, {
+    update: (cache, res) => updates.updateAfterCreatePerson(cache, res, queries.GET_SCIENCE_GROUPS, variables, viewId)})
+
+  const [createScienceArticle, { loading: creationArticleLoading }] = useMutation(queries.CREATE_SCIENCE_ARTICLE, {
+    update: (cache, res) => updates.updateAfterCreateArticle(cache, res, queries.GET_SCIENCE_GROUPS, variables, viewId)})
+
+  const [updateSciencePerson, { loading: updatingPersonLoading }] = useMutation(queries.UPDATE_SCIENCE_PERSON)
+  const [updateScienceArticle, { loading: updatingArticleLoading }] = useMutation(queries.UPDATE_SCIENCE_ARTICLE)
+  
+  const [deleteSciencePerson, { loading: deletingPersonLoading }] = useMutation(queries.DELETE_SCIENCE_PERSON, {
+    update: (cache, res) => updates.updateAfterDeletePerson(cache, res, queries.GET_SCIENCE_GROUPS, variables, viewId)})
+
+  const [deleteScienceArticle, { loading: deletingArticleLoading }] = useMutation(queries.DELETE_SCIENCE_ARTICLE, {
+    update: (cache, res) => updates.updateAfterDeleteArticle(cache, res, queries.GET_SCIENCE_GROUPS, variables, viewId)})
+
+  const [movePersonPosition, { loading: updatingPersonPositionLoading }] = useMutation(queries.MOVE_PERSON, {
+    update: (cache, res) => updates.updateAfterMovePerson(cache, res, queries.GET_SCIENCE_GROUPS, variables, viewId)})
+
+  const [moveArticlePosition, { loading: updatingArticlePositionLoading }] = useMutation(queries.MOVE_ARTICLE, {
+    update: (cache, res) => updates.updateAfterMoveArticle(cache, res, queries.GET_SCIENCE_GROUPS, variables, viewId)})
 
   if (queryLoading || creationLoading || updatingLoading || deletingLoading || creatingPersonLoading ||
     creationArticleLoading || updatingPersonLoading || updatingArticleLoading || deletingPersonLoading ||
     deletingArticleLoading || updatingPersonPositionLoading || updatingArticlePositionLoading
     ) return <Spinner />
-  if (queryError) return <NetworkErrorComponent error={queryError} />
-  if (updatingError) return <NetworkErrorComponent error={updatingError} />
-  if (deletingError) return <NetworkErrorComponent error={deletingError} />
-  if (creatingError) return <NetworkErrorComponent error={creatingError} />
-  if (creatingPersonError) return <NetworkErrorComponent error={creatingPersonError} />
-  if (creatingArticleError) return <NetworkErrorComponent error={creatingArticleError} />
-  if (updatingPersonError) return <NetworkErrorComponent error={updatingPersonError} />
-  if (updatingArticleError) return <NetworkErrorComponent error={updatingArticleError} />
-  if (deletingPersonError) return <NetworkErrorComponent error={deletingPersonError} />
-  if (deletingArticleError) return <NetworkErrorComponent error={deletingArticleError} />
-  if (updatingPersonPositionError) return <NetworkErrorComponent error={updatingPersonPositionError} />
-  if (updatingArticlePositionError) return <NetworkErrorComponent error={updatingArticlePositionError} />
+
+  if (queryError) return <NetworkErrorComponent error={queryError} type='queryError' />
+  if (isError) return <NetworkErrorComponent error={isError} onDismiss={() => setIsError(null)} />
 
   const onSelectScinceGroupHandler = (id) => {
     if (id === viewId) setviewId(1000)
@@ -599,24 +300,34 @@ const ScienceGroup = ({match}) => {
 
   const onDeleteScienceGroupHandler = async () => {
     if (mode.isDeleting) {
-      await deleteScienceGroup({ variables: {id: updatedGroup.id}})
-      setMode({...mode, isDeleting: false})
-      setUpdatedGroup({})
+      try {
+        await deleteScienceGroup({ variables: {id: updatedGroup.id}})
+        setMode({...mode, isDeleting: false})
+        setUpdatedGroup({})
+      } catch(error) {
+        setIsError(error)
+      }
     }
     if (peopleMode.isDeleting) {
-      await deleteSciencePerson({ variables: {id: updatedPerson.id}})
-      setPeopleMode({...peopleMode, isDeleting: false})
-      setUpdatedPerson({})
+      try {
+        await deleteSciencePerson({ variables: {id: updatedPerson.id}})
+        setPeopleMode({...peopleMode, isDeleting: false})
+        setUpdatedPerson({})
+      } catch(error) {
+        setIsError(error)
+      }
     }
     if (articleMode.isDeleting) {
-      await deleteScienceArticle({ variables: {id: updatedArticle.id}})
-      setArticleMode({...articleMode, isDeleting: false})
-      setUpdatedArticle({})
-    }
-    
+      try {
+        await deleteScienceArticle({ variables: {id: updatedArticle.id}})
+        setArticleMode({...articleMode, isDeleting: false})
+        setUpdatedArticle({})
+      } catch(error) {
+        setIsError(error)
+      }
+    } 
     setIsModalOpen(false)
-    document.body.style.overflow = "scroll"
-    
+    document.body.style.overflow = "scroll" 
   }
 
   const onChangeGroupHandler = async (e, postData, valid) => {
@@ -630,34 +341,58 @@ const ScienceGroup = ({match}) => {
           return obj
       } , {})
       if (mode.isEditing) {
-        const forUpdate = getUpdateData(updatedGroup, postObject)
-        await updateScienceGroup({ variables: {id: updatedGroup.id, inputData: forUpdate}})
-        setMode({...mode, isEditing: false})
-        setUpdatedGroup({})
+        try {
+          const forUpdate = getUpdateData(updatedGroup, postObject)
+          await updateScienceGroup({ variables: {id: updatedGroup.id, inputData: forUpdate}})
+          setMode({...mode, isEditing: false})
+          setUpdatedGroup({})
+        } catch(error) {
+          setIsError(error)
+        }
       }
       if (mode.isCreating) {
-        await createScienceGroup({ variables: {inputData: postObject, scienceRouteId }})
-        setMode({...mode, isCreating: false})
+        try {
+          await createScienceGroup({ variables: {inputData: postObject, scienceRouteId }})
+          setMode({...mode, isCreating: false})
+        } catch(error) {
+          setIsError(error)
+        }
       }
       if (peopleMode.isCreating) {
-        await createSciencePerson({ variables: {inputData: postObject, scienceGroupId: scienceGroups[viewId].id}})
-        setPeopleMode({...peopleMode, isCreating: false})
+        try {
+          await createSciencePerson({ variables: {inputData: postObject, scienceGroupId: scienceGroups[viewId].id}})
+          setPeopleMode({...peopleMode, isCreating: false})
+        } catch(error) {
+          setIsError(error)
+        }
       }
       if (articleMode.isCreating) {
-        await createScienceArticle({ variables: {inputData: postObject, scienceGroupId: scienceGroups[viewId].id}})
-        setArticleMode({...articleMode, isCreating: false})
+        try {
+          await createScienceArticle({ variables: {inputData: postObject, scienceGroupId: scienceGroups[viewId].id}})
+          setArticleMode({...articleMode, isCreating: false})
+        } catch(error) {
+          setIsError(error)
+        }
       }
       if (peopleMode.isEditing) {
-        const forUpdate = getUpdateData(updatedPerson, postObject)
-        await updateSciencePerson({ variables: {inputData: forUpdate, id: updatedPerson.id}})
-        setPeopleMode({...peopleMode, isEditing: false})
-        setUpdatedPerson({})
+        try {
+          const forUpdate = getUpdateData(updatedPerson, postObject)
+          await updateSciencePerson({ variables: {inputData: forUpdate, id: updatedPerson.id}})
+          setPeopleMode({...peopleMode, isEditing: false})
+          setUpdatedPerson({})
+        } catch(error) {
+          setIsError(error)
+        }
       }
       if (articleMode.isEditing) {
-        const forUpdate = getUpdateData(updatedArticle, postObject)
-        await updateScienceArticle({ variables: {inputData: forUpdate, id: updatedArticle.id}})
-        setArticleMode({...articleMode, isEditing: false})
-        setUpdatedArticle({})
+        try {
+          const forUpdate = getUpdateData(updatedArticle, postObject)
+          await updateScienceArticle({ variables: {inputData: forUpdate, id: updatedArticle.id}})
+          setArticleMode({...articleMode, isEditing: false})
+          setUpdatedArticle({})
+        } catch(error) {
+          setIsError(error)
+        }
       }
     } 
   }
@@ -679,10 +414,18 @@ const ScienceGroup = ({match}) => {
 
   const onChangePosition = async (id, type, vector) => {
     if (type === 'people') {
-      await movePersonPosition({variables:{id, vector}})
+      try {
+        await movePersonPosition({variables:{id, vector}})
+      } catch(error) {
+        setIsError(error)
+      }    
     }
     if (type === 'articles') {
-      await moveArticlePosition({variables:{id, vector}})
+      try {
+        await moveArticlePosition({variables:{id, vector}})
+      } catch(error) {
+        setIsError(error)
+      }   
     }
   }
 

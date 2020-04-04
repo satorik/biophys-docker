@@ -12,9 +12,9 @@ const departmentMutation = {
     return createWithImage(models.TextDescription, {...createData, section}, imageUrl, 'history')
   },
   async updateHistory(parent, {section, inputData}, { models, auth }){
-    
+
     const {updateData, imageToClear, isUploaded} = 
-    await valueForUpdateImg(section, inputData, 'history', auth, models.TextDescription, models.User)
+    await valueForUpdateImg('_', inputData, 'history', auth, models.TextDescription, models.User)
 
     return updateWithImage(updateData, imageToClear, isUploaded, 'history')
   },

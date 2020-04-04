@@ -1,7 +1,10 @@
 import React from 'react'
-import { useQuery, useMutation, gql } from '@apollo/client'
+import { useQuery, useMutation } from '@apollo/client'
 import { required, length } from './utils/validators'
 import { useLocation, useHistory } from 'react-router-dom'
+
+import { updateAfterCreate, updateAfterDelete, updateAfterFetchMore } from './utils/updateCache/blog'
+import * as queries from './utils/queries/blog'
 
 import YesDelete from './components/Shared/DoYouWantToDelete'
 import Blogpost from './components/Blog/Blogpost'
@@ -13,54 +16,9 @@ import Pagination from './components/UI/Pagination'
 import ErrorBoundry from './components/Shared/ErrorHandling/ErrorBoundry'
 import getUpdateData from './utils/getObjectForUpdate'
 import NetworkErrorComponent from './components/Shared/ErrorHandling/NetworkErrorComponent'
+import {EmptyData} from './components/Shared/EmptyData'
 
 const POSTS_PER_PAGE = 6
-
-const GET_BLOGPOSTS = gql`                    
-    query getBlogposts($limit: Int, $offset: Int){
-      blogposts(limit: $limit, offset: $offset) {
-        posts{
-          id,
-          title,
-          content,
-          description,
-          imageUrl,
-          createdAt
-        }
-        total
-    }
-  }
-  `
-const CREATE_BLOGPOST = gql`
-  mutation createBlogpost($inputData: BlogpostCreateData!) {
-    createBlogpost(inputData: $inputData) {
-      id
-      title
-      description
-      content
-      imageUrl
-      createdAt
-    }
-  }
-`
-
-const DELETE_BLOGPOST = gql`
-  mutation deleteBlogpost($id: ID!) {
-    deleteBlogpost(id: $id) 
-  }
-`
-const UPDATE_BLOGPOST = gql`
-  mutation updateBlogpost($id: ID!, $inputData: BlogpostUpdateData!) {
-    updateBlogpost(id: $id, inputData: $inputData) {
-      id
-      title
-      description
-      content
-      imageUrl
-      createdAt
-    }
-  }
-`
 
 const FORM_TEMPLATE = [
   {
@@ -108,7 +66,7 @@ const Blog = () => {
   const [isAbleToSave, setIsAbleToSave] = React.useState(true)
   const [viewId, setViewId] = React.useState(null)
   const [shouldScroll, setShouldScroll] = React.useState(false)
-  //const [divElement] = React.useState({})
+  const [isError, setIsError] = React.useState(null)
 
   const queryUrl = useQueryUrl()
   const urlId = queryUrl.get("id")
@@ -118,32 +76,13 @@ const Blog = () => {
     limit: POSTS_PER_PAGE
   }
 
-  const { loading: queryLodading, error: queryError, data, fetchMore } = useQuery(
-        GET_BLOGPOSTS, {variables, fetchPolicy: 'cache-and-network' })
-  const [createBlogpost,
-        { loading: creationLoading, error: creatingError }] = useMutation(CREATE_BLOGPOST, {
-            update(cache, { data: {createBlogpost} }) {
-              const { blogposts } = cache.readQuery({ query: GET_BLOGPOSTS, variables })
-              cache.writeQuery({
-                query: GET_BLOGPOSTS,
-                variables,
-                data: { blogposts:  {...blogposts, posts:  [createBlogpost, ...blogposts.posts]}}
-              })
-            }
-          })
-  const [updateBlogpost,
-        { loading: updatingLoading, error: updatingError }] = useMutation(UPDATE_BLOGPOST)
-  const [deleteBlogpost,
-        { loading: deletingLoading, error: deletingError }] = useMutation(DELETE_BLOGPOST, {
-          update(cache, { data: { deleteBlogpost } }) {
-            const { blogposts } = cache.readQuery({ query: GET_BLOGPOSTS , variables})
-            cache.writeQuery({
-              query: GET_BLOGPOSTS,
-              variables,
-              data: { blogposts: {...blogposts, posts: blogposts.posts.filter(el => el.id !== deleteBlogpost)}}
-            })
-          }
-        })
+  const { loading: queryLodading, error: queryError, data, fetchMore } = 
+    useQuery(queries.GET_BLOGPOSTS, {variables, fetchPolicy: 'cache-and-network' })
+  const [createBlogpost, { loading: creationLoading }] = useMutation(queries.CREATE_BLOGPOST, {
+    update: (cache, res) => updateAfterCreate(cache, res, queries.GET_BLOGPOSTS, variables)})
+  const [updateBlogpost, { loading: updatingLoading }] = useMutation(queries.UPDATE_BLOGPOST)
+  const [deleteBlogpost, { loading: deletingLoading }] = useMutation(queries.DELETE_BLOGPOST, {
+    update: (cache, res) => updateAfterDelete(cache, res, queries.GET_BLOGPOSTS, variables)})
   
   React.useEffect(() => {
     if (data && urlId) {
@@ -163,82 +102,73 @@ const Blog = () => {
 
   if (queryLodading || creationLoading || updatingLoading || deletingLoading) return <Spinner />
  
-  if (queryError) return <NetworkErrorComponent error={queryError} />
-  if (updatingError) return <NetworkErrorComponent error={updatingError} />
-  if (deletingError) return <NetworkErrorComponent error={deletingError} />
-  if (creatingError) return <NetworkErrorComponent error={creatingError} />
+  if (queryError) return <NetworkErrorComponent error={queryError} type='queryError' />
+  if (isError) return <NetworkErrorComponent error={isError} onDismiss={() => setIsError(null)} />
 
   const blogposts = data.blogposts.posts
   const totalPages = Math.ceil(data.blogposts.total/POSTS_PER_PAGE)
 
-  //console.log(divElement)
-
   const onViewBlogpostDetails = (i) => {
     if (viewId === i) {
-      history.push({
-        search: ''
-      })
+      history.push({search: ''})
     }
     else {
-      history.push({
-        search: '?id='+data.blogposts.posts[i].id
-      })
+      history.push({search: '?id='+data.blogposts.posts[i].id})
     }
   }
 
-  const onAddNewBlogpost = () => {
+  const onClearMode = (operation, full = false) => {
+    setIsModalOpen(false)
+    document.body.style.overflow = "scroll"
+    setUpdatedPost({})
+    setIsAbleToSave(true)
+
+    if (full) setMode({isDeleting: false, isEditing: false, isCreating: false})
+    else setMode({...mode, [operation]: false})
+  }
+
+  const onSetMode = (operation) => {
     setIsModalOpen(true)
-    setMode({...mode, isCreating: true})
+    setMode({...mode, [operation]: true})
     document.body.style.overflow = "hidden"
+  }
+
+
+  const onAddNewBlogpost = () => {
+    onSetMode('isCreating')
   }
 
   const onEditBlogpost = (id) => {
-    setIsModalOpen(true)
-    setMode({...mode, isEditing: true})
-    document.body.style.overflow = "hidden"
+    onSetMode('isEditing')
     setUpdatedPost(blogposts[id])
   }
   const onDeleteBlogpost = (id) => {
-    setIsModalOpen(true)
-    document.body.style.overflow = "hidden"
-    setMode({...mode, isDeleting: true})
+    onSetMode('isDeleting')
     setUpdatedPost(blogposts[id])
-    //setUpdatedPost(blogposts[id])
   }
 
   const onDeletePostHandler = async () => {
-    await deleteBlogpost({ variables: {id: updatedPost.id}})
-    setIsModalOpen(false)
-    setMode({...mode, isDeleting: false})
-    document.body.style.overflow = "scroll"
-    setUpdatedPost({})
+    try {
+      await deleteBlogpost({ variables: {id: updatedPost.id}})
+      onClearMode('isDeleting')
+     // history.push({ search: ''})
+    } catch(error) {
+      setIsError(error)
+    }
   }
 
   const onPaginate = (page) => {
-    fetchMore({
-      variables: {
-        offset: POSTS_PER_PAGE*(page-1)
-      },
-      updateQuery: (prev, { fetchMoreResult }) => {
-        if (!fetchMoreResult) return prev
-        return Object.assign({}, prev, {
-          blogposts: { 
-              ...prev.blogposts, 
-              posts: [...fetchMoreResult.blogposts.posts]}
-          } 
-        )
-    }})
-    setPageNumber(page)
-    history.push({
-      search: ''
+    fetchMore({ 
+      variables: {offset: POSTS_PER_PAGE*(page-1)},
+      updateQuery: (prev, { fetchMoreResult }) => updateAfterFetchMore(prev, { fetchMoreResult })
     })
+
+    setPageNumber(page)
+    history.push({search: ''})
   }
 
   const onCloseModal = () => {
-    setIsModalOpen(false)
-    setMode({isDeleting: false, isEditing: false, isCreating: false})
-    setUpdatedPost({})
-    document.body.style.overflow = "scroll"
+    onClearMode('_', true)
   }
 
   const onChangePostHandler = async (e, postData, valid) => {
@@ -255,17 +185,21 @@ const Blog = () => {
         }, {})
       if (mode.isEditing) {
         let forUpdate = getUpdateData(updatedPost, postObject)
-        await updateBlogpost({ variables: {id: updatedPost.id, inputData: forUpdate}})
-        setIsModalOpen(false)
-        setMode({...mode, isEditing: false})
-        document.body.style.overflow = "scroll"
-        setUpdatedPost({})
+        try {
+          await updateBlogpost({ variables: {id: updatedPost.id, inputData: forUpdate}})
+          onClearMode('isEditing')
+        } catch(error) {
+          setIsError(error)
+        }
       }
       if (mode.isCreating) {
-        await createBlogpost({ variables: {inputData: postObject}})
-        setIsModalOpen(false)
-        setMode({...mode, isCreating: false})
-        document.body.style.overflow = "scroll"
+        try {
+          await createBlogpost({ variables: {inputData: postObject}})
+         // history.push({search: '?id='+createdConference.data.createConference.id})
+          onClearMode('isCreating')
+        } catch(error) {
+          setIsError(error)
+        }
       }
     } 
   }
@@ -294,7 +228,7 @@ const Blog = () => {
         (mode.isDeleting) &&  <YesDelete onDelete={onDeletePostHandler} onCancel={onCloseModal} info={updatedPost} instance='blogpost' />    
       }
     </Modal>}
-    <div className="container">
+    {blogposts.length > 0 && <div className="container">
       {blogposts.map((blogpost, idx) => 
           <Blogpost 
             blogpost = {blogpost} 
@@ -314,7 +248,8 @@ const Blog = () => {
         currentPage={pageNumber} 
         onClickPage={onPaginate}  
         />
-    </div>
+    </div>}
+    {blogposts.length === 0 && <EmptyData instance='blogpost' />}
     <ButtonAddNew
       color='red'
       onClickAddButton={onAddNewBlogpost}

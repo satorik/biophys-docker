@@ -2,6 +2,9 @@ import React from 'react'
 import { useQuery, useMutation, gql } from '@apollo/client'
 import { required, length, isUrl } from '../../utils/validators'
 
+import { updateAfterCreate, updateAfterDelete } from '../../utils/updateCache/partnership'
+import * as queries from '../../utils/queries/partnership'
+
 import YesDelete from '../Shared/DoYouWantToDelete'
 import ButtonAddNew from '../UI/ButtonAddNew'
 import Modal from '../UI/Modal'
@@ -11,46 +14,8 @@ import ErrorBoundry from '../Shared/ErrorHandling/ErrorBoundry'
 import getUpdateData from '../../utils/getObjectForUpdate'
 import NetworkErrorComponent from '../Shared/ErrorHandling/NetworkErrorComponent'
 import LinkCard from '../Shared/LinkCard'
+import {EmptyData} from '../Shared/EmptyData'
 
-const GET_DEPARTMENT_PARTNERSHIP = gql`                    
-    query getDepartmentPartnership {
-      partnership{
-        id
-        link
-        imageUrl
-        description  
-        title
-    }
-  }
-  ` 
-const CREATE_PARTNERSHIP = gql`
-mutation createPartnership($inputData: DepartmentPartnershipCreateData!) {
-  createPartnership(inputData: $inputData) {
-    id
-    link
-    imageUrl
-    description  
-    title
-  }
-}
-`
-
-const DELETE_PARTNERSHIP = gql`
-mutation deletePartnership($id: ID!) {
-  deletePartnership(id: $id) 
-}
-`
-const UPDATE_PARTNERSHIP = gql`
-mutation updatePartnership($id: ID!, $inputData: DepartmentPartnershipUpdateData!) {
-  updatePartnership(id: $id, inputData: $inputData) {
-    id
-    link
-    imageUrl
-    description  
-    title
-  }
-}
-`
 
 const FORM_TEMPLATE = [
 {
@@ -89,69 +54,59 @@ const Partnership = () => {
   const [mode, setMode] = React.useState({isEditing: false, isCreating: false, isDeleting: false})
   const [updatedPartner, setUpdatedPartner] = React.useState({})
   const [isAbleToSave, setIsAbleToSave] = React.useState(true)
+  const [isError, setIsError] = React.useState(null)
 
-  const { loading: queryLoading, error: queryError, data} = useQuery(GET_DEPARTMENT_PARTNERSHIP)
-  const [createPartnership,
-        { loading: creationLoading, error: creatingError }] = useMutation(CREATE_PARTNERSHIP, {
-            update(cache, { data: {createPartnership} }) {
-              const { partnership } = cache.readQuery({ query: GET_DEPARTMENT_PARTNERSHIP })
-              cache.writeQuery({
-                query: GET_DEPARTMENT_PARTNERSHIP,
-                data: { partnership:  [...partnership, createPartnership]}
-              })
-            }
-          })
-  const [updatePartnership,
-        { loading: updatingLoading, error: updatingError }] = useMutation(UPDATE_PARTNERSHIP)
-  const [deletePartnership,
-        { loading: deletingLoading, error: deletingError }] = useMutation(DELETE_PARTNERSHIP, {
-          update(cache, { data: { deletePartnership } }) {
-            const { partnership } = cache.readQuery({ query:GET_DEPARTMENT_PARTNERSHIP})
-            cache.writeQuery({
-              query: GET_DEPARTMENT_PARTNERSHIP,
-              data: { partnership: partnership.filter(el => el.id !== deletePartnership)}
-            })
-          }
-        })
-  
+  const { loading: queryLoading, error: queryError, data} = useQuery(queries.GET_DEPARTMENT_PARTNERSHIP)
+  const [createPartnership, { loading: creationLoading }] = useMutation(queries.CREATE_PARTNERSHIP, {
+    update: (cache, res) => updateAfterCreate(cache, res, queries.GET_DEPARTMENT_PARTNERSHIP)})
+  const [updatePartnership, { loading: updatingLoading }] = useMutation(queries.UPDATE_PARTNERSHIP)
+  const [deletePartnership, { loading: deletingLoading }] = useMutation(queries.DELETE_PARTNERSHIP, {
+    update: (cache, res) => updateAfterDelete(cache, res, queries.GET_DEPARTMENT_PARTNERSHIP)})
+
   if (queryLoading || creationLoading || updatingLoading || deletingLoading) return <Spinner />
-  if (queryError) return <NetworkErrorComponent error={queryError} />
-  if (updatingError) return <NetworkErrorComponent error={updatingError} />
-  if (deletingError) return <NetworkErrorComponent error={deletingError} />
-  if (creatingError) return <NetworkErrorComponent error={creatingError} />
+  if (queryError) return <NetworkErrorComponent error={queryError} type='queryError' />
+  if (isError) return <NetworkErrorComponent error={isError} onDismiss={() => setIsError(null)} />
+
+  const onClearMode = (operation, full = false) => {
+    setIsModalOpen(false)
+    document.body.style.overflow = "scroll"
+    setUpdatedPartner({})
+    setIsAbleToSave(true)
+
+    if (full) setMode({isDeleting: false, isEditing: false, isCreating: false})
+    else setMode({...mode, [operation]: false})
+  }
+
+  const onSetMode = (operation) => {
+    setIsModalOpen(true)
+    setMode({...mode, [operation]: true})
+    document.body.style.overflow = "hidden"
+  }
 
   const onAddNewPartner = () => {
-    setIsModalOpen(true)
-    setMode({...mode, isCreating: true})
-    document.body.style.overflow = "hidden"
+    onSetMode('isCreating')
   }
 
   const onEditPartner = (id) => {
-    setIsModalOpen(true)
-    setMode({...mode, isEditing: true})
-    document.body.style.overflow = "hidden"
+    onSetMode('isEditing')
     setUpdatedPartner(partnership[id])
   }
   const onDeletePartner = (id) => {
-    setIsModalOpen(true)
-    document.body.style.overflow = "hidden"
-    setMode({...mode, isDeleting: true})
+    onSetMode('isDeleting')
     setUpdatedPartner(partnership[id])
   }
 
   const onDeletePartnerHandler = async () => {
-    await deletePartnership({ variables: {id: updatedPartner.id}})
-    setIsModalOpen(false)
-    setMode({...mode, isDeleting: false})
-    document.body.style.overflow = "scroll"
-    setUpdatedPartner({})
+    try {
+      await deletePartnership({ variables: {id: updatedPartner.id}})
+      onClearMode('isDeleting')
+    } catch(error) {
+      setIsError(error)
+    }
   }
 
   const onCloseModal = () => {
-    setIsModalOpen(false)
-    setMode({isDeleting: false, isEditing: false, isCreating: false})
-    setUpdatedPartner({})
-    document.body.style.overflow = "scroll"
+    onClearMode('_', true)
   }
 
   const onChangeConferenceHandler = async (e, postData, valid) => {
@@ -166,17 +121,20 @@ const Partnership = () => {
       } ,{})
       if (mode.isEditing) {
         const forUpdate = getUpdateData(updatedPartner, postObject)
-        await updatePartnership({ variables: {id: updatedPartner.id, inputData: forUpdate}})
-        setIsModalOpen(false)
-        setMode({...mode, isEditing: false})
-        document.body.style.overflow = "scroll"
-        setUpdatedPartner({})
+        try {
+          await updatePartnership({ variables: {id: updatedPartner.id, inputData: forUpdate}})
+          onClearMode('isEditing')
+        } catch(error) {
+          setIsError(error)
+        }
       }
       if (mode.isCreating) {
-        await createPartnership({ variables: {inputData: postObject}})
-        setIsModalOpen(false)
-        setMode({...mode, isCreating: false})
-        document.body.style.overflow = "scroll"
+        try {
+          await createPartnership({ variables: {inputData: postObject}})
+          onClearMode('isCreating')
+        } catch(error) {
+          setIsError(error)
+        }
       }
     } 
   }
@@ -206,7 +164,7 @@ const Partnership = () => {
         (mode.isDeleting) &&  <YesDelete onDelete={onDeletePartnerHandler} onCancel={onCloseModal} info={updatedPartner} instance='partnership' />   
       }
       </Modal>}
-    <div className="container d-flex flex-wrap mt-5 justify-content-between">
+    {partnership.length > 0 && <div className="container d-flex flex-wrap mt-5 justify-content-between">
       {partnership.map((partner, idx) => 
         <LinkCard 
           key={partner.id}
@@ -218,7 +176,8 @@ const Partnership = () => {
           onDeleteClick={() => onDeletePartner(idx)}
         />)
       }
-    </div>
+    </div>}
+    {partnership.length === 0 && <EmptyData instance='partnership' />}
     <ButtonAddNew
         color='red'
         onClickAddButton={onAddNewPartner}
@@ -229,4 +188,4 @@ const Partnership = () => {
   )
 }
 
-export default Partnership
+export default ErrorBoundry(Partnership)

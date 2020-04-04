@@ -1,11 +1,11 @@
-import { ApolloError } from "apollo-server"
+import { ApolloError, AuthenticationError, UserInputError } from "apollo-server"
 import bcrypt from 'bcryptjs'
 import jwt from 'jsonwebtoken'
 
 const userMutation = {
   async createUser(parent, {inputData}, { models }) {
     const existingUser = await models.User.findOne({where: {email: inputData.email}})
-    if (existingUser) {throw new ApolloError("User already exists")}
+    if (existingUser) {throw new UserInputError('Такой пользователь уже существует.')}
 
     const hashedPassword = await bcrypt.hash(inputData.password, 12)
 
@@ -28,11 +28,11 @@ const userMutation = {
   },
   async loginUser(parent, {inputData}, { models }) {
     const user = await models.User.findOne({where: {email: inputData.email}})
-    if (!user) {throw new ApolloError("User not found")}
+    if (!user) {throw new AuthenticationError('Такого пользователя не существует')}
 
     const isEqual = await bcrypt.compare(inputData.password, user.hashedPassword)
     if (!isEqual) {
-      throw new ApolloError('Password is incorrect');
+      throw new AuthenticationError('Пароль неверен');
     }
 
     const token = jwt.sign({userId: user.id, email: user.email}, process.env.JWT_key, {expiresIn: '1d'})

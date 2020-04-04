@@ -1,6 +1,8 @@
+import { ApolloError } from "apollo-server"
+
 const scienceQuery = {
   async scienceRoutes(parent, {id}, {models}, info) {
-    
+
     let WHERE = {}
     if (id) WHERE = {id}
     

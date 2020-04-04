@@ -1,7 +1,9 @@
 import React from 'react'
 import {Route, Redirect} from 'react-router-dom'
-import { useQuery, useMutation, gql } from '@apollo/client'
+import { useQuery, useMutation } from '@apollo/client'
 import { required, length } from './utils/validators'
+import { updateAfterCreate, updateAfterDelete } from './utils/updateCache/scienceRoute'
+import * as queries from './utils/queries/scienceRoute'
 
 import NavigationList from './components/Shared/SecondaryNavigation/NavigationList'
 import ScienceGroup from './components/Science/ScienceGroup'
@@ -13,36 +15,9 @@ import Spinner from './components/UI/Spinner'
 import getUpdateData from './utils/getObjectForUpdate'
 import ErrorBoundry from './components/Shared/ErrorHandling/ErrorBoundry'
 import NetworkErrorComponent from './components/Shared/ErrorHandling/NetworkErrorComponent'
+import {EmptyData} from './components/Shared/EmptyData'
 
-const GET_SCIENCE_ROUTE = gql`  
-  {                  
-    scienceRoutes {
-      id
-      title
-    }
-  }
-`
-const CREATE_SCIENCE_ROUTE = gql`
-  mutation createScienceRoute($inputData: ScienceRouteCreateData!) {
-    createScienceRoute(inputData: $inputData) {
-      id
-      title
-    }
-  }
-`
-const DELETE_SCIENCE_ROUTE = gql`
-  mutation deleteScienceRoute($id: ID!) {
-    deleteScienceRoute(id: $id) 
-  }
-`
-const UPDATE_SCIENCE_ROUTE = gql`
-  mutation updateScienceRoute($id: ID!, $inputData: ScienceRouteUpdateData!) {
-    updateScienceRoute(id: $id, inputData: $inputData) {
-        id
-        title
-    }
-  }
-`
+
 const FORM_TEMPLATE = [
   {
     title: 'title',
@@ -66,40 +41,21 @@ const Science = () => {
   const [mode, setMode] = React.useState({isEditing: false, isCreating: false, isDeleting: false})
   const [updatedRoute, setUpdatedRoute] = React.useState({})
   const [isAbleToSave, setIsAbleToSave] = React.useState(true)
+  const [isError, setIsError] = React.useState(null)
   
-  const { loading: queryLoading, error: queryError, data} = useQuery(GET_SCIENCE_ROUTE)
-  const [createScienceRoute,
-      { loading: creationLoading, error: creatingError }] = useMutation(CREATE_SCIENCE_ROUTE, 
-        {
-          update(cache, { data: {createScienceRoute} }) {
-            const { scienceRoutes } = cache.readQuery({ query: GET_SCIENCE_ROUTE })
-            cache.writeQuery({
-              query: GET_SCIENCE_ROUTE,
-              data: { scienceRoutes:  [...scienceRoutes, createScienceRoute]}
-            })
-          }
-        }
-        )
-  const [updateScienceRoute,
-      { loading: updatingLoading, error: updatingError }] = useMutation(UPDATE_SCIENCE_ROUTE)
-  const [deleteScienceRoute,
-      { loading: deletingLoading, error: deletingError }] = useMutation(DELETE_SCIENCE_ROUTE, 
-        {
-        update(cache, { data: { deleteScienceRoute } }) {
-          const { scienceRoutes } = cache.readQuery({ query: GET_SCIENCE_ROUTE})
-          cache.writeQuery({
-            query: GET_SCIENCE_ROUTE,
-            data: { scienceRoutes: scienceRoutes.filter(el => el.id !== deleteScienceRoute)}
-          })
-        }
-      }
-      )
+  const { loading: queryLoading, error: queryError, data} = useQuery(queries.GET_SCIENCE_ROUTE)
+  
+  const [createScienceRoute, { loading: creationLoading }] = useMutation(queries.CREATE_SCIENCE_ROUTE, {
+    update: (cache, res) => updateAfterCreate(cache, res, queries.GET_SCIENCE_ROUTE)})
 
-  if (queryLoading) return <Spinner />
-  if (queryError) return <NetworkErrorComponent error={queryError} />
-  if (updatingError) return <NetworkErrorComponent error={updatingError} />
-  if (deletingError) return <NetworkErrorComponent error={deletingError} />
-  if (creatingError) return <NetworkErrorComponent error={creatingError} />
+  const [updateScienceRoute, { loading: updatingLoading }] = useMutation(queries.UPDATE_SCIENCE_ROUTE)
+  
+  const [deleteScienceRoute, { loading: deletingLoading }] = useMutation(queries.DELETE_SCIENCE_ROUTE, {
+    update: (cache, res) => updateAfterDelete(cache, res, queries.GET_SCIENCE_ROUTE)})
+
+  if (queryLoading || creationLoading || updatingLoading || deletingLoading) return <Spinner />
+  if (isError) return <NetworkErrorComponent error={isError} onDismiss={() => setIsError(null)}/>
+  if (queryError) return <NetworkErrorComponent error={queryError} type="queryError"/>
 
   const { scienceRoutes } = data
 
@@ -114,47 +70,53 @@ const Science = () => {
     }
   })
  
+  const onClearMode = (operation, full = false) => {
+    setIsModalOpen(false)
+    document.body.style.overflow = "scroll"
+    setUpdatedRoute({})
+    setIsAbleToSave(true)
+
+    if (full) setMode({isDeleting: false, isEditing: false, isCreating: false})
+    else setMode({...mode, [operation]: false})
+  }
+
+  const onSetMode = (operation) => {
+    setIsModalOpen(true)
+    setMode({...mode, [operation]: true})
+    document.body.style.overflow = "hidden"
+  }
+
   const onSelectRoute = (sublinkId) => {
     setViewId(sublinkId)
   }
 
   const onAddNewScienceRoute = () => {
-    setIsModalOpen(true)
-    setMode({...mode, isCreating: true})
-    document.body.style.overflow = "hidden"
+    onSetMode('isCreating')
   }
 
   const onEditScienceRoute = (id) => {
-    setIsModalOpen(true)
-    setMode({...mode, isEditing: true})
-    document.body.style.overflow = "hidden"
+    onSetMode('isEditing')
     setUpdatedRoute(scienceRoutes[id])
   }
   const onDeleteScienceRoute = (id) => {
-    setIsModalOpen(true)
-    document.body.style.overflow = "hidden"
-    setMode({...mode, isDeleting: true})
+    onSetMode('isDeleting')
     setUpdatedRoute(scienceRoutes[id])
-    //setUpdatedRoute(blogposts[id])
   }
 
   const onDeleteScienceRouteHandler = async () => {
-    await deleteScienceRoute({ variables: {id: updatedRoute.id}})
-    setIsModalOpen(false)
-    setMode({...mode, isDeleting: false})
-    document.body.style.overflow = "scroll"
-    setUpdatedRoute({})
+    try {
+      await deleteScienceRoute({ variables: {id: updatedRoute.id}})
+      onClearMode('isDeleting')
+    } catch(error) {
+      setIsError(error)
+    }
   }
 
   const onCloseModal = () => {
-    setIsModalOpen(false)
-    setMode({isDeleting: false, isEditing: false, isCreating: false})
-    setUpdatedRoute({})
-    setIsAbleToSave(true)
-    document.body.style.overflow = "scroll"
+    onClearMode('_', true)
   }
 
-  const onChangeConferenceHandler = async (e, postData, valid, id) => {
+  const onChangeConferenceHandler = async (e, postData, valid) => {
     e.preventDefault()
     if (!valid) {
       setIsAbleToSave(false)
@@ -164,22 +126,24 @@ const Science = () => {
           obj[item.title] = item.value
           return obj
       } ,{})
-      setIsModalOpen(false)
-      setMode({...mode, isEditing: false})
-      setMode({...mode, isCreating: false})
       if (mode.isEditing) {
         const forUpdate = getUpdateData(updatedRoute, postObject)
-        await updateScienceRoute({ variables: {id: updatedRoute.id, inputData: forUpdate}})
-        setIsModalOpen(false)
-        setMode({...mode, isEditing: false})
-        document.body.style.overflow = "scroll"
-        setUpdatedRoute({})
+        try {
+          await updateScienceRoute({ variables: {id: updatedRoute.id, inputData: forUpdate}})
+          onClearMode('isEditing')
+        }
+        catch(error) {
+          setIsError(error)
+        }
       }
       if (mode.isCreating) {
-        await createScienceRoute({ variables: {inputData: postObject}})
-        setIsModalOpen(false)
-        setMode({...mode, isCreating: false})
-        document.body.style.overflow = "scroll"
+        try {
+          await createScienceRoute({ variables: {inputData: postObject}})
+          onClearMode('isCreating')
+        }
+        catch(error) {
+          setIsError(error)
+        }
       }
     } 
   }
@@ -190,10 +154,8 @@ const Science = () => {
   if (mode.isDeleting) {modalTitle = 'Удаление научного направления'}
 
   return (
-    <div>
-      <NavigationList subLinks={links} navigationChange={onSelectRoute} selectedLink={viewId}/>
-      <Redirect from="/science" to={`/science${links[0].path}`} /> 
-      {isModalOpen && <Modal 
+    <>
+    {isModalOpen && <Modal 
         isOpen={isModalOpen}
         title={modalTitle}
         onClose={onCloseModal}
@@ -208,18 +170,23 @@ const Science = () => {
         {
           (mode.isDeleting) &&  <YesDelete onDelete={onDeleteScienceRouteHandler} onCancel={onCloseModal} info={updatedRoute} instance='scienceRoute' />   
         }
-      </Modal>}
+    </Modal>}
+    {scienceRoutes.length > 0 && <div>
+      <NavigationList subLinks={links} navigationChange={onSelectRoute} selectedLink={viewId}/>
+      <Redirect from="/science" to={`/science${links[0].path}`} /> 
       <Route
           path="/science/route/:id"
           component={ScienceGroup}
         />
-      <ButtonAddNew
-        color='red'
-        onClickAddButton={onAddNewScienceRoute}
-        fixed
-        size='4'
-       />
-    </div>
+    </div>}
+    {scienceRoutes.length === 0 && <EmptyData instance='scienceRoute' />}
+    <ButtonAddNew
+      color='red'
+      onClickAddButton={onAddNewScienceRoute}
+      fixed
+      size='4'
+      />
+    </>
   )
 }
 

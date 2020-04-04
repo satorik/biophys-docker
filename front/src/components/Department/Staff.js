@@ -1,6 +1,9 @@
 import React from 'react'
-import { useQuery, useMutation, gql } from '@apollo/client'
+import { useQuery, useMutation } from '@apollo/client'
 import { required, length, email } from '../../utils/validators'
+
+import { updateAfterCreate, updateAfterDelete, updateAfterMove } from '../../utils/updateCache/staff'
+import * as queries from '../../utils/queries/staff'
 
 import FullPersonCard from './FullPersonCard'
 import YesDelete from '../Shared/DoYouWantToDelete'
@@ -11,69 +14,9 @@ import Spinner from '../UI/Spinner'
 import ErrorBoundry from '../Shared/ErrorHandling/ErrorBoundry'
 import getUpdateData from '../../utils/getObjectForUpdate'
 import NetworkErrorComponent from '../Shared/ErrorHandling/NetworkErrorComponent'
+import {EmptyData} from '../Shared/EmptyData'
 
-const GET_DEPARTMENT_STAFF = gql`                    
-    query getDepartmentStaff {
-      staff{
-        id
-        firstname
-        middlename
-        lastname
-        jobTitle
-        imageUrl
-        description
-        position
-        tel
-        mail      
-    }
-  }
-  `
-const CREATE_DEPARTMENT_STAFF = gql`
-mutation createDepartmentPerson($inputData: DepartmentStaffCreateData!) {
-  createDepartmentPerson(inputData: $inputData) {
-    id
-    firstname
-    middlename
-    lastname
-    jobTitle
-    imageUrl
-    description
-    position
-    tel
-    mail
-  }
-}
-`
 
-const DELETE_DEPARTMENT_STAFF = gql`
-mutation deleteDepartmentPerson($id: ID!) {
-  deleteDepartmentPerson(id: $id) 
-}
-`
-const UPDATE_DEPARTMENT_STAFF = gql`
-mutation updateDepartmentPerson($id: ID!, $inputData: DepartmentStaffUpdateData!) {
-  updateDepartmentPerson(id: $id, inputData: $inputData) {
-    id
-    firstname
-    middlename
-    lastname
-    jobTitle
-    imageUrl
-    description
-    position
-    tel
-    mail
-  }
-}
-`
-const MOVE_PERSON = gql`
-mutation movePersonPosition($id: ID!, $vector: VECTOR!){
-  moveDepartmentPerson(id: $id, vector:$vector){
-    id
-    position
-  } 
-}
-`
 
 const FORM_TEMPLATE = [
   {
@@ -136,100 +79,65 @@ const Staff = () => {
   const [mode, setMode] = React.useState({isEditing: false, isCreating: false, isDeleting: false})
   const [updatedPerson, setUpdatedPerson] = React.useState({})
   const [isAbleToSave, setIsAbleToSave] = React.useState(true)
+  const [isError, setIsError] = React.useState(null)
   
 
-const { loading: queryLoading, error: queryError, data} = useQuery(GET_DEPARTMENT_STAFF)
-  const [createDepartmentPerson,
-        { loading: creationLoading, error: creatingError }] = useMutation(CREATE_DEPARTMENT_STAFF, {
-            update(cache, { data: {createDepartmentPerson} }) {
-              const { staff } = cache.readQuery({ query: GET_DEPARTMENT_STAFF })
-              cache.writeQuery({
-                query: GET_DEPARTMENT_STAFF,
-                data: { staff:  [...staff, createDepartmentPerson]}
-              })
-            }
-          })
-  const [updateDepartmentPerson,
-        { loading: updatingLoading, error: updatingError }] = useMutation(UPDATE_DEPARTMENT_STAFF)
-  const [deleteDepartmentPerson,
-        { loading: deletingLoading, error: deletingError }] = useMutation(DELETE_DEPARTMENT_STAFF, {
-          update(cache, { data: { deleteDepartmentPerson } }) {
-            const { staff } = cache.readQuery({ query: GET_DEPARTMENT_STAFF})
-            const newStaff = staff.filter(person => person.position !== deleteDepartmentPerson)
-                .map(person => {
-                  if (person.position > deleteDepartmentPerson)
-                    return {...person, position: person.position - 1}
-                  if (person.position < deleteDepartmentPerson){
-                    return person
-                  }
-                })
-                .sort((a, b) => a.position - b.position)
-            cache.writeQuery({
-              query: GET_DEPARTMENT_STAFF,
-              data: { staff: newStaff}
-            })
-          }
-        })
-  const [movePersonPosition,
-    { loading: updatingPersonPositionLoading, error: updatingPersonPositionError }] = useMutation(MOVE_PERSON, {
-      update(cache, { data: { moveDepartmentPerson } }) {
-        const { staff } = cache.readQuery({ query: GET_DEPARTMENT_STAFF })
-        const newStaff = staff.map(person => {
-          const foundPerson = moveDepartmentPerson.find(newPos => newPos.id === person.id)
-            if (foundPerson) {
-              return {...person, position: foundPerson.position}
-            }
-            return person
-        }).sort((a, b) => a.position - b.position)
-        cache.writeQuery({
-          query: GET_DEPARTMENT_STAFF,
-          data: {staff: newStaff}
-        })
-      }
-    })
-  
+  const { loading: queryLoading, error: queryError, data} = useQuery(queries.GET_DEPARTMENT_STAFF)
+  const [createDepartmentPerson,{ loading: creationLoading }] = useMutation(queries.CREATE_DEPARTMENT_STAFF, {
+    update: (cache, res) => updateAfterCreate(cache, res, queries.GET_DEPARTMENT_STAFF)})
+  const [updateDepartmentPerson, { loading: updatingLoading }] = useMutation(queries.UPDATE_DEPARTMENT_STAFF)
+  const [deleteDepartmentPerson, { loading: deletingLoading }] = useMutation(queries.DELETE_DEPARTMENT_STAFF, {
+    update: (cache, res) => updateAfterDelete(cache, res, queries.GET_DEPARTMENT_STAFF)})
+  const [movePersonPosition, { loading: updatingPersonPositionLoading }] = useMutation(queries.MOVE_PERSON, {
+    update: (cache, res) => updateAfterMove(cache, res, queries.GET_DEPARTMENT_STAFF)})
+
   if (queryLoading || creationLoading || updatingLoading || deletingLoading || updatingPersonPositionLoading) return <Spinner />
-  if (queryError) return <NetworkErrorComponent error={queryError} />
-  if (updatingError) return <NetworkErrorComponent error={updatingError} />
-  if (deletingError) return <NetworkErrorComponent error={deletingError} />
-  if (creatingError) return <NetworkErrorComponent error={creatingError} />
-  if (updatingPersonPositionError) return <NetworkErrorComponent error={updatingPersonPositionError} />
+  
+  if (queryError) return <NetworkErrorComponent error={queryError} type='queryError' />
+  if (isError) return <NetworkErrorComponent error={isError} onDismiss={() => setIsError(null)} />
 
   const {staff} = data
   
-  const onAddNewDepartmentPerson = () => {
+  const onClearMode = (operation, full = false) => {
+    setIsModalOpen(false)
+    document.body.style.overflow = "scroll"
+    setUpdatedPerson({})
+    setIsAbleToSave(true)
+
+    if (full) setMode({isDeleting: false, isEditing: false, isCreating: false})
+    else setMode({...mode, [operation]: false})
+  }
+
+  const onSetMode = (operation) => {
     setIsModalOpen(true)
-    setMode({...mode, isCreating: true})
+    setMode({...mode, [operation]: true})
     document.body.style.overflow = "hidden"
+  }
+
+  const onAddNewDepartmentPerson = () => {
+    onSetMode('isCreating')
   }
 
   const onEditDeaprtmentPerson = (id) => {
-    setIsModalOpen(true)
-    setMode({...mode, isEditing: true})
-    document.body.style.overflow = "hidden"
+    onSetMode('isEditing')
     setUpdatedPerson(staff[id])
   }
   const ondeleteDepartmentPerson = (id) => {
-    setIsModalOpen(true)
-    document.body.style.overflow = "hidden"
-    setMode({...mode, isDeleting: true})
+    onSetMode('isDeleting')
     setUpdatedPerson(staff[id])
-    //setUpdatedPerson(blogposts[id])
   }
 
   const ondeleteDepartmentPersonHandler = async () => {
-    await deleteDepartmentPerson({ variables: {id: updatedPerson.id}})
-    setIsModalOpen(false)
-    setMode({...mode, isDeleting: false})
-    document.body.style.overflow = "scroll"
-    setUpdatedPerson({})
+    try {
+      await deleteDepartmentPerson({ variables: {id: updatedPerson.id}})
+      onClearMode('isDeleting')
+    } catch(error) {
+      setIsError(error)
+    }
   }
 
   const onCloseModal = () => {
-    setIsModalOpen(false)
-    setMode({isDeleting: false, isEditing: false, isCreating: false})
-    setUpdatedPerson({})
-    document.body.style.overflow = "scroll"
+    onClearMode('_', true)
   }
 
   const onChangeDepartmentStaffHandler = async (e, postData, valid) => {
@@ -244,17 +152,20 @@ const { loading: queryLoading, error: queryError, data} = useQuery(GET_DEPARTMEN
       } ,{})
       if (mode.isEditing) {
         const forUpdate = getUpdateData(updatedPerson, postObject)
-        await updateDepartmentPerson({ variables: {id: updatedPerson.id, inputData: forUpdate}})
-        setIsModalOpen(false)
-        setMode({...mode, isEditing: false})
-        document.body.style.overflow = "scroll"
-        setUpdatedPerson({})
+        try {
+          await updateDepartmentPerson({ variables: {id: updatedPerson.id, inputData: forUpdate}})
+          onClearMode('isEditing')
+        } catch(error) {
+          setIsError(error)
+        }
       }
       if (mode.isCreating) {
-        await createDepartmentPerson({ variables: {inputData: postObject}})
-        setIsModalOpen(false)
-        setMode({...mode, isCreating: false})
-        document.body.style.overflow = "scroll"
+        try {
+          await createDepartmentPerson({ variables: {inputData: postObject}})
+          onClearMode('isCreating')
+        } catch(error) {
+          setIsError(error)
+        }
       }
     } 
   }
@@ -286,7 +197,7 @@ const { loading: queryLoading, error: queryError, data} = useQuery(GET_DEPARTMEN
         (mode.isDeleting) &&  <YesDelete onDelete={ondeleteDepartmentPersonHandler} onCancel={onCloseModal} info={updatedPerson} instance='staff' />   
       }
     </Modal>}
-    <div className="container d-flex mt-5 flex-wrap align-items-top">
+    {staff.length > 0 && <div className="container d-flex mt-5 flex-wrap align-items-top">
       {staff.map((person, idx) => 
         <FullPersonCard 
             key={person.id}
@@ -305,7 +216,8 @@ const { loading: queryLoading, error: queryError, data} = useQuery(GET_DEPARTMEN
             firstElement = {idx === 0}
             lastElement = {idx === staff.length-1}
         />)}
-    </div>
+    </div>}
+    {staff.length === 0 && <EmptyData instance='staff' />}
     <ButtonAddNew
         color='red'
         onClickAddButton={onAddNewDepartmentPerson}

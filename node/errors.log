@@ -11493,4 +11493,1599 @@
 			]
 		}
 	}
+}2020-04-02T12:45:46.129Z{
+	"message": "Not Authorized!",
+	"locations": [
+		{
+			"line": 2,
+			"column": 3
+		}
+	],
+	"path": [
+		"createScienceRoute"
+	],
+	"extensions": {
+		"code": "UNAUTHENTICATED",
+		"exception": {
+			"stacktrace": [
+				"AuthenticationError: Not Authorized!",
+				"    at C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\src\\utils/getUser.js:6:30",
+				"    at new Promise (<anonymous>)",
+				"    at _callee$ (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\src\\utils/getUser.js:4:10)",
+				"    at tryCatch (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\regenerator-runtime\\runtime.js:45:40)",
+				"    at Generator.invoke [as _invoke] (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\regenerator-runtime\\runtime.js:271:22)",
+				"    at Generator.prototype.(anonymous function) [as next] (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\regenerator-runtime\\runtime.js:97:21)",
+				"    at asyncGeneratorStep (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\src\\utils\\getUser.js:10:103)",
+				"    at _next (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\src\\utils\\getUser.js:12:194)",
+				"    at C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\src\\utils\\getUser.js:12:364",
+				"    at new Promise (<anonymous>)",
+				"    at C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\src\\utils\\getUser.js:12:97",
+				"    at C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\src\\utils\\getUser.js:46:17",
+				"    at _callee4$ (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\src\\resolvers\\mutation/science.js:34:24)",
+				"    at tryCatch (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\regenerator-runtime\\runtime.js:45:40)",
+				"    at Generator.invoke [as _invoke] (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\regenerator-runtime\\runtime.js:271:22)",
+				"    at Generator.prototype.(anonymous function) [as next] (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\regenerator-runtime\\runtime.js:97:21)",
+				"    at asyncGeneratorStep (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\src\\resolvers\\mutation\\science.js:28:103)",
+				"    at _next (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\src\\resolvers\\mutation\\science.js:30:194)",
+				"    at C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\src\\resolvers\\mutation\\science.js:30:364",
+				"    at new Promise (<anonymous>)",
+				"    at C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\src\\resolvers\\mutation\\science.js:30:97",
+				"    at createScienceRoute (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\src\\resolvers\\mutation/science.js:9:25)"
+			]
+		}
+	}
+}2020-04-02T12:45:56.663Z{
+	"message": "User not found",
+	"locations": [
+		{
+			"line": 2,
+			"column": 3
+		}
+	],
+	"path": [
+		"loginUser"
+	],
+	"extensions": {
+		"code": "INTERNAL_SERVER_ERROR",
+		"exception": {
+			"stacktrace": [
+				"Error: User not found",
+				"    at _callee2$ (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\src\\resolvers\\mutation/user.js:31:23)",
+				"    at tryCatch (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\regenerator-runtime\\runtime.js:45:40)",
+				"    at Generator.invoke [as _invoke] (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\regenerator-runtime\\runtime.js:271:22)",
+				"    at Generator.prototype.(anonymous function) [as next] (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\regenerator-runtime\\runtime.js:97:21)",
+				"    at asyncGeneratorStep (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\src\\resolvers\\mutation\\user.js:16:103)",
+				"    at _next (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\src\\resolvers\\mutation\\user.js:18:194)"
+			]
+		}
+	}
+}2020-04-02T12:46:10.738Z{
+	"message": "User not found",
+	"locations": [
+		{
+			"line": 2,
+			"column": 3
+		}
+	],
+	"path": [
+		"loginUser"
+	],
+	"extensions": {
+		"code": "INTERNAL_SERVER_ERROR",
+		"exception": {
+			"stacktrace": [
+				"Error: User not found",
+				"    at _callee2$ (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\src\\resolvers\\mutation/user.js:31:23)",
+				"    at tryCatch (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\regenerator-runtime\\runtime.js:45:40)",
+				"    at Generator.invoke [as _invoke] (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\regenerator-runtime\\runtime.js:271:22)",
+				"    at Generator.prototype.(anonymous function) [as next] (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\regenerator-runtime\\runtime.js:97:21)",
+				"    at asyncGeneratorStep (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\src\\resolvers\\mutation\\user.js:16:103)",
+				"    at _next (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\src\\resolvers\\mutation\\user.js:18:194)"
+			]
+		}
+	}
+}2020-04-02T12:50:25.371Z{
+	"message": "User not found",
+	"locations": [
+		{
+			"line": 2,
+			"column": 3
+		}
+	],
+	"path": [
+		"loginUser"
+	],
+	"extensions": {
+		"code": "INTERNAL_SERVER_ERROR",
+		"exception": {
+			"stacktrace": [
+				"Error: User not found",
+				"    at _callee2$ (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\src\\resolvers\\mutation/user.js:31:23)",
+				"    at tryCatch (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\regenerator-runtime\\runtime.js:45:40)",
+				"    at Generator.invoke [as _invoke] (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\regenerator-runtime\\runtime.js:271:22)",
+				"    at Generator.prototype.(anonymous function) [as next] (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\regenerator-runtime\\runtime.js:97:21)",
+				"    at asyncGeneratorStep (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\src\\resolvers\\mutation\\user.js:16:103)",
+				"    at _next (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\src\\resolvers\\mutation\\user.js:18:194)"
+			]
+		}
+	}
+}2020-04-02T13:08:47.975Z{
+	"message": "User not found",
+	"locations": [
+		{
+			"line": 2,
+			"column": 3
+		}
+	],
+	"path": [
+		"loginUser"
+	],
+	"extensions": {
+		"code": "UNAUTHENTICATED",
+		"exception": {
+			"stacktrace": [
+				"AuthenticationError: User not found",
+				"    at _callee2$ (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\src\\resolvers\\mutation/user.js:31:23)",
+				"    at tryCatch (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\regenerator-runtime\\runtime.js:45:40)",
+				"    at Generator.invoke [as _invoke] (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\regenerator-runtime\\runtime.js:271:22)",
+				"    at Generator.prototype.(anonymous function) [as next] (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\regenerator-runtime\\runtime.js:97:21)",
+				"    at asyncGeneratorStep (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\src\\resolvers\\mutation\\user.js:16:103)",
+				"    at _next (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\src\\resolvers\\mutation\\user.js:18:194)"
+			]
+		}
+	}
+}2020-04-02T13:18:23.356Z{
+	"message": "Такого пользователя не существует",
+	"locations": [
+		{
+			"line": 2,
+			"column": 3
+		}
+	],
+	"path": [
+		"loginUser"
+	],
+	"extensions": {
+		"code": "UNAUTHENTICATED",
+		"exception": {
+			"stacktrace": [
+				"AuthenticationError: Такого пользователя не существует",
+				"    at _callee2$ (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\src\\resolvers\\mutation/user.js:31:23)",
+				"    at tryCatch (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\regenerator-runtime\\runtime.js:45:40)",
+				"    at Generator.invoke [as _invoke] (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\regenerator-runtime\\runtime.js:271:22)",
+				"    at Generator.prototype.(anonymous function) [as next] (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\regenerator-runtime\\runtime.js:97:21)",
+				"    at asyncGeneratorStep (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\src\\resolvers\\mutation\\user.js:16:103)",
+				"    at _next (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\src\\resolvers\\mutation\\user.js:18:194)"
+			]
+		}
+	}
+}2020-04-02T13:20:08.841Z{
+	"message": "Такого пользователя не существует",
+	"locations": [
+		{
+			"line": 2,
+			"column": 3
+		}
+	],
+	"path": [
+		"loginUser"
+	],
+	"extensions": {
+		"code": "UNAUTHENTICATED",
+		"exception": {
+			"stacktrace": [
+				"AuthenticationError: Такого пользователя не существует",
+				"    at _callee2$ (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\src\\resolvers\\mutation/user.js:31:23)",
+				"    at tryCatch (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\regenerator-runtime\\runtime.js:45:40)",
+				"    at Generator.invoke [as _invoke] (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\regenerator-runtime\\runtime.js:271:22)",
+				"    at Generator.prototype.(anonymous function) [as next] (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\regenerator-runtime\\runtime.js:97:21)",
+				"    at asyncGeneratorStep (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\src\\resolvers\\mutation\\user.js:16:103)",
+				"    at _next (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\src\\resolvers\\mutation\\user.js:18:194)"
+			]
+		}
+	}
+}2020-04-02T13:20:49.836Z{
+	"message": "Такого пользователя не существует",
+	"locations": [
+		{
+			"line": 2,
+			"column": 3
+		}
+	],
+	"path": [
+		"loginUser"
+	],
+	"extensions": {
+		"code": "UNAUTHENTICATED",
+		"exception": {
+			"stacktrace": [
+				"AuthenticationError: Такого пользователя не существует",
+				"    at _callee2$ (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\src\\resolvers\\mutation/user.js:31:23)",
+				"    at tryCatch (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\regenerator-runtime\\runtime.js:45:40)",
+				"    at Generator.invoke [as _invoke] (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\regenerator-runtime\\runtime.js:271:22)",
+				"    at Generator.prototype.(anonymous function) [as next] (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\regenerator-runtime\\runtime.js:97:21)",
+				"    at asyncGeneratorStep (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\src\\resolvers\\mutation\\user.js:16:103)",
+				"    at _next (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\src\\resolvers\\mutation\\user.js:18:194)"
+			]
+		}
+	}
+}2020-04-02T13:21:53.205Z{
+	"message": "Такого пользователя не существует",
+	"locations": [
+		{
+			"line": 2,
+			"column": 3
+		}
+	],
+	"path": [
+		"loginUser"
+	],
+	"extensions": {
+		"code": "UNAUTHENTICATED",
+		"exception": {
+			"stacktrace": [
+				"AuthenticationError: Такого пользователя не существует",
+				"    at _callee2$ (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\src\\resolvers\\mutation/user.js:31:23)",
+				"    at tryCatch (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\regenerator-runtime\\runtime.js:45:40)",
+				"    at Generator.invoke [as _invoke] (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\regenerator-runtime\\runtime.js:271:22)",
+				"    at Generator.prototype.(anonymous function) [as next] (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\regenerator-runtime\\runtime.js:97:21)",
+				"    at asyncGeneratorStep (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\src\\resolvers\\mutation\\user.js:16:103)",
+				"    at _next (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\src\\resolvers\\mutation\\user.js:18:194)"
+			]
+		}
+	}
+}2020-04-02T13:22:55.578Z{
+	"message": "Такого пользователя не существует",
+	"locations": [
+		{
+			"line": 2,
+			"column": 3
+		}
+	],
+	"path": [
+		"loginUser"
+	],
+	"extensions": {
+		"code": "UNAUTHENTICATED",
+		"exception": {
+			"stacktrace": [
+				"AuthenticationError: Такого пользователя не существует",
+				"    at _callee2$ (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\src\\resolvers\\mutation/user.js:31:23)",
+				"    at tryCatch (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\regenerator-runtime\\runtime.js:45:40)",
+				"    at Generator.invoke [as _invoke] (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\regenerator-runtime\\runtime.js:271:22)",
+				"    at Generator.prototype.(anonymous function) [as next] (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\regenerator-runtime\\runtime.js:97:21)",
+				"    at asyncGeneratorStep (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\src\\resolvers\\mutation\\user.js:16:103)",
+				"    at _next (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\src\\resolvers\\mutation\\user.js:18:194)"
+			]
+		}
+	}
+}2020-04-02T13:23:08.881Z{
+	"message": "Такого пользователя не существует",
+	"locations": [
+		{
+			"line": 2,
+			"column": 3
+		}
+	],
+	"path": [
+		"loginUser"
+	],
+	"extensions": {
+		"code": "UNAUTHENTICATED",
+		"exception": {
+			"stacktrace": [
+				"AuthenticationError: Такого пользователя не существует",
+				"    at _callee2$ (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\src\\resolvers\\mutation/user.js:31:23)",
+				"    at tryCatch (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\regenerator-runtime\\runtime.js:45:40)",
+				"    at Generator.invoke [as _invoke] (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\regenerator-runtime\\runtime.js:271:22)",
+				"    at Generator.prototype.(anonymous function) [as next] (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\regenerator-runtime\\runtime.js:97:21)",
+				"    at asyncGeneratorStep (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\src\\resolvers\\mutation\\user.js:16:103)",
+				"    at _next (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\src\\resolvers\\mutation\\user.js:18:194)"
+			]
+		}
+	}
+}2020-04-02T13:48:14.808Z{
+	"message": "Такого пользователя не существует",
+	"locations": [
+		{
+			"line": 2,
+			"column": 3
+		}
+	],
+	"path": [
+		"loginUser"
+	],
+	"extensions": {
+		"code": "UNAUTHENTICATED",
+		"exception": {
+			"stacktrace": [
+				"AuthenticationError: Такого пользователя не существует",
+				"    at _callee2$ (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\src\\resolvers\\mutation/user.js:31:23)",
+				"    at tryCatch (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\regenerator-runtime\\runtime.js:45:40)",
+				"    at Generator.invoke [as _invoke] (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\regenerator-runtime\\runtime.js:271:22)",
+				"    at Generator.prototype.(anonymous function) [as next] (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\regenerator-runtime\\runtime.js:97:21)",
+				"    at asyncGeneratorStep (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\src\\resolvers\\mutation\\user.js:16:103)",
+				"    at _next (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\src\\resolvers\\mutation\\user.js:18:194)"
+			]
+		}
+	}
+}2020-04-02T13:49:40.852Z{
+	"message": "Такого пользователя не существует",
+	"locations": [
+		{
+			"line": 2,
+			"column": 3
+		}
+	],
+	"path": [
+		"loginUser"
+	],
+	"extensions": {
+		"code": "UNAUTHENTICATED",
+		"exception": {
+			"stacktrace": [
+				"AuthenticationError: Такого пользователя не существует",
+				"    at _callee2$ (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\src\\resolvers\\mutation/user.js:31:23)",
+				"    at tryCatch (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\regenerator-runtime\\runtime.js:45:40)",
+				"    at Generator.invoke [as _invoke] (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\regenerator-runtime\\runtime.js:271:22)",
+				"    at Generator.prototype.(anonymous function) [as next] (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\regenerator-runtime\\runtime.js:97:21)",
+				"    at asyncGeneratorStep (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\src\\resolvers\\mutation\\user.js:16:103)",
+				"    at _next (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\src\\resolvers\\mutation\\user.js:18:194)"
+			]
+		}
+	}
+}2020-04-02T13:52:27.653Z{
+	"message": "Такого пользователя не существует",
+	"locations": [
+		{
+			"line": 2,
+			"column": 3
+		}
+	],
+	"path": [
+		"loginUser"
+	],
+	"extensions": {
+		"code": "UNAUTHENTICATED",
+		"exception": {
+			"stacktrace": [
+				"AuthenticationError: Такого пользователя не существует",
+				"    at _callee2$ (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\src\\resolvers\\mutation/user.js:31:23)",
+				"    at tryCatch (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\regenerator-runtime\\runtime.js:45:40)",
+				"    at Generator.invoke [as _invoke] (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\regenerator-runtime\\runtime.js:271:22)",
+				"    at Generator.prototype.(anonymous function) [as next] (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\regenerator-runtime\\runtime.js:97:21)",
+				"    at asyncGeneratorStep (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\src\\resolvers\\mutation\\user.js:16:103)",
+				"    at _next (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\src\\resolvers\\mutation\\user.js:18:194)"
+			]
+		}
+	}
+}2020-04-02T13:55:12.651Z{
+	"message": "Такого пользователя не существует",
+	"locations": [
+		{
+			"line": 2,
+			"column": 3
+		}
+	],
+	"path": [
+		"loginUser"
+	],
+	"extensions": {
+		"code": "UNAUTHENTICATED",
+		"exception": {
+			"stacktrace": [
+				"AuthenticationError: Такого пользователя не существует",
+				"    at _callee2$ (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\src\\resolvers\\mutation/user.js:31:23)",
+				"    at tryCatch (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\regenerator-runtime\\runtime.js:45:40)",
+				"    at Generator.invoke [as _invoke] (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\regenerator-runtime\\runtime.js:271:22)",
+				"    at Generator.prototype.(anonymous function) [as next] (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\regenerator-runtime\\runtime.js:97:21)",
+				"    at asyncGeneratorStep (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\src\\resolvers\\mutation\\user.js:16:103)",
+				"    at _next (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\src\\resolvers\\mutation\\user.js:18:194)"
+			]
+		}
+	}
+}2020-04-02T13:56:11.377Z{
+	"message": "Такого пользователя не существует",
+	"locations": [
+		{
+			"line": 2,
+			"column": 3
+		}
+	],
+	"path": [
+		"loginUser"
+	],
+	"extensions": {
+		"code": "UNAUTHENTICATED",
+		"exception": {
+			"stacktrace": [
+				"AuthenticationError: Такого пользователя не существует",
+				"    at _callee2$ (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\src\\resolvers\\mutation/user.js:31:23)",
+				"    at tryCatch (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\regenerator-runtime\\runtime.js:45:40)",
+				"    at Generator.invoke [as _invoke] (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\regenerator-runtime\\runtime.js:271:22)",
+				"    at Generator.prototype.(anonymous function) [as next] (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\regenerator-runtime\\runtime.js:97:21)",
+				"    at asyncGeneratorStep (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\src\\resolvers\\mutation\\user.js:16:103)",
+				"    at _next (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\src\\resolvers\\mutation\\user.js:18:194)"
+			]
+		}
+	}
+}2020-04-02T13:57:11.006Z{
+	"message": "Такого пользователя не существует",
+	"locations": [
+		{
+			"line": 2,
+			"column": 3
+		}
+	],
+	"path": [
+		"loginUser"
+	],
+	"extensions": {
+		"code": "UNAUTHENTICATED",
+		"exception": {
+			"stacktrace": [
+				"AuthenticationError: Такого пользователя не существует",
+				"    at _callee2$ (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\src\\resolvers\\mutation/user.js:31:23)",
+				"    at tryCatch (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\regenerator-runtime\\runtime.js:45:40)",
+				"    at Generator.invoke [as _invoke] (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\regenerator-runtime\\runtime.js:271:22)",
+				"    at Generator.prototype.(anonymous function) [as next] (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\regenerator-runtime\\runtime.js:97:21)",
+				"    at asyncGeneratorStep (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\src\\resolvers\\mutation\\user.js:16:103)",
+				"    at _next (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\src\\resolvers\\mutation\\user.js:18:194)"
+			]
+		}
+	}
+}2020-04-02T14:01:02.116Z{
+	"message": "Такого пользователя не существует",
+	"locations": [
+		{
+			"line": 2,
+			"column": 3
+		}
+	],
+	"path": [
+		"loginUser"
+	],
+	"extensions": {
+		"code": "UNAUTHENTICATED",
+		"exception": {
+			"stacktrace": [
+				"AuthenticationError: Такого пользователя не существует",
+				"    at _callee2$ (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\src\\resolvers\\mutation/user.js:31:23)",
+				"    at tryCatch (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\regenerator-runtime\\runtime.js:45:40)",
+				"    at Generator.invoke [as _invoke] (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\regenerator-runtime\\runtime.js:271:22)",
+				"    at Generator.prototype.(anonymous function) [as next] (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\regenerator-runtime\\runtime.js:97:21)",
+				"    at asyncGeneratorStep (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\src\\resolvers\\mutation\\user.js:16:103)",
+				"    at _next (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\src\\resolvers\\mutation\\user.js:18:194)"
+			]
+		}
+	}
+}2020-04-02T14:05:21.490Z{
+	"message": "Такого пользователя не существует",
+	"locations": [
+		{
+			"line": 2,
+			"column": 3
+		}
+	],
+	"path": [
+		"loginUser"
+	],
+	"extensions": {
+		"code": "UNAUTHENTICATED",
+		"exception": {
+			"stacktrace": [
+				"AuthenticationError: Такого пользователя не существует",
+				"    at _callee2$ (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\src\\resolvers\\mutation/user.js:31:23)",
+				"    at tryCatch (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\regenerator-runtime\\runtime.js:45:40)",
+				"    at Generator.invoke [as _invoke] (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\regenerator-runtime\\runtime.js:271:22)",
+				"    at Generator.prototype.(anonymous function) [as next] (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\regenerator-runtime\\runtime.js:97:21)",
+				"    at asyncGeneratorStep (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\src\\resolvers\\mutation\\user.js:16:103)",
+				"    at _next (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\src\\resolvers\\mutation\\user.js:18:194)"
+			]
+		}
+	}
+}2020-04-02T14:09:01.516Z{
+	"message": "Такого пользователя не существует",
+	"locations": [
+		{
+			"line": 2,
+			"column": 3
+		}
+	],
+	"path": [
+		"loginUser"
+	],
+	"extensions": {
+		"code": "UNAUTHENTICATED",
+		"exception": {
+			"stacktrace": [
+				"AuthenticationError: Такого пользователя не существует",
+				"    at _callee2$ (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\src\\resolvers\\mutation/user.js:31:23)",
+				"    at tryCatch (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\regenerator-runtime\\runtime.js:45:40)",
+				"    at Generator.invoke [as _invoke] (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\regenerator-runtime\\runtime.js:271:22)",
+				"    at Generator.prototype.(anonymous function) [as next] (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\regenerator-runtime\\runtime.js:97:21)",
+				"    at asyncGeneratorStep (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\src\\resolvers\\mutation\\user.js:16:103)",
+				"    at _next (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\src\\resolvers\\mutation\\user.js:18:194)"
+			]
+		}
+	}
+}2020-04-02T16:32:00.747Z{
+	"message": "text",
+	"locations": [
+		{
+			"line": 2,
+			"column": 3
+		}
+	],
+	"path": [
+		"scienceRoutes"
+	],
+	"extensions": {
+		"code": "INTERNAL_SERVER_ERROR",
+		"exception": {
+			"stacktrace": [
+				"Error: text",
+				"    at _callee$ (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\src\\resolvers\\query/science.js:6:12)",
+				"    at tryCatch (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\regenerator-runtime\\runtime.js:45:40)",
+				"    at Generator.invoke [as _invoke] (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\regenerator-runtime\\runtime.js:271:22)",
+				"    at Generator.prototype.(anonymous function) [as next] (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\regenerator-runtime\\runtime.js:97:21)",
+				"    at asyncGeneratorStep (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\src\\resolvers\\query\\science.js:16:103)",
+				"    at _next (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\src\\resolvers\\query\\science.js:18:194)",
+				"    at C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\src\\resolvers\\query\\science.js:18:364",
+				"    at new Promise (<anonymous>)",
+				"    at C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\src\\resolvers\\query\\science.js:18:97",
+				"    at scienceRoutes (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\src\\resolvers\\query/science.js:3:22)",
+				"    at field.resolve (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\graphql-extensions\\src\\index.ts:274:18)",
+				"    at resolveFieldValueOrError (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\graphql\\execution\\execute.js:467:18)",
+				"    at resolveField (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\graphql\\execution\\execute.js:434:16)",
+				"    at executeFields (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\graphql\\execution\\execute.js:275:18)",
+				"    at executeOperation (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\graphql\\execution\\execute.js:219:122)",
+				"    at executeImpl (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\graphql\\execution\\execute.js:104:14)",
+				"    at Object.execute (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\graphql\\execution\\execute.js:64:35)",
+				"    at C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\apollo-server-core\\src\\requestPipeline.ts:481:30",
+				"    at Generator.next (<anonymous>)",
+				"    at C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\apollo-server-core\\dist\\requestPipeline.js:8:71",
+				"    at new Promise (<anonymous>)",
+				"    at __awaiter (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\apollo-server-core\\dist\\requestPipeline.js:4:12)"
+			]
+		}
+	}
+}2020-04-02T16:33:01.615Z{
+	"message": "text",
+	"locations": [
+		{
+			"line": 2,
+			"column": 3
+		}
+	],
+	"path": [
+		"scienceRoutes"
+	],
+	"extensions": {
+		"code": "INTERNAL_SERVER_ERROR",
+		"exception": {
+			"stacktrace": [
+				"Error: text",
+				"    at _callee$ (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\src\\resolvers\\query/science.js:6:12)",
+				"    at tryCatch (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\regenerator-runtime\\runtime.js:45:40)",
+				"    at Generator.invoke [as _invoke] (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\regenerator-runtime\\runtime.js:271:22)",
+				"    at Generator.prototype.(anonymous function) [as next] (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\regenerator-runtime\\runtime.js:97:21)",
+				"    at asyncGeneratorStep (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\src\\resolvers\\query\\science.js:16:103)",
+				"    at _next (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\src\\resolvers\\query\\science.js:18:194)",
+				"    at C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\src\\resolvers\\query\\science.js:18:364",
+				"    at new Promise (<anonymous>)",
+				"    at C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\src\\resolvers\\query\\science.js:18:97",
+				"    at scienceRoutes (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\src\\resolvers\\query/science.js:3:22)",
+				"    at field.resolve (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\graphql-extensions\\src\\index.ts:274:18)",
+				"    at resolveFieldValueOrError (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\graphql\\execution\\execute.js:467:18)",
+				"    at resolveField (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\graphql\\execution\\execute.js:434:16)",
+				"    at executeFields (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\graphql\\execution\\execute.js:275:18)",
+				"    at executeOperation (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\graphql\\execution\\execute.js:219:122)",
+				"    at executeImpl (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\graphql\\execution\\execute.js:104:14)",
+				"    at Object.execute (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\graphql\\execution\\execute.js:64:35)",
+				"    at C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\apollo-server-core\\src\\requestPipeline.ts:481:30",
+				"    at Generator.next (<anonymous>)",
+				"    at C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\apollo-server-core\\dist\\requestPipeline.js:8:71",
+				"    at new Promise (<anonymous>)",
+				"    at __awaiter (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\apollo-server-core\\dist\\requestPipeline.js:4:12)"
+			]
+		}
+	}
+}2020-04-02T16:35:15.887Z{
+	"message": "text",
+	"locations": [
+		{
+			"line": 2,
+			"column": 3
+		}
+	],
+	"path": [
+		"scienceRoutes"
+	],
+	"extensions": {
+		"code": "INTERNAL_SERVER_ERROR",
+		"exception": {
+			"stacktrace": [
+				"Error: text",
+				"    at _callee$ (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\src\\resolvers\\query/science.js:6:12)",
+				"    at tryCatch (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\regenerator-runtime\\runtime.js:45:40)",
+				"    at Generator.invoke [as _invoke] (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\regenerator-runtime\\runtime.js:271:22)",
+				"    at Generator.prototype.(anonymous function) [as next] (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\regenerator-runtime\\runtime.js:97:21)",
+				"    at asyncGeneratorStep (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\src\\resolvers\\query\\science.js:16:103)",
+				"    at _next (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\src\\resolvers\\query\\science.js:18:194)",
+				"    at C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\src\\resolvers\\query\\science.js:18:364",
+				"    at new Promise (<anonymous>)",
+				"    at C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\src\\resolvers\\query\\science.js:18:97",
+				"    at scienceRoutes (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\src\\resolvers\\query/science.js:3:22)",
+				"    at field.resolve (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\graphql-extensions\\src\\index.ts:274:18)",
+				"    at resolveFieldValueOrError (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\graphql\\execution\\execute.js:467:18)",
+				"    at resolveField (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\graphql\\execution\\execute.js:434:16)",
+				"    at executeFields (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\graphql\\execution\\execute.js:275:18)",
+				"    at executeOperation (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\graphql\\execution\\execute.js:219:122)",
+				"    at executeImpl (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\graphql\\execution\\execute.js:104:14)",
+				"    at Object.execute (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\graphql\\execution\\execute.js:64:35)",
+				"    at C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\apollo-server-core\\src\\requestPipeline.ts:481:30",
+				"    at Generator.next (<anonymous>)",
+				"    at C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\apollo-server-core\\dist\\requestPipeline.js:8:71",
+				"    at new Promise (<anonymous>)",
+				"    at __awaiter (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\apollo-server-core\\dist\\requestPipeline.js:4:12)"
+			]
+		}
+	}
+}2020-04-02T16:36:58.236Z{
+	"message": "text",
+	"locations": [
+		{
+			"line": 2,
+			"column": 3
+		}
+	],
+	"path": [
+		"scienceRoutes"
+	],
+	"extensions": {
+		"code": "INTERNAL_SERVER_ERROR",
+		"exception": {
+			"stacktrace": [
+				"Error: text",
+				"    at _callee$ (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\src\\resolvers\\query/science.js:6:12)",
+				"    at tryCatch (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\regenerator-runtime\\runtime.js:45:40)",
+				"    at Generator.invoke [as _invoke] (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\regenerator-runtime\\runtime.js:271:22)",
+				"    at Generator.prototype.(anonymous function) [as next] (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\regenerator-runtime\\runtime.js:97:21)",
+				"    at asyncGeneratorStep (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\src\\resolvers\\query\\science.js:16:103)",
+				"    at _next (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\src\\resolvers\\query\\science.js:18:194)",
+				"    at C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\src\\resolvers\\query\\science.js:18:364",
+				"    at new Promise (<anonymous>)",
+				"    at C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\src\\resolvers\\query\\science.js:18:97",
+				"    at scienceRoutes (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\src\\resolvers\\query/science.js:3:22)",
+				"    at field.resolve (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\graphql-extensions\\src\\index.ts:274:18)",
+				"    at resolveFieldValueOrError (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\graphql\\execution\\execute.js:467:18)",
+				"    at resolveField (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\graphql\\execution\\execute.js:434:16)",
+				"    at executeFields (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\graphql\\execution\\execute.js:275:18)",
+				"    at executeOperation (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\graphql\\execution\\execute.js:219:122)",
+				"    at executeImpl (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\graphql\\execution\\execute.js:104:14)",
+				"    at Object.execute (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\graphql\\execution\\execute.js:64:35)",
+				"    at C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\apollo-server-core\\src\\requestPipeline.ts:481:30",
+				"    at Generator.next (<anonymous>)",
+				"    at C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\apollo-server-core\\dist\\requestPipeline.js:8:71",
+				"    at new Promise (<anonymous>)",
+				"    at __awaiter (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\apollo-server-core\\dist\\requestPipeline.js:4:12)"
+			]
+		}
+	}
+}2020-04-02T16:37:37.386Z{
+	"message": "text",
+	"locations": [
+		{
+			"line": 2,
+			"column": 3
+		}
+	],
+	"path": [
+		"scienceRoutes"
+	],
+	"extensions": {
+		"code": "INTERNAL_SERVER_ERROR",
+		"exception": {
+			"stacktrace": [
+				"Error: text",
+				"    at _callee$ (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\src\\resolvers\\query/science.js:6:12)",
+				"    at tryCatch (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\regenerator-runtime\\runtime.js:45:40)",
+				"    at Generator.invoke [as _invoke] (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\regenerator-runtime\\runtime.js:271:22)",
+				"    at Generator.prototype.(anonymous function) [as next] (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\regenerator-runtime\\runtime.js:97:21)",
+				"    at asyncGeneratorStep (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\src\\resolvers\\query\\science.js:16:103)",
+				"    at _next (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\src\\resolvers\\query\\science.js:18:194)",
+				"    at C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\src\\resolvers\\query\\science.js:18:364",
+				"    at new Promise (<anonymous>)",
+				"    at C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\src\\resolvers\\query\\science.js:18:97",
+				"    at scienceRoutes (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\src\\resolvers\\query/science.js:3:22)",
+				"    at field.resolve (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\graphql-extensions\\src\\index.ts:274:18)",
+				"    at resolveFieldValueOrError (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\graphql\\execution\\execute.js:467:18)",
+				"    at resolveField (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\graphql\\execution\\execute.js:434:16)",
+				"    at executeFields (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\graphql\\execution\\execute.js:275:18)",
+				"    at executeOperation (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\graphql\\execution\\execute.js:219:122)",
+				"    at executeImpl (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\graphql\\execution\\execute.js:104:14)",
+				"    at Object.execute (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\graphql\\execution\\execute.js:64:35)",
+				"    at C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\apollo-server-core\\src\\requestPipeline.ts:481:30",
+				"    at Generator.next (<anonymous>)",
+				"    at C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\apollo-server-core\\dist\\requestPipeline.js:8:71",
+				"    at new Promise (<anonymous>)",
+				"    at __awaiter (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\apollo-server-core\\dist\\requestPipeline.js:4:12)"
+			]
+		}
+	}
+}2020-04-02T16:39:06.458Z{
+	"message": "text",
+	"locations": [
+		{
+			"line": 2,
+			"column": 3
+		}
+	],
+	"path": [
+		"scienceRoutes"
+	],
+	"extensions": {
+		"code": "INTERNAL_SERVER_ERROR",
+		"exception": {
+			"stacktrace": [
+				"Error: text",
+				"    at _callee$ (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\src\\resolvers\\query/science.js:6:12)",
+				"    at tryCatch (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\regenerator-runtime\\runtime.js:45:40)",
+				"    at Generator.invoke [as _invoke] (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\regenerator-runtime\\runtime.js:271:22)",
+				"    at Generator.prototype.(anonymous function) [as next] (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\regenerator-runtime\\runtime.js:97:21)",
+				"    at asyncGeneratorStep (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\src\\resolvers\\query\\science.js:16:103)",
+				"    at _next (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\src\\resolvers\\query\\science.js:18:194)",
+				"    at C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\src\\resolvers\\query\\science.js:18:364",
+				"    at new Promise (<anonymous>)",
+				"    at C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\src\\resolvers\\query\\science.js:18:97",
+				"    at scienceRoutes (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\src\\resolvers\\query/science.js:3:22)",
+				"    at field.resolve (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\graphql-extensions\\src\\index.ts:274:18)",
+				"    at resolveFieldValueOrError (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\graphql\\execution\\execute.js:467:18)",
+				"    at resolveField (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\graphql\\execution\\execute.js:434:16)",
+				"    at executeFields (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\graphql\\execution\\execute.js:275:18)",
+				"    at executeOperation (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\graphql\\execution\\execute.js:219:122)",
+				"    at executeImpl (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\graphql\\execution\\execute.js:104:14)",
+				"    at Object.execute (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\graphql\\execution\\execute.js:64:35)",
+				"    at C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\apollo-server-core\\src\\requestPipeline.ts:481:30",
+				"    at Generator.next (<anonymous>)",
+				"    at C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\apollo-server-core\\dist\\requestPipeline.js:8:71",
+				"    at new Promise (<anonymous>)",
+				"    at __awaiter (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\apollo-server-core\\dist\\requestPipeline.js:4:12)"
+			]
+		}
+	}
+}2020-04-02T16:39:25.327Z{
+	"message": "text",
+	"locations": [
+		{
+			"line": 2,
+			"column": 3
+		}
+	],
+	"path": [
+		"scienceRoutes"
+	],
+	"extensions": {
+		"code": "INTERNAL_SERVER_ERROR",
+		"exception": {
+			"stacktrace": [
+				"Error: text",
+				"    at _callee$ (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\src\\resolvers\\query/science.js:6:12)",
+				"    at tryCatch (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\regenerator-runtime\\runtime.js:45:40)",
+				"    at Generator.invoke [as _invoke] (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\regenerator-runtime\\runtime.js:271:22)",
+				"    at Generator.prototype.(anonymous function) [as next] (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\regenerator-runtime\\runtime.js:97:21)",
+				"    at asyncGeneratorStep (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\src\\resolvers\\query\\science.js:16:103)",
+				"    at _next (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\src\\resolvers\\query\\science.js:18:194)",
+				"    at C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\src\\resolvers\\query\\science.js:18:364",
+				"    at new Promise (<anonymous>)",
+				"    at C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\src\\resolvers\\query\\science.js:18:97",
+				"    at scienceRoutes (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\src\\resolvers\\query/science.js:3:22)",
+				"    at field.resolve (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\graphql-extensions\\src\\index.ts:274:18)",
+				"    at resolveFieldValueOrError (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\graphql\\execution\\execute.js:467:18)",
+				"    at resolveField (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\graphql\\execution\\execute.js:434:16)",
+				"    at executeFields (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\graphql\\execution\\execute.js:275:18)",
+				"    at executeOperation (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\graphql\\execution\\execute.js:219:122)",
+				"    at executeImpl (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\graphql\\execution\\execute.js:104:14)",
+				"    at Object.execute (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\graphql\\execution\\execute.js:64:35)",
+				"    at C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\apollo-server-core\\src\\requestPipeline.ts:481:30",
+				"    at Generator.next (<anonymous>)",
+				"    at C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\apollo-server-core\\dist\\requestPipeline.js:8:71",
+				"    at new Promise (<anonymous>)",
+				"    at __awaiter (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\apollo-server-core\\dist\\requestPipeline.js:4:12)"
+			]
+		}
+	}
+}2020-04-02T16:40:04.982Z{
+	"message": "text",
+	"locations": [
+		{
+			"line": 2,
+			"column": 3
+		}
+	],
+	"path": [
+		"scienceRoutes"
+	],
+	"extensions": {
+		"code": "INTERNAL_SERVER_ERROR",
+		"exception": {
+			"stacktrace": [
+				"Error: text",
+				"    at _callee$ (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\src\\resolvers\\query/science.js:6:12)",
+				"    at tryCatch (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\regenerator-runtime\\runtime.js:45:40)",
+				"    at Generator.invoke [as _invoke] (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\regenerator-runtime\\runtime.js:271:22)",
+				"    at Generator.prototype.(anonymous function) [as next] (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\regenerator-runtime\\runtime.js:97:21)",
+				"    at asyncGeneratorStep (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\src\\resolvers\\query\\science.js:16:103)",
+				"    at _next (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\src\\resolvers\\query\\science.js:18:194)",
+				"    at C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\src\\resolvers\\query\\science.js:18:364",
+				"    at new Promise (<anonymous>)",
+				"    at C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\src\\resolvers\\query\\science.js:18:97",
+				"    at scienceRoutes (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\src\\resolvers\\query/science.js:3:22)",
+				"    at field.resolve (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\graphql-extensions\\src\\index.ts:274:18)",
+				"    at resolveFieldValueOrError (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\graphql\\execution\\execute.js:467:18)",
+				"    at resolveField (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\graphql\\execution\\execute.js:434:16)",
+				"    at executeFields (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\graphql\\execution\\execute.js:275:18)",
+				"    at executeOperation (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\graphql\\execution\\execute.js:219:122)",
+				"    at executeImpl (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\graphql\\execution\\execute.js:104:14)",
+				"    at Object.execute (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\graphql\\execution\\execute.js:64:35)",
+				"    at C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\apollo-server-core\\src\\requestPipeline.ts:481:30",
+				"    at Generator.next (<anonymous>)",
+				"    at C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\apollo-server-core\\dist\\requestPipeline.js:8:71",
+				"    at new Promise (<anonymous>)",
+				"    at __awaiter (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\apollo-server-core\\dist\\requestPipeline.js:4:12)"
+			]
+		}
+	}
+}2020-04-02T20:41:53.852Z{
+	"message": "Unexpected error value: \"Error creating folder\"",
+	"locations": [
+		{
+			"line": 2,
+			"column": 3
+		}
+	],
+	"path": [
+		"createScienceGroup"
+	],
+	"extensions": {
+		"code": "INTERNAL_SERVER_ERROR",
+		"exception": {
+			"stacktrace": [
+				"Error: Unexpected error value: \"Error creating folder\"",
+				"    at asErrorInstance (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\graphql\\execution\\execute.js:481:10)"
+			]
+		}
+	}
+}2020-04-03T16:49:24.984Z{
+	"message": "Not Authorized!",
+	"locations": [
+		{
+			"line": 2,
+			"column": 3
+		}
+	],
+	"path": [
+		"createConference"
+	],
+	"extensions": {
+		"code": "UNAUTHENTICATED",
+		"exception": {
+			"stacktrace": [
+				"AuthenticationError: Not Authorized!",
+				"    at C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\src\\utils/getUser.js:6:30",
+				"    at new Promise (<anonymous>)",
+				"    at _callee$ (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\src\\utils/getUser.js:4:10)",
+				"    at tryCatch (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\regenerator-runtime\\runtime.js:45:40)",
+				"    at Generator.invoke [as _invoke] (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\regenerator-runtime\\runtime.js:271:22)",
+				"    at Generator.prototype.(anonymous function) [as next] (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\regenerator-runtime\\runtime.js:97:21)",
+				"    at asyncGeneratorStep (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\src\\utils\\getUser.js:10:103)",
+				"    at _next (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\src\\utils\\getUser.js:12:194)",
+				"    at C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\src\\utils\\getUser.js:12:364",
+				"    at new Promise (<anonymous>)",
+				"    at C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\src\\utils\\getUser.js:12:97",
+				"    at C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\src\\utils\\getUser.js:46:17",
+				"    at _callee$ (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\src\\utils/getMutationValue.js:8:22)",
+				"    at tryCatch (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\regenerator-runtime\\runtime.js:45:40)",
+				"    at Generator.invoke [as _invoke] (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\regenerator-runtime\\runtime.js:271:22)",
+				"    at Generator.prototype.(anonymous function) [as next] (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\regenerator-runtime\\runtime.js:97:21)",
+				"    at asyncGeneratorStep (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\src\\utils\\getMutationValue.js:28:103)",
+				"    at _next (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\src\\utils\\getMutationValue.js:30:194)",
+				"    at C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\src\\utils\\getMutationValue.js:30:364",
+				"    at new Promise (<anonymous>)",
+				"    at C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\src\\utils\\getMutationValue.js:30:97",
+				"    at valueForCreateImg (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\src\\utils/getMutationValue.js:6:24)"
+			]
+		}
+	}
+}2020-04-03T22:17:38.329Z{
+	"message": "invalid input syntax for integer: \"HISTORY\"",
+	"locations": [
+		{
+			"line": 2,
+			"column": 3
+		}
+	],
+	"path": [
+		"updateHistory"
+	],
+	"extensions": {
+		"code": "INTERNAL_SERVER_ERROR",
+		"exception": {
+			"name": "SequelizeDatabaseError",
+			"parent": {
+				"name": "error",
+				"length": 101,
+				"severity": "ERROR",
+				"code": "22P02",
+				"position": "192",
+				"file": "numutils.c",
+				"line": "62",
+				"routine": "pg_atoi",
+				"sql": "SELECT \"id\", \"content\", \"section\", \"imageUrl\", \"createdAt\", \"updatedAt\", \"userUpdated\", \"userCreated\" FROM \"biophys_dev\".\"textDescription\" AS \"textDescription\" WHERE \"textDescription\".\"id\" = 'HISTORY';"
+			},
+			"original": {
+				"name": "error",
+				"length": 101,
+				"severity": "ERROR",
+				"code": "22P02",
+				"position": "192",
+				"file": "numutils.c",
+				"line": "62",
+				"routine": "pg_atoi",
+				"sql": "SELECT \"id\", \"content\", \"section\", \"imageUrl\", \"createdAt\", \"updatedAt\", \"userUpdated\", \"userCreated\" FROM \"biophys_dev\".\"textDescription\" AS \"textDescription\" WHERE \"textDescription\".\"id\" = 'HISTORY';"
+			},
+			"sql": "SELECT \"id\", \"content\", \"section\", \"imageUrl\", \"createdAt\", \"updatedAt\", \"userUpdated\", \"userCreated\" FROM \"biophys_dev\".\"textDescription\" AS \"textDescription\" WHERE \"textDescription\".\"id\" = 'HISTORY';",
+			"stacktrace": [
+				"SequelizeDatabaseError: invalid input syntax for integer: \"HISTORY\"",
+				"    at Query.formatError (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\sequelize\\lib\\dialects\\postgres\\query.js:366:16)",
+				"    at query.catch.err (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\sequelize\\lib\\dialects\\postgres\\query.js:72:18)",
+				"    at tryCatcher (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\bluebird\\js\\release\\util.js:16:23)",
+				"    at Promise._settlePromiseFromHandler (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\bluebird\\js\\release\\promise.js:547:31)",
+				"    at Promise._settlePromise (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\bluebird\\js\\release\\promise.js:604:18)",
+				"    at Promise._settlePromise0 (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\bluebird\\js\\release\\promise.js:649:10)",
+				"    at Promise._settlePromises (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\bluebird\\js\\release\\promise.js:725:18)",
+				"    at _drainQueueStep (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\bluebird\\js\\release\\async.js:93:12)",
+				"    at _drainQueue (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\bluebird\\js\\release\\async.js:86:9)",
+				"    at Async._drainQueues (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\bluebird\\js\\release\\async.js:102:5)",
+				"    at Immediate.Async.drainQueues [as _onImmediate] (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\bluebird\\js\\release\\async.js:15:14)",
+				"    at runCallback (timers.js:705:18)",
+				"    at tryOnImmediate (timers.js:676:5)",
+				"    at processImmediate (timers.js:658:5)",
+				"    at process.topLevelDomainCallback (domain.js:120:23)"
+			]
+		}
+	}
+}2020-04-03T22:23:34.400Z{
+	"message": "invalid input syntax for integer: \"HISTORY\"",
+	"locations": [
+		{
+			"line": 2,
+			"column": 3
+		}
+	],
+	"path": [
+		"updateHistory"
+	],
+	"extensions": {
+		"code": "INTERNAL_SERVER_ERROR",
+		"exception": {
+			"name": "SequelizeDatabaseError",
+			"parent": {
+				"name": "error",
+				"length": 101,
+				"severity": "ERROR",
+				"code": "22P02",
+				"position": "192",
+				"file": "numutils.c",
+				"line": "62",
+				"routine": "pg_atoi",
+				"sql": "SELECT \"id\", \"content\", \"section\", \"imageUrl\", \"createdAt\", \"updatedAt\", \"userUpdated\", \"userCreated\" FROM \"biophys_dev\".\"textDescription\" AS \"textDescription\" WHERE \"textDescription\".\"id\" = 'HISTORY';"
+			},
+			"original": {
+				"name": "error",
+				"length": 101,
+				"severity": "ERROR",
+				"code": "22P02",
+				"position": "192",
+				"file": "numutils.c",
+				"line": "62",
+				"routine": "pg_atoi",
+				"sql": "SELECT \"id\", \"content\", \"section\", \"imageUrl\", \"createdAt\", \"updatedAt\", \"userUpdated\", \"userCreated\" FROM \"biophys_dev\".\"textDescription\" AS \"textDescription\" WHERE \"textDescription\".\"id\" = 'HISTORY';"
+			},
+			"sql": "SELECT \"id\", \"content\", \"section\", \"imageUrl\", \"createdAt\", \"updatedAt\", \"userUpdated\", \"userCreated\" FROM \"biophys_dev\".\"textDescription\" AS \"textDescription\" WHERE \"textDescription\".\"id\" = 'HISTORY';",
+			"stacktrace": [
+				"SequelizeDatabaseError: invalid input syntax for integer: \"HISTORY\"",
+				"    at Query.formatError (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\sequelize\\lib\\dialects\\postgres\\query.js:366:16)",
+				"    at query.catch.err (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\sequelize\\lib\\dialects\\postgres\\query.js:72:18)",
+				"    at tryCatcher (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\bluebird\\js\\release\\util.js:16:23)",
+				"    at Promise._settlePromiseFromHandler (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\bluebird\\js\\release\\promise.js:547:31)",
+				"    at Promise._settlePromise (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\bluebird\\js\\release\\promise.js:604:18)",
+				"    at Promise._settlePromise0 (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\bluebird\\js\\release\\promise.js:649:10)",
+				"    at Promise._settlePromises (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\bluebird\\js\\release\\promise.js:725:18)",
+				"    at _drainQueueStep (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\bluebird\\js\\release\\async.js:93:12)",
+				"    at _drainQueue (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\bluebird\\js\\release\\async.js:86:9)",
+				"    at Async._drainQueues (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\bluebird\\js\\release\\async.js:102:5)",
+				"    at Immediate.Async.drainQueues [as _onImmediate] (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\bluebird\\js\\release\\async.js:15:14)",
+				"    at runCallback (timers.js:705:18)",
+				"    at tryOnImmediate (timers.js:676:5)",
+				"    at processImmediate (timers.js:658:5)",
+				"    at process.topLevelDomainCallback (domain.js:120:23)"
+			]
+		}
+	}
+}2020-04-03T22:25:50.791Z{
+	"message": "invalid input syntax for integer: \"HISTORY\"",
+	"locations": [
+		{
+			"line": 2,
+			"column": 3
+		}
+	],
+	"path": [
+		"updateHistory"
+	],
+	"extensions": {
+		"code": "INTERNAL_SERVER_ERROR",
+		"exception": {
+			"name": "SequelizeDatabaseError",
+			"parent": {
+				"name": "error",
+				"length": 101,
+				"severity": "ERROR",
+				"code": "22P02",
+				"position": "192",
+				"file": "numutils.c",
+				"line": "62",
+				"routine": "pg_atoi",
+				"sql": "SELECT \"id\", \"content\", \"section\", \"imageUrl\", \"createdAt\", \"updatedAt\", \"userUpdated\", \"userCreated\" FROM \"biophys_dev\".\"textDescription\" AS \"textDescription\" WHERE \"textDescription\".\"id\" = 'HISTORY';"
+			},
+			"original": {
+				"name": "error",
+				"length": 101,
+				"severity": "ERROR",
+				"code": "22P02",
+				"position": "192",
+				"file": "numutils.c",
+				"line": "62",
+				"routine": "pg_atoi",
+				"sql": "SELECT \"id\", \"content\", \"section\", \"imageUrl\", \"createdAt\", \"updatedAt\", \"userUpdated\", \"userCreated\" FROM \"biophys_dev\".\"textDescription\" AS \"textDescription\" WHERE \"textDescription\".\"id\" = 'HISTORY';"
+			},
+			"sql": "SELECT \"id\", \"content\", \"section\", \"imageUrl\", \"createdAt\", \"updatedAt\", \"userUpdated\", \"userCreated\" FROM \"biophys_dev\".\"textDescription\" AS \"textDescription\" WHERE \"textDescription\".\"id\" = 'HISTORY';",
+			"stacktrace": [
+				"SequelizeDatabaseError: invalid input syntax for integer: \"HISTORY\"",
+				"    at Query.formatError (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\sequelize\\lib\\dialects\\postgres\\query.js:366:16)",
+				"    at query.catch.err (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\sequelize\\lib\\dialects\\postgres\\query.js:72:18)",
+				"    at tryCatcher (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\bluebird\\js\\release\\util.js:16:23)",
+				"    at Promise._settlePromiseFromHandler (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\bluebird\\js\\release\\promise.js:547:31)",
+				"    at Promise._settlePromise (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\bluebird\\js\\release\\promise.js:604:18)",
+				"    at Promise._settlePromise0 (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\bluebird\\js\\release\\promise.js:649:10)",
+				"    at Promise._settlePromises (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\bluebird\\js\\release\\promise.js:725:18)",
+				"    at _drainQueueStep (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\bluebird\\js\\release\\async.js:93:12)",
+				"    at _drainQueue (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\bluebird\\js\\release\\async.js:86:9)",
+				"    at Async._drainQueues (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\bluebird\\js\\release\\async.js:102:5)",
+				"    at Immediate.Async.drainQueues [as _onImmediate] (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\bluebird\\js\\release\\async.js:15:14)",
+				"    at runCallback (timers.js:705:18)",
+				"    at tryOnImmediate (timers.js:676:5)",
+				"    at processImmediate (timers.js:658:5)",
+				"    at process.topLevelDomainCallback (domain.js:120:23)"
+			]
+		}
+	}
+}2020-04-03T22:27:48.722Z{
+	"message": "invalid input syntax for integer: \"_\"",
+	"locations": [
+		{
+			"line": 2,
+			"column": 3
+		}
+	],
+	"path": [
+		"updateHistory"
+	],
+	"extensions": {
+		"code": "INTERNAL_SERVER_ERROR",
+		"exception": {
+			"name": "SequelizeDatabaseError",
+			"parent": {
+				"name": "error",
+				"length": 95,
+				"severity": "ERROR",
+				"code": "22P02",
+				"position": "192",
+				"file": "numutils.c",
+				"line": "62",
+				"routine": "pg_atoi",
+				"sql": "SELECT \"id\", \"content\", \"section\", \"imageUrl\", \"createdAt\", \"updatedAt\", \"userUpdated\", \"userCreated\" FROM \"biophys_dev\".\"textDescription\" AS \"textDescription\" WHERE \"textDescription\".\"id\" = '_';"
+			},
+			"original": {
+				"name": "error",
+				"length": 95,
+				"severity": "ERROR",
+				"code": "22P02",
+				"position": "192",
+				"file": "numutils.c",
+				"line": "62",
+				"routine": "pg_atoi",
+				"sql": "SELECT \"id\", \"content\", \"section\", \"imageUrl\", \"createdAt\", \"updatedAt\", \"userUpdated\", \"userCreated\" FROM \"biophys_dev\".\"textDescription\" AS \"textDescription\" WHERE \"textDescription\".\"id\" = '_';"
+			},
+			"sql": "SELECT \"id\", \"content\", \"section\", \"imageUrl\", \"createdAt\", \"updatedAt\", \"userUpdated\", \"userCreated\" FROM \"biophys_dev\".\"textDescription\" AS \"textDescription\" WHERE \"textDescription\".\"id\" = '_';",
+			"stacktrace": [
+				"SequelizeDatabaseError: invalid input syntax for integer: \"_\"",
+				"    at Query.formatError (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\sequelize\\lib\\dialects\\postgres\\query.js:366:16)",
+				"    at query.catch.err (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\sequelize\\lib\\dialects\\postgres\\query.js:72:18)",
+				"    at tryCatcher (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\bluebird\\js\\release\\util.js:16:23)",
+				"    at Promise._settlePromiseFromHandler (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\bluebird\\js\\release\\promise.js:547:31)",
+				"    at Promise._settlePromise (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\bluebird\\js\\release\\promise.js:604:18)",
+				"    at Promise._settlePromise0 (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\bluebird\\js\\release\\promise.js:649:10)",
+				"    at Promise._settlePromises (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\bluebird\\js\\release\\promise.js:725:18)",
+				"    at _drainQueueStep (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\bluebird\\js\\release\\async.js:93:12)",
+				"    at _drainQueue (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\bluebird\\js\\release\\async.js:86:9)",
+				"    at Async._drainQueues (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\bluebird\\js\\release\\async.js:102:5)",
+				"    at Immediate.Async.drainQueues [as _onImmediate] (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\bluebird\\js\\release\\async.js:15:14)",
+				"    at runCallback (timers.js:705:18)",
+				"    at tryOnImmediate (timers.js:676:5)",
+				"    at processImmediate (timers.js:658:5)",
+				"    at process.topLevelDomainCallback (domain.js:120:23)"
+			]
+		}
+	}
+}2020-04-03T22:28:59.533Z{
+	"message": "invalid input syntax for integer: \"_\"",
+	"locations": [
+		{
+			"line": 2,
+			"column": 3
+		}
+	],
+	"path": [
+		"updateHistory"
+	],
+	"extensions": {
+		"code": "INTERNAL_SERVER_ERROR",
+		"exception": {
+			"name": "SequelizeDatabaseError",
+			"parent": {
+				"name": "error",
+				"length": 95,
+				"severity": "ERROR",
+				"code": "22P02",
+				"position": "192",
+				"file": "numutils.c",
+				"line": "62",
+				"routine": "pg_atoi",
+				"sql": "SELECT \"id\", \"content\", \"section\", \"imageUrl\", \"createdAt\", \"updatedAt\", \"userUpdated\", \"userCreated\" FROM \"biophys_dev\".\"textDescription\" AS \"textDescription\" WHERE \"textDescription\".\"id\" = '_';"
+			},
+			"original": {
+				"name": "error",
+				"length": 95,
+				"severity": "ERROR",
+				"code": "22P02",
+				"position": "192",
+				"file": "numutils.c",
+				"line": "62",
+				"routine": "pg_atoi",
+				"sql": "SELECT \"id\", \"content\", \"section\", \"imageUrl\", \"createdAt\", \"updatedAt\", \"userUpdated\", \"userCreated\" FROM \"biophys_dev\".\"textDescription\" AS \"textDescription\" WHERE \"textDescription\".\"id\" = '_';"
+			},
+			"sql": "SELECT \"id\", \"content\", \"section\", \"imageUrl\", \"createdAt\", \"updatedAt\", \"userUpdated\", \"userCreated\" FROM \"biophys_dev\".\"textDescription\" AS \"textDescription\" WHERE \"textDescription\".\"id\" = '_';",
+			"stacktrace": [
+				"SequelizeDatabaseError: invalid input syntax for integer: \"_\"",
+				"    at Query.formatError (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\sequelize\\lib\\dialects\\postgres\\query.js:366:16)",
+				"    at query.catch.err (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\sequelize\\lib\\dialects\\postgres\\query.js:72:18)",
+				"    at tryCatcher (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\bluebird\\js\\release\\util.js:16:23)",
+				"    at Promise._settlePromiseFromHandler (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\bluebird\\js\\release\\promise.js:547:31)",
+				"    at Promise._settlePromise (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\bluebird\\js\\release\\promise.js:604:18)",
+				"    at Promise._settlePromise0 (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\bluebird\\js\\release\\promise.js:649:10)",
+				"    at Promise._settlePromises (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\bluebird\\js\\release\\promise.js:725:18)",
+				"    at _drainQueueStep (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\bluebird\\js\\release\\async.js:93:12)",
+				"    at _drainQueue (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\bluebird\\js\\release\\async.js:86:9)",
+				"    at Async._drainQueues (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\bluebird\\js\\release\\async.js:102:5)",
+				"    at Immediate.Async.drainQueues [as _onImmediate] (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\bluebird\\js\\release\\async.js:15:14)",
+				"    at runCallback (timers.js:705:18)",
+				"    at tryOnImmediate (timers.js:676:5)",
+				"    at processImmediate (timers.js:658:5)",
+				"    at process.topLevelDomainCallback (domain.js:120:23)"
+			]
+		}
+	}
+}2020-04-04T17:41:48.240Z{
+	"message": "Not Authorized!",
+	"locations": [
+		{
+			"line": 2,
+			"column": 3
+		}
+	],
+	"path": [
+		"updateHistory"
+	],
+	"extensions": {
+		"code": "UNAUTHENTICATED",
+		"exception": {
+			"stacktrace": [
+				"AuthenticationError: Not Authorized!",
+				"    at C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\src\\utils/getUser.js:6:30",
+				"    at new Promise (<anonymous>)",
+				"    at _callee$ (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\src\\utils/getUser.js:4:10)",
+				"    at tryCatch (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\regenerator-runtime\\runtime.js:45:40)",
+				"    at Generator.invoke [as _invoke] (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\regenerator-runtime\\runtime.js:271:22)",
+				"    at Generator.prototype.(anonymous function) [as next] (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\regenerator-runtime\\runtime.js:97:21)",
+				"    at asyncGeneratorStep (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\src\\utils\\getUser.js:10:103)",
+				"    at _next (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\src\\utils\\getUser.js:12:194)",
+				"    at C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\src\\utils\\getUser.js:12:364",
+				"    at new Promise (<anonymous>)",
+				"    at C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\src\\utils\\getUser.js:12:97",
+				"    at C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\src\\utils\\getUser.js:46:17",
+				"    at _callee2$ (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\src\\utils/getMutationValue.js:41:22)",
+				"    at tryCatch (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\regenerator-runtime\\runtime.js:45:40)",
+				"    at Generator.invoke [as _invoke] (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\regenerator-runtime\\runtime.js:271:22)",
+				"    at Generator.prototype.(anonymous function) [as next] (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\regenerator-runtime\\runtime.js:97:21)",
+				"    at asyncGeneratorStep (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\src\\utils\\getMutationValue.js:28:103)",
+				"    at _next (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\src\\utils\\getMutationValue.js:30:194)",
+				"    at C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\src\\utils\\getMutationValue.js:30:364",
+				"    at new Promise (<anonymous>)",
+				"    at C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\src\\utils\\getMutationValue.js:30:97",
+				"    at valueForUpdateImg (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\src\\utils/getMutationValue.js:39:24)"
+			]
+		}
+	}
+}2020-04-04T19:00:08.568Z{
+	"message": "Cannot read property 'imageUrl' of null",
+	"locations": [
+		{
+			"line": 2,
+			"column": 3
+		}
+	],
+	"path": [
+		"updateHistory"
+	],
+	"extensions": {
+		"code": "INTERNAL_SERVER_ERROR",
+		"exception": {
+			"stacktrace": [
+				"TypeError: Cannot read property 'imageUrl' of null",
+				"    at _callee5$ (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\src\\utils/getMutationValue.js:86:18)",
+				"    at tryCatch (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\regenerator-runtime\\runtime.js:45:40)",
+				"    at Generator.invoke [as _invoke] (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\regenerator-runtime\\runtime.js:271:22)",
+				"    at Generator.prototype.(anonymous function) [as next] (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\regenerator-runtime\\runtime.js:97:21)",
+				"    at asyncGeneratorStep (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\src\\utils\\getMutationValue.js:22:103)",
+				"    at _next (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\src\\utils\\getMutationValue.js:24:194)"
+			]
+		}
+	}
+}2020-04-04T19:03:28.069Z{
+	"message": "Cannot read property 'imageUrl' of null",
+	"locations": [
+		{
+			"line": 2,
+			"column": 3
+		}
+	],
+	"path": [
+		"updateHistory"
+	],
+	"extensions": {
+		"code": "INTERNAL_SERVER_ERROR",
+		"exception": {
+			"stacktrace": [
+				"TypeError: Cannot read property 'imageUrl' of null",
+				"    at _callee5$ (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\src\\utils/getMutationValue.js:88:18)",
+				"    at tryCatch (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\regenerator-runtime\\runtime.js:45:40)",
+				"    at Generator.invoke [as _invoke] (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\regenerator-runtime\\runtime.js:271:22)",
+				"    at Generator.prototype.(anonymous function) [as next] (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\regenerator-runtime\\runtime.js:97:21)",
+				"    at asyncGeneratorStep (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\src\\utils\\getMutationValue.js:22:103)",
+				"    at _next (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\src\\utils\\getMutationValue.js:24:194)"
+			]
+		}
+	}
+}2020-04-04T19:04:08.777Z{
+	"message": "Cannot read property 'imageUrl' of null",
+	"locations": [
+		{
+			"line": 2,
+			"column": 3
+		}
+	],
+	"path": [
+		"updateHistory"
+	],
+	"extensions": {
+		"code": "INTERNAL_SERVER_ERROR",
+		"exception": {
+			"stacktrace": [
+				"TypeError: Cannot read property 'imageUrl' of null",
+				"    at _callee5$ (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\src\\utils/getMutationValue.js:88:18)",
+				"    at tryCatch (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\regenerator-runtime\\runtime.js:45:40)",
+				"    at Generator.invoke [as _invoke] (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\regenerator-runtime\\runtime.js:271:22)",
+				"    at Generator.prototype.(anonymous function) [as next] (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\regenerator-runtime\\runtime.js:97:21)",
+				"    at asyncGeneratorStep (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\src\\utils\\getMutationValue.js:22:103)",
+				"    at _next (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\src\\utils\\getMutationValue.js:24:194)"
+			]
+		}
+	}
+}2020-04-04T19:20:49.896Z{
+	"message": "isUploaded is not defined",
+	"locations": [
+		{
+			"line": 2,
+			"column": 3
+		}
+	],
+	"path": [
+		"updateHistory"
+	],
+	"extensions": {
+		"code": "INTERNAL_SERVER_ERROR",
+		"exception": {
+			"stacktrace": [
+				"ReferenceError: isUploaded is not defined",
+				"    at _callee5$ (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\src\\utils/getMutationValue.js:98:5)",
+				"    at tryCatch (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\regenerator-runtime\\runtime.js:45:40)",
+				"    at Generator.invoke [as _invoke] (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\regenerator-runtime\\runtime.js:271:22)",
+				"    at Generator.prototype.(anonymous function) [as next] (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\regenerator-runtime\\runtime.js:97:21)",
+				"    at asyncGeneratorStep (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\src\\utils\\getMutationValue.js:22:103)",
+				"    at _next (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\src\\utils\\getMutationValue.js:24:194)"
+			]
+		}
+	}
+}2020-04-04T19:23:29.863Z{
+	"message": "Cannot read property 'imageUrl' of null",
+	"locations": [
+		{
+			"line": 2,
+			"column": 3
+		}
+	],
+	"path": [
+		"updateHistory"
+	],
+	"extensions": {
+		"code": "INTERNAL_SERVER_ERROR",
+		"exception": {
+			"stacktrace": [
+				"TypeError: Cannot read property 'imageUrl' of null",
+				"    at _callee5$ (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\src\\utils/getMutationValue.js:99:26)",
+				"    at tryCatch (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\regenerator-runtime\\runtime.js:45:40)",
+				"    at Generator.invoke [as _invoke] (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\regenerator-runtime\\runtime.js:271:22)",
+				"    at Generator.prototype.(anonymous function) [as next] (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\regenerator-runtime\\runtime.js:97:21)",
+				"    at asyncGeneratorStep (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\src\\utils\\getMutationValue.js:22:103)",
+				"    at _next (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\src\\utils\\getMutationValue.js:24:194)"
+			]
+		}
+	}
+}2020-04-04T19:24:39.653Z{
+	"message": "Cannot read property 'imageUrl' of null",
+	"locations": [
+		{
+			"line": 2,
+			"column": 3
+		}
+	],
+	"path": [
+		"updateHistory"
+	],
+	"extensions": {
+		"code": "INTERNAL_SERVER_ERROR",
+		"exception": {
+			"stacktrace": [
+				"TypeError: Cannot read property 'imageUrl' of null",
+				"    at _callee5$ (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\src\\utils/getMutationValue.js:101:26)",
+				"    at tryCatch (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\regenerator-runtime\\runtime.js:45:40)",
+				"    at Generator.invoke [as _invoke] (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\regenerator-runtime\\runtime.js:271:22)",
+				"    at Generator.prototype.(anonymous function) [as next] (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\regenerator-runtime\\runtime.js:97:21)",
+				"    at asyncGeneratorStep (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\src\\utils\\getMutationValue.js:22:103)",
+				"    at _next (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\src\\utils\\getMutationValue.js:24:194)"
+			]
+		}
+	}
+}2020-04-04T19:25:34.317Z{
+	"message": "Cannot read property 'imageUrl' of null",
+	"locations": [
+		{
+			"line": 2,
+			"column": 3
+		}
+	],
+	"path": [
+		"updateHistory"
+	],
+	"extensions": {
+		"code": "INTERNAL_SERVER_ERROR",
+		"exception": {
+			"stacktrace": [
+				"TypeError: Cannot read property 'imageUrl' of null",
+				"    at _callee5$ (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\src\\utils/getMutationValue.js:102:26)",
+				"    at tryCatch (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\regenerator-runtime\\runtime.js:45:40)",
+				"    at Generator.invoke [as _invoke] (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\regenerator-runtime\\runtime.js:271:22)",
+				"    at Generator.prototype.(anonymous function) [as next] (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\regenerator-runtime\\runtime.js:97:21)",
+				"    at asyncGeneratorStep (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\src\\utils\\getMutationValue.js:22:103)",
+				"    at _next (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\src\\utils\\getMutationValue.js:24:194)"
+			]
+		}
+	}
+}2020-04-04T19:30:16.713Z{
+	"message": "currentSection is not defined",
+	"locations": [
+		{
+			"line": 2,
+			"column": 3
+		}
+	],
+	"path": [
+		"deleteHistory"
+	],
+	"extensions": {
+		"code": "INTERNAL_SERVER_ERROR",
+		"exception": {
+			"stacktrace": [
+				"ReferenceError: currentSection is not defined",
+				"    at _callee6$ (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\src\\utils/getMutationValue.js:110:27)",
+				"    at tryCatch (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\regenerator-runtime\\runtime.js:45:40)",
+				"    at Generator.invoke [as _invoke] (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\regenerator-runtime\\runtime.js:271:22)",
+				"    at Generator.prototype.(anonymous function) [as next] (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\regenerator-runtime\\runtime.js:97:21)",
+				"    at asyncGeneratorStep (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\src\\utils\\getMutationValue.js:22:103)",
+				"    at _next (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\src\\utils\\getMutationValue.js:24:194)"
+			]
+		}
+	}
+}2020-04-04T19:32:36.668Z{
+	"message": "fileType is not defined",
+	"locations": [
+		{
+			"line": 2,
+			"column": 3
+		}
+	],
+	"path": [
+		"createHistory"
+	],
+	"extensions": {
+		"code": "INTERNAL_SERVER_ERROR",
+		"exception": {
+			"stacktrace": [
+				"ReferenceError: fileType is not defined",
+				"    at _callee$ (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\src\\utils/getMutationValue.js:29:26)",
+				"    at tryCatch (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\regenerator-runtime\\runtime.js:45:40)",
+				"    at Generator.invoke [as _invoke] (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\regenerator-runtime\\runtime.js:271:22)",
+				"    at Generator.prototype.(anonymous function) [as next] (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\regenerator-runtime\\runtime.js:97:21)",
+				"    at asyncGeneratorStep (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\src\\utils\\getMutationValue.js:22:103)",
+				"    at _next (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\src\\utils\\getMutationValue.js:24:194)",
+				"    at C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\src\\utils\\getMutationValue.js:24:364",
+				"    at new Promise (<anonymous>)",
+				"    at C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\src\\utils\\getMutationValue.js:24:97",
+				"    at getUploadedLinks (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\src\\utils/getMutationValue.js:29:23)",
+				"    at _callee2$ (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\src\\utils/getMutationValue.js:49:26)",
+				"    at tryCatch (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\regenerator-runtime\\runtime.js:45:40)",
+				"    at Generator.invoke [as _invoke] (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\regenerator-runtime\\runtime.js:271:22)",
+				"    at Generator.prototype.(anonymous function) [as next] (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\regenerator-runtime\\runtime.js:97:21)",
+				"    at asyncGeneratorStep (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\src\\utils\\getMutationValue.js:22:103)",
+				"    at _next (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\src\\utils\\getMutationValue.js:24:194)"
+			]
+		}
+	}
+}2020-04-04T19:33:36.512Z{
+	"message": "currentSection is not defined",
+	"locations": [
+		{
+			"line": 2,
+			"column": 3
+		}
+	],
+	"path": [
+		"createHistory"
+	],
+	"extensions": {
+		"code": "INTERNAL_SERVER_ERROR",
+		"exception": {
+			"stacktrace": [
+				"ReferenceError: currentSection is not defined",
+				"    at _callee$ (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\src\\utils/getMutationValue.js:33:81)",
+				"    at tryCatch (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\regenerator-runtime\\runtime.js:45:40)",
+				"    at Generator.invoke [as _invoke] (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\regenerator-runtime\\runtime.js:271:22)",
+				"    at Generator.prototype.(anonymous function) [as next] (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\regenerator-runtime\\runtime.js:97:21)",
+				"    at asyncGeneratorStep (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\src\\utils\\getMutationValue.js:22:103)",
+				"    at _next (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\src\\utils\\getMutationValue.js:24:194)"
+			]
+		}
+	}
+}2020-04-04T19:38:21.700Z{
+	"message": "Cannot return null for non-nullable field HistoryText.imageUrl.",
+	"locations": [
+		{
+			"line": 5,
+			"column": 5
+		}
+	],
+	"path": [
+		"createHistory",
+		"imageUrl"
+	],
+	"extensions": {
+		"code": "INTERNAL_SERVER_ERROR",
+		"exception": {
+			"stacktrace": [
+				"Error: Cannot return null for non-nullable field HistoryText.imageUrl.",
+				"    at completeValue (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\graphql\\execution\\execute.js:560:13)",
+				"    at completeValueCatchingError (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\graphql\\execution\\execute.js:495:19)",
+				"    at resolveField (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\graphql\\execution\\execute.js:435:10)",
+				"    at executeFields (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\graphql\\execution\\execute.js:275:18)",
+				"    at collectAndExecuteSubfields (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\graphql\\execution\\execute.js:713:10)",
+				"    at completeObjectValue (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\graphql\\execution\\execute.js:703:10)",
+				"    at completeValue (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\graphql\\execution\\execute.js:591:12)",
+				"    at completeValue (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\graphql\\execution\\execute.js:557:21)",
+				"    at C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\graphql\\execution\\execute.js:492:16"
+			]
+		}
+	}
+}2020-04-04T19:38:57.294Z{
+	"message": "Cannot return null for non-nullable field HistoryText.imageUrl.",
+	"locations": [
+		{
+			"line": 5,
+			"column": 5
+		}
+	],
+	"path": [
+		"history",
+		"imageUrl"
+	],
+	"extensions": {
+		"code": "INTERNAL_SERVER_ERROR",
+		"exception": {
+			"stacktrace": [
+				"Error: Cannot return null for non-nullable field HistoryText.imageUrl.",
+				"    at completeValue (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\graphql\\execution\\execute.js:560:13)",
+				"    at completeValueCatchingError (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\graphql\\execution\\execute.js:495:19)",
+				"    at resolveField (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\graphql\\execution\\execute.js:435:10)",
+				"    at executeFields (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\graphql\\execution\\execute.js:275:18)",
+				"    at collectAndExecuteSubfields (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\graphql\\execution\\execute.js:713:10)",
+				"    at completeObjectValue (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\graphql\\execution\\execute.js:703:10)",
+				"    at completeValue (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\graphql\\execution\\execute.js:591:12)",
+				"    at C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\graphql\\execution\\execute.js:492:16",
+				"    at tryCatcher (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\bluebird\\js\\release\\util.js:16:23)",
+				"    at Promise._settlePromiseFromHandler (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\bluebird\\js\\release\\promise.js:547:31)",
+				"    at Promise._settlePromise (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\bluebird\\js\\release\\promise.js:604:18)",
+				"    at Promise._settlePromise0 (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\bluebird\\js\\release\\promise.js:649:10)",
+				"    at Promise._settlePromises (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\bluebird\\js\\release\\promise.js:729:18)",
+				"    at _drainQueueStep (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\bluebird\\js\\release\\async.js:93:12)",
+				"    at _drainQueue (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\bluebird\\js\\release\\async.js:86:9)",
+				"    at Async._drainQueues (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\bluebird\\js\\release\\async.js:102:5)",
+				"    at Immediate.Async.drainQueues [as _onImmediate] (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\bluebird\\js\\release\\async.js:15:14)",
+				"    at runCallback (timers.js:705:18)",
+				"    at tryOnImmediate (timers.js:676:5)",
+				"    at processImmediate (timers.js:658:5)",
+				"    at process.topLevelDomainCallback (domain.js:120:23)"
+			]
+		}
+	}
+}2020-04-04T19:40:16.770Z{
+	"message": "Cannot return null for non-nullable field HistoryText.imageUrl.",
+	"locations": [
+		{
+			"line": 5,
+			"column": 5
+		}
+	],
+	"path": [
+		"createHistory",
+		"imageUrl"
+	],
+	"extensions": {
+		"code": "INTERNAL_SERVER_ERROR",
+		"exception": {
+			"stacktrace": [
+				"Error: Cannot return null for non-nullable field HistoryText.imageUrl.",
+				"    at completeValue (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\graphql\\execution\\execute.js:560:13)",
+				"    at completeValueCatchingError (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\graphql\\execution\\execute.js:495:19)",
+				"    at resolveField (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\graphql\\execution\\execute.js:435:10)",
+				"    at executeFields (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\graphql\\execution\\execute.js:275:18)",
+				"    at collectAndExecuteSubfields (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\graphql\\execution\\execute.js:713:10)",
+				"    at completeObjectValue (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\graphql\\execution\\execute.js:703:10)",
+				"    at completeValue (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\graphql\\execution\\execute.js:591:12)",
+				"    at completeValue (C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\graphql\\execution\\execute.js:557:21)",
+				"    at C:\\Users\\Satorik\\Documents\\Projects\\___fullaps\\biophys-docker\\node\\node_modules\\graphql\\execution\\execute.js:492:16"
+			]
+		}
+	}
 }

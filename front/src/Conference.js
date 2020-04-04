@@ -1,7 +1,10 @@
 import React from 'react'
-import { useQuery, useMutation, gql } from '@apollo/client'
+import { useQuery, useMutation } from '@apollo/client'
 import { required, length, date } from './utils/validators'
 import { useLocation, useHistory } from 'react-router-dom'
+
+import { updateAfterCreate, updateAfterDelete } from './utils/updateCache/conference'
+import * as queries from './utils/queries/conference'
 
 import YesDelete from './components/Shared/DoYouWantToDelete'
 import ButtonAddNew from './components/UI/ButtonAddNew'
@@ -13,57 +16,10 @@ import getUpdateData from './utils/getObjectForUpdate'
 import ConferenceCard from './components/Conference/ConferenceCard'
 import ConferenceDetails from './components/Conference/ConferenceDetails'
 import NetworkErrorComponent from './components/Shared/ErrorHandling/NetworkErrorComponent'
+import {EmptyData} from './components/Shared/EmptyData'
 
 const CONFERENCES_PER_PAGE = 6
 
-const GET_CONFERENCE = gql`                    
-    query getConferences($limit: Int, $offset: Int){
-      conferences(limit: $limit, offset: $offset) {
-        id
-        title
-        content
-        description
-        imageUrl
-        dateFrom
-        dateTo
-        location
-    }
-  }
-  `
-const CREATE_CONFERENCE = gql`
-  mutation createConference($inputData: ConferenceCreateData!) {
-    createConference(inputData: $inputData) {
-      id
-      title
-      content
-      description
-      imageUrl
-      dateFrom
-      dateTo
-      location
-    }
-  }
-`
-
-const DELETE_CONFERENCE = gql`
-  mutation deleteConference($id: ID!) {
-    deleteConference(id: $id) 
-  }
-`
-const UPDATE_CONFERENCE = gql`
-  mutation updateConference($id: ID!, $inputData: ConferenceUpdateData!) {
-    updateConference(id: $id, inputData: $inputData) {
-        id
-        title
-        content
-        description
-        imageUrl
-        dateFrom
-        dateTo
-        location
-    }
-  }
-`
 
 const FORM_TEMPLATE = [
   {
@@ -129,91 +85,82 @@ const Conferece = () => {
   const [mode, setMode] = React.useState({isEditing: false, isCreating: false, isDeleting: false})
   const [updatedConference, setUpdatedConference] = React.useState({})
   const [isAbleToSave, setIsAbleToSave] = React.useState(true)
+  const [isError, setIsError] = React.useState(null)
   
   const variables = {
     offset:0, 
     limit: CONFERENCES_PER_PAGE
   }
 
-  const { loading: queryLoading, error: queryError, data} = useQuery(GET_CONFERENCE, {variables})
-  const [createConference,
-        { loading: creationLoading, error: creatingError }] = useMutation(CREATE_CONFERENCE, {
-            update(cache, { data: {createConference} }) {
-              const { conferences } = cache.readQuery({ query: GET_CONFERENCE, variables })
-              cache.writeQuery({
-                query: GET_CONFERENCE,
-                variables,
-                data: { conferences:  [createConference, ...conferences]}
-              })
-            }
-          })
-  const [updateConference,
-        { loading: updatingLoading, error: updatingError }] = useMutation(UPDATE_CONFERENCE)
-  const [deleteConference,
-        { loading: deletingLoading, error: deletingError }] = useMutation(DELETE_CONFERENCE, {
-          update(cache, { data: { deleteConference } }) {
-            const { conferences } = cache.readQuery({ query: GET_CONFERENCE, variables})
-            cache.writeQuery({
-              query: GET_CONFERENCE,
-              variables,
-              data: { conferences: conferences.filter(el => el.id !== deleteConference)}
-            })
-          }
-        })
+  const { loading: queryLoading, error: queryError, data} = useQuery(queries.GET_CONFERENCE, {variables})
+  const [createConference, { loading: creationLoading }] = useMutation(queries.CREATE_CONFERENCE, {
+    update: (cache, res) => updateAfterCreate(cache, res, queries.GET_CONFERENCE, variables)})
+  const [updateConference, { loading: updatingLoading }] = useMutation(queries.UPDATE_CONFERENCE)
+  const [deleteConference, { loading: deletingLoading }] = useMutation(queries.DELETE_CONFERENCE, {
+    update: (cache, res) => updateAfterDelete(cache, res, queries.GET_CONFERENCE, variables)})
 
   React.useEffect(() => {
     if (data && urlId) {
-      setViewId(data.conferences.indexOf(data.conferences.find(el => el.id === urlId)))
+      const selectedConf = data.conferences.indexOf(data.conferences.find(el => el.id === urlId))
+      if (selectedConf && selectedConf !== -1) setViewId(selectedConf)
+      else setViewId(0)
+
+      if (data.conferences.length === 0) history.push({search: ''})
     }
   }, [data, urlId])
   
   if (queryLoading || creationLoading || updatingLoading || deletingLoading) return <Spinner />
-  if (queryError) return <NetworkErrorComponent error={queryError} />
-  if (updatingError) return <NetworkErrorComponent error={updatingError} />
-  if (deletingError) return <NetworkErrorComponent error={deletingError} />
-  if (creatingError) return <NetworkErrorComponent error={creatingError} />
+
+  if (queryError) return <NetworkErrorComponent error={queryError} type='queryError' />
+  if (isError) return <NetworkErrorComponent error={isError} onDismiss={() => setIsError(null)} />
 
   const { conferences } = data
 
+  const onClearMode = (operation, full = false) => {
+    setIsModalOpen(false)
+    document.body.style.overflow = "scroll"
+    setUpdatedConference({})
+    setIsAbleToSave(true)
+
+    if (full) setMode({isDeleting: false, isEditing: false, isCreating: false})
+    else setMode({...mode, [operation]: false})
+  }
+
+  const onSetMode = (operation) => {
+    setIsModalOpen(true)
+    setMode({...mode, [operation]: true})
+    document.body.style.overflow = "hidden"
+  }
+
   const onShowConferenceDetails = (i) => {
-    history.push({
-      search: '?id='+conferences[i].id
-    })
+    history.push({search: '?id='+conferences[i].id})
   }
 
   const onAddNewConference = () => {
-    setIsModalOpen(true)
-    setMode({...mode, isCreating: true})
-    document.body.style.overflow = "hidden"
+    onSetMode('isCreating')
   }
 
   const onEditConference = (id) => {
-    setIsModalOpen(true)
-    setMode({...mode, isEditing: true})
-    document.body.style.overflow = "hidden"
+    onSetMode('isEditing')
     setUpdatedConference(conferences[id])
   }
+
   const onDeleteConference = (id) => {
-    setIsModalOpen(true)
-    document.body.style.overflow = "hidden"
-    setMode({...mode, isDeleting: true})
+    onSetMode('isDeleting')
     setUpdatedConference(conferences[id])
-    //setUpdatedConference(blogposts[id])
   }
 
   const onDeleteConferenceHandler = async () => {
-    await deleteConference({ variables: {id: updatedConference.id}})
-    setIsModalOpen(false)
-    setMode({...mode, isDeleting: false})
-    document.body.style.overflow = "scroll"
-    setUpdatedConference({})
+    try {
+      await deleteConference({ variables: {id: updatedConference.id}})
+      onClearMode('isDeleting')
+    } catch(error) {
+      setIsError(error)
+    }
   }
 
   const onCloseModal = () => {
-    setIsModalOpen(false)
-    setMode({isDeleting: false, isEditing: false, isCreating: false})
-    setUpdatedConference({})
-    document.body.style.overflow = "scroll"
+    onClearMode('_', true)
   }
 
   const onChangeConferenceHandler = async (e, postData, valid) => {
@@ -232,17 +179,21 @@ const Conferece = () => {
       } ,{})
       if (mode.isEditing) {
         const forUpdate = getUpdateData(updatedConference, postObject)
-        await updateConference({ variables: {id: updatedConference.id, inputData: forUpdate}})
-        setIsModalOpen(false)
-        setMode({...mode, isEditing: false})
-        document.body.style.overflow = "scroll"
-        setUpdatedConference({})
+        try {
+          await updateConference({ variables: {id: updatedConference.id, inputData: forUpdate}})
+          onClearMode('isEditing')
+        } catch(error) {
+          setIsError(error)
+        }
       }
       if (mode.isCreating) {
-        await createConference({ variables: {inputData: postObject}})
-        setIsModalOpen(false)
-        setMode({...mode, isCreating: false})
-        document.body.style.overflow = "scroll"
+        try {
+          const createdConference = await createConference({ variables: {inputData: postObject}})
+          history.push({search: '?id='+createdConference.data.createConference.id})
+          onClearMode('isCreating')
+        } catch(error) {
+          setIsError(error)
+        }
       }
     } 
   }
@@ -271,7 +222,7 @@ const Conferece = () => {
         (mode.isDeleting) &&  <YesDelete onDelete={onDeleteConferenceHandler} onCancel={onCloseModal} info={updatedConference} instance='conference' />   
       }
     </Modal>}
-      <div className="container mt-5">
+      {conferences.length > 0 && <div className="container mt-5">
         <div className="row">
           <div className="col-4 p-0 flex-column" style={{borderRight: '3px solid #17a2b8'}}>
               {conferences.map((conference, idx) => 
@@ -294,7 +245,10 @@ const Conferece = () => {
             content={conferences[viewId].content}
           />
         </div>
-      </div>
+      </div>}
+      {(conferences.length === 0 ) &&
+        <EmptyData instance='conference' />
+      }
       <ButtonAddNew
         color='red'
         onClickAddButton={onAddNewConference}
