@@ -1,6 +1,7 @@
 import React from 'react'
 import { useQuery, useMutation } from '@apollo/client'
 import { required, length } from './utils/validators'
+import { getUpdateData } from './utils/postDataHandlers'
 
 import { updateAfterCreate, updateAfterDelete } from './utils/updateCache/news'
 import * as queries from './utils/queries/news'
@@ -14,9 +15,8 @@ import Modal from './components/UI/Modal'
 import Edit from './components/Shared/Edit'
 import Spinner from './components/UI/Spinner'
 import ErrorBoundry from './components/Shared/ErrorHandling/ErrorBoundry'
-import getUpdateData from './utils/getObjectForUpdate'
 import NetworkErrorComponent from './components/Shared/ErrorHandling/NetworkErrorComponent'
-import {EmptyData} from './components/Shared/EmptyData'
+import { EmptyData } from './components/Shared/EmptyData'
 
 const CONFERENCES_PER_PAGE = 4
 const SEMINARS_PER_PAGE = 4
@@ -29,12 +29,14 @@ const FORM_TEMPLATE = [
     title: 'title',
     label:'Название',
     type: 'input',
+    required: true,
     validators: [required, length({ min: 5 })]
   },
   {
     title: 'description',
     label:'Описание',
     type:'textarea',
+    required: true,
     validators: [required, length({ min: 5, max: 250 })]
   },
   {
@@ -57,7 +59,6 @@ const News = () => {
   const [isModalOpen, setIsModalOpen] = React.useState(false)
   const [mode, setMode] = React.useState({isEditing: false, isCreating: false, isDeleting: false})
   const [updatedNote, setUpdatedNote] = React.useState({})
-  const [isAbleToSave, setIsAbleToSave] = React.useState(true)
   const [isError, setIsError] = React.useState(null)
 
   const variables = {
@@ -85,7 +86,6 @@ const News = () => {
     setIsModalOpen(false)
     document.body.style.overflow = "scroll"
     setUpdatedNote({})
-    setIsAbleToSave(true)
 
     if (full) setMode({isDeleting: false, isEditing: false, isCreating: false})
     else setMode({...mode, [operation]: false})
@@ -129,6 +129,7 @@ const News = () => {
     onSetMode('isEditing')
     setUpdatedNote(notes[id])
   }
+
   const onDeleteNote = (id) => {
     onSetMode('isDeleting')
     setUpdatedNote(notes[id])
@@ -138,6 +139,9 @@ const News = () => {
     try {
       await deleteNote({ variables: {id: updatedNote.id}})
       onClearMode('isDeleting')
+      setViewId(0)
+      console.log('setting viewId')
+      console.log(viewId)
     } catch(error) {
       setIsError(error)
     }
@@ -147,34 +151,26 @@ const News = () => {
     onClearMode('_', true)
   }
 
-  const onChangeNoteHandler = async (e, postData, valid, id) => {
-    e.preventDefault()
-    if (!valid) {
-      setIsAbleToSave(false)
+  const onChangeNoteHandler = async (postObject) => {
+
+    if (mode.isEditing) {
+      const forUpdate = getUpdateData(updatedNote, postObject)
+      try {
+        await updateNote({ variables: {id: updatedNote.id, inputData: forUpdate}})
+        onClearMode('isEditing')
+      } catch(error) {
+        setIsError(error)
+      }
     }
-    else {
-      let postObject = postData.reduce((obj, item) => {
-          obj[item.title] = item.value
-          return obj
-      } ,{})
-      if (mode.isEditing) {
-        const forUpdate = getUpdateData(updatedNote, postObject)
-        try {
-          await updateNote({ variables: {id: updatedNote.id, inputData: forUpdate}})
-          onClearMode('isEditing')
-        } catch(error) {
-          setIsError(error)
-        }
+    if (mode.isCreating) {
+      try {
+        await createNote({ variables: {inputData: postObject}})
+        onClearMode('isCreating')
+        setViewId(0)
+      } catch(error) {
+        setIsError(error)
       }
-      if (mode.isCreating) {
-        try {
-          await createNote({ variables: {inputData: postObject}})
-          onClearMode('isCreating')
-        } catch(error) {
-          setIsError(error)
-        }
-      }
-    } 
+    }  
   }
 
   let modalTitle = ''
@@ -182,7 +178,9 @@ const News = () => {
   if (mode.isCreating) {modalTitle = 'Новое объявление'}
   if (mode.isDeleting) {modalTitle = 'Удаление объявления'}
 
-
+  console.log('notes', notes)
+  console.log('viewId', viewId)
+  console.log('notes.length', notes.length)
   return (
     <>
     {isModalOpen && <Modal 
@@ -193,7 +191,6 @@ const News = () => {
      { (mode.isEditing || mode.isCreating) && <Edit 
         onClickSubmit={onChangeNoteHandler}
         onClickCancel={onCloseModal}
-        isAbleToSave={isAbleToSave}
         post={updatedNote}
         formTemplate={FORM_TEMPLATE}
       />}
@@ -201,7 +198,7 @@ const News = () => {
         (mode.isDeleting) &&  <YesDelete onDelete={onDeleteNoteHandler} onCancel={onCloseModal} info={updatedNote} instance='note'/>   
       }
     </Modal>}
-    {notes.length > 0 && <NoteCarousel 
+    {notes.length > 0 && viewId < notes.length && <NoteCarousel 
       selectedNote={viewId}
       showContent={showContent}
       last={notes.length-1}

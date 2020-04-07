@@ -1,6 +1,7 @@
 import React from 'react'
-import { useQuery, useMutation, gql } from '@apollo/client'
+import { useQuery, useMutation } from '@apollo/client'
 import { required, length, isUrl } from '../../utils/validators'
+import { getUpdateData } from '../../utils/postDataHandlers'
 
 import { updateAfterCreate, updateAfterDelete } from '../../utils/updateCache/partnership'
 import * as queries from '../../utils/queries/partnership'
@@ -11,7 +12,6 @@ import Modal from '../UI/Modal'
 import Edit from '../Shared/Edit'
 import Spinner from '../UI/Spinner'
 import ErrorBoundry from '../Shared/ErrorHandling/ErrorBoundry'
-import getUpdateData from '../../utils/getObjectForUpdate'
 import NetworkErrorComponent from '../Shared/ErrorHandling/NetworkErrorComponent'
 import LinkCard from '../Shared/LinkCard'
 import {EmptyData} from '../Shared/EmptyData'
@@ -53,7 +53,6 @@ const Partnership = () => {
   const [isModalOpen, setIsModalOpen] = React.useState(false)
   const [mode, setMode] = React.useState({isEditing: false, isCreating: false, isDeleting: false})
   const [updatedPartner, setUpdatedPartner] = React.useState({})
-  const [isAbleToSave, setIsAbleToSave] = React.useState(true)
   const [isError, setIsError] = React.useState(null)
 
   const { loading: queryLoading, error: queryError, data} = useQuery(queries.GET_DEPARTMENT_PARTNERSHIP)
@@ -71,7 +70,6 @@ const Partnership = () => {
     setIsModalOpen(false)
     document.body.style.overflow = "scroll"
     setUpdatedPartner({})
-    setIsAbleToSave(true)
 
     if (full) setMode({isDeleting: false, isEditing: false, isCreating: false})
     else setMode({...mode, [operation]: false})
@@ -109,32 +107,22 @@ const Partnership = () => {
     onClearMode('_', true)
   }
 
-  const onChangeConferenceHandler = async (e, postData, valid) => {
-    e.preventDefault()
-    if (!valid) {
-      setIsAbleToSave(false)
-    }
-    else {
-      let postObject = postData.reduce((obj, item) => {
-          obj[item.title] = item.value
-          return obj
-      } ,{})
-      if (mode.isEditing) {
-        const forUpdate = getUpdateData(updatedPartner, postObject)
-        try {
-          await updatePartnership({ variables: {id: updatedPartner.id, inputData: forUpdate}})
-          onClearMode('isEditing')
-        } catch(error) {
-          setIsError(error)
-        }
+  const onChangeConferenceHandler = async (postObject) => {
+    if (mode.isEditing) {
+      const forUpdate = getUpdateData(updatedPartner, postObject)
+      try {
+        await updatePartnership({ variables: {id: updatedPartner.id, inputData: forUpdate}})
+        onClearMode('isEditing')
+      } catch(error) {
+        setIsError(error)
       }
-      if (mode.isCreating) {
-        try {
-          await createPartnership({ variables: {inputData: postObject}})
-          onClearMode('isCreating')
-        } catch(error) {
-          setIsError(error)
-        }
+    }
+    if (mode.isCreating) {
+      try {
+        await createPartnership({ variables: {inputData: postObject}})
+        onClearMode('isCreating')
+      } catch(error) {
+        setIsError(error)
       }
     } 
   }
@@ -156,7 +144,6 @@ const Partnership = () => {
      { (mode.isEditing || mode.isCreating) && <Edit 
         onClickSubmit={onChangeConferenceHandler}
         onClickCancel={onCloseModal}
-        isAbleToSave={isAbleToSave}
         post={updatedPartner}
         formTemplate={FORM_TEMPLATE}
       />}

@@ -2,6 +2,7 @@ import React from 'react'
 import { useQuery, useMutation} from '@apollo/client'
 import { required, length, datetime } from './utils/validators'
 import { useLocation, useHistory } from 'react-router-dom'
+import { getUpdateData } from './utils/postDataHandlers'
 
 import { updateAfterCreate, updateAfterDelete } from './utils/updateCache/seminar'
 import * as queries from './utils/queries/seminar'
@@ -12,7 +13,6 @@ import Modal from './components/UI/Modal'
 import Edit from './components/Shared/Edit'
 import Spinner from './components/UI/Spinner'
 import ErrorBoundry from './components/Shared/ErrorHandling/ErrorBoundry'
-import getUpdateData from './utils/getObjectForUpdate'
 import SeminarCard from './components/Seminar/SeminarCard'
 import SeminarDetails from './components/Seminar/SeminarDetails'
 import NetworkErrorComponent from './components/Shared/ErrorHandling/NetworkErrorComponent'
@@ -84,7 +84,6 @@ const Seminar = () => {
   const [isModalOpen, setIsModalOpen] = React.useState(false)
   const [mode, setMode] = React.useState({isEditing: false, isCreating: false, isDeleting: false})
   const [updatedSeminar, setUpdatedSeminar] = React.useState({})
-  const [isAbleToSave, setIsAbleToSave] = React.useState(true)
   const [isError, setIsError] = React.useState(null)
 
   const variables = {
@@ -125,7 +124,6 @@ const Seminar = () => {
     setIsModalOpen(false)
     document.body.style.overflow = "scroll"
     setUpdatedSeminar({})
-    setIsAbleToSave(true)
 
     if (full) setMode({isDeleting: false, isEditing: false, isCreating: false})
     else setMode({...mode, [operation]: false})
@@ -164,39 +162,25 @@ const Seminar = () => {
     onClearMode('_', true)
   }
 
-  const onChangeSeminarHandler = async (e, postData, valid, id) => {
-    e.preventDefault()
-    if (!valid) {
-      setIsAbleToSave(false)
+  const onChangeSeminarHandler = async (postObject) => {
+    if (mode.isEditing) {
+      const forUpdate = getUpdateData(updatedSeminar, postObject)
+      try {
+        await updateSeminar({ variables: {id: updatedSeminar.id, inputData: forUpdate}})
+        onClearMode('isEditing')
+      } catch(error) {
+        setIsError(error)
+      }
     }
-    else {
-      let postObject = postData.reduce((obj, item) => {
-          obj[item.title] = item.value
-          if(item.type === 'datetime') {
-            const fullDate = new Date(item.value.year, item.value.month, item.value.day, item.value.hours, item.value.minutes)
-            obj[item.title] = fullDate.toISOString()
-          }
-          return obj
-      } ,{})
-      if (mode.isEditing) {
-        const forUpdate = getUpdateData(updatedSeminar, postObject)
-        try {
-          await updateSeminar({ variables: {id: updatedSeminar.id, inputData: forUpdate}})
-          onClearMode('isEditing')
-        } catch(error) {
-          setIsError(error)
-        }
+    if (mode.isCreating) {
+      try {
+        const createdSeminar = await createSeminar({ variables: {inputData: postObject}})
+        history.push({search: '?id='+createdSeminar.data.createSeminar.id})
+        onClearMode('isCreating')
+      } catch(error) {
+        setIsError(error)
       }
-      if (mode.isCreating) {
-        try {
-          const createdSeminar = await createSeminar({ variables: {inputData: postObject}})
-          history.push({search: '?id='+createdSeminar.data.createSeminar.id})
-          onClearMode('isCreating')
-        } catch(error) {
-          setIsError(error)
-        }
-      }
-    } 
+    }  
   }
 
   let modalTitle = ''
@@ -215,7 +199,6 @@ const Seminar = () => {
      { (mode.isEditing || mode.isCreating) && <Edit 
         onClickSubmit={onChangeSeminarHandler}
         onClickCancel={onCloseModal}
-        isAbleToSave={isAbleToSave}
         post={updatedSeminar}
         formTemplate={FORM_TEMPLATE}
       />}

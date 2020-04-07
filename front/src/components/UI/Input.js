@@ -14,7 +14,7 @@ const Input = ({control, value, onChanged, onBlur, touched, valid, label, requir
     if (typeof(touched) === 'boolean' && touched) {
       inputClasses.push('is-invalid')
       const field = typeof(label) === 'string' ? label : 'Материалы' //сделать лучше
-      validationError = errors.map((error, idx) => <p className="d-inline text-danger text-right" key={idx}>{error}</p>)
+      validationError = <p className="d-inline text-danger text-right" key={idx}>{errors}</p>
     }
     else if (typeof(touched) !== 'boolean') {
       let allTouched = true
@@ -23,7 +23,7 @@ const Input = ({control, value, onChanged, onBlur, touched, valid, label, requir
       })
       if (allTouched) {
         inputClasses.push('is-invalid')
-        validationError = errors.map((error, idx) => <p className="d-inline text-danger text-right" key={idx}>{error}</p>)
+        validationError = <p className="d-inline text-danger text-right" key={idx}>{errors}</p>
       }
     }
   }

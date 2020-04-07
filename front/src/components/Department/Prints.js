@@ -1,8 +1,9 @@
 import React from 'react'
 import { useQuery, useMutation } from '@apollo/client'
 import { required, length } from '../../utils/validators'
+import { getUpdateData } from '../../utils/postDataHandlers'
 
-import { updateAfterCreate, updateAfterDelete, updateAfterMove } from '../../utils/updateCache/prints'
+import { updateAfterCreate, updateAfterDelete } from '../../utils/updateCache/prints'
 import * as queries from '../../utils/queries/prints'
 
 import YesDelete from '../Shared/DoYouWantToDelete'
@@ -11,7 +12,6 @@ import Modal from '../UI/Modal'
 import Edit from '../Shared/Edit'
 import Spinner from '../UI/Spinner'
 import ErrorBoundry from '../Shared/ErrorHandling/ErrorBoundry'
-import getUpdateData from '../../utils/getObjectForUpdate'
 import NetworkErrorComponent from '../Shared/ErrorHandling/NetworkErrorComponent'
 import {PrintCard} from './PrintCard'
 import {EmptyData} from '../Shared/EmptyData'
@@ -45,7 +45,6 @@ const Prints = () => {
   const [isModalOpen, setIsModalOpen] = React.useState(false)
   const [mode, setMode] = React.useState({isEditing: false, isCreating: false, isDeleting: false})
   const [updatedPrint, setUpdatedPrint] = React.useState({})
-  const [isAbleToSave, setIsAbleToSave] = React.useState(true)
   const [isError, setIsError] = React.useState(null)
 
   const { loading: queryLoading, error: queryError, data} = useQuery(queries.GET_DEPARTMENT_PRINTS)
@@ -65,7 +64,6 @@ const Prints = () => {
     setIsModalOpen(false)
     document.body.style.overflow = "scroll"
     setUpdatedPrint({})
-    setIsAbleToSave(true)
 
     if (full) setMode({isDeleting: false, isEditing: false, isCreating: false})
     else setMode({...mode, [operation]: false})
@@ -103,32 +101,22 @@ const Prints = () => {
     onClearMode('_', true)
   }
 
-  const onChangePrintHandler = async (e, postData, valid) => {
-    e.preventDefault()
-    if (!valid) {
-      setIsAbleToSave(false)
-    }
-    else {
-      let postObject = postData.reduce((obj, item) => {
-          obj[item.title] = item.value
-          return obj
-      } ,{})
-      if (mode.isEditing) {
-        const forUpdate = getUpdateData(updatedPrint, postObject)
-        try {
-          await updatePrint({ variables: {id: updatedPrint.id, inputData: forUpdate}})
-          onClearMode('isEditing')
-        } catch(error) {
-          setIsError(error)
-        }
+  const onChangePrintHandler = async (postObject) => { 
+    if (mode.isEditing) {
+      const forUpdate = getUpdateData(updatedPrint, postObject)
+      try {
+        await updatePrint({ variables: {id: updatedPrint.id, inputData: forUpdate}})
+        onClearMode('isEditing')
+      } catch(error) {
+        setIsError(error)
       }
-      if (mode.isCreating) {
-        try {
-          await createPrint({ variables: {inputData: postObject}})
-          onClearMode('isCreating')
-        } catch(error) {
-          setIsError(error)
-        }
+    }
+    if (mode.isCreating) {
+      try {
+        await createPrint({ variables: {inputData: postObject}})
+        onClearMode('isCreating')
+      } catch(error) {
+        setIsError(error)
       }
     } 
   }
@@ -148,7 +136,6 @@ const Prints = () => {
      { (mode.isEditing || mode.isCreating) && <Edit 
         onClickSubmit={onChangePrintHandler}
         onClickCancel={onCloseModal}
-        isAbleToSave={isAbleToSave}
         post={updatedPrint}
         formTemplate={FORM_TEMPLATE}
       />}

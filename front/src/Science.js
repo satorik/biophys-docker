@@ -2,6 +2,8 @@ import React from 'react'
 import {Route, Redirect} from 'react-router-dom'
 import { useQuery, useMutation } from '@apollo/client'
 import { required, length } from './utils/validators'
+import { getUpdateData } from './utils/postDataHandlers'
+
 import { updateAfterCreate, updateAfterDelete } from './utils/updateCache/scienceRoute'
 import * as queries from './utils/queries/scienceRoute'
 
@@ -12,7 +14,6 @@ import ButtonAddNew from './components/UI/ButtonAddNew'
 import Modal from './components/UI/Modal'
 import Edit from './components/Shared/Edit'
 import Spinner from './components/UI/Spinner'
-import getUpdateData from './utils/getObjectForUpdate'
 import ErrorBoundry from './components/Shared/ErrorHandling/ErrorBoundry'
 import NetworkErrorComponent from './components/Shared/ErrorHandling/NetworkErrorComponent'
 import {EmptyData} from './components/Shared/EmptyData'
@@ -40,7 +41,6 @@ const Science = () => {
   const [isModalOpen, setIsModalOpen] = React.useState(false)
   const [mode, setMode] = React.useState({isEditing: false, isCreating: false, isDeleting: false})
   const [updatedRoute, setUpdatedRoute] = React.useState({})
-  const [isAbleToSave, setIsAbleToSave] = React.useState(true)
   const [isError, setIsError] = React.useState(null)
   
   const { loading: queryLoading, error: queryError, data} = useQuery(queries.GET_SCIENCE_ROUTE)
@@ -74,7 +74,6 @@ const Science = () => {
     setIsModalOpen(false)
     document.body.style.overflow = "scroll"
     setUpdatedRoute({})
-    setIsAbleToSave(true)
 
     if (full) setMode({isDeleting: false, isEditing: false, isCreating: false})
     else setMode({...mode, [operation]: false})
@@ -116,36 +115,26 @@ const Science = () => {
     onClearMode('_', true)
   }
 
-  const onChangeConferenceHandler = async (e, postData, valid) => {
-    e.preventDefault()
-    if (!valid) {
-      setIsAbleToSave(false)
+  const onChangeConferenceHandler = async (postObject) => {
+    if (mode.isEditing) {
+      const forUpdate = getUpdateData(updatedRoute, postObject)
+      try {
+        await updateScienceRoute({ variables: {id: updatedRoute.id, inputData: forUpdate}})
+        onClearMode('isEditing')
+      }
+      catch(error) {
+        setIsError(error)
+      }
     }
-    else {
-      const postObject = postData.reduce((obj, item) => {
-          obj[item.title] = item.value
-          return obj
-      } ,{})
-      if (mode.isEditing) {
-        const forUpdate = getUpdateData(updatedRoute, postObject)
-        try {
-          await updateScienceRoute({ variables: {id: updatedRoute.id, inputData: forUpdate}})
-          onClearMode('isEditing')
-        }
-        catch(error) {
-          setIsError(error)
-        }
+    if (mode.isCreating) {
+      try {
+        await createScienceRoute({ variables: {inputData: postObject}})
+        onClearMode('isCreating')
       }
-      if (mode.isCreating) {
-        try {
-          await createScienceRoute({ variables: {inputData: postObject}})
-          onClearMode('isCreating')
-        }
-        catch(error) {
-          setIsError(error)
-        }
+      catch(error) {
+        setIsError(error)
       }
-    } 
+    }   
   }
 
   let modalTitle = ''
@@ -163,7 +152,6 @@ const Science = () => {
         {(mode.isEditing || mode.isCreating) && <Edit 
           onClickSubmit={onChangeConferenceHandler}
           onClickCancel={onCloseModal}
-          isAbleToSave={isAbleToSave}
           post={updatedRoute}
           formTemplate={FORM_TEMPLATE}
         />}

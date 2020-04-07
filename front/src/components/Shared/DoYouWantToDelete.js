@@ -2,7 +2,7 @@ import React from 'react'
 
 export default ({onDelete, onCancel, info, instance}) => {
   let question = 'Вы действительно хотите удалить '
- console.log(info, instance)
+  //console.log(info, instance)
   switch (instance) {
     case 'scienceRoute':
         question = question+'научное направление под названием <b>'+info.title+ '</b> ?'

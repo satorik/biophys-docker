@@ -2,7 +2,7 @@ import React from 'react'
 import GroupCard from './GroupCard'
 import EditButtons from '../UI/EditButtons'
 
-const ScienceGroupListItem = ({groupObject, active, save, updatedArticle, updatedPerson}) => {
+const ScienceGroupListItem = ({groupObject, active, updatedArticle, updatedPerson}) => {
 
   const color = active ? 'white' : 'dark-grey'
   const divClass='d-flex justify-content-between card-header'
@@ -25,7 +25,6 @@ const ScienceGroupListItem = ({groupObject, active, save, updatedArticle, update
       {active && 
         <GroupCard 
           group={groupObject} 
-          save={save} 
           articleForUpdate = {updatedArticle}
           personForUpdate = {updatedPerson}
         />

@@ -1,6 +1,8 @@
 import React from 'react'
 import { useQuery, useMutation, gql } from '@apollo/client'
 import { required, length, isUrl, email } from '../../utils/validators'
+import { getUpdateData } from '../../utils/postDataHandlers'
+
 import updates  from '../../utils/updateCache/scienceGroup'
 import * as queries from '../../utils/queries/scienceGroup'
 
@@ -11,7 +13,6 @@ import Modal from '../UI/Modal'
 import Edit from '../Shared/Edit'
 import Spinner from '../UI/Spinner'
 import ErrorBoundry from '../Shared/ErrorHandling/ErrorBoundry'
-import getUpdateData from '../../utils/getObjectForUpdate'
 import NetworkErrorComponent from '../Shared/ErrorHandling/NetworkErrorComponent'
 
 
@@ -166,7 +167,6 @@ const ScienceGroup = ({match}) => {
   const [peopleMode, setPeopleMode] = React.useState({isEditing: false, isCreating: false, isDeleting: false})
   const [articleMode, setArticleMode] = React.useState({isEditing: false, isCreating: false, isDeleting: false})
   const [isModalOpen, setIsModalOpen] = React.useState(false)
-  const [isAbleToSave, setIsAbleToSave] = React.useState(true)
   const [updatedGroup, setUpdatedGroup] = React.useState({})
   const [updatedPerson, setUpdatedPerson] = React.useState({})
   const [updatedArticle, setUpdatedArticle] = React.useState({})
@@ -330,71 +330,61 @@ const ScienceGroup = ({match}) => {
     document.body.style.overflow = "scroll" 
   }
 
-  const onChangeGroupHandler = async (e, postData, valid) => {
-    e.preventDefault()
-    if (!valid) {
-      setIsAbleToSave(false)
+  const onChangeGroupHandler = async (postObject) => {
+    if (mode.isEditing) {
+      try {
+        const forUpdate = getUpdateData(updatedGroup, postObject)
+        await updateScienceGroup({ variables: {id: updatedGroup.id, inputData: forUpdate}})
+        setMode({...mode, isEditing: false})
+        setUpdatedGroup({})
+      } catch(error) {
+        setIsError(error)
+      }
     }
-    else {
-      const postObject = postData.reduce((obj, item) => {
-          obj[item.title] = item.value
-          return obj
-      } , {})
-      if (mode.isEditing) {
-        try {
-          const forUpdate = getUpdateData(updatedGroup, postObject)
-          await updateScienceGroup({ variables: {id: updatedGroup.id, inputData: forUpdate}})
-          setMode({...mode, isEditing: false})
-          setUpdatedGroup({})
-        } catch(error) {
-          setIsError(error)
-        }
+    if (mode.isCreating) {
+      try {
+        await createScienceGroup({ variables: {inputData: postObject, scienceRouteId }})
+        setMode({...mode, isCreating: false})
+      } catch(error) {
+        setIsError(error)
       }
-      if (mode.isCreating) {
-        try {
-          await createScienceGroup({ variables: {inputData: postObject, scienceRouteId }})
-          setMode({...mode, isCreating: false})
-        } catch(error) {
-          setIsError(error)
-        }
+    }
+    if (peopleMode.isCreating) {
+      try {
+        await createSciencePerson({ variables: {inputData: postObject, scienceGroupId: scienceGroups[viewId].id}})
+        setPeopleMode({...peopleMode, isCreating: false})
+      } catch(error) {
+        setIsError(error)
       }
-      if (peopleMode.isCreating) {
-        try {
-          await createSciencePerson({ variables: {inputData: postObject, scienceGroupId: scienceGroups[viewId].id}})
-          setPeopleMode({...peopleMode, isCreating: false})
-        } catch(error) {
-          setIsError(error)
-        }
+    }
+    if (articleMode.isCreating) {
+      try {
+        await createScienceArticle({ variables: {inputData: postObject, scienceGroupId: scienceGroups[viewId].id}})
+        setArticleMode({...articleMode, isCreating: false})
+      } catch(error) {
+        setIsError(error)
       }
-      if (articleMode.isCreating) {
-        try {
-          await createScienceArticle({ variables: {inputData: postObject, scienceGroupId: scienceGroups[viewId].id}})
-          setArticleMode({...articleMode, isCreating: false})
-        } catch(error) {
-          setIsError(error)
-        }
+    }
+    if (peopleMode.isEditing) {
+      try {
+        const forUpdate = getUpdateData(updatedPerson, postObject)
+        await updateSciencePerson({ variables: {inputData: forUpdate, id: updatedPerson.id}})
+        setPeopleMode({...peopleMode, isEditing: false})
+        setUpdatedPerson({})
+      } catch(error) {
+        setIsError(error)
       }
-      if (peopleMode.isEditing) {
-        try {
-          const forUpdate = getUpdateData(updatedPerson, postObject)
-          await updateSciencePerson({ variables: {inputData: forUpdate, id: updatedPerson.id}})
-          setPeopleMode({...peopleMode, isEditing: false})
-          setUpdatedPerson({})
-        } catch(error) {
-          setIsError(error)
-        }
+    }
+    if (articleMode.isEditing) {
+      try {
+        const forUpdate = getUpdateData(updatedArticle, postObject)
+        await updateScienceArticle({ variables: {inputData: forUpdate, id: updatedArticle.id}})
+        setArticleMode({...articleMode, isEditing: false})
+        setUpdatedArticle({})
+      } catch(error) {
+        setIsError(error)
       }
-      if (articleMode.isEditing) {
-        try {
-          const forUpdate = getUpdateData(updatedArticle, postObject)
-          await updateScienceArticle({ variables: {inputData: forUpdate, id: updatedArticle.id}})
-          setArticleMode({...articleMode, isEditing: false})
-          setUpdatedArticle({})
-        } catch(error) {
-          setIsError(error)
-        }
-      }
-    } 
+    }
   }
 
   const onCancelEditing = (type) => {
@@ -408,8 +398,6 @@ const ScienceGroup = ({match}) => {
       default:
         clearMode()
     }
-    
-    setIsAbleToSave(true)
   }
 
   const onChangePosition = async (id, type, vector) => {
@@ -506,7 +494,6 @@ const ScienceGroup = ({match}) => {
               groupObject = {scienceGroup}
               updatedArticle = {updatedArticle}
               updatedPerson = {updatedPerson}
-              save = {isAbleToSave}
           />
         )}
         {
@@ -515,7 +502,6 @@ const ScienceGroup = ({match}) => {
             <Edit 
               onClickSubmit={onChangeGroupHandler}
               onClickCancel={onCancelEditing}
-              isAbleToSave={isAbleToSave}
               post={updatedGroup}
               formTemplate={GENERAL_TEMPLATE}
             /></div>

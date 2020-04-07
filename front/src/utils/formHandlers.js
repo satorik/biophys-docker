@@ -1,60 +1,5 @@
-
-  const getValue = (type, isForUpdate, oldData, control, label, required) => {
-    if (type === 'file') {return ''}
-    if (isForUpdate) {
-      if (type === 'date') {
-        return {
-        day: new Date(oldData[control]).getDate(), 
-        month: new Date(oldData[control]).getMonth(), 
-        year: new Date(oldData[control]).getFullYear()
-        }
-      }
-      if (type === 'time') {
-        return {
-          hours: oldData[control] ? oldData[control].split(':')[0] : '',
-          minutes: oldData[control] ? oldData[control].split(':')[1] : ''
-          }
-      }
-      if (type === 'datetime') {
-        return {
-        day: new Date(oldData[control]).getDate(), 
-        month: new Date(oldData[control]).getMonth(), 
-        year: new Date(oldData[control]).getFullYear(),
-        hours: new Date(oldData[control]).getHours(),
-        minutes: new Date(oldData[control]).getMinutes()
-        }
-      }
-      if (type === 'course') {
-        return {
-        course: oldData[control].course,  
-        year: new Date(oldData[control]).getFullYear(),
-        term: oldData[control].term
-        }
-      }
-      if (type === 'resourse') {
-        return {
-        educationFormId: oldData.form.parentForm? oldData.form.parentForm.id : oldData.form.id,  
-        file: '',
-        subSectionId: oldData.form.parentForm ? oldData.form.id : '',
-        subSectionText:''
-        }
-      }
-       if (type === 'radio' || type === 'check') {
-        return oldData[control]
-       }
-      return oldData[control] || ''
-    }
-    if (type === 'date') {return {day: '', month: new Date().getMonth(), year: new Date().getFullYear()}}
-    if (type === 'datetime') {return {day: '', month: new Date().getMonth(), year: new Date().getFullYear(), hours: '', minutes: '' }}
-    if (type === 'time') {return {hours: '', minutes: ''}}
-    if (type === 'radio') { return label[0].value}
-    if (type === 'check') { return false}
-    if (type === 'course') {return {course: '', year: new Date().getFullYear(), term: 1}}
-    if (type === 'resourse') {return {educationFormId: label[0].id, file: '', subSectionId: '', subSectionText: ''}}
-
-    return ''
-  }
-
+import { getIntitialValue } from './valueHandlers'
+  
   const getTouched = (type, subType = null, old = null, check = false) => {
     if (!check) {
       if (type === 'datetime') return {
@@ -77,24 +22,24 @@
     }
   }
   
- const createPostForm = (template, post) => {
-   const forUpdate = Object.entries(post).length !== 0
-   return template.map(element => {
-      return {
-      ...element,
-      value: getValue(element.type, forUpdate, post, element.title, element.label, element.required),
-      valid: forUpdate || !element.required || element.type === 'radio' || element.type === 'check',
-      touched: getTouched(element.type),
-      validationErrors:[]
-    } 
-    }) 
- }
+  const createPostForm = (template, post) => {
+    const forUpdate = Object.entries(post).length !== 0
+    return template.map(element => {
+        return {
+        ...element,
+        value: getIntitialValue(element.type, forUpdate, post, element.title, element.label, element.required),
+        valid: forUpdate || !element.required || element.type === 'radio' || element.type === 'check',
+        touched: getTouched(element.type),
+        validationErrors:[]
+      } 
+      }) 
+  }
  
- const postInputChange = (form, id, value, isForUpdate) => {
+  const postInputChange = (form, id, value, isForUpdate) => {
 
     let valueForCheck = value
     let isValid = true
-    const validationErrors = []
+    let validationError = null
     
     if (form[id].type === 'course') {
       valueForCheck = value.course
@@ -110,10 +55,10 @@
       for (const validator of form[id].validators) {
         const checkValid = validator(valueForCheck)
         isValid = isValid && checkValid.valid
-        if (!checkValid.valid) validationErrors.push(checkValid.error) 
+        if (!checkValid.valid) validationError = checkValid.error
+      }
     }
-    }
-    const updatedForm = form.map((control, idx) => {
+    return form.map((control, idx) => {
       if (idx !== id ) {
         return control
       }
@@ -121,19 +66,54 @@
         ...control,
         value: value,
         valid: isValid,
-        validationErrors: validationErrors
+        validationErrors: validationError
       }
     })
 
-    let formIsValid = true
+  }
 
-    updatedForm.forEach( item =>
-      {formIsValid = formIsValid && item.valid}
+  const checkFormIsValid = (form) => {
+
+    let formValid = true
+    
+    const setTouchedTrue = (obj) => {
+      let newObj = {}
+      Object.keys(obj).forEach(key => {
+        newObj = {
+          ...newObj,
+          [key]: true
+        }
+      })
+      return newObj
+    }
+    const updatedForm = form.map( item =>
+      {
+        let newItem = {}
+        if (item.value === '' && item.required === true) {
+          newItem = {
+            ...item, 
+            touched: true,
+            validationErrors: 'Поле обязательно для заполнения'
+          }
+        }
+        else if (typeof(item.value) === 'object' && item.required === true) {
+          let allExist = true
+          Object.keys(item.value).forEach(key => { allExist = allExist && item.value[key] != ''})
+          newItem = {
+            ...item, 
+            touched: setTouchedTrue(item.touched),
+            validationErrors: 'Поле обязательно для заполнения'
+          }
+        }
+        else newItem = item
+        formValid = formValid && newItem.valid
+        return newItem
+      }
     )
 
     return {
       postForm: updatedForm,
-      formIsValid: formIsValid
+      formValid: formValid
     }
   }
 
@@ -144,9 +124,10 @@
       }
       return {
         ...control,
-        touched: getTouched(control.type, subType, control.touched, true)
+        touched: getTouched(control.type, subType, control.touched, true),
+        validationErrors: (control.required && !control.valid) ? 'Поле обязательно для заполнения' : ''
       }
     })
   }
 
-  export { postInputChange, postInputBlur, createPostForm }
+  export { postInputChange, postInputBlur, createPostForm, checkFormIsValid }

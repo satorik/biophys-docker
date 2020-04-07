@@ -2,6 +2,7 @@ import React from 'react'
 import { useQuery, useMutation } from '@apollo/client'
 import { required, length, time, date } from '../../utils/validators'
 import { getIsDouble } from '../../utils/checkDoubleLecture'
+import { getUpdateData } from '../../utils/postDataHandlers'
 
 import { updateAfterCreate, updateAfterDelete, updateAfterCreateTime, updateAfterDeleteTime } from '../../utils/updateCache/schedule'
 import * as queries from '../../utils/queries/schedule'
@@ -13,7 +14,6 @@ import ButtonAddNew from '../UI/ButtonAddNew'
 import Modal from '../UI/Modal'
 import Edit from '../Shared/Edit'
 import Spinner from '../UI/Spinner'
-import getUpdateData from '../../utils/getObjectForUpdate'
 import ErrorBoundry from '../Shared/ErrorHandling/ErrorBoundry'
 import NetworkErrorComponent from '../Shared/ErrorHandling/NetworkErrorComponent'
 import {EducationButtons} from '../UI/EducationButtons'
@@ -86,7 +86,6 @@ const Schedule = () => {
   const [updatedDay, setUpdatedDay] = React.useState('')
   const [updatedTime, setUpdatedTime] = React.useState({})
   const [updatedYear, setUpdatedYear] = React.useState({})
-  const [isAbleToSave, setIsAbleToSave] = React.useState(true)
   const [isError, setIsError] = React.useState(null)
 
   const {currentWeek, currentTerm, currentYear} = getWeekNumber()
@@ -160,7 +159,6 @@ const Schedule = () => {
   const clearTimeMode = (operation, full = false) => {
     setIsModalOpen(false)
     document.body.style.overflow = "scroll"
-    setIsAbleToSave(true)  
     setUpdatedTime({})
     setUpdatedDay('')
 
@@ -172,7 +170,6 @@ const Schedule = () => {
     setIsModalOpen(false)
     document.body.style.overflow = "scroll"
     setUpdatedYear({})
-    setIsAbleToSave(true)
 
     if (full) setMode({isDeleting: false, isEditing: false, isCreating: false})
     else setMode({...mode, [operation]: false})
@@ -242,37 +239,11 @@ const Schedule = () => {
     clearMode('_', true)
   }
 
-  const onChangeTimeHandler = async (e, postData, valid) => {
-    e.preventDefault()
-    if (!valid) {
-      setIsAbleToSave(false)
-    }
-    else {
-      let postObject = postData.reduce((obj, item) => {
-        obj[item.title] = item.value
-        if(item.type === 'time') {
-          if ( item.value.hours === '') {obj[item.title] = null}
-          if ( item.value.minutes === '') {obj[item.title] = item.value.hours+':00'}
-          else {obj[item.title] = item.value.hours+':'+item.value.minutes} 
-        }
-        if(item.type === 'date') {
-          if (item.value.day !== '')
-          {
-            const fullDate = new Date(item.value.year, item.value.month, item.value.day)
-            obj[item.title] = fullDate
-          }
-          else obj[item.title] = null
-        }
-        if (item.title === 'isEven'){
-          obj[item.title] = +item.value
-        }
-        return obj
-      } ,{})     
-      if (timeMode.isEditing) {
-        const double = getIsDouble(postObject, timetableByDay[DAYS[updatedTime.dayId]], updatedTime.id)
-        const forUpdate = getUpdateData(updatedTime, {...postObject, isDouble: +double.isDouble})
-        if (double.isOneEven && double.isOneDouble) {
-
+  const onChangeTimeHandler = async (postObject) => {   
+    if (timeMode.isEditing) {
+      const double = getIsDouble(postObject, timetableByDay[DAYS[updatedTime.dayId]], updatedTime.id)
+      const forUpdate = getUpdateData(updatedTime, {...postObject, isDouble: +double.isDouble})
+      if (double.isOneEven && double.isOneDouble) {
         try {
             await updateScheduleTimetable({ variables: {id: updatedTime.id, inputData: forUpdate}})
             if (forUpdate.isDouble !== undefined) {
@@ -283,67 +254,54 @@ const Schedule = () => {
         } catch(error) {
             setIsError(error)
         }
-        }
-        else {
-          if (!double.isOneDouble) {console.log('Третий дубль')}
-          if (!double.isOneEven) {console.log('Две по четным или две по нечетным')}
-          setDoubleFound(true)
-          setIsAbleToSave(false)
+      }
+      else {
+        if (!double.isOneDouble) {console.log('Третий дубль')}
+        if (!double.isOneEven) {console.log('Две по четным или две по нечетным')}
+        setDoubleFound(true)
+      }
+    }
+    if (timeMode.isCreating) {
+      const double = getIsDouble(postObject, timetableByDay[updatedDay])
+      if (double.isOneDouble && double.isOneEven) {
+        try {
+            await createScheduleTimetable({ variables: {
+              yearId: years[viewId].id, dayId: DAYS.indexOf(updatedDay), inputData: {...postObject, isDouble: +double.isDouble}
+            }})
+          setTimeMode({...timeMode, isCreating: false})
+          setUpdatedDay('')
+        } catch(error) {
+            setIsError(error)
         }
       }
-      if (timeMode.isCreating) {
-        const double = getIsDouble(postObject, timetableByDay[updatedDay])
-        if (double.isOneDouble && double.isOneEven) {
-          try {
-              await createScheduleTimetable({ variables: {
-                yearId: years[viewId].id, dayId: DAYS.indexOf(updatedDay), inputData: {...postObject, isDouble: +double.isDouble}
-              }})
-            setTimeMode({...timeMode, isCreating: false})
-            setUpdatedDay('')
-          } catch(error) {
-              setIsError(error)
-          }
-        }
-        else {
-          if (!double.isOneDouble) {console.log('Третий дубль')}
-          if (!double.isOneEven) {console.log('Две по четным или две по нечетным')}
-          setDoubleFound(true)
-          setIsAbleToSave(false)
-        }
+      else {
+        if (!double.isOneDouble) {console.log('Третий дубль')}
+        if (!double.isOneEven) {console.log('Две по четным или две по нечетным')}
+        setDoubleFound(true)
       }
     }
   }
 
 
-  const onChangeYearHandler = async (e, postData, valid) => {
-    e.preventDefault()
-    if (!valid) {
-      setIsAbleToSave(false)
-    }
-    else {
-      const postObject = postData.reduce((obj, item) => {
-          obj[item.title] = item.value
-          return obj
-      } ,{})
-      if (mode.isEditing) {
-        try {
-          await updateScheduleYear({ variables: {id: updatedYear.id, inputData: postObject}})
-          clearMode('isEditing')
-        } catch(error) {
-            setIsError(error)
-        }
+  const onChangeYearHandler = async (postObject) => {
+    if (mode.isEditing) {
+      try {
+        await updateScheduleYear({ variables: {id: updatedYear.id, inputData: postObject}})
+        clearMode('isEditing')
+      } catch(error) {
+          setIsError(error)
       }
-      if (mode.isCreating) {
-        try {
-          await createScheduleYear({ variables: {inputData: {
-            title: postObject.course.course,
-            year: +postObject.course.year,
-            term: +postObject.course.term
-          }}})
-          clearMode('isCreating')
-        } catch(error) {
-            setIsError(error)
-        }
+    }
+    if (mode.isCreating) {
+      try {
+        await createScheduleYear({ variables: {inputData: {
+          title: postObject.course.course,
+          year: +postObject.course.year,
+          term: +postObject.course.term
+        }}})
+        clearMode('isCreating')
+      } catch(error) {
+          setIsError(error)
       }
     } 
   }
@@ -367,14 +325,12 @@ const Schedule = () => {
           {(mode.isCreating || mode.isEditing) && <Edit 
             onClickSubmit={onChangeYearHandler}
             onClickCancel={onCloseModal}
-            isAbleToSave={isAbleToSave}
             post={updatedYear}
             formTemplate={FORM_TEMPLATE}
          />}
           {(timeMode.isEditing) && <Edit 
             onClickSubmit={onChangeTimeHandler}
             onClickCancel={onCloseModal}
-            isAbleToSave={isAbleToSave}
             post={updatedTime}
             formTemplate={DAY_TEMPLATE}
          />}
@@ -413,7 +369,6 @@ const Schedule = () => {
               onCreate = {() => onAddNewTime(key)}
               onCancel = {onCancelEditing}
               onSave = {onChangeTimeHandler}
-              isAbleToSave={isAbleToSave}
               isDayUpdating = {key === updatedDay}
               updatedTime = {updatedTime}
               dayTemplate = {DAY_TEMPLATE}

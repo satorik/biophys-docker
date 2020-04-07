@@ -33,7 +33,7 @@ const noteMutation = {
     const t = await sequelize.transaction()
   
     try {
-      let removedFromTop = {}
+      let removedFromTop = null
       if (inputData.onTop) {
         removedFromTop = await models.Note.findOne({where: {onTop: true}})
         if (removedFromTop) {

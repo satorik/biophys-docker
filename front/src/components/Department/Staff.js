@@ -1,6 +1,7 @@
 import React from 'react'
 import { useQuery, useMutation } from '@apollo/client'
 import { required, length, email } from '../../utils/validators'
+import { getUpdateData } from '../../utils/postDataHandlers'
 
 import { updateAfterCreate, updateAfterDelete, updateAfterMove } from '../../utils/updateCache/staff'
 import * as queries from '../../utils/queries/staff'
@@ -12,7 +13,6 @@ import Modal from '../UI/Modal'
 import Edit from '../Shared/Edit'
 import Spinner from '../UI/Spinner'
 import ErrorBoundry from '../Shared/ErrorHandling/ErrorBoundry'
-import getUpdateData from '../../utils/getObjectForUpdate'
 import NetworkErrorComponent from '../Shared/ErrorHandling/NetworkErrorComponent'
 import {EmptyData} from '../Shared/EmptyData'
 
@@ -78,7 +78,6 @@ const Staff = () => {
   const [isModalOpen, setIsModalOpen] = React.useState(false)
   const [mode, setMode] = React.useState({isEditing: false, isCreating: false, isDeleting: false})
   const [updatedPerson, setUpdatedPerson] = React.useState({})
-  const [isAbleToSave, setIsAbleToSave] = React.useState(true)
   const [isError, setIsError] = React.useState(null)
   
 
@@ -102,7 +101,6 @@ const Staff = () => {
     setIsModalOpen(false)
     document.body.style.overflow = "scroll"
     setUpdatedPerson({})
-    setIsAbleToSave(true)
 
     if (full) setMode({isDeleting: false, isEditing: false, isCreating: false})
     else setMode({...mode, [operation]: false})
@@ -140,32 +138,22 @@ const Staff = () => {
     onClearMode('_', true)
   }
 
-  const onChangeDepartmentStaffHandler = async (e, postData, valid) => {
-    e.preventDefault()
-    if (!valid) {
-      setIsAbleToSave(false)
-    }
-    else {
-      let postObject = postData.reduce((obj, item) => {
-          obj[item.title] = item.value
-          return obj
-      } ,{})
-      if (mode.isEditing) {
-        const forUpdate = getUpdateData(updatedPerson, postObject)
-        try {
-          await updateDepartmentPerson({ variables: {id: updatedPerson.id, inputData: forUpdate}})
-          onClearMode('isEditing')
-        } catch(error) {
-          setIsError(error)
-        }
+  const onChangeDepartmentStaffHandler = async(postObject) => {
+    if (mode.isEditing) {
+      const forUpdate = getUpdateData(updatedPerson, postObject)
+      try {
+        await updateDepartmentPerson({ variables: {id: updatedPerson.id, inputData: forUpdate}})
+        onClearMode('isEditing')
+      } catch(error) {
+        setIsError(error)
       }
-      if (mode.isCreating) {
-        try {
-          await createDepartmentPerson({ variables: {inputData: postObject}})
-          onClearMode('isCreating')
-        } catch(error) {
-          setIsError(error)
-        }
+    }
+    if (mode.isCreating) {
+      try {
+        await createDepartmentPerson({ variables: {inputData: postObject}})
+        onClearMode('isCreating')
+      } catch(error) {
+        setIsError(error)
       }
     } 
   }
@@ -189,7 +177,6 @@ const Staff = () => {
      { (mode.isEditing || mode.isCreating) && <Edit 
         onClickSubmit={onChangeDepartmentStaffHandler}
         onClickCancel={onCloseModal}
-        isAbleToSave={isAbleToSave}
         post={updatedPerson}
         formTemplate={FORM_TEMPLATE}
       />}

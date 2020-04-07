@@ -6,9 +6,9 @@ export const required = value => {
     Object.keys(value).forEach(item => {
       allExist = allExist && value[item] != ''
     })
-    return {valid: allExist, error: !allExist ? 'Поле не заполнено' : ''}
+    return {valid: allExist, error: !allExist ? 'Поле обязательно для заполнения' : ''}
   }
-  else return {valid: value.trim() !== '', error: !value.trim() !== '' ? 'Поле не заполнено' : ''}
+  else return {valid: value !== '', error: value !== '' ? '' : 'Поле обязательно для заполнения'}
 }
 
 export const length = config => value => {

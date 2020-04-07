@@ -1,33 +1,38 @@
 import React from 'react'
 import Input from '../UI/Input'
-import { getValue } from '../../utils/getFormChangedValue'
-import { postInputChange, postInputBlur, createPostForm } from '../../utils/formHandlers'
+import { getChangedValue } from '../../utils/valueHandlers'
+import { postInputChange, postInputBlur, createPostForm, checkFormIsValid } from '../../utils/formHandlers'
+import { generateBase64FromImage } from '../../utils/image'
+import { trasformPostData } from '../../utils/postDataHandlers'
 
 
-const Edit = ({onClickSubmit, onClickCancel, formTemplate, isAbleToSave, post, border}) => {
+const Edit = ({onClickSubmit, onClickCancel, formTemplate, post, border}) => {
   
   const [postForm, setPostForm] = React.useState(createPostForm(formTemplate, post))
-  const [formIsValid, setFormIsValid] = React.useState(false)
   const [imagePreview, setImagePreview] = React.useState(post.imageUrl ? process.env.REACT_APP_STATIC_URI+post.imageUrl : null)
+  const [canSave, setCanSave] = React.useState(true)
 
-  React.useEffect(() => {
-    if(isAbleToSave) {
-      setPostForm(createPostForm(formTemplate, post))
-      setImagePreview(post.imageUrl ? process.env.REACT_APP_STATIC_URI+post.imageUrl : null)
+  // React.useEffect(() => {
+  //   if(isAbleToSave) {
+  //     setPostForm(createPostForm(formTemplate, post))
+  //     setImagePreview(post.imageUrl ? process.env.REACT_APP_STATIC_URI+post.imageUrl : null)
+  //   }
+  // }, [formTemplate])
+
+  const postInputChangeHandler = async (event, id) => {
+    if (!canSave) setCanSave(true)
+
+    const newValue = getChangedValue(event, postForm[id].type, postForm[id].value)
+    setPostForm(postInputChange(postForm, id, newValue.value, Object.entries(post).length !== 0))
+
+    if (postForm[id].title === 'image') {
+      try {
+          const b64 = await generateBase64FromImage(newValue)
+          setImagePreview(b64)
+        } catch(e) {
+          throw new Error('Failed to generate b64')
+        }
     }
-  }, [formTemplate])
-
-  const postInputChangeHandler = (event, id) => {
-    getValue(event, postForm[id].type, postForm[id].value)
-    .then(valueObj => {
-      if (postForm[id].title === 'image') {
-         setImagePreview(valueObj.imagePreview)
-      }
-      const updatedState = postInputChange(postForm, id, valueObj.value, Object.entries(post).length !== 0)
-      setPostForm(updatedState.postForm)
-      setFormIsValid(updatedState.formIsValid)
-    })
-    .catch(e => console.log(e))
   }
 
   const inputBlurHandler = (id, subType) => {
@@ -36,22 +41,29 @@ const Edit = ({onClickSubmit, onClickCancel, formTemplate, isAbleToSave, post, b
     }
   }
 
+  const submitHandler = (e) => {
+    e.preventDefault()
+
+     const formValidity = checkFormIsValid(postForm)
+     setPostForm(formValidity.postForm)
+ 
+     if (formValidity.formValid) {
+       const postData = trasformPostData(postForm)     
+       onClickSubmit(postData)
+     
+      }
+     else {
+      setCanSave(false)
+     }
+  }
+
   return (
     <div className={`text-left my-3 ${border ? "border border-secondary p-3" : ""}`}>
-      {!isAbleToSave && <p className="text-danger text-center">Заполните форму верно</p>}
+      {!canSave && <p className="text-danger text-center">Заполните форму верно</p>}
       <p>* - обязательное поле</p>
       <form>
-           <div>
-              {imagePreview && (
-                  <img 
-                    className="img-thumbnail w-25"
-                    src={imagePreview}
-                  />
-              )}
-            </div>
-            
-          {
-            postForm.map((control, idx) => 
+          <div> {imagePreview && (<img className="img-thumbnail w-25" src={imagePreview} />)} </div>    
+          {postForm.map((control, idx) => 
               <Input
                 key={idx}
                 idx = {idx}
@@ -68,7 +80,7 @@ const Edit = ({onClickSubmit, onClickCancel, formTemplate, isAbleToSave, post, b
             />
             )
           }
-            <button type="submit" className="btn btn-primary mr-3" onClick={(e) => onClickSubmit(e, postForm, formIsValid)}>Сохранить</button>
+            <button type="submit" className="btn btn-primary mr-3" onClick={(e) => submitHandler(e)}>Сохранить</button>
             <button type="reset" className="btn btn-secondary" onClick={onClickCancel}>Отменить</button>
       </form>
     </div>

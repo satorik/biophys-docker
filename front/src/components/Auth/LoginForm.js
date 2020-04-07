@@ -96,7 +96,6 @@ const clearLocalStorage = () => {
 
 const LoginForm = ({onCancel, isAuth, updatedAuth}) => {
 
-  const [isAbleToSave, setIsAbleToSave] = React.useState(true)
   const [isLogin, setIsLogin] = React.useState(true)
   const [isError, setIsError] = React.useState(null)
 
@@ -107,42 +106,36 @@ const LoginForm = ({onCancel, isAuth, updatedAuth}) => {
     onCancel()
   }
 
-  const onHandleSubmit = async (e, postData, valid) => {
-    e.preventDefault()
-    if (!valid) {
-      setIsAbleToSave(false)
+  const onHandleSubmit = async (postData) => {
+    const postObject = postData.reduce((obj, item) => {
+      if (item.title !== 'passwordRepeat') {
+        obj[item.title] = item.value
+      }
+      return obj
+    } ,{})   
+    
+    if (isLogin) {
+      try {
+        const userData = await loginUser({ variables: {inputData: postObject} })
+        updateLocalStorage(userData.data.loginUser)
+        updatedAuth({...userData.data.loginUser})   
+        onCancel()
+      }
+      catch(error){
+        setIsError(error)
+      }
     }
     else {
-      const postObject = postData.reduce((obj, item) => {
-        if (item.title !== 'passwordRepeat') {
-          obj[item.title] = item.value
-        }
-        return obj
-      } ,{})   
-      
-      if (isLogin) {
-        try {
-          const userData = await loginUser({ variables: {inputData: postObject} })
-          updateLocalStorage(userData.data.loginUser)
-          updatedAuth({...userData.data.loginUser})   
-          onCancel()
-        }
-        catch(error){
-          setIsError(error)
-        }
+      try {
+        const userData = await createUser({ variables: {inputData: postObject} })
+        updateLocalStorage(userData.data.createUser)
+        updatedAuth({...userData.data.createUser})   
+        onCancel()
       }
-      else {
-        try {
-          const userData = await createUser({ variables: {inputData: postObject} })
-          updateLocalStorage(userData.data.createUser)
-          updatedAuth({...userData.data.createUser})   
-          onCancel()
-        }
-        catch(error){
-          setIsError(error)
-        }
+      catch(error){
+        setIsError(error)
       }
-    } 
+    }  
   }
 
   const handleLogout = () => {
@@ -167,7 +160,6 @@ const LoginForm = ({onCancel, isAuth, updatedAuth}) => {
         <Edit 
             onClickSubmit={onHandleSubmit}
             onClickCancel={onCloseModal}
-            isAbleToSave={isAbleToSave}
             post={{}}
             formTemplate={isLogin ? LOGIN_FORM_TEMPLATE : REGISTER_FORM_TEMPLATE}
         />

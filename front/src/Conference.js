@@ -2,6 +2,7 @@ import React from 'react'
 import { useQuery, useMutation } from '@apollo/client'
 import { required, length, date } from './utils/validators'
 import { useLocation, useHistory } from 'react-router-dom'
+import { getUpdateData } from './utils/postDataHandlers'
 
 import { updateAfterCreate, updateAfterDelete } from './utils/updateCache/conference'
 import * as queries from './utils/queries/conference'
@@ -12,7 +13,6 @@ import Modal from './components/UI/Modal'
 import Edit from './components/Shared/Edit'
 import Spinner from './components/UI/Spinner'
 import ErrorBoundry from './components/Shared/ErrorHandling/ErrorBoundry'
-import getUpdateData from './utils/getObjectForUpdate'
 import ConferenceCard from './components/Conference/ConferenceCard'
 import ConferenceDetails from './components/Conference/ConferenceDetails'
 import NetworkErrorComponent from './components/Shared/ErrorHandling/NetworkErrorComponent'
@@ -84,7 +84,6 @@ const Conferece = () => {
   const [isModalOpen, setIsModalOpen] = React.useState(false)
   const [mode, setMode] = React.useState({isEditing: false, isCreating: false, isDeleting: false})
   const [updatedConference, setUpdatedConference] = React.useState({})
-  const [isAbleToSave, setIsAbleToSave] = React.useState(true)
   const [isError, setIsError] = React.useState(null)
   
   const variables = {
@@ -120,7 +119,6 @@ const Conferece = () => {
     setIsModalOpen(false)
     document.body.style.overflow = "scroll"
     setUpdatedConference({})
-    setIsAbleToSave(true)
 
     if (full) setMode({isDeleting: false, isEditing: false, isCreating: false})
     else setMode({...mode, [operation]: false})
@@ -163,39 +161,25 @@ const Conferece = () => {
     onClearMode('_', true)
   }
 
-  const onChangeConferenceHandler = async (e, postData, valid) => {
-    e.preventDefault()
-    if (!valid) {
-      setIsAbleToSave(false)
+  const onChangeConferenceHandler = async (postObject) => {
+    if (mode.isEditing) {
+      const forUpdate = getUpdateData(updatedConference, postObject)
+      try {
+        await updateConference({ variables: {id: updatedConference.id, inputData: forUpdate}})
+        onClearMode('isEditing')
+      } catch(error) {
+        setIsError(error)
+      }
     }
-    else {
-      let postObject = postData.reduce((obj, item) => {
-          obj[item.title] = item.value
-          if(item.type === 'date') {
-            const fullDate = new Date(Date.UTC(item.value.year, item.value.month, item.value.day))
-            obj[item.title] = fullDate.toISOString()
-          }
-          return obj
-      } ,{})
-      if (mode.isEditing) {
-        const forUpdate = getUpdateData(updatedConference, postObject)
-        try {
-          await updateConference({ variables: {id: updatedConference.id, inputData: forUpdate}})
-          onClearMode('isEditing')
-        } catch(error) {
-          setIsError(error)
-        }
+    if (mode.isCreating) {
+      try {
+        const createdConference = await createConference({ variables: {inputData: postObject}})
+        history.push({search: '?id='+createdConference.data.createConference.id})
+        onClearMode('isCreating')
+      } catch(error) {
+        setIsError(error)
       }
-      if (mode.isCreating) {
-        try {
-          const createdConference = await createConference({ variables: {inputData: postObject}})
-          history.push({search: '?id='+createdConference.data.createConference.id})
-          onClearMode('isCreating')
-        } catch(error) {
-          setIsError(error)
-        }
-      }
-    } 
+    }
   }
 
   let modalTitle = ''
@@ -214,7 +198,6 @@ const Conferece = () => {
      { (mode.isEditing || mode.isCreating) && <Edit 
         onClickSubmit={onChangeConferenceHandler}
         onClickCancel={onCloseModal}
-        isAbleToSave={isAbleToSave}
         post={updatedConference}
         formTemplate={FORM_TEMPLATE}
       />}

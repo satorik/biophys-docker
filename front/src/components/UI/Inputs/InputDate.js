@@ -51,7 +51,7 @@ const InputDate = ({onChanged, onBlur, label, value, withTime, children, require
               className='form-control col-1 mr-1'
               value={value.hours}
               title='hours'
-              placeholder='Часы'
+              placeholder={`Часы${required ? '*': ''}`}
               onChange={onChanged}
               onBlur={() => onBlur(idx, 'hours')}
             />
@@ -61,7 +61,7 @@ const InputDate = ({onChanged, onBlur, label, value, withTime, children, require
               className='form-control col-1 mx-1'
               value={value.minutes}
               title='minutes'
-              placeholder='Минуты'
+              placeholder={`Минуты${required ? '*': ''}`}
               onChange={onChanged}
               onBlur={() => onBlur(idx, 'minutes')}
             /></>

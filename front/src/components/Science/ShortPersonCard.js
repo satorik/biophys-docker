@@ -28,11 +28,11 @@ const ShortPersonCard = ({firstname, lastname, middlename, description, onEditCl
           { mail && <><span className="mr-1"><FontAwesomeIcon icon="envelope" style={{color: 'var(--green)'}} size="sm"/></span><span>{mail}</span></>}
       </div>
       <div>
-        { urlIstina && <a href={urlIstina} className="mr-1">ИСТИНА</a>}
-        { urlRints && <a href={urlRints} className="mr-1">РИНЦ</a>}
-        { urlOrcid && <a href={urlOrcid} className="mr-1">ORCID</a>}
-        { urlResearcher && <a href={urlResearcher} className="mr-1">Researcher</a>}
-        { urlScopus && <a href={urlScopus} className="mr-1">Scopus</a>}
+        { urlIstina && <a href={urlIstina} className="mr-1">ИСТИНА</a> }
+        { urlRints && <a href={urlRints} className="mr-1">РИНЦ</a> }
+        { urlOrcid && <a href={urlOrcid} className="mr-1">ORCID</a> }
+        { urlResearcher && <a href={urlResearcher} className="mr-1">Researcher</a> }
+        { urlScopus && <a href={urlScopus} className="mr-1">Scopus</a> }
       </div>
     </div>
   )

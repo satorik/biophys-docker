@@ -1,6 +1,7 @@
 import React from 'react'
 import { useQuery, useMutation } from '@apollo/client'
 import { required, length } from '../../utils/validators'
+import { getUpdateData } from '../../utils/postDataHandlers'
 
 import { updateAfterCreate, updateAfterDelete } from '../../utils/updateCache/admission'
 import * as queries from '../../utils/queries/admission'
@@ -11,7 +12,6 @@ import Modal from '../UI/Modal'
 import Edit from '../Shared/Edit'
 import Spinner from '../UI/Spinner'
 import EditButtons from '../UI/EditButtons'
-import getUpdateData from '../../utils/getObjectForUpdate'
 import ErrorBoundry from '../Shared/ErrorHandling/ErrorBoundry'
 import NetworkErrorComponent from '../Shared/ErrorHandling/NetworkErrorComponent'
 import {EmptyData} from '../Shared/EmptyData'
@@ -31,7 +31,6 @@ const Admission = () => {
 
   const [isModalOpen, setIsModalOpen] = React.useState(false)
   const [mode, setMode] = React.useState({isEditing: false, isCreating: false, isDeleting: false})
-  const [isAbleToSave, setIsAbleToSave] = React.useState(true)
   const [isError, setIsError] = React.useState(null)
 
   const { loading: queryLodading, error: queryError, data } = useQuery(queries.GET_ADMISSSION)
@@ -77,34 +76,22 @@ const Admission = () => {
     }
   }
 
-  const onChangeAdmissionHandler = async (e, postData, valid) => {
-    e.preventDefault()
-    if (!valid) {
-      setIsAbleToSave(false)
-    }
-    else {
-      let postObject = postData
-        .reduce((obj, item) => 
-        { 
-        obj[item.title] = item.value  
-        return obj
-        }, {})
-      if (mode.isEditing) {
-        let forUpdate = getUpdateData(admission, postObject)
-        try {
-          await updatedAdmission({ variables: {inputData: forUpdate}})
-          setMode({...mode, isEditing: false})
-        } catch(error) {
-          setIsError(error)
-        }
+  const onChangeAdmissionHandler = async (postObject) => {
+    if (mode.isEditing) {
+      let forUpdate = getUpdateData(admission, postObject)
+      try {
+        await updatedAdmission({ variables: {inputData: forUpdate}})
+        setMode({...mode, isEditing: false})
+      } catch(error) {
+        setIsError(error)
       }
-      if (mode.isCreating) {
-        try {
-          await createAdmission({ variables: {inputData: postObject}})
-          setMode({...mode, isCreating: false})
-        } catch(error) {
-          setIsError(error)
-        }
+    }
+    if (mode.isCreating) {
+      try {
+        await createAdmission({ variables: {inputData: postObject}})
+        setMode({...mode, isCreating: false})
+      } catch(error) {
+        setIsError(error)
       }
     } 
   }
@@ -126,7 +113,6 @@ const Admission = () => {
       {(mode.isCreating) && <div className="container card mt-5 p-2"><Edit 
         onClickSubmit={onChangeAdmissionHandler}
         onClickCancel={onCloseModal}
-        isAbleToSave={isAbleToSave}
         formTemplate={FORM_TEMPLATE}
         post={{}}
       /></div>}
@@ -135,7 +121,6 @@ const Admission = () => {
           {(mode.isEditing ) && <Edit 
             onClickSubmit={onChangeAdmissionHandler}
             onClickCancel={onCloseModal}
-            isAbleToSave={isAbleToSave}
             post={admission }
             formTemplate={FORM_TEMPLATE}
           />}

@@ -4,7 +4,7 @@ import {getTimeToLocal} from '../../utils/dateFormat'
 import ButtonAddNew from '../UI/ButtonAddNew'
 import Edit from '../Shared/Edit'
 
-const ScheduleDay = ({scheduleDay, dayTitle, currentWeek,  timeMode, onCreate, onCancel, onSave, isAbleToSave, isDayUpdating, dayTemplate, updatedTime}) => {
+const ScheduleDay = ({scheduleDay, dayTitle, currentWeek,  timeMode, onCreate, onCancel, onSave, isDayUpdating, dayTemplate, updatedTime}) => {
 
   const consolidatedDayWithDoubles = [] 
   if (scheduleDay.length > 0) {
@@ -59,7 +59,6 @@ const ScheduleDay = ({scheduleDay, dayTitle, currentWeek,  timeMode, onCreate, o
         <Edit 
           onClickSubmit={onSave}
           onClickCancel={onCancel}
-          isAbleToSave={isAbleToSave}
           post={updatedTime}
           formTemplate={dayTemplate}
           border

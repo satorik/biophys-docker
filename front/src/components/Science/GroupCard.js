@@ -4,7 +4,7 @@ import ScienceArticleCard from './ScienceArticleCard'
 import Edit from '../Shared/Edit'
 import ButtonAddNew from '../UI/ButtonAddNew'
 
-const GroupCard = ({group, save, articleForUpdate, personForUpdate}) => {
+const GroupCard = ({group, articleForUpdate, personForUpdate}) => {
 
 
   const content = group.mode.isEditing ? 
@@ -13,7 +13,6 @@ const GroupCard = ({group, save, articleForUpdate, personForUpdate}) => {
     <Edit 
       onClickSubmit={group.onChangeInfo}
       onClickCancel={group.onCancel}
-      isAbleToSave={true}
       post={group}
       formTemplate={group.template}
     />
@@ -37,7 +36,6 @@ const GroupCard = ({group, save, articleForUpdate, personForUpdate}) => {
               key={person.id}
               onClickSubmit={group.people.onChangePerson}
               onClickCancel={group.people.onCancel}
-              isAbleToSave={save}
               post={personForUpdate}
               formTemplate={group.people.template}
             />
@@ -74,7 +72,6 @@ const GroupCard = ({group, save, articleForUpdate, personForUpdate}) => {
             <Edit 
               onClickSubmit={group.people.onChangePerson}
               onClickCancel={group.people.onCancel}
-              isAbleToSave={save}
               post={{}}
               formTemplate={group.people.template}
             /></div>
@@ -99,7 +96,6 @@ const GroupCard = ({group, save, articleForUpdate, personForUpdate}) => {
               key={article.id}
               onClickSubmit={group.articles.onChangeArticle}
               onClickCancel={group.articles.onCancel}
-              isAbleToSave={save}
               post={articleForUpdate}
               formTemplate={group.articles.template}
             />
@@ -125,7 +121,6 @@ const GroupCard = ({group, save, articleForUpdate, personForUpdate}) => {
             <Edit 
               onClickSubmit={group.articles.onChangeArticle}
               onClickCancel={group.articles.onCancel}
-              isAbleToSave={save}
               post={{}}
               formTemplate={group.articles.template}
             /></div>

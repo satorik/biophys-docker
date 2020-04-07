@@ -1,6 +1,7 @@
 import React from 'react'
 import { useQuery, useMutation } from '@apollo/client'
 import { required, length } from '../../utils/validators'
+import { getUpdateData } from '../../utils/postDataHandlers'
 
 import { updateAfterCreate, updateAfterDelete } from '../../utils/updateCache/history'
 import * as queries from '../../utils/queries/history'
@@ -11,7 +12,6 @@ import Modal from '../UI/Modal'
 import Edit from '../Shared/Edit'
 import Spinner from '../UI/Spinner'
 import EditButtons from '../UI/EditButtons'
-import getUpdateData from '../../utils/getObjectForUpdate'
 import ErrorBoundry from '../Shared/ErrorHandling/ErrorBoundry'
 import NetworkErrorComponent from '../Shared/ErrorHandling/NetworkErrorComponent'
 import {EmptyData} from '../Shared/EmptyData'
@@ -38,7 +38,6 @@ const History = () => {
   
   const [isModalOpen, setIsModalOpen] = React.useState(false)
   const [mode, setMode] = React.useState({isEditing: false, isCreating: false, isDeleting: false})
-  const [isAbleToSave, setIsAbleToSave] = React.useState(true)
   const [isError, setIsError] = React.useState(null)
 
   const { loading: queryLodading, error: queryError, data } = useQuery(queries.GET_DEPARTMENT_HISTORY)
@@ -84,36 +83,24 @@ const History = () => {
     }
   }
 
-  const onChangeHistoryHandler = async (e, postData, valid) => {
-    e.preventDefault()
-    if (!valid) {
-      setIsAbleToSave(false)
+  const onChangeHistoryHandler = async (postObject) => {
+    if (mode.isEditing) {
+      let forUpdate = getUpdateData(history, postObject)
+      try {
+        await updateHistory({ variables: {inputData: forUpdate}})
+        setMode({...mode, isEditing: false})
+      } catch(error) {
+        setIsError(error)
+      }
     }
-    else {
-      let postObject = postData
-        .reduce((obj, item) => 
-        { 
-        obj[item.title] = item.value  
-        return obj
-        }, {})
-      if (mode.isEditing) {
-        let forUpdate = getUpdateData(history, postObject)
-        try {
-          await updateHistory({ variables: {inputData: forUpdate}})
-          setMode({...mode, isEditing: false})
-        } catch(error) {
-          setIsError(error)
-        }
+    if (mode.isCreating) {
+      try {
+        await createHistory({ variables: {inputData: postObject}})
+        setMode({...mode, isCreating: false})
+      } catch(error) {
+        setIsError(error)
       }
-      if (mode.isCreating) {
-        try {
-          await createHistory({ variables: {inputData: postObject}})
-          setMode({...mode, isCreating: false})
-        } catch(error) {
-          setIsError(error)
-        }
-      }
-    } 
+    }
   }
 
   let modalTitle = ''
@@ -133,7 +120,6 @@ const History = () => {
         {(mode.isCreating) && <div className="container card mt-5 p-2"><Edit 
           onClickSubmit={onChangeHistoryHandler}
           onClickCancel={onCloseModal}
-          isAbleToSave={isAbleToSave}
           formTemplate={FORM_TEMPLATE}
           post={{}}
         /></div>}
@@ -142,7 +128,6 @@ const History = () => {
           {(mode.isEditing ) && <Edit 
             onClickSubmit={onChangeHistoryHandler}
             onClickCancel={onCloseModal}
-            isAbleToSave={isAbleToSave}
             post={history || {}}
             formTemplate={FORM_TEMPLATE}
           />}

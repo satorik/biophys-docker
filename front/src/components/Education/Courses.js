@@ -1,6 +1,8 @@
 import React from 'react'
 import { useQuery, useMutation } from '@apollo/client'
 import { required, length, time, date } from '../../utils/validators'
+import { getUpdateData } from '../../utils/postDataHandlers'
+
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faCaretDown, faCaretUp } from '@fortawesome/free-solid-svg-icons'
 
@@ -14,7 +16,6 @@ import ButtonAddNew from '../UI/ButtonAddNew'
 import Modal from '../UI/Modal'
 import Edit from '../Shared/Edit'
 import Spinner from '../UI/Spinner'
-import getUpdateData from '../../utils/getObjectForUpdate'
 import ErrorBoundry from '../Shared/ErrorHandling/ErrorBoundry'
 import NetworkErrorComponent from '../Shared/ErrorHandling/NetworkErrorComponent'
 import {EducationButtons} from '../UI/EducationButtons'
@@ -64,7 +65,6 @@ const Courses = () => {
   const [resourseMode, setResourseMode] = React.useState({isEditing: false, isCreating: false, isDeleting: false})
   const [updatedCourse, setUpdatedCourse] = React.useState({})
   const [updatedResourse, setUpdatedResourse] = React.useState({})
-  const [isAbleToSave, setIsAbleToSave] = React.useState(true)
   const [isError, setIsError] = React.useState(null)
 
   const [showResourses, setShowResourses] = React.useState({
@@ -219,93 +219,69 @@ const Courses = () => {
     }
   }
 
-  const onChangeResourseHandler = async (e, postData, valid) => {
-    e.preventDefault()
-    if (!valid) {
-      setIsAbleToSave(false)
-    }
-    else {
-      let postObject = postData.reduce((obj, item) => {
-        if (item.type !== 'resourse') {
-          obj[item.title] = item.value
-        }
-        else {
-          Object.keys(item.value).forEach(key => obj[key] = item.value[key])
-        }
-        return obj
-      } ,{})    
-      
-      const filetype = forms.find(form => form.id === postObject.educationFormId).filetype
+  const onChangeResourseHandler = async (postObject) => {
+    const filetype = forms.find(form => form.id === postObject.educationFormId).filetype
 
-      if (resourseMode.isEditing) {
-        
-        const forUpdate = getUpdateData(updatedResourse, postObject)
-        try {
-          await updateEducationResourse({
-            variables: {
-              id: updatedResourse.id, 
-              filetype: filetype,
-              inputData: {...forUpdate}
-            }
-          })
-  
-          setResourseMode({...resourseMode, isEditing: false})
-          setIsModalOpen(false)
-          document.body.style.overflow = "scroll"
-        } catch(error) {
-          setIsError(error)
-        }
+    if (resourseMode.isEditing) {
+      
+      const forUpdate = getUpdateData(updatedResourse, postObject)
+      try {
+        await updateEducationResourse({
+          variables: {
+            id: updatedResourse.id, 
+            filetype: filetype,
+            inputData: {...forUpdate}
+          }
+        })
+
+        setResourseMode({...resourseMode, isEditing: false})
+        setIsModalOpen(false)
+        document.body.style.overflow = "scroll"
+      } catch(error) {
+        setIsError(error)
       }
-      if (resourseMode.isCreating) {
-        try {
-          await createEducationResourse({
-            variables: {
-              courseId: courses[viewId].id, 
-              filetype: filetype,
-              inputData: {...postObject}
-            }
-          })
-         setResourseMode({...resourseMode, isCreating: false})
-         setUpdatedResourse({})
-        } catch(error) {
-          setIsError(error)
-        }
+    }
+    if (resourseMode.isCreating) {
+      try {
+        await createEducationResourse({
+          variables: {
+            courseId: courses[viewId].id, 
+            filetype: filetype,
+            inputData: {...postObject}
+          }
+        })
+        setResourseMode({...resourseMode, isCreating: false})
+        setUpdatedResourse({})
+      } catch(error) {
+        setIsError(error)
       }
     }
   }
 
-  const onChangeCourseHandler = async (e, postData, valid) => {
-    e.preventDefault()
-    if (!valid) {
-      setIsAbleToSave(false)
+  const onChangeCourseHandler = async (postObject) => { 
+    if (mode.isEditing) {
+      const forUpdate = getUpdateData(updatedCourse, postObject)
+      try {
+        await updateEducationCourse({ variables: {id: updatedCourse.id, inputData: forUpdate}})
+        setMode({...mode, isEditing: false})
+        setUpdatedCourse({})
+        setIsModalOpen(false)
+        document.body.style.overflow = "scroll"
+      } catch(error) {
+        setIsError(error)
+      }
+
     }
-    else {
-      const postObject = postData.reduce((obj, item) => {
-          obj[item.title] = item.value
-          return obj
-      } ,{})
-      setIsModalOpen(false)
-      document.body.style.overflow = "scroll"
-      if (mode.isEditing) {
-        const forUpdate = getUpdateData(updatedCourse, postObject)
-        try {
-          await updateEducationCourse({ variables: {id: updatedCourse.id, inputData: forUpdate}})
-          setMode({...mode, isEditing: false})
-          setUpdatedCourse({})
-        } catch(error) {
-          setIsError(error)
-        }
- 
+    if (mode.isCreating) {
+      try {
+        await createEducationCourse({ variables: {inputData: postObject}})
+        setMode({...mode, isCreating: false})
+        setIsModalOpen(false)
+        document.body.style.overflow = "scroll"
+      } catch(error) {
+        setIsError(error)
       }
-      if (mode.isCreating) {
-        try {
-          await createEducationCourse({ variables: {inputData: postObject}})
-          setMode({...mode, isCreating: false})
-        } catch(error) {
-          setIsError(error)
-        }
-      }
-    } 
+    }
   }
 
  let modalTitle = ''
@@ -326,7 +302,6 @@ const Courses = () => {
           {(mode.isCreating || mode.isEditing) && <Edit 
             onClickSubmit={onChangeCourseHandler}
             onClickCancel={onCloseModal}
-            isAbleToSave={isAbleToSave}
             post={updatedCourse}
             formTemplate={FORM_TEMPLATE}
         />}
@@ -389,7 +364,6 @@ const Courses = () => {
             <Edit 
               onClickSubmit={onChangeResourseHandler}
               onClickCancel={onCancelEditing}
-              isAbleToSave={isAbleToSave}
               post={updatedResourse}
               formTemplate={RESOURSE_TEMPLATE}
               border
