@@ -27,10 +27,10 @@ const Edit = ({onClickSubmit, onClickCancel, formTemplate, post, border}) => {
 
     if (postForm[id].title === 'image') {
       try {
-          const b64 = await generateBase64FromImage(newValue)
+          const b64 = await generateBase64FromImage(newValue.value)
           setImagePreview(b64)
         } catch(e) {
-          throw new Error('Failed to generate b64')
+          throw new Error('Failed to generate b64, ', e)
         }
     }
   }
