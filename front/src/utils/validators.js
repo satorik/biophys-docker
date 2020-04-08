@@ -4,11 +4,11 @@ export const required = value => {
   else if (typeof(value) === 'object') {
     let allExist = true
     Object.keys(value).forEach(item => {
-      allExist = allExist && value[item] != ''
+      allExist = allExist && value[item] !== ''
     })
     return {valid: allExist, error: !allExist ? 'Поле обязательно для заполнения' : ''}
   }
-  else return {valid: value !== '', error: value !== '' ? '' : 'Поле обязательно для заполнения'}
+  else return {valid: value.trim() !== '', error: value.trim() !== '' ? '' : 'Поле обязательно для заполнения'}
 }
 
 export const length = config => value => {

@@ -18,6 +18,7 @@ import ErrorBoundry from '../Shared/ErrorHandling/ErrorBoundry'
 import NetworkErrorComponent from '../Shared/ErrorHandling/NetworkErrorComponent'
 import {EducationButtons} from '../UI/EducationButtons'
 import {EmptyData} from '../Shared/EmptyData'
+import SimpleAlert from '../Shared/SimpleAlert'
 
 const DAYS = ["Понедельник", "Вторник", "Среда", "Четверг", "Пятница", "Суббота"]
 
@@ -88,6 +89,7 @@ const Schedule = () => {
   const [updatedTime, setUpdatedTime] = React.useState({})
   const [updatedYear, setUpdatedYear] = React.useState({})
   const [isError, setIsError] = React.useState(null)
+  const [alertMessage, setAlertMessage] = React.useState(null)
 
   const {currentWeek, currentTerm, currentYear} = getWeekNumber()
 
@@ -240,6 +242,20 @@ const Schedule = () => {
     clearMode('_', true)
   }
 
+  const openSimpleAlert = (twoDoubles, twoEven) => {
+    setIsModalOpen(true)
+    document.body.style.overflow = "hidden"
+
+    if (twoDoubles) setAlertMessage('Невозможно поставить три лекции на одно и то же время')
+    if (twoEven) setAlertMessage('Невозможно поставить две лекции по четным или две по нечетным')
+    setDoubleFound(true)  
+  }
+
+  const onCloseSimpleAlert = () => {
+    setIsModalOpen(false)
+    document.body.style.overflow = "scroll"
+  }
+
   const onChangeTimeHandler = async (postObject) => {   
     if (timeMode.isEditing) {
       const double = getIsDouble(postObject, timetableByDay[DAYS[updatedTime.dayId]], updatedTime.id)
@@ -257,9 +273,7 @@ const Schedule = () => {
         }
       }
       else {
-        if (!double.isOneDouble) {console.log('Третий дубль')}
-        if (!double.isOneEven) {console.log('Две по четным или две по нечетным')}
-        setDoubleFound(true)
+        openSimpleAlert(!double.isOneDouble, !double.isOneEven)
       }
     }
     if (timeMode.isCreating) {
@@ -276,9 +290,7 @@ const Schedule = () => {
         }
       }
       else {
-        if (!double.isOneDouble) {console.log('Третий дубль')}
-        if (!double.isOneEven) {console.log('Две по четным или две по нечетным')}
-        setDoubleFound(true)
+        openSimpleAlert(!double.isOneDouble, !double.isOneEven)
       }
     }
   }
@@ -306,6 +318,7 @@ const Schedule = () => {
       }
     } 
   }
+
 
   let modalTitle = ''
   if (mode.isEditing) {modalTitle = 'Редактирование расписания'}
@@ -337,6 +350,7 @@ const Schedule = () => {
          />}
           {(mode.isDeleting) &&  <YesDelete onDelete={onDeleteScheduleYearHandler} onCancel={onCloseModal} info={updatedYear} instance={'educationYear'} /> }
           {(timeMode.isDeleting) &&  <YesDelete onDelete={onDeleteScheduleTimeHandler} onCancel={onCloseModal} info={updatedTime} instance={'scheduleDay'} /> }
+          { doubleFound && <SimpleAlert alert={alertMessage} onClose={onCloseSimpleAlert} />}
      </Modal>}
     {(data.years.length !== 0 ) &&
     <div className="container mt-5">

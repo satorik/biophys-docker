@@ -1,5 +1,28 @@
 import { getIntitialValue } from './valueHandlers'
   
+const setTouchedTrue = (obj) => {
+  let newObj = {}
+  Object.keys(obj).forEach(key => {
+    newObj = {
+      ...newObj,
+      [key]: true
+    }
+  })
+  return newObj
+}
+
+const checkValueEmpty = (value) => {
+  if (value instanceof File) return false
+  else if (typeof(value) === 'object') {
+    let nonExist = true
+    Object.keys(value).forEach(item => {
+      nonExist = nonExist && value[item].trim() === ''
+    })
+    return nonExist
+  }
+  else return value.trim() === ''
+}
+
   const getTouched = (type, subType = null, old = null, check = false) => {
     if (!check) {
       if (type === 'datetime') return {
@@ -7,10 +30,10 @@ import { getIntitialValue } from './valueHandlers'
           hours: false,
           minutes: false
         }
-      else if (type === 'time') return {
-        hours: false,
-        minutes: false
-      }
+      // else if (type === 'time') return {
+      //   hours: false,
+      //   minutes: false
+      // }
       else if (type === 'day') return {
         day: false,
       }
@@ -29,7 +52,7 @@ import { getIntitialValue } from './valueHandlers'
         ...element,
         value: getIntitialValue(element.type, forUpdate, post, element.title, element.label, element.required),
         valid: forUpdate || !element.required || element.type === 'radio' || element.type === 'check',
-        touched: getTouched(element.type),
+        touched: false, //getTouched(element.type),
         validationErrors:[]
       } 
       }) 
@@ -55,9 +78,14 @@ import { getIntitialValue } from './valueHandlers'
       for (const validator of form[id].validators) {
         const checkValid = validator(valueForCheck)
         isValid = isValid && checkValid.valid
-        if (!checkValid.valid) validationError = checkValid.error
+        validationError = checkValid.error
       }
     }
+
+    if (!form[id].required && checkValueEmpty(valueForCheck)) {
+      isValid = true
+    }
+
     return form.map((control, idx) => {
       if (idx !== id ) {
         return control
@@ -76,16 +104,6 @@ import { getIntitialValue } from './valueHandlers'
 
     let formValid = true
     
-    const setTouchedTrue = (obj) => {
-      let newObj = {}
-      Object.keys(obj).forEach(key => {
-        newObj = {
-          ...newObj,
-          [key]: true
-        }
-      })
-      return newObj
-    }
     const updatedForm = form.map( item =>
       {
         let newItem = {}
@@ -101,7 +119,7 @@ import { getIntitialValue } from './valueHandlers'
           Object.keys(item.value).forEach(key => { allExist = allExist && item.value[key] != ''})
           newItem = {
             ...item, 
-            touched: setTouchedTrue(item.touched),
+            touched: true, //setTouchedTrue(item.touched),
             validationErrors: 'Поле обязательно для заполнения'
           }
         }
@@ -113,6 +131,7 @@ import { getIntitialValue } from './valueHandlers'
 
     return {
       postForm: updatedForm,
+      secondCheck: [],
       formValid: formValid
     }
   }
@@ -124,8 +143,8 @@ import { getIntitialValue } from './valueHandlers'
       }
       return {
         ...control,
-        touched: getTouched(control.type, subType, control.touched, true),
-        validationErrors: (control.required && !control.valid) ? 'Поле обязательно для заполнения' : ''
+        touched: true, //getTouched(control.type, subType, control.touched, true),
+        validationErrors: (control.required && !control.valid ) ? 'Поле обязательно для заполнения' : control.validationErrors
       }
     })
   }
