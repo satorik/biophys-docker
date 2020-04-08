@@ -9,3 +9,4 @@ front/.env.development
 front/node_modules
 docker-compose.yml
 react_LEGASY/
+volumes/
