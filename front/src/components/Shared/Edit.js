@@ -56,6 +56,8 @@ const Edit = ({onClickSubmit, onClickCancel, formTemplate, post, border}) => {
       setCanSave(false)
      }
   }
+ 
+  console.log(postForm)
 
   return (
     <div className={`text-left my-3 ${border ? "border border-secondary p-3" : ""}`}>

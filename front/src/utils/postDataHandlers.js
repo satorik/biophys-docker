@@ -43,8 +43,11 @@ export const trasformPostData = (data) => {
     if (item.title === 'isEven'){
       obj[item.title] = +item.value
     }
+
+    if (item.title !== 'passwordRepeat') {
+      return obj
+    }
     
-    return obj
   } ,{})
 
 }

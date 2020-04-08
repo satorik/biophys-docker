@@ -106,14 +106,7 @@ const LoginForm = ({onCancel, isAuth, updatedAuth}) => {
     onCancel()
   }
 
-  const onHandleSubmit = async (postData) => {
-    const postObject = postData.reduce((obj, item) => {
-      if (item.title !== 'passwordRepeat') {
-        obj[item.title] = item.value
-      }
-      return obj
-    } ,{})   
-    
+  const onHandleSubmit = async (postObject) => {
     if (isLogin) {
       try {
         const userData = await loginUser({ variables: {inputData: postObject} })

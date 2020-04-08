@@ -26,6 +26,7 @@ const FORM_TEMPLATE = [
     title: 'course',
     label:'Курс',
     type: 'course',
+    required: true,
     validators: [required, length({ min: 5 })]
   }
 ]

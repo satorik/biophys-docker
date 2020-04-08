@@ -12,7 +12,7 @@ export const getChangedValue =  (e, type, prevValue) => {
     return { 
       value: {
         ...prevValue,
-        [e.target.title]: e.target.value.trim()
+        [e.target.title]: e.target.value
       }
     }
   }
@@ -22,18 +22,18 @@ export const getChangedValue =  (e, type, prevValue) => {
         ...prevValue,
         subSectionSelect: '',
         subSectionText: '',
-        [e.target.title]: e.target.files ? e.target.files[0] : e.target.value.trim()
+        [e.target.title]: e.target.files ? e.target.files[0] : e.target.value
       }
     }
     else return {
       value : {
         ...prevValue,
-        [e.target.title]: e.target.files ? e.target.files[0] : e.target.value.value.trim()
+        [e.target.title]: e.target.files ? e.target.files[0] : e.target.value.value
       }
     }
   }
 
-  return {value: e.target.value.trim()}
+  return {value: e.target.value}
 } 
 
 export const getIntitialValue = (type, isForUpdate, oldData, control, label) => {
