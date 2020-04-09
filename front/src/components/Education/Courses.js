@@ -1,6 +1,6 @@
 import React from 'react'
 import { useQuery, useMutation } from '@apollo/client'
-import { required, length, isPdf } from '../../utils/validators'
+import { required, length, isPdf, isUrl } from '../../utils/validators'
 import { getUpdateData } from '../../utils/postDataHandlers'
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
@@ -125,7 +125,7 @@ const Courses = () => {
           label: resourseMode.isCreating ? materialsToAdd : forms,
           type: 'resourse',
           required: true,
-          validators: [required, isPdf]
+          validators: [required, isPdf, isUrl]
         }
     ]
   }
@@ -221,6 +221,7 @@ const Courses = () => {
 
   const onChangeResourseHandler = async (postObject) => {
     const filetype = forms.find(form => form.id === postObject.educationFormId).filetype
+    console.log('Courses', postObject)
 
     if (resourseMode.isEditing) {
       

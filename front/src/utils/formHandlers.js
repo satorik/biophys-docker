@@ -1,16 +1,6 @@
   import { getIntitialValue } from './valueHandlers'
+import {valueFromAST} from 'graphql'
     
-  const setTouchedTrue = (obj) => {
-    let newObj = {}
-    Object.keys(obj).forEach(key => {
-      newObj = {
-        ...newObj,
-        [key]: true
-      }
-    })
-    return newObj
-  }
-
   const checkValueEmpty = (value) => {
     if (value instanceof File) return false
     else if (typeof(value) === 'object') {
@@ -23,27 +13,6 @@
     else return value === ''
   }
 
-  const getTouched = (type, subType = null, old = null, check = false) => {
-    if (!check) {
-      if (type === 'datetime') return {
-          day: false,
-          hours: false,
-          minutes: false
-        }
-      // else if (type === 'time') return {
-      //   hours: false,
-      //   minutes: false
-      // }
-      else if (type === 'day') return {
-        day: false,
-      }
-      return check
-    }
-    else {
-      if (subType) return {...old, [subType]: true}
-      else return true
-    }
-  }
   
   const createPostForm = (template, post) => {
     const forUpdate = Object.entries(post).length !== 0
@@ -58,6 +27,21 @@
       }) 
   }
  
+  const checkResourseInput = (validators, value, isForUpdate) => {
+    let isValid = true
+    let validationError = null
+    
+    for (const validator of validators) {
+      if (validator.name !== 'isUrl') {
+        const checkValid = validator(value.file)
+        isValid = isValid && checkValid.valid
+        validationError = checkValid.error
+      }
+    }
+    
+    return {valid: isValid, validationError: validationError}
+  }
+
   const postInputChange = (form, id, value, isForUpdate) => {
 
     let valueForCheck = value
@@ -68,19 +52,21 @@
       valueForCheck = value.course
     }
     if (form[id].type === 'resourse') {
-      if (!isForUpdate) {
-        valueForCheck = value.file
-      }
-      else {valueForCheck = 'exists'}   
+      valueForCheck = value.file
     }
- 
+
     if (form[id].validators && form[id].validators.length > 0) {
       for (const validator of form[id].validators) {
-        const checkValid = validator(valueForCheck)
-        isValid = isValid && checkValid.valid
-        validationError = checkValid.error
+        console.log('formHandlers', form[id].type, value.educationFormId, validator.name)
+        if(!(form[id].type === 'resourse' && value.educationFormId === '4' && validator.name === 'isPdf')
+            && !(form[id].type === 'resourse' && value.educationFormId !== '4' && validator.name === 'isUrl') ){
+            const checkValid = validator(valueForCheck)
+            isValid = isValid && checkValid.valid
+            validationError = checkValid.error
+            }
       }
     }
+    
 
     if (!form[id].required && checkValueEmpty(valueForCheck)) {
       isValid = true

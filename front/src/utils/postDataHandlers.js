@@ -18,7 +18,7 @@ export const trasformPostData = (data) => {
 
   return data.reduce((obj, item) => {
   
-    if (item.title !== 'passwordRepeat') {
+    if (item.title !== 'passwordRepeat' && item.title !== 'resourse') {
       obj[item.title] = item.value
     }
 
@@ -48,8 +48,6 @@ export const trasformPostData = (data) => {
       obj[item.title] = +item.value
     }
 
-
-    
     return obj
 
   } ,{})

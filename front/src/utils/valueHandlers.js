@@ -28,7 +28,7 @@ export const getChangedValue =  (e, type, prevValue) => {
     else return {
       value : {
         ...prevValue,
-        [e.target.title]: e.target.files ? e.target.files[0] : e.target.value.value
+        [e.target.title]: e.target.files ? e.target.files[0] : e.target.value
       }
     }
   }
@@ -69,6 +69,7 @@ export const getIntitialValue = (type, isForUpdate, oldData, control, label) => 
       }
     }
     if (type === 'resourse') {
+      console.log(oldData.form)
       return {
       educationFormId: oldData.form.parentForm? oldData.form.parentForm.id : oldData.form.id,  
       file: '',

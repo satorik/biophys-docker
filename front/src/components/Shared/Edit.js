@@ -21,6 +21,7 @@ const Edit = ({onClickSubmit, onClickCancel, formTemplate, post, border}) => {
     if (!canSave) setCanSave(true)
 
     const newValue = getChangedValue(event, postForm[id].type, postForm[id].value)
+    
     setPostForm(postInputChange(postForm, id, newValue.value, Object.entries(post).length !== 0))
 
     if (postForm[id].title === 'image') {

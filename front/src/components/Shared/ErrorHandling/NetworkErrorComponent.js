@@ -2,7 +2,7 @@ import React from 'react'
 
 const NetworkErrorComponent = ({error, onDismiss, type}) => {
 
-  console.log(error)
+  //console.log(error)
   
   const {graphQLErrors, networkError} = error
   let errorInfo = []
@@ -23,10 +23,21 @@ const NetworkErrorComponent = ({error, onDismiss, type}) => {
 
   if (networkError) {
    if (networkError.result) 
-    networkError.result.errors.map(({ message }) => 
-    errorInfo.push(`[Network error]: Message: ${message}`)
+    networkError.result.errors.map(error => {
+      errorInfo.push(`[Network error]: Message: ${error.message}`)
+      }        
     )
-    else errorInfo.push(`[Network error]: Message: ${networkError.message}`)
+    // else {
+    //   if (networkError.extensions.code === "INTERNAL_SERVER_ERROR") {
+    //     errorType.push('Ошибка сервера') 
+    //   }
+    //   else {
+    //     errorType.push('Неизвестная ошибка') 
+    //   }
+    //   errorText.push(networkError.message)
+    //   errorInfo.push(`[Network error]: Message: ${networkError.message}`)
+
+    // }
   }
 
   if (errorInfo.length > 1) console.log('MNOGA', errorInfo)
@@ -34,12 +45,17 @@ const NetworkErrorComponent = ({error, onDismiss, type}) => {
   return (
     <div className="container mt-5 text-center">
       <h2>Что-то пошло не так.</h2>
-      <p className="text-center text-danger d-inline">{errorType[0]+': '}</p>
-      <p className="text-center d-inline">{errorText[0].toLowerCase()}</p>
-      {type === 'queryError' && <p className="text-muted">{'(Обратитесь к администрации сайта по адресу: ВСТАВИТЬ АДРЕС)'}</p>}
-      <details className="mb-3" style={{ whiteSpace: "pre-wrap" }}>
-        {errorInfo[0]}
-      </details>
+      {
+        errorType.map((error, idx) => <div>
+          <p className="text-center text-danger d-inline">{error+': '}</p>
+          <p className="text-center d-inline">{errorText[idx]}</p>
+          {type === 'queryError' && <p className="text-muted">{'(Обратитесь к администрации сайта по адресу: ВСТАВИТЬ АДРЕС)'}</p>}
+          <details className="mb-3" style={{ whiteSpace: "pre-wrap" }}>
+            {errorInfo[idx]}
+          </details>
+        </div>)
+        
+      }
       {onDismiss && <button className="btn btn-secondary" onClick={onDismiss}>Вернуться</button>}
     </div>
   )

@@ -2,6 +2,7 @@ import React from 'react'
 
 const InputResourse = ({onChanged, onBlur, label, value, children, required}) => {
 
+
   const isLink = label.find(el => el.id === value.educationFormId).filetype === 'URL'
   const isMulty = label.find(el => el.id === value.educationFormId).type === 'MULTY'
   const selectedForm = label.find(el => el.id === value.educationFormId)
