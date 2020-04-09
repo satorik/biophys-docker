@@ -107,7 +107,7 @@ const LoginForm = ({onCancel, isAuth, updatedAuth}) => {
   }
 
   const onHandleSubmit = async (postObject) => {
-    console.log('postObject', postObject)
+   // console.log('postObject', postObject)
     if (isLogin) {
       try {
         const userData = await loginUser({ variables: {inputData: postObject} })
