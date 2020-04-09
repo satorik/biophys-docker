@@ -12,12 +12,10 @@ const Edit = ({onClickSubmit, onClickCancel, formTemplate, post, border}) => {
   const [imagePreview, setImagePreview] = React.useState(post.imageUrl ? process.env.REACT_APP_STATIC_URI+post.imageUrl : null)
   const [canSave, setCanSave] = React.useState(true)
 
-  // React.useEffect(() => {
-  //   if(isAbleToSave) {
-  //     setPostForm(createPostForm(formTemplate, post))
-  //     setImagePreview(post.imageUrl ? process.env.REACT_APP_STATIC_URI+post.imageUrl : null)
-  //   }
-  // }, [formTemplate])
+  React.useEffect(() => {
+      setPostForm(createPostForm(formTemplate, post))
+      setImagePreview(post.imageUrl ? process.env.REACT_APP_STATIC_URI+post.imageUrl : null)
+  }, [formTemplate])
 
   const postInputChangeHandler = async (event, id) => {
     if (!canSave) setCanSave(true)

@@ -15,6 +15,7 @@ export const getUpdateData = (oldData, newData) => {
 }
 
 export const trasformPostData = (data) => {
+
   return data.reduce((obj, item) => {
     obj[item.title] = item.value
 
