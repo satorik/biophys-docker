@@ -124,7 +124,7 @@ const departmentMutation = {
   async updatePrint(parent, {id, inputData}, { models, auth }){
 
     const {updateData, imageToClear, isUploaded} = 
-    await valueForUpdateImg(id, inputData, 'prints', auth, models.DepartmentPrint, models.User)
+    await valueForUpdateImg(id, inputData, 'prints', auth, models.DepartmentPrint, models.User, 'pdf')
 
     return updateWithImage(updateData, imageToClear, isUploaded, 'prints', 'pdf')
 
@@ -132,7 +132,8 @@ const departmentMutation = {
   async deletePrint(parent, {id}, { models, auth }){
 
     const forDelete = await valueForDeleteImg(auth, models.User, id, models.DepartmentPrint)
-    return deleteWithImage(forDelete, forDelete.dataValues.fileLink, 'prints', id, 'pdf')
+
+    return deleteWithImage(forDelete, forDelete.dataValues.fileLink, 'prints', id, null, 'pdf')
 
   }
 }

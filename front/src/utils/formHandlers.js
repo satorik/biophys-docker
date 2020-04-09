@@ -1,27 +1,27 @@
-import { getIntitialValue } from './valueHandlers'
-  
-const setTouchedTrue = (obj) => {
-  let newObj = {}
-  Object.keys(obj).forEach(key => {
-    newObj = {
-      ...newObj,
-      [key]: true
-    }
-  })
-  return newObj
-}
-
-const checkValueEmpty = (value) => {
-  if (value instanceof File) return false
-  else if (typeof(value) === 'object') {
-    let nonExist = true
-    Object.keys(value).forEach(item => {
-      nonExist = nonExist && value[item].trim() === ''
+  import { getIntitialValue } from './valueHandlers'
+    
+  const setTouchedTrue = (obj) => {
+    let newObj = {}
+    Object.keys(obj).forEach(key => {
+      newObj = {
+        ...newObj,
+        [key]: true
+      }
     })
-    return nonExist
+    return newObj
   }
-  else return value.trim() === ''
-}
+
+  const checkValueEmpty = (value) => {
+    if (value instanceof File) return false
+    else if (typeof(value) === 'object') {
+      let nonExist = true
+      Object.keys(value).forEach(item => {
+        nonExist = nonExist && value[item] === ''
+      })
+      return nonExist
+    }
+    else return value === ''
+  }
 
   const getTouched = (type, subType = null, old = null, check = false) => {
     if (!check) {

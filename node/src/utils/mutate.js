@@ -26,17 +26,17 @@ const updateWithImage = async(post, imageToClear, upload, currentSection, fileTy
   }
 }
 
-const deleteWithImage = async(post, imageUrl, currentSection, id, t = null, fileType = 'image') => {
-  const transaction = t || await sequelize.transaction()
+const deleteWithImage = async(post, imageUrl, currentSection, id, transation = null, fileType = 'image') => {
 
+  const t = transation || await sequelize.transaction()
   try {
-      await post.destroy({ transaction })
+      await post.destroy({ transaction: t })
       clearImage(imageUrl, currentSection, fileType)
-      await transaction.commit()
+      await t.commit()
       return id
   } catch(error) {
       console.log(error)
-      await transaction.rollback()
+      await t.rollback()
       throw error
   }
 }

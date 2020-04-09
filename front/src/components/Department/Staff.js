@@ -1,6 +1,6 @@
 import React from 'react'
 import { useQuery, useMutation } from '@apollo/client'
-import { required, length, email } from '../../utils/validators'
+import { required, length, email, isImage } from '../../utils/validators'
 import { getUpdateData } from '../../utils/postDataHandlers'
 
 import { updateAfterCreate, updateAfterDelete, updateAfterMove } from '../../utils/updateCache/staff'
@@ -23,7 +23,7 @@ const FORM_TEMPLATE = [
     title: 'image',
     label:'Картинка',
     type: 'file',
-    validators: [required]
+    validators: [required, isImage]
   },
   {
     title: 'firstname',

@@ -1,6 +1,6 @@
 import React from 'react'
 import { useQuery, useMutation } from '@apollo/client'
-import { required, length, time, date } from '../../utils/validators'
+import { required, length, isPdf } from '../../utils/validators'
 import { getUpdateData } from '../../utils/postDataHandlers'
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
@@ -125,7 +125,7 @@ const Courses = () => {
           label: resourseMode.isCreating ? materialsToAdd : forms,
           type: 'resourse',
           required: true,
-          validators: [required]
+          validators: [required, isPdf]
         }
     ]
   }

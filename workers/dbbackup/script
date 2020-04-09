@@ -1,0 +1,32 @@
+#/bin/sh
+
+START_TIME=`date +%s`
+
+
+BACKUP_DIR="/usr/local/backups"
+TIMESTAMP=$(date  "+%d-%m-%Y_%H-%M-%S")
+DAYS_TO_STORE=7
+
+echo "Starting SQL backup script"
+echo  "\t PID: $$"
+echo  "\t Start time: $TIMESTAMP\n"
+
+
+echo -n "Starting pg_dumpall... "
+/usr/bin/pg_dumpall | gzip > $BACKUP_DIR/pg_dumpall_$TIMESTAMP.sql.gz
+echo "ok"
+
+
+echo -n "Computing MD5 hash... "
+/usr/bin/md5sum $BACKUP_DIR/pg_dumpall_$TIMESTAMP.sql.gz >> $BACKUP_DIR/md5sums.txt
+echo  "ok\n"
+
+echo "Deleting backup older than $DAYS_TO_STORE days..."
+for i in $(find /usr/local/backups -type f -mtime  +14 -name "*.sql.gz" -print); do
+    echo -n "\tdeleting file $i ... "
+    rm $i
+    echo "ok"
+done
+
+END_TIME=`date +%s`
+echo  "\n\nScript ended in `expr $END_TIME - $START_TIME` sec."

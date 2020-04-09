@@ -15,6 +15,7 @@ export default (file, subDir, type = 'image') => {
       }
     }
     if (type === 'pdf') {
+      console.log('readStreamIntoFile', mimetype)
       if (!(mimetype === 'application/pdf')){
         const error = new Error('Forbidden file type ', mimetype)
         error.code = 415
@@ -22,7 +23,8 @@ export default (file, subDir, type = 'image') => {
       }
       rootDir = 'files'
     }
-
+    console.log('readStreamIntoFile', rootDir)
+    
     try {
       fs.mkdirSync(path.join(__dirname, '..', rootDir, subDir), {recursive: true})
     }

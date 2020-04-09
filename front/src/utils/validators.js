@@ -11,6 +11,22 @@ export const required = value => {
   else return {valid: value.trim() !== '', error: value.trim() !== '' ? '' : 'Поле обязательно для заполнения'}
 }
 
+export const isPdf = value => {
+  if (!(value instanceof File)) return {valid: false, error: 'Попытка закачать неверный файл'}
+  if (value.type !== 'application/pdf') return {valid: false, error: 'Попытка закачать неверный формат файла. Разрешен только PDF.'}
+
+  return {valid: true}
+}
+
+export const isImage = value => {
+  if (!(value instanceof File)) return {valid: false, error: 'Попытка закачать неверный файл'}
+  if (!(value.type === 'image/png' || value.type === 'image/jpeg' || value.type === 'image/jpg')) {
+    return {valid: false, error: 'Попытка закачать неверный формат файла. Разрешены только JPG и PNG.'}
+  }
+  
+  return {valid: true}
+}
+
 export const length = config => value => {
   let isValid = true
   let error = ''

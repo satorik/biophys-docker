@@ -1,6 +1,6 @@
 import React from 'react'
 import { useQuery, useMutation } from '@apollo/client'
-import { required, length } from '../../utils/validators'
+import { required, length, isPdf } from '../../utils/validators'
 import { getUpdateData } from '../../utils/postDataHandlers'
 
 import { updateAfterCreate, updateAfterDelete } from '../../utils/updateCache/prints'
@@ -19,10 +19,10 @@ import {EmptyData} from '../Shared/EmptyData'
 const FORM_TEMPLATE = [
   {
     title: 'file',
-    label:'Файл',
+    label:'Файл в формате PDF',
     type: 'file',
     required: true,
-    validators: [required]
+    validators: [required, isPdf]
   },
   {
     title: 'title',

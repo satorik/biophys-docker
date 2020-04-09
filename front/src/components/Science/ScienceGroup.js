@@ -1,6 +1,6 @@
 import React from 'react'
-import { useQuery, useMutation, gql } from '@apollo/client'
-import { required, length, isUrl, email } from '../../utils/validators'
+import { useQuery, useMutation} from '@apollo/client'
+import { required, length, isUrl, email, isImage } from '../../utils/validators'
 import { getUpdateData } from '../../utils/postDataHandlers'
 
 import updates  from '../../utils/updateCache/scienceGroup'
@@ -121,7 +121,7 @@ const GENERAL_TEMPLATE = [
     label:'Картинка',
     type: 'file',
     required: true,
-    validators: [required]
+    validators: [required, isImage]
   },
   {
     title: 'title',

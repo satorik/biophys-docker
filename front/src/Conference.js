@@ -1,6 +1,6 @@
 import React from 'react'
 import { useQuery, useMutation } from '@apollo/client'
-import { required, length, date } from './utils/validators'
+import { required, length, date, isImage } from './utils/validators'
 import { useLocation, useHistory } from 'react-router-dom'
 import { getUpdateData } from './utils/postDataHandlers'
 
@@ -27,7 +27,7 @@ const FORM_TEMPLATE = [
     label:'Картинка',
     type: 'file',
     required: true,
-    validators: [required]
+    validators: [required, isImage]
   },
   {
     title: 'title',
