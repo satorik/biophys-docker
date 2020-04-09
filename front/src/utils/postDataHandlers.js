@@ -17,7 +17,10 @@ export const getUpdateData = (oldData, newData) => {
 export const trasformPostData = (data) => {
 
   return data.reduce((obj, item) => {
-    obj[item.title] = item.value
+  
+    if (item.title !== 'passwordRepeat') {
+      obj[item.title] = item.value
+    }
 
     if(item.type === 'datetime') {
       const fullDate = new Date(item.value.year, item.value.month, item.value.day, item.value.hours, item.value.minutes)
@@ -45,10 +48,10 @@ export const trasformPostData = (data) => {
       obj[item.title] = +item.value
     }
 
-    if (item.title !== 'passwordRepeat') {
-      return obj
-    }
+
     
+    return obj
+
   } ,{})
 
 }

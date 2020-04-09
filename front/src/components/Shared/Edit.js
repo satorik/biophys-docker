@@ -47,6 +47,8 @@ const Edit = ({onClickSubmit, onClickCancel, formTemplate, post, border}) => {
  
      if (formValidity.formValid) {
        const postData = trasformPostData(postForm)     
+       console.log('Edit', postData)
+     
        onClickSubmit(postData)
      
       }
