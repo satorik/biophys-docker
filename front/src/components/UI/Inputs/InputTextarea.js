@@ -7,6 +7,7 @@ export default ({className, onChanged, onBlur, label, value, children, required}
     rows='3'
     placeholder={label+`${required ? '*': ''}`}
     onChange={onChanged}
+    onPaste={onChanged}
     onBlur={onBlur}
   />
   {children}

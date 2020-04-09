@@ -26,6 +26,7 @@ const InputQuill = ({onChanged, onBlur, label, value, children, required}) => {
       value={value}
       placeholder={label+`${required ? '*': ''}`}
       onChange={onChanged} 
+      onPaste={onChanged} 
       onBlur={onBlur}
       formats={quillFormats}
       modules={quillModules}

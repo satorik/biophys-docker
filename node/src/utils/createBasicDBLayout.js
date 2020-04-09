@@ -27,7 +27,8 @@ const educationForms = [
 ]
 
 const createBasicLayout = async (models) => {
-  const formCnt = models.educationForm.count()
+  const formCnt = await models.educationForm.count()
+
   if (formCnt === 0) {
     await models.educationForm.bulkCreate(educationForms)
   } 
