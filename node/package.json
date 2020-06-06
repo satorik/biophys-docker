@@ -10,7 +10,7 @@
   "author": "satorik",
   "license": "ISC",
   "dependencies": {
-    "apollo-server": "^2.9.16",
+    "apollo-server": "^2.14.2",
     "apollo-server-express": "^2.9.16",
     "bcryptjs": "^2.4.3",
     "dateformat": "^3.0.3",
