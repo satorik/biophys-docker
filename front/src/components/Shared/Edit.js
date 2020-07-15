@@ -23,7 +23,7 @@ const Edit = ({onClickSubmit, onClickCancel, formTemplate, post, border}) => {
     const newValue = getChangedValue(event, postForm[id].type, postForm[id].value)
     
     setPostForm(postInputChange(postForm, id, newValue.value, Object.entries(post).length !== 0))
-
+    console.log('Edit', postInputChange(postForm, id, newValue.value, Object.entries(post).length !== 0))
     if (postForm[id].title === 'image') {
       try {
           const b64 = await generateBase64FromImage(newValue.value)

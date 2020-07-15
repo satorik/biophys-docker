@@ -31,6 +31,11 @@ const LINKS = [
   {
     path: '/science',
     title: 'Наука'
+  },
+  {
+    path: '/admin',
+    title: 'Администрирование',
+    type: 'closed'
   }
 ]
 
@@ -50,16 +55,18 @@ const NavBarTop = () => {
         title={modalTitle}
         onClose={() => setIsModalOpen(false)}
       >
-        <LoginForm onCancel={() => setIsModalOpen(false)} isAuth={currentUser.token} updatedAuth={setCurrentUser}/>
+        <LoginForm onCancel={() => setIsModalOpen(false)} isAuth={currentUser.username} updatedAuth={setCurrentUser}/>
       </Modal> }
 
       <nav className="navbar navbar-dark navbar-expand-md bg-dark" >
         <a className="navbar-brand" href="/">БИОФИЗИКА</a>
         <ul className="navbar-nav mr-auto">
-            {LINKS.map((link, idx) => <NavBarTopItem link={link} key={idx} selectedPath={currentPath.split('/')[1]} /> )}
+            {LINKS.map((link, idx) => {
+              if (link.type !== 'closed' || (currentUser.token && currentUser.role === 'ADMIN')) return <NavBarTopItem link={link} key={idx} selectedPath={currentPath.split('/')[1]} />
+            })}
         </ul>
         <button className="btn p-0" onClick={() => setIsModalOpen(true)}><span><FontAwesomeIcon icon='user-graduate' style={{color: 'var(--light)'}} size="lg"/></span></button>
-        {currentUser.token && <p className="text-light mr-1 ml-2 my-0">{currentUser.username}</p>}
+        {currentUser.username && <p className="text-light mr-1 ml-2 my-0">{currentUser.username}</p>}
       </nav>
       </>
   )

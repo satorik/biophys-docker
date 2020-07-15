@@ -1,5 +1,5 @@
-const User = (sequelize, DataTypes ) => {
-  return sequelize.define('user', {
+const UserTemp = (sequelize, DataTypes ) => {
+  return sequelize.define('userTemp', {
   email: {
     type: DataTypes.STRING(100), 
     allowNull: false,
@@ -29,15 +29,12 @@ const User = (sequelize, DataTypes ) => {
     type: DataTypes.STRING(64),
     is: /^[0-9a-f]{64}$/i
   },
-  status: {type:DataTypes.ENUM('CREATED', 'MESSAGE SENT' , 'VALIDATED', 'APPROVED')},
-  role: {type:DataTypes.ENUM('USER', 'ADMIN')},
   hashedString: {
-    type: DataTypes.STRING(256),
+    type: DataTypes.STRING(64),
     is: /^[0-9a-f]{64}$/i
   }
-  },
-  {
+  }, {
    
   })}
 
-export default User
+export default UserTemp

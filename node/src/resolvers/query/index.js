@@ -17,7 +17,7 @@ const Query = {
   ...conferenceQuery,
   ...seminarQuery,
   ...noteQuery,
- // ...userQuery
+  ...userQuery
 }
 
 export default Query

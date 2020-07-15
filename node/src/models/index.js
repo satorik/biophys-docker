@@ -31,7 +31,8 @@ const sequelize = new Sequelize(process.env.DB_NAME, process.env.DB_USER, proces
     EducationForm: sequelize.import('./education/courses/educationForms'),
     EducationCourse: sequelize.import('./education/courses/educationCourse'),
     EducationResourse: sequelize.import('./education/courses/educationResourse'),
-    User: sequelize.import('./user.js')
+    User: sequelize.import('./user.js'),
+    UserTemp: sequelize.import('./userDump.js')
   }
   
   models.EducationResourse.belongsTo(models.EducationForm)

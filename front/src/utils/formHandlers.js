@@ -13,7 +13,6 @@ import {valueFromAST} from 'graphql'
     else return value === ''
   }
 
-  
   const createPostForm = (template, post) => {
     const forUpdate = Object.entries(post).length !== 0
     return template.map(element => {
@@ -57,7 +56,7 @@ import {valueFromAST} from 'graphql'
 
     if (form[id].validators && form[id].validators.length > 0) {
       for (const validator of form[id].validators) {
-        console.log('formHandlers', form[id].type, value.educationFormId, validator.name)
+        //console.log('formHandlers', form[id].type, value.educationFormId, validator.name)
         if(!(form[id].type === 'resourse' && value.educationFormId === '4' && validator.name === 'isPdf')
             && !(form[id].type === 'resourse' && value.educationFormId !== '4' && validator.name === 'isUrl') ){
             const checkValid = validator(valueForCheck)
@@ -67,6 +66,12 @@ import {valueFromAST} from 'graphql'
       }
     }
     
+    if (form[id].title === 'passwordRepeat') {
+     const password = form.find(control => control.title === 'password').value
+     isValid = isValid && password === valueForCheck
+     validationError = !isValid ? 'Пароли не совпадают' : null
+    }
+
 
     if (!form[id].required && checkValueEmpty(valueForCheck)) {
       isValid = true
@@ -123,6 +128,7 @@ import {valueFromAST} from 'graphql'
   }
 
   const postInputBlur = (form, id, subType = null) => {
+
     return form.map((control, idx) => {
       if (idx !== id) {
         return control

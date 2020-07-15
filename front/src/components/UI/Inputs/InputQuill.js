@@ -18,7 +18,6 @@ const quillFormats = [
   'list', 'bullet', 'indent',
   'link', 'video'
 ]
-
 const InputQuill = ({onChanged, onBlur, label, value, children, required}) => {
   return (
   <div className="form-group">
@@ -30,6 +29,7 @@ const InputQuill = ({onChanged, onBlur, label, value, children, required}) => {
       onBlur={onBlur}
       formats={quillFormats}
       modules={quillModules}
+      bounds='.quill'
       theme='snow'
     />
     {children}

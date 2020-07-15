@@ -23,7 +23,7 @@ const Modal = ({isOpen, title, children, onClose}) => {
       show={isOpen}
       clicked={onClose}
     />
-    <div className="card "
+    <div className="card"
       style={styleModal}
     >
         <div className="card-header d-flex justify-content-between">
