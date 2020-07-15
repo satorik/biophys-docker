@@ -11,14 +11,9 @@ const populate = async (force = true) => {
   if (force) {
     await db.sync({force: true})
 
-    console.log(`Database & tables created!`)
+    console.log(`Force sync!`)
     try {
-      await createNews(db.models)
-      await createDepartment(db.models)
-      await createEducation(db.models)
-      await createScience(db.models)
-      await createLinks(db.models)
-      console.log('populated')
+      await createBasis(db.models)
     }
     catch (err) {
       console.log(err);

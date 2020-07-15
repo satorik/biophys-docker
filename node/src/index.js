@@ -17,7 +17,7 @@ app.use('/files', express.static(path.join(__dirname, 'files')))
 
 server.applyMiddleware({ app })
 
-populate(false).
+populate(true).
   then(res => {
     app.listen({ port: process.env.PORT || 4000 }, () => {
       console.log(`🚀 Server ready at http://localhost:4000${server.graphqlPath}`)
