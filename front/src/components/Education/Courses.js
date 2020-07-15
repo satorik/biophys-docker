@@ -173,6 +173,7 @@ const Courses = () => {
 
   const onAddNewResourse = () => {
     clearMode()
+    setIsModalOpen(true)
     setResourseMode({...mode, isCreating: true})
   }
 
@@ -192,6 +193,7 @@ const Courses = () => {
 
   const onEditResourse = (id) => {
     clearMode()
+    setIsModalOpen(true)
     setResourseMode({...resourseMode, isEditing: true})
     setUpdatedResourse(courses[viewId].resourses.find(resourse => resourse.id === id))
   }
@@ -253,6 +255,8 @@ const Courses = () => {
         })
         setResourseMode({...resourseMode, isCreating: false})
         setUpdatedResourse({})
+        setIsModalOpen(false)
+        document.body.style.overflow = "scroll"
       } catch(error) {
         setIsError(error)
       }
@@ -290,6 +294,8 @@ const Courses = () => {
  if (mode.isCreating) {modalTitle = 'Новый курс'}
  if (mode.isDeleting) {modalTitle = 'Удаление курса'}
  if (resourseMode.isDeleting) {modalTitle = 'Удаление материалов'}
+ if (resourseMode.isCreating) {modalTitle = 'Новый материал'}
+ if (resourseMode.isEditing) {modalTitle = 'Редактирование материалов'}
 
  //console.log(forms)
 
@@ -306,6 +312,15 @@ const Courses = () => {
             post={updatedCourse}
             formTemplate={FORM_TEMPLATE}
         />}
+          {(resourseMode.isCreating || resourseMode.isEditing) && 
+            <Edit 
+              onClickSubmit={onChangeResourseHandler}
+              onClickCancel={onCloseModal}
+              post={updatedResourse}
+              formTemplate={RESOURSE_TEMPLATE}
+              border
+            />
+          }
           {(mode.isDeleting) &&  <YesDelete onDelete={onDeleteCourseHandler} onCancel={onCloseModal} info={updatedCourse} instance='educationCourse' /> }
           {(resourseMode.isDeleting) &&  <YesDelete onDelete={onDeleteResourseHandler} onCancel={onCloseModal} info={updatedResourse} instance='educationResourse'  /> }
         </Modal>}
@@ -359,17 +374,6 @@ const Courses = () => {
               />
             </div>
           </div>  
-          }
-          {(resourseMode.isCreating || resourseMode.isEditing) && 
-          <div className="p-2">
-            <Edit 
-              onClickSubmit={onChangeResourseHandler}
-              onClickCancel={onCancelEditing}
-              post={updatedResourse}
-              formTemplate={RESOURSE_TEMPLATE}
-              border
-            />
-          </div>
           }
           {showResourses.basic && <>   
             {(singleResourses.length > 0 || multyResourses.length > 0) && 

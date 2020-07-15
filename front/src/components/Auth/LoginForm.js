@@ -126,10 +126,10 @@ const LoginForm = ({onCancel, isAuth, updatedAuth}) => {
   }
 
   const onHandleSubmit = async (postObject) => {
-    console.log('LoginForm', postObject, passRecovery)
+    //console.log('LoginForm', postObject, passRecovery)
     if (passRecovery) {
       const messageRecieved = await recoverPassword({ variables: {email: postObject.email}})
-      console.log('LoginForm', messageRecieved)
+      //console.log('LoginForm', messageRecieved)
       setMessage(messageRecieved.data.recoverPassword)
       setMessageSent(true)
       setPassRecovery(false)

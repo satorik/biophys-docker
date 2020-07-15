@@ -96,6 +96,24 @@ const userMutation = {
     catch(error) {
       console.log('user', error)
     }  
+  },
+  async changePassword(parent, {hashedString, newPassword}, {models}){
+    try {
+      const decodedString = jwt.verify(hashedString, process.env.JWT_key)
+
+      const user = await models.User.findOne({where: {email: decodedString.email}})
+      if (!user) return 'Пользователя с таким почтовым адресом не существует'
+
+      const hashedPassword = await bcrypt.hash(newPassword, 12)
+
+      user.hashedPassword = hashedPassword
+      await user.save()
+
+      return 'Пароль был изменен'
+    }
+    catch(err) {
+      if (err.message === 'jwt expired') return 'Ссылка на смену пароля устарела, запросите новую'
+    }
   }
 }
 

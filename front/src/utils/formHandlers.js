@@ -136,7 +136,7 @@ import {valueFromAST} from 'graphql'
       return {
         ...control,
         touched: true, //getTouched(control.type, subType, control.touched, true),
-        validationErrors: (control.required && !control.valid ) ? 'Поле обязательно для заполнения' : control.validationErrors
+        validationErrors: (control.required && !control.valid &&  control.validationErrors.length === 0) ? 'Поле обязательно для заполнения' : control.validationErrors
       }
     })
   }

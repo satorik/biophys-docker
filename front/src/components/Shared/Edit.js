@@ -17,13 +17,14 @@ const Edit = ({onClickSubmit, onClickCancel, formTemplate, post, border}) => {
       setImagePreview(post.imageUrl ? process.env.REACT_APP_STATIC_URI+post.imageUrl : null)
   }, [formTemplate])
 
+
   const postInputChangeHandler = async (event, id) => {
     if (!canSave) setCanSave(true)
 
     const newValue = getChangedValue(event, postForm[id].type, postForm[id].value)
     
     setPostForm(postInputChange(postForm, id, newValue.value, Object.entries(post).length !== 0))
-    console.log('Edit', postInputChange(postForm, id, newValue.value, Object.entries(post).length !== 0))
+   
     if (postForm[id].title === 'image') {
       try {
           const b64 = await generateBase64FromImage(newValue.value)

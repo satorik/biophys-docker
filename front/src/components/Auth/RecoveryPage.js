@@ -1,7 +1,7 @@
 import React from 'react'
-import { required, password, passwordRepeat } from '../../utils/validators'
+import { required, password } from '../../utils/validators'
 import Edit from '../Shared/Edit'
-import {Redirect, useHistory } from 'react-router-dom'
+import { useHistory } from 'react-router-dom'
 import { useMutation } from '@apollo/client'
 import { gql } from 'apollo-boost'
 
@@ -20,29 +20,41 @@ const PASS_CHANGE_FORM_TEMPLATE = [
   }
 ]
 
+const PASS_CHANGE = gql`
+  mutation changePassword($hashedString: String!, $newPass: String!){
+      changePassword(hashedString: $hashedString, newPassword: $newPass) 
+  }
+`
+
 export const RecoveryPage = ({match}) => {
   let history = useHistory()
   const { code } = match.params
+  
+  const [message, setMessage] = React.useState(null)
+  const [changePassword] = useMutation(PASS_CHANGE)
 
-  const onHandleSubmit = (postObject) => {
-    console.log('RecoveryPage', postObject)
+  const onHandleSubmit = async (postObject) => {
+    const messageRecieved = await changePassword({ variables: {hashedString: code, newPass: postObject.password}})
+    setMessage(messageRecieved.data.changePassword)
   }
 
   const onCancel = () => {
-    
-    console.log('RecoveryPage', 'cancel')
     history.push('/news')
   }
 
   return (
-    <div className="container">
-      <Edit 
-        onClickSubmit={onHandleSubmit}
-        onClickCancel={onCancel}
-        post={{}}
-        formTemplate={PASS_CHANGE_FORM_TEMPLATE}
-        border
-      />
-    </div>
-  )
+    !message 
+    ? <div className="container">
+    <Edit 
+      onClickSubmit={onHandleSubmit}
+      onClickCancel={onCancel}
+      post={{}}
+      formTemplate={PASS_CHANGE_FORM_TEMPLATE}
+      border
+    /></div>
+    : <div className="container border text-center p-3">
+        <p>{message}</p>
+        <button className="btn btn-success" onClick={() => onCancel()}>Вернутся</button>
+      </div>
+    )
 }

@@ -61,6 +61,7 @@ const mutation =   `
     deleteUser(id: ID!): ID!
     getRole(id: ID!): USERROLE!
     recoverPassword(email: String!): String!
+    changePassword(hashedString: String!, newPassword: String!): String!
   }
 `
 
