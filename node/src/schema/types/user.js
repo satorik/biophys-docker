@@ -24,11 +24,13 @@ export default `
   }
 
   type authData {
-    userId: ID!
+    userId: ID
     token: String
-    username: String!
+    username: String
     tokenExpiration: Int
-    role: USERROLE!
+    role: USERROLE
+    message: String
+    code: Int
   }
 
   input UserCreateData {

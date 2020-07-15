@@ -52,7 +52,7 @@ export const RecoveryPage = ({match}) => {
       formTemplate={PASS_CHANGE_FORM_TEMPLATE}
       border
     /></div>
-    : <div className="container border text-center p-3">
+    : <div className="container border text-center p-3 mt-3">
         <p>{message}</p>
         <button className="btn btn-success" onClick={() => onCancel()}>Вернутся</button>
       </div>

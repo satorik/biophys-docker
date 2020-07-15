@@ -5,6 +5,10 @@ const userQuery = {
     try {
       const decodedString = jwt.verify(hashedString, process.env.JWT_key)
       const user = await models.User.findOne({where: {email: decodedString.email}})
+       if (user.status !== 'MESSAGE SENT')  return {
+        message: 'Учетная уже запись была активирована',
+      }
+
       user.status = 'VALIDATED'
       await user.save()
 
@@ -15,11 +19,12 @@ const userQuery = {
         token: token,
         username: user.username,
         tokenExpiration: 1,
-        role: user.role
+        role: user.role,
+        message: 'Учетная запись была активирована'
       }
     }
     catch(err) {
-      if (err.message === 'jwt expired') return 'Ссылка на активацию устарела, запросите новую'
+      if (err.message === 'jwt expired') return {message: 'Ссылка на активацию устарела, запросите новую'}
     }
   },
   async users(parent, args, {models}) {
