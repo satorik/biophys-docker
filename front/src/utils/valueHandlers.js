@@ -18,17 +18,25 @@ export const getChangedValue =  (e, type, prevValue) => {
   }
   else if (type === 'resourse') {
     if (e.target.title === 'form') return {
-      value : {
-        ...prevValue,
-        subSectionSelect: '',
-        subSectionText: '',
-        [e.target.title]: e.target.files ? e.target.files[0] : e.target.value
-      }
+        value : {
+          ...prevValue,
+          subSectionSelect: '',
+          subSectionText: '',
+          [e.target.title]: e.target.files.length > 0 ? e.target.files[0] : e.target.value
+        }
     }
-    else return {
-      value : {
-        ...prevValue,
-        [e.target.title]: e.target.files ? e.target.files[0] : e.target.value
+    else {
+      if (e.target.type === 'file') return {
+        value : {
+          ...prevValue,
+          [e.target.title]: e.target.files.length > 0  ? e.target.files[0] : ''
+        }
+      }
+      else return {
+        value : {
+          ...prevValue,
+          [e.target.title]: e.target.value
+        }
       }
     }
   }
@@ -69,10 +77,9 @@ export const getIntitialValue = (type, isForUpdate, oldData, control, label) => 
       }
     }
     if (type === 'resourse') {
-      console.log(oldData.form)
       return {
       educationFormId: oldData.form.parentForm? oldData.form.parentForm.id : oldData.form.id,  
-      file: '',
+      file: oldData.form.filetype === 'URL' ? oldData.fileLink : '',
       subSectionId: oldData.form.parentForm ? oldData.form.id : '',
       subSectionText:''
       }
@@ -82,6 +89,7 @@ export const getIntitialValue = (type, isForUpdate, oldData, control, label) => 
      }
     return oldData[control] || ''
   }
+
   if (type === 'date') {return {day: '', month: new Date().getMonth(), year: new Date().getFullYear()}}
   if (type === 'datetime') {return {day: '', month: new Date().getMonth(), year: new Date().getFullYear(), hours: '', minutes: '' }}
   if (type === 'time') {return {hours: '', minutes: ''}}

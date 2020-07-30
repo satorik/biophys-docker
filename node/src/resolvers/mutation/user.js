@@ -1,5 +1,6 @@
 import { ApolloError, AuthenticationError, UserInputError } from "apollo-server"
 import bcrypt from 'bcryptjs'
+import getUser from '../../utils/getUser'
 import jwt from 'jsonwebtoken'
 import sendMail from '../../utils/sendMail'
 
@@ -25,7 +26,7 @@ const userMutation = {
     try 
     {
       sendMail(inputData.username, inputData.email, hashedString, 'register')
-      user.status = 'MESSAGE SENT'
+      user.status = 'MESSAGESENT'
       await user.save()
       return true
     }
@@ -59,30 +60,52 @@ const userMutation = {
       role: user.role
     }
   },
-  async updateUser(parent, {id, status}, {models}) {
-    const user = await models.User.findOne({where: {id}})
-    if (!user) {throw new AuthenticationError('Такого пользователя не существует')}
+  // async updateUser(parent, {id, status}, {models}) {
+  //   const user = await models.User.findOne({where: {id}})
+  //   if (!user) {throw new AuthenticationError('Такого пользователя не существует')}
 
-    user.status = status
-    await user.save()
-    return {
-      ...user,
-      createdAt: user.createdAt.toISOString(),
-      updatedAt: user.updatedAt.toISOString()
-    }
-  },
-  async deleteUser(parent, {id}, {models}){
+  //   user.status = status
+  //   await user.save()
+  //   return {
+  //     ...user,
+  //     createdAt: user.createdAt.toISOString(),
+  //     updatedAt: user.updatedAt.toISOString()
+  //   }
+  // },
+  async deleteUser(parent, {id}, {models, auth}){
+    await getUser(auth, models.User, 'ADMIN')
+
     const user = await models.User.findOne({where: {id}})
     if (!user) {throw new AuthenticationError('Такого пользователя не существует')}
 
     await user.destroy()
     return id
   },
-  async getRole(parent, {id}, {models}){
+  async changeUserRole(parent, {id, role}, {models, auth}){
+    await getUser(auth, models.User, 'ADMIN')
+
     const user = await models.User.findOne({where: {id}})
     if (!user) {throw new AuthenticationError('Такого пользователя не существует')}
+    user.role = role
+    await user.save()
+    return {
+      ...user.dataValues,
+      createdAt: user.createdAt.toISOString(),
+      updatedAt: user.updatedAt.toISOString()
+    }
+  },
+  async changeUserStatus(parent, {id, status}, {models, auth}){
+    await getUser(auth, models.User, 'ADMIN')
 
-    return user.dataValues.role
+    const user = await models.User.findOne({where: {id}})
+    if (!user) {throw new AuthenticationError('Такого пользователя не существует')}
+    user.status = status
+    await user.save()
+    return {
+      ...user.dataValues,
+      createdAt: user.createdAt.toISOString(),
+      updatedAt: user.updatedAt.toISOString()
+    }
   },
   async recoverPassword(parent, {email}, {models}){
     const user = await models.User.findOne({where: {email}})

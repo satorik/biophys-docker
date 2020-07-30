@@ -103,22 +103,42 @@ export const UPDATE_COURSE = gql`
 export const CREATE_RESOURSE = gql`
   mutation createEducationResourse($courseId: ID!, $filetype: FILETYPE!,  $inputData: EducationResourseCreateData!) {
     createEducationResourse(courseId: $courseId, inputData: $inputData, filetype: $filetype) {
-      id
-      title
-      image
-      description
-      fileLink
-      form{
-          id
-          title
-          type
-          filetype
-          parentForm {
+      resourse{
+        id
+        title
+        image
+        description
+        fileLink
+        form{
             id
-            type
             title
+            type
             filetype
-          }
+            parentForm {
+              id
+              type
+              title
+              filetype
+            }
+        }
+      }
+      forms {
+        id
+        title
+        type
+        filetype
+        parentForm {
+          id
+          type
+          title
+          filetype
+        }
+        subSections {
+          id
+          type
+          title
+          filetype
+        }
       }
     }
   }
@@ -127,22 +147,42 @@ export const CREATE_RESOURSE = gql`
 export const UPDATE_RESOURSE = gql`
   mutation updateEducationResourse($id: ID!, $filetype: FILETYPE!,  $inputData: EducationResourseUpdateData!) {
     updateEducationResourse(id: $id, filetype: $filetype, inputData: $inputData) {
-      id
-      title
-      image
-      description
-      fileLink
-      form{
-          id
-          title
-          type
-          filetype
-          parentForm {
+      resourse{
+        id
+        title
+        image
+        description
+        fileLink
+        form{
             id
-            type
             title
+            type
             filetype
-          }
+            parentForm {
+              id
+              type
+              title
+              filetype
+            }
+        }
+      }
+      forms {
+        id
+        title
+        type
+        filetype
+        parentForm {
+          id
+          type
+          title
+          filetype
+        }
+        subSections {
+          id
+          type
+          title
+          filetype
+        }
       }
     }
   }
@@ -150,6 +190,28 @@ export const UPDATE_RESOURSE = gql`
 
 export const DELETE_RESOURSE = gql`
   mutation deleteEducationResourse($id: ID!) {
-    deleteEducationResourse(id: $id)
+    deleteEducationResourse(id: $id) {
+      resourse {
+        id
+      }
+      forms {
+        id
+        title
+        type
+        filetype
+        parentForm {
+          id
+          type
+          title
+          filetype
+        }
+        subSections {
+          id
+          type
+          title
+          filetype
+        }
+      }
+    }
   }
 `

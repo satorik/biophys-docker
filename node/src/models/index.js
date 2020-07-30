@@ -32,7 +32,7 @@ const sequelize = new Sequelize(process.env.DB_NAME, process.env.DB_USER, proces
     EducationCourse: sequelize.import('./education/courses/educationCourse'),
     EducationResourse: sequelize.import('./education/courses/educationResourse'),
     User: sequelize.import('./user.js'),
-    UserTemp: sequelize.import('./userDump.js')
+    BackUp: sequelize.import('./backup.js')
   }
   
   models.EducationResourse.belongsTo(models.EducationForm)

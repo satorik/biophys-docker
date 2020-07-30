@@ -41,9 +41,7 @@ const updateAfterDeletePerson = (cache, mutationResults, query, variables, curre
   .map(person => {
     if (person.position > deleteSciencePerson)
       return {...person, position: person.position - 1}
-    if (person.position < deleteSciencePerson){
-      return person
-    }
+    else return person
   })
   .sort((a, b) => a.position - b.position)
   cache.writeQuery({
@@ -70,9 +68,7 @@ const updateAfterDeleteArticle = (cache, mutationResults, query, variables, curr
   .map(article => {
     if (article.position > deleteScienceArticle)
       return {...article, position: article.position - 1}
-    if (article.position < deleteScienceArticle){
-      return article
-    }
+    else return article
   })
   .sort((a, b) => a.position - b.position)
   cache.writeQuery({

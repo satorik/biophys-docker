@@ -94,6 +94,7 @@ const Education = `
     exam: EXAMTYPE!
     resourses: [EducationResourse!]!
   }
+   
 
   enum SECTIONTYPE {
     MULTY,
@@ -121,6 +122,11 @@ const Education = `
     description: String
     fileLink: String!
     form: EducationForm!
+  }
+
+  type EducationResorseWithForms {
+    resourse: EducationResourse!
+    forms: [EducationForm!]!
   }
 
   input EducationCourseCreateData {

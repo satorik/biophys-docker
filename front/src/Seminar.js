@@ -214,7 +214,7 @@ const Seminar = () => {
                 key={idx}
                 date={seminar.date}
                 speaker={seminar.speaker}
-                active={viewId == idx}
+                active={viewId === idx}
                 last={idx === (seminars.length-1)}
                 onCampus={seminar.onCampus}
                 onSelectSeminar={()=>onShowSeminarDetails(idx)}

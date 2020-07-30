@@ -1,6 +1,5 @@
   import { getIntitialValue } from './valueHandlers'
-import {valueFromAST} from 'graphql'
-    
+
   const checkValueEmpty = (value) => {
     if (value instanceof File) return false
     else if (typeof(value) === 'object') {
@@ -26,20 +25,20 @@ import {valueFromAST} from 'graphql'
       }) 
   }
  
-  const checkResourseInput = (validators, value, isForUpdate) => {
-    let isValid = true
-    let validationError = null
+  // const checkResourseInput = (validators, value, isForUpdate) => {
+  //   let isValid = true
+  //   let validationError = null
     
-    for (const validator of validators) {
-      if (validator.name !== 'isUrl') {
-        const checkValid = validator(value.file)
-        isValid = isValid && checkValid.valid
-        validationError = checkValid.error
-      }
-    }
+  //   for (const validator of validators) {
+  //     if (validator.name !== 'isUrl') {
+  //       const checkValid = validator(value.file)
+  //       isValid = isValid && checkValid.valid
+  //       validationError = checkValid.error
+  //     }
+  //   }
     
-    return {valid: isValid, validationError: validationError}
-  }
+  //   return {valid: isValid, validationError: validationError}
+  // }
 
   const postInputChange = (form, id, value, isForUpdate) => {
 
@@ -107,7 +106,7 @@ import {valueFromAST} from 'graphql'
         }
         else if (typeof(item.value) === 'object' && item.required === true) {
           let allExist = true
-          Object.keys(item.value).forEach(key => { allExist = allExist && item.value[key] != ''})
+          Object.keys(item.value).forEach(key => { allExist = allExist && item.value[key] !== ''})
           newItem = {
             ...item, 
             touched: true, //setTouchedTrue(item.touched),

@@ -8,15 +8,15 @@ const { createUploadLink } = require('apollo-upload-client')
 const errorLink = onError(({ graphQLErrors, networkError }) => {
   if (graphQLErrors) 
     graphQLErrors.map(({ message, locations, path, extensions }) => {
-      console.log(
-      `[GraphQL error]: Message: ${message}, Location: ${locations}, Path: ${path}`,
-      )
        if (extensions.code === "UNAUTHENTICATED") {
         localStorage.removeItem('userId')
         localStorage.removeItem('token')
         localStorage.removeItem('username')
         localStorage.removeItem('tokenExpiration')
        } 
+       return console.log(
+        `[GraphQL error]: Message: ${message}, Location: ${locations}, Path: ${path}`,
+        )
       }
     )
 

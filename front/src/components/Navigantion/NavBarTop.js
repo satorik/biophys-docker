@@ -63,6 +63,7 @@ const NavBarTop = () => {
         <ul className="navbar-nav mr-auto">
             {LINKS.map((link, idx) => {
               if (link.type !== 'closed' || (currentUser.token && currentUser.role === 'ADMIN')) return <NavBarTopItem link={link} key={idx} selectedPath={currentPath.split('/')[1]} />
+              else return null
             })}
         </ul>
         <button className="btn p-0" onClick={() => setIsModalOpen(true)}><span><FontAwesomeIcon icon='user-graduate' style={{color: 'var(--light)'}} size="lg"/></span></button>

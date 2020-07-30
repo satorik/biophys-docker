@@ -8,7 +8,7 @@ export const PrintCard = ({fileLink, description, image, title, onEditClick, onD
        <div className="container">
          <div className="row">
            <div className="col-md-8">
-            <img className="img-thumbnail" src={image}/>
+            <img className="img-thumbnail" alt={title} src={image}/>
            </div>
            <div className="col-md-4">
             <div>

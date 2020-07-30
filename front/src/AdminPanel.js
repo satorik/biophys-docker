@@ -23,7 +23,7 @@ export const AdminPanel = () => {
   return (
     <div className="container mt-5">
       <div className="row">
-        <div className="col-3 p-0 flex-column" style={{borderRight: '3px solid #ffc107'}}>
+        <div className="col-2 p-0 flex-column" style={{borderRight: '3px solid #ffc107'}}>
           {PANELLINKS.map((link, idx) => 
             <div 
               key={idx}

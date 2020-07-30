@@ -1,11 +1,12 @@
 import jwt from 'jsonwebtoken'
+import getUser from '../../utils/getUser'
 
 const userQuery = {
   async activateUser(parent, {hashedString}, { models }) {
     try {
       const decodedString = jwt.verify(hashedString, process.env.JWT_key)
       const user = await models.User.findOne({where: {email: decodedString.email}})
-       if (user.status !== 'MESSAGE SENT')  return {
+       if (user.status !== 'MESSAGESENT')  return {
         message: 'Учетная уже запись была активирована',
       }
 
@@ -27,7 +28,10 @@ const userQuery = {
       if (err.message === 'jwt expired') return {message: 'Ссылка на активацию устарела, запросите новую'}
     }
   },
-  async users(parent, args, {models}) {
+  async users(parent, args, {models, auth}) {
+
+    await getUser(auth, models.User, 'ADMIN')
+
     const users = await models.User.findAll({attributes: ['id', 'email', 'username', 'status', 'role', 'createdAt', 'updatedAt', 'userUpdated'], order: [['updatedAt', 'DESC']]})
     return users.map(user => {
       return {

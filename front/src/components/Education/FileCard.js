@@ -18,8 +18,9 @@ export const FileCard = ({fileLink, description, image, title, onEditClick, onDe
               />
           </div>      
           <div>
-              {filetype === 'PDF' && <img className="img-thumbnail" src={image}/>}
+              {filetype === 'PDF' && <img className="img-thumbnail" src={image} alt={title}/>}
               {filetype === 'URL' && <iframe width="400" height="200"
+                  title={title}
                   src={fileLink} frameBorder="0" 
                   allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" 
                   allowFullScreen></iframe>}

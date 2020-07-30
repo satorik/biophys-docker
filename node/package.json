@@ -5,7 +5,8 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "nodemon --ignore frontend/ src/index.js --exec babel-node"
+    "dev": "nodemon --ignore frontend/ src/index.js --exec babel-node --verbose",
+    "start": "node dist/index.js"
   },
   "author": "satorik",
   "license": "ISC",
@@ -21,7 +22,6 @@
     "jsonwebtoken": "^8.5.1",
     "multer": "^1.4.2",
     "nodemailer": "^6.4.10",
-    "nodemon": "^1.19.4",
     "pdf-thumbnail": "^1.0.6",
     "pdf2pic": "^1.4.0",
     "pg": "^7.18.2",
@@ -37,6 +37,7 @@
     "@babel/node": "^7.10.4",
     "@babel/preset-env": "^7.10.4",
     "env-cmd": "^9.0.3",
-    "faker": "^4.1.0"
+    "faker": "^4.1.0",
+    "nodemon": "^2.0.4"
   }
 }

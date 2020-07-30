@@ -26,7 +26,7 @@ const GET_NEWS = gql`
 
 const HeaderNews = () => {
 
-  const { loading: queryLoading, error: queryError, data} = useQuery(GET_NEWS)
+  const { data } = useQuery(GET_NEWS)
 
   const [topNote, setTopNote] = React.useState({title: '', description: ''})
  

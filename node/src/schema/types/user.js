@@ -9,7 +9,7 @@ export default `
     CREATED
     VALIDATED
     APPROVED
-    MESSAGE SENT
+    MESSAGESENT
   }
 
   type User {

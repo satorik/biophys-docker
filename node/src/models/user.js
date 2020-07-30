@@ -29,7 +29,7 @@ const User = (sequelize, DataTypes ) => {
     type: DataTypes.STRING(64),
     is: /^[0-9a-f]{64}$/i
   },
-  status: {type:DataTypes.ENUM('CREATED', 'MESSAGE SENT' , 'VALIDATED', 'APPROVED')},
+  status: {type:DataTypes.ENUM('CREATED', 'MESSAGESENT' , 'VALIDATED', 'APPROVED')},
   role: {type:DataTypes.ENUM('USER', 'ADMIN')},
   hashedString: {
     type: DataTypes.STRING(256),

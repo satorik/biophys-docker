@@ -213,7 +213,7 @@ const Conferece = () => {
                   key={idx}
                   dateFrom={conference.dateFrom}
                   dateTo={conference.dateTo}
-                  active={viewId == idx}
+                  active={viewId === idx}
                   last={idx === (conferences.length-1)}
                   onSelectConference={()=>onShowConferenceDetails(idx)}
                   onClickEdit={() => onEditConference(idx)}

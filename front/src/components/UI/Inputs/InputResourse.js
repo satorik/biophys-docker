@@ -43,7 +43,7 @@ const InputResourse = ({onChanged, onBlur, label, value, children, required}) =>
             type='text'
             className='form-control mb-3'
             value={value.file}
-            placeholder={'Ссылка на видеозапись'+`${required ? '*': ''}`}
+            placeholder={`'Ссылка на видеозапись'+${required ? '*': ''}`}
             title='file'
             onChange={onChanged}
             onBlur={onBlur}
@@ -59,8 +59,9 @@ const InputResourse = ({onChanged, onBlur, label, value, children, required}) =>
                   onChange={onChanged}
                   onBlur={onBlur}
                   title='file'
+                  accept=".pdf"
                   id="customFile"/>
-                <label className="custom-file-label" htmlFor="customFile">{value.file.name ? value.file.name : 'Выберите файл'+`${required ? '*': ''}`}</label>
+                <label className="custom-file-label" htmlFor="customFile">{value.file.name ? value.file.name : `'Выберите файл'+ ${required ? '*': ''}`}</label>
               </div>
             </div>
           }

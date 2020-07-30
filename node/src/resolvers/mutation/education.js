@@ -212,6 +212,7 @@ const educationMutation = {
     if (!course) { throw new ApolloError('Course not found') }
 
     const subSection = await getEducationSubsection(inputData.subSectionId, inputData.subSectionText, inputData.educationFormId, models, filetype)
+    let resourse = {}
 
     if (filetype === 'PDF') {
       const {file, ...postData} = inputData
@@ -228,7 +229,7 @@ const educationMutation = {
         educationCourseId: courseId,
         userCreated: user
       }
-      return models.EducationResourse.create({...postWithFile})
+      resourse = await models.EducationResourse.create({...postWithFile})
     }
     else if (filetype === 'URL'){
       const postData = {
@@ -239,9 +240,10 @@ const educationMutation = {
         userCreated: user
       }
   
-      return models.EducationResourse.create({...postData})
+      resourse = await models.EducationResourse.create({...postData})
     }
-    
+    const forms = await models.EducationForm.findAll({raw:true, where: {educationFormId: null}})
+    return { resourse : resourse.dataValues, forms }
   },
 
   async updateEducationResourse(parent, {id, filetype, inputData}, { models, auth }){
@@ -252,7 +254,6 @@ const educationMutation = {
     if (!resourse) { throw new ApolloError('Resourse not found') }
 
     const form = await resourse.getEducationForm()
-  
     if (inputData.title) resourse.title = inputData.title
     if (inputData.description) resourse.description = inputData.description
     resourse.userUpdated = user
@@ -267,16 +268,16 @@ const educationMutation = {
           ...isUploaded,
           image
         }
-        clearImage(post.fileLink, 'education', 'pdf')
+        clearImage(isUploaded.fileLink, 'education', 'pdf')
       }
 
-      if (isUploaded.fileLink) { 
-        resourse.fileLink = isUploaded.fileLink 
-        resourse.image = isUploaded.image
-      }
+       if (isUploaded.fileLink) { 
+         resourse.fileLink = isUploaded.fileLink
+         resourse.image = isUploaded.image
+       }
     }
     else if (filetype === 'URL'){
-      if (inputData.fileLink) resourse.fileLink = inputData.fileLink
+      if (inputData.file) resourse.fileLink = inputData.file
     }
 
     await resourse.save()
@@ -290,8 +291,8 @@ const educationMutation = {
 
       await clearSubSection(form, models)
     }
-
-    return resourse.dataValues
+    const forms = await models.EducationForm.findAll({raw:true, where: {educationFormId: null}})
+    return { resourse : resourse.dataValues, forms }
 
   },
   async deleteEducationResourse(parent, {id}, { models, auth }){
@@ -302,12 +303,13 @@ const educationMutation = {
     if (!resourse) { throw new ApolloError('Resourse not found') }
 
     const form = await resourse.getEducationForm()
-
+    const resourseReturn = resourse.dataValues
     await resourse.destroy()
 
     await clearSubSection(form, models)
 
-    return id
+    const forms = await models.EducationForm.findAll({raw:true, where: {educationFormId: null}})
+    return { resourse : resourseReturn, forms }
   },
 }
 

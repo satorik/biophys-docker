@@ -51,15 +51,15 @@ const mutation =   `
     createEducationCourse(inputData: EducationCourseCreateData!): EducationCourse!
     updateEducationCourse(id: ID!, inputData: EducationCourseUpdateData!): EducationCourse!
     deleteEducationCourse(id: ID!): ID!
-    createEducationResourse(courseId: ID!, filetype: FILETYPE!,  inputData: EducationResourseCreateData!): EducationResourse!
-    updateEducationResourse(id: ID!, filetype: FILETYPE!, inputData: EducationResourseUpdateData!): EducationResourse!
-    deleteEducationResourse(id: ID!): ID!
+    createEducationResourse(courseId: ID!, filetype: FILETYPE!,  inputData: EducationResourseCreateData!): EducationResorseWithForms!
+    updateEducationResourse(id: ID!, filetype: FILETYPE!, inputData: EducationResourseUpdateData!): EducationResorseWithForms!
+    deleteEducationResourse(id: ID!): EducationResorseWithForms!
     createUser(inputData: UserCreateData!): Boolean!
     loginUser(inputData: UserLoginData!): authData!
     activateUser(hashedString: String!): authData!
-    updateUser(id: ID!, status: USERSTATUS!): User!
     deleteUser(id: ID!): ID!
-    getRole(id: ID!): USERROLE!
+    changeUserRole(id: ID!, role: USERROLE!): User!
+    changeUserStatus(id: ID!, status: USERSTATUS!): User!
     recoverPassword(email: String!): String!
     changePassword(hashedString: String!, newPassword: String!): String!
   }

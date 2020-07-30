@@ -1,6 +1,6 @@
 import React from 'react'
 import Edit from '../Shared/Edit'
-import { required, email, password, passwordRepeat } from '../../utils/validators'
+import { required, email, password } from '../../utils/validators'
 import NetworkErrorComponent from '../Shared/ErrorHandling/NetworkErrorComponent'
 import ErrorBoundry from '../Shared/ErrorHandling/ErrorBoundry'
 import Spinner from '../UI/Spinner'
@@ -162,7 +162,7 @@ const LoginForm = ({onCancel, isAuth, updatedAuth}) => {
     updatedAuth({...emptyUser})
   }
 
-  if (loadingUser || creationLoading) return <Spinner />
+  if (loadingUser || creationLoading || recoverLoading) return <Spinner />
   if (isError) return <NetworkErrorComponent error={isError} onDismiss={() => setIsError(null)} />
 
   let content = ""
@@ -184,10 +184,10 @@ const LoginForm = ({onCancel, isAuth, updatedAuth}) => {
       <>
         <ul className="nav nav-tabs">
           <li className="nav-item">
-            <a className={`nav-link ${isLogin ? 'active' : ''}`} href="#" onClick={() => setIsLogin(true)}>Авторизация</a>
+            <span className={`nav-link ${isLogin ? 'active' : ''}`} style={{cursor:"pointer"}} onClick={() => setIsLogin(true)}>Авторизация</span>
           </li>
           <li className="nav-item">
-            <a className={`nav-link ${!isLogin ? 'active' : ''}`} href="#" onClick={() => setIsLogin(false)}>Регистрация</a>
+            <span className={`nav-link ${!isLogin ? 'active' : ''}`} style={{cursor:"pointer"}} onClick={() => setIsLogin(false)}>Регистрация</span>
           </li>
         </ul>
 

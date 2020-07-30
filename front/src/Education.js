@@ -1,5 +1,4 @@
 import React from 'react'
-import EducationHeader from './components/UI/Header/QuoteHeader'
 import {Route, Redirect} from 'react-router-dom'
 import NavigationList from './components/Shared/SecondaryNavigation/NavigationList'
 import Schedule from './components/Education/Schedule'

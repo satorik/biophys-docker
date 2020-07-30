@@ -1,5 +1,6 @@
 
 export const required = value => {
+  if (typeof(value) === 'undefined') return {valid: false}
   if (value instanceof File) return {valid: true}
   else if (typeof(value) === 'object') {
     let allExist = true

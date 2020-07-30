@@ -6,7 +6,7 @@ import { getUpdateData } from '../../utils/postDataHandlers'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faCaretDown, faCaretUp } from '@fortawesome/free-solid-svg-icons'
 
-import { updateAfterCreate, updateAfterDelete, updateAfterCreateResourse, updateAfterDeleteResourse } from '../../utils/updateCache/courses'
+import { updateAfterCreate, updateAfterDelete, updateAfterCreateResourse, updateAfterDeleteResourse, updateAfterUpdateResourse } from '../../utils/updateCache/courses'
 import * as queries from '../../utils/queries/courses'
 
 import {CourseInfo} from './CourseInfo'
@@ -29,11 +29,13 @@ const FORM_TEMPLATE = [
     title: 'title',
     label:'Название',
     type: 'input',
+    required: true,
     validators: [required, length({ min: 5 })]
   },
   {
     title: 'description',
     label:'Описание',
+    required: true,
     type: 'textarea-long',
     validators: [required, length({ min: 5 })]
   },
@@ -41,18 +43,21 @@ const FORM_TEMPLATE = [
     title: 'read',
     label:'Читается',
     type: 'input',
+    required: true,
     validators: [required, length({ min: 5 })]
   },
   {
     title: 'lector',
     label:'Лектор',
     type: 'input',
+    required: true,
     validators: [required, length({ min: 5 })]
   },
   {
     title: 'exam',
     label:[{title:'Экзамен', value: 'EXAM'}, {title:'Зачет', value: 'TEST'}],
     type: 'radio',
+    required: true,
     validators: []
   }
 ]
@@ -82,7 +87,8 @@ const Courses = () => {
     update: (cache, res) => updateAfterDelete(cache, res, queries.GET_COURSES)})
   const [createEducationResourse, { loading: createResourseLoading }] = useMutation(queries.CREATE_RESOURSE, {
     update: (cache, res) => updateAfterCreateResourse(cache, res, queries.GET_COURSES, viewId)})
-  const [updateEducationResourse, { loading: updateResourseLoading }] = useMutation(queries.UPDATE_RESOURSE)
+  const [updateEducationResourse, { loading: updateResourseLoading }] = useMutation(queries.UPDATE_RESOURSE, {
+    update: (cache, res) => updateAfterUpdateResourse(cache, res, queries.GET_COURSES, viewId)})
   const [deleteEducationResourse, { loading: deleteEducationResourseLoading }] = useMutation(queries.DELETE_RESOURSE, {
     update: (cache, res) => updateAfterDeleteResourse(cache, res, queries.GET_COURSES, viewId)})
 
@@ -223,7 +229,7 @@ const Courses = () => {
 
   const onChangeResourseHandler = async (postObject) => {
     const filetype = forms.find(form => form.id === postObject.educationFormId).filetype
-    console.log('Courses', postObject)
+    //console.log('Courses', postObject)
 
     if (resourseMode.isEditing) {
       
@@ -237,7 +243,7 @@ const Courses = () => {
           }
         })
 
-        setResourseMode({...resourseMode, isEditing: false})
+        clearResourseMode()
         setIsModalOpen(false)
         document.body.style.overflow = "scroll"
       } catch(error) {
@@ -253,8 +259,7 @@ const Courses = () => {
             inputData: {...postObject}
           }
         })
-        setResourseMode({...resourseMode, isCreating: false})
-        setUpdatedResourse({})
+        clearResourseMode()
         setIsModalOpen(false)
         document.body.style.overflow = "scroll"
       } catch(error) {

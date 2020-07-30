@@ -1,5 +1,5 @@
 import React from 'react'
-import {Link, useLocation, useHistory } from 'react-router-dom'
+import {Link, useLocation } from 'react-router-dom'
 import EditButtons from '../../UI/EditButtons'
 
 const NavigationItems = ({title, id, path, onEdit, onDelete}) => {

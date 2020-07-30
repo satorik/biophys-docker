@@ -4,9 +4,6 @@ import './App.css'
 import {BrowserRouter, Route, Redirect, Switch} from 'react-router-dom'
 import AuthContext from './context/AuthContext'
 
-import { useMutation } from '@apollo/client'
-import { gql } from 'apollo-boost'
-
 import { library } from '@fortawesome/fontawesome-svg-core'
 import { faAngleLeft, faAngleRight, faCaretUp, faCaretDown, faCircle, faPlus, 
   faArrowUp, faArrowDown, faFileDownload, faEye, faPhone, faEnvelope, faUserGraduate, faHome, faCheck, faUserTie, faTrash } from '@fortawesome/free-solid-svg-icons'
@@ -34,13 +31,12 @@ const initialState = {
   token: localStorage.getItem('token'),
   tokenExpiration: localStorage.getItem('tokenExpiration'),
   username: localStorage.getItem('username'),
-  role: 'USER'
+  role: localStorage.getItem('role')
 }
 
 const App = () => {
 
   const [currentUser, setCurrentUser] = React.useState(initialState)
-
   return (
       <BrowserRouter>
          <>
