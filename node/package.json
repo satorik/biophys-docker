@@ -11,7 +11,7 @@
   "author": "satorik",
   "license": "ISC",
   "dependencies": {
-    "apollo-server": "^2.15.1",
+    "apollo-server": "^2.25.3",
     "apollo-server-express": "^2.15.1",
     "bcryptjs": "^2.4.3",
     "dateformat": "^3.0.3",
